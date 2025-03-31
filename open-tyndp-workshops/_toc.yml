@@ -1,0 +1,9 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: 20250409-workshop-pypsa-01
+
+- file: oet-extension/00-reference.md
