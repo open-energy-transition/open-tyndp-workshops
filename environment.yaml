@@ -1,4 +1,4 @@
-name: esm-ws-24-25
+name: open-tyndp-workshops
 channels:
 - conda-forge
 dependencies:
