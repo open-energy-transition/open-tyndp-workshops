@@ -84,7 +84,7 @@ The environment has to be activated whenever you open a new terminal,
 
 If you want to use `pip` for managing your environment, download
 
-https://github.com/fneum/data-science-for-esm/blob/main/requirements.txt
+https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/requirements.txt
 
 There is a download button at the top-right corner.
 
