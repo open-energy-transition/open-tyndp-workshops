@@ -21,7 +21,7 @@ in a [Jupyter Notebook](jupyter.org/) environment. This requires a Google accoun
 
 For running the notebook using Google Colab you can simply launch it by clicking on the little rocket symbol in the top right corner of the page:
 
-![Notebook-Launch.png](Notebook-Launch.png)
+![notebook_launch.png](notebook_launch.png)
 
 ### Alternative: Local installation
 
