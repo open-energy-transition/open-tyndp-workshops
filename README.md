@@ -1,7 +1,7 @@
 # Open-TYNDP Workshops
 
 Series of hands-on workshops facilitated by Open Energy Transition (OET) to accompany the development of an open-source energy modeling tool for the TYNDP.
-With every workshop a new notebook will be added to the repository investigating different functionalities of PyPSA 
+With every workshop a new notebook will be added to the repository investigating different functionalities of PyPSA
 and implementations for the Open-TYNDP workflow.
 
 ## Usage
