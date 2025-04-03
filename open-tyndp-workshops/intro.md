@@ -1,6 +1,6 @@
 # Open-TYNDP Workshops
 
-Welcome to the website covering a series of hands-on workshops facilitated by Open Energy Transition (OET) to accompany the development of an open-source energy modeling tool for the Ten-Year Network Development Plan (TYNDP). 
+Welcome to the website covering a series of hands-on workshops facilitated by Open Energy Transition (OET) to accompany the development of an open-source energy modeling tool for the Ten-Year Network Development Plan (TYNDP).
 With every workshop a new notebook will be added to this website investigating different functionalities of PyPSA and implementations for the Open-TYNDP workflow.
 
 The workshops will, one by one, introduce modellers to the basics of the PyPSA framework and investigate important features of the TYNDP Scenario Building introduced by the OET team.
