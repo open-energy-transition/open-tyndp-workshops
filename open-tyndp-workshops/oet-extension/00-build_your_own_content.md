@@ -12,7 +12,7 @@ This guide helps you in building your own **Data Science for Energy System Model
 <div style="position: relative; width: 100%; padding-bottom: 56.25%">
 <iframe src="https://www.youtube.com/embed/mvOgmEgRIhc"
         title="How to create you own energy modeling course" frameborder="0" allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         style="position: absolute; width: 95%; height: 95%;">
 </iframe>
 </div>
@@ -82,12 +82,12 @@ git clone https://github.com/<your-username>/data-science-for-esm.git
 cd ./data-science-for-esm
 ```
 
-You can modify the content by adding, editing and removing markdown (`.md`) and jupyter notebook (`.ipynb`) files in the `data-science-for--esm` folder. 
+You can modify the content by adding, editing and removing markdown (`.md`) and jupyter notebook (`.ipynb`) files in the `data-science-for--esm` folder.
 * Make sure that all attachments within the markdown and jupyter notebook are included as well.
 * For a successful deployment of the website, please specify the files and order of those file in the [Table Of Contents](https://jupyterbook.org/en/stable/structure/toc.html) `_toc.yml`.
 * To modify details of the website, such as the author, logo, other relevant GitHub and Google Collab links, modify the `_config.yml`.
 
-you can test run the changes locally by running the `jupyter-book build data-science-for-esm` command. 
+you can test run the changes locally by running the `jupyter-book build data-science-for-esm` command.
 * This command is in charge generating the HTML code which you can open from your browser.
 * You can then run `jupyter-book clean data-science-for-esm` to remove the generated build.
 * Further readings on how `jupyter-book build` works are [here](https://jupyterbook.org/en/stable/basics/build.html)
@@ -165,4 +165,3 @@ If you’d like to add your course to this list, please reach out to XXX. -->
 [OET]:      https://open-energy-transition.github.io/handbook/docs/Engineering/SoftForkStrategy/#contributing-oet-changes-to-upstream-via-cherry-picking
 [deploy]:   https://github.com/open-energy-transition/data-science-for-esm/blob/main/.github/workflows/deploy.yml
 [folder]:   https://github.com/open-energy-transition/data-science-for-esm/tree/main/data-science-for-esm
-
