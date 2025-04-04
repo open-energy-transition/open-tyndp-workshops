@@ -63,7 +63,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="References" href="oet-extension/00-reference.html" />
+    <link rel="next" title="Background: Intro to the basics of Python" href="background1-python.html" />
     <link rel="prev" title="Open-TYNDP Workshops" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,6 +187,10 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Intro to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Annex: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background4-geopandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
 </ul>
 
@@ -420,23 +424,21 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-structured-data-to-optimisation">From structured data to optimisation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pypsa-a-simple-dispatch-problem">Introduction to pypsa: a simple dispatch problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pypsa-a-minimal-dispatch-problem">Introduction to pypsa: a minimal dispatch problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-electricity-market-problem">Simple electricity market problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-basic-network">Building a basic network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation">Optimisation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-pypsa-model">Explore pypsa model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation">Optimisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-pypsa-model">Explore pypsa model</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-session-1-building-the-reference-grids">Hands-on Session 1: Building the reference grids</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-reference-grids">Building the reference grids</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-example-data">Load example data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-bidding-zones">Explore bidding zones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-electricity-reference-grid">Explore the Electricity reference grid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-hydrogen-reference-grid">Explore the Hydrogen reference grid</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-session-2-extracting-insights-visualization">Hands-on Session 2: Extracting insights &amp; Visualization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-visualization">Extracting insights &amp; Visualization</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-solved-model">Import the solved model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-insights-from-the-network-using-pypsa-statistics">Extract insights from the network using <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-using-pypsa-statistics">Visualizing results using <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code></a></li>
@@ -493,16 +495,16 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
 <p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>atlite<span class="w"> </span>pandas<span class="w"> </span>geopandas<span class="w"> </span>xarray<span class="w"> </span>matplotlib<span class="w"> </span>hvplot<span class="w"> </span>geoviews<span class="w"> </span>plotly<span class="w"> </span>highspy<span class="w"> </span>holoviews
-%env<span class="w"> </span><span class="nv">HV_DOC_HTML</span><span class="o">=</span><span class="nb">true</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>atlite<span class="w"> </span>pandas<span class="w"> </span>geopandas<span class="w"> </span>xarray<span class="w"> </span>matplotlib<span class="w"> </span>hvplot<span class="w"> </span>geoviews<span class="w"> </span>plotly<span class="w"> </span>highspy<span class="w"> </span>holoviews<span class="w"> </span>folium<span class="w"> </span>mapclassify
+!pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/pypsa/pypsa
 </pre></div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this notebook in Google Colab, uncomment the following lines:</span>
-<span class="c1"># !pip install atlite pandas geopandas xarray matplotlib hvplot geoviews plotly highspy holoviews</span>
-<span class="c1"># !pip install git+https://github.com/pypsa/pypsa</span>
+<span class="c1"># !pip install atlite pandas geopandas xarray matplotlib hvplot geoviews plotly highspy holoviews folium mapclassify</span>
+<span class="c1"># !pip install git+https://github.com/pypsa/pypsa@e8099795c9661744ab515868c46c3297b123ac0f</span>
 </pre></div>
 </div>
 </div>
@@ -579,13 +581,13 @@ document.write(`
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0982c413-16b2-47cb-bd46-b6a6407e0adc">
-<span class="eqno">(1)<a class="headerlink" href="#equation-0982c413-16b2-47cb-bd46-b6a6407e0adc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eff5bff3-b4d2-4aa3-ad0e-f0efb4f2f789">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eff5bff3-b4d2-4aa3-ad0e-f0efb4f2f789" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0cea160b-98fe-47fe-982c-0d17cf49cf18">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0cea160b-98fe-47fe-982c-0d17cf49cf18" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-475f42a5-3989-4537-b3f8-bb4c3b0fbf28">
+<span class="eqno">(2)<a class="headerlink" href="#equation-475f42a5-3989-4537-b3f8-bb4c3b0fbf28" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -F_\ell &amp;\leq f_{\ell,t} \leq F_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} f_{\ell,t} &amp; \text{KCL : bus} \\
@@ -620,8 +622,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pypsa-a-simple-dispatch-problem">
-<h1>Introduction to pypsa: a simple dispatch problem<a class="headerlink" href="#introduction-to-pypsa-a-simple-dispatch-problem" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pypsa-a-minimal-dispatch-problem">
+<h1>Introduction to pypsa: a minimal dispatch problem<a class="headerlink" href="#introduction-to-pypsa-a-minimal-dispatch-problem" title="Link to this heading">#</a></h1>
 <p><font size="2"><em>Copyright (c) 2025, Iegor Riepin</em></font></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -635,6 +637,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <span class="kn">import</span><span class="w"> </span><span class="nn">holoviews</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">hvplot.pandas</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mapclassify</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">add_legend_circles</span><span class="p">,</span>
     <span class="n">add_legend_patches</span><span class="p">,</span>
@@ -1146,12 +1150,12 @@ if (window.Jupyter !== undefined) {
   } catch(err) {
   }
 }
-</script><div class="output text_html"><div id='61eb232a-6265-43f6-b1d0-f68f5fea4144'>
-  <div id="a002b740-5681-40d1-b28e-fb4be745d859" data-root-id="61eb232a-6265-43f6-b1d0-f68f5fea4144" style="display: contents;"></div>
+</script><div class="output text_html"><div id='1a439d93-1702-4b6e-995f-d0502ac245d8'>
+  <div id="af5386cd-b867-4745-a748-cdf3d3fa09d4" data-root-id="1a439d93-1702-4b6e-995f-d0502ac245d8" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"31a6aa4d-1f80-4c41-b2fc-f1e1a46d836b":{"version":"3.7.2","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"61eb232a-6265-43f6-b1d0-f68f5fea4144"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"d00c184a-6c35-402f-930a-eaf598cc18bc","attributes":{"plot_id":"61eb232a-6265-43f6-b1d0-f68f5fea4144","comm_id":"87ec67b6abd74b8d9a297d9c8d042f41","client_comm_id":"2bcf5f6d5f0d492b9e6a93562fdcb553"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"31a6aa4d-1f80-4c41-b2fc-f1e1a46d836b","roots":{"61eb232a-6265-43f6-b1d0-f68f5fea4144":"a002b740-5681-40d1-b28e-fb4be745d859"},"root_ids":["61eb232a-6265-43f6-b1d0-f68f5fea4144"]}];
+  var docs_json = {"d54386e3-d0ce-49fd-9c7c-f4ab8caab0f5":{"version":"3.7.2","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"1a439d93-1702-4b6e-995f-d0502ac245d8"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"e2b15a3b-3027-400c-9384-2c748eed17e2","attributes":{"plot_id":"1a439d93-1702-4b6e-995f-d0502ac245d8","comm_id":"e638063ebf8d43939d255a42306836d4","client_comm_id":"e3138861e43d409face9ad1da9aa932a"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"d54386e3-d0ce-49fd-9c7c-f4ab8caab0f5","roots":{"1a439d93-1702-4b6e-995f-d0502ac245d8":"af5386cd-b867-4745-a748-cdf3d3fa09d4"},"root_ids":["1a439d93-1702-4b6e-995f-d0502ac245d8"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1217,16 +1221,16 @@ if (window.Jupyter !== undefined) {
   }
 })(window);</script></div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">hvplot.pandas</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">add_legend_circles</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">add_legend_patches</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">add_legend_lines</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span><span class="w"> </span><span class="nn">mapclassify</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">add_legend_circles</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">add_legend_patches</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">add_legend_lines</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;pypsa.plot.maps.static&#39;; &#39;pypsa.plot.maps&#39; is not a package
 </pre></div>
@@ -1246,7 +1250,7 @@ if (window.Jupyter !== undefined) {
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we create a network object which serves as the container for all components</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Demo&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1262,7 +1266,8 @@ if (window.Jupyter !== undefined) {
 <p>Components can be added to the network <code class="docutils literal notranslate"><span class="pre">n</span></code> using the <code class="docutils literal notranslate"><span class="pre">n.add()</span></code> function. It takes the component name as a first argument, the name of the component as a second argument and possibly further parameters as keyword arguments. Let’s use this function, to add buses for each country to our network:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;Springfield&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">380</span><span class="p">,</span> <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;AC&quot;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;Springfield&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">380</span><span class="p">,</span> <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1293,6 +1298,7 @@ if (window.Jupyter !== undefined) {
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
     <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;Springfield&quot;</span><span class="p">,</span>
     <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>  <span class="c1"># €/MWh</span>
@@ -1301,6 +1307,7 @@ if (window.Jupyter !== undefined) {
 <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;nuclear&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
     <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;Springfield&quot;</span><span class="p">,</span>
     <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># €/MWh</span>
@@ -1326,6 +1333,7 @@ if (window.Jupyter !== undefined) {
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Small town&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
     <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;Springfield&quot;</span><span class="p">,</span>
     <span class="n">p_set</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>  <span class="c1"># MW</span>
 <span class="p">)</span>
@@ -1345,13 +1353,13 @@ if (window.Jupyter !== undefined) {
 <h2>Optimisation<a class="headerlink" href="#optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For this dispatch problem, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-36ef60dc-f446-4664-afec-58d55dfa47a8">
-<span class="eqno">(3)<a class="headerlink" href="#equation-36ef60dc-f446-4664-afec-58d55dfa47a8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a0406083-0b64-4db9-87ea-6ba702c7728a">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a0406083-0b64-4db9-87ea-6ba702c7728a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{s,t};} \sum_{t,s} o_{s} g_{s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46f26982-1187-4838-b910-31e09719b3d5">
-<span class="eqno">(4)<a class="headerlink" href="#equation-46f26982-1187-4838-b910-31e09719b3d5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d899c7d1-a0b8-4f44-bdfb-4d172b63b133">
+<span class="eqno">(4)<a class="headerlink" href="#equation-d899c7d1-a0b8-4f44-bdfb-4d172b63b133" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{s,t} \leq G_{s}  &amp; \text{generation limits : generator} \\
 D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 \end{align}\]</div>
@@ -1397,15 +1405,9 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">mu_upper</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
 <section id="explore-pypsa-model">
-<h3>Explore pypsa model<a class="headerlink" href="#explore-pypsa-model" title="Link to this heading">#</a></h3>
+<h2>Explore pypsa model<a class="headerlink" href="#explore-pypsa-model" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">model</span>
@@ -1443,9 +1445,8 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="hands-on-session-1-building-the-reference-grids">
-<h1>Hands-on Session 1: Building the reference grids<a class="headerlink" href="#hands-on-session-1-building-the-reference-grids" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="building-the-reference-grids">
+<h1>Building the reference grids<a class="headerlink" href="#building-the-reference-grids" title="Link to this heading">#</a></h1>
 <p>The minimal <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> example illustrates how time-consuming it can be to compose a network by hand. To simplify the work, <code class="docutils literal notranslate"><span class="pre">PyPSA-Eur</span></code> provides a set of scripts that does this for you. It collects and processes open data, composes a network, writes the constraints, solves the operation and capacity expansion problem, collects the result and produces basic summary outputs for analysis.</p>
 <p>The current <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> project aims to adapt <code class="docutils literal notranslate"><span class="pre">PyPSA-Eur</span></code> to the specific needs of the TYNDP process. All the code is openly available in the project repository: <a class="reference external" href="https://github.com/open-energy-transition/open-tyndp">open-tyndp</a>. Currently, the workflow implements the reference grid data for both the electricity and hydrogen networks and solves the network with the default <code class="docutils literal notranslate"><span class="pre">PyPSA-Eur</span></code> demand.</p>
 <p>As any open-source repository, you can get the code, contribute using pull-requests, reports issues and submit feature requests.</p>
@@ -1485,7 +1486,7 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 <p>And let’s get a general overview of the components in it:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">component</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span>
 </pre></div>
 </div>
 </div>
@@ -1576,6 +1577,13 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
     <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">opts</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">active_tools</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pan&quot;</span><span class="p">,</span> <span class="s2">&quot;wheel_zoom&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task: explore the bidding zones geographies</span>
 </pre></div>
 </div>
 </div>
@@ -1732,6 +1740,7 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 </div>
 </div>
 </div>
+<p>You’ve just created the reference grid published in the <a class="reference external" href="https://2024.entsos-tyndp-scenarios.eu/download/">Scenarios Methodology report from TYNDP 2024</a>!</p>
 </section>
 <section id="explore-the-hydrogen-reference-grid">
 <h2>Explore the Hydrogen reference grid<a class="headerlink" href="#explore-the-hydrogen-reference-grid" title="Link to this heading">#</a></h2>
@@ -1780,7 +1789,7 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 <span class="n">n_h2_grid</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span> <span class="n">n_h2_grid</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;p_nom == 0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
 <span class="c1"># explore the reference grid</span>
-<span class="n">n_h2_grid</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
+<span class="n">n_h2_grid</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1885,10 +1894,11 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 </div>
 </div>
 </div>
+<p>You’ve just created the hydrogen reference grid published in the <a class="reference external" href="https://2024.entsos-tyndp-scenarios.eu/download/">Scenarios Methodology report from TYNDP 2024</a>!</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="hands-on-session-2-extracting-insights-visualization">
-<h1>Hands-on Session 2: Extracting insights &amp; Visualization<a class="headerlink" href="#hands-on-session-2-extracting-insights-visualization" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="extracting-insights-visualization">
+<h1>Extracting insights &amp; Visualization<a class="headerlink" href="#extracting-insights-visualization" title="Link to this heading">#</a></h1>
 <section id="import-the-solved-model">
 <h2>Import the solved model<a class="headerlink" href="#import-the-solved-model" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -1948,6 +1958,13 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task: try to fine tune this query to your needs</span>
 </pre></div>
 </div>
 </div>
@@ -2017,18 +2034,41 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
     <span class="n">query</span><span class="o">=</span><span class="s2">&quot;value&gt;1e3&quot;</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>You can also have details for specific countries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">comps</span><span class="o">=</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;bus_carrier&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;value&gt;1e3 and country in [&#39;DE&#39;, &#39;FR&#39;]&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">facet_col</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>You can have a closer look to the wind production</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;wind&quot;</span><span class="p">,</span>
+    <span class="n">nice_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… or to the dispatch for specific countries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
@@ -2038,13 +2078,14 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
     <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
-    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;country in [&#39;DE&#39;, &#39;FR&#39;]&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;country in [&#39;DE&#39;, &#39;FR&#39;] and snapshot &lt; &#39;2013-03&#39;&quot;</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>You can also explore H2 results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
@@ -2056,65 +2097,12 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">query</span><span class="o">=</span><span class="s2">&quot;country in [&#39;DE&#39;, &#39;FR&#39;]&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
-    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
-    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;wind&quot;</span><span class="p">,</span>
-    <span class="n">nice_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-    <span class="n">aspect</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
-    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
-    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span>
-    <span class="n">nice_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
-    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
-    <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span>
-    <span class="n">nice_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>You can also explore the correlation between renewable production and hydrogen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
@@ -2126,42 +2114,14 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
     <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;snapshot &lt; &#39;2013-03&#39;&quot;</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
-    <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;H2&quot;</span><span class="p">],</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
-    <span class="n">aspect</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-    <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-    <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;H2&quot;</span><span class="p">],</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="n">facet_col</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>There is also the possibility to explore maps.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subplot_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">proj</span><span class="p">}</span>
@@ -2169,18 +2129,18 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 <span class="n">s</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
     <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span>
     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Example: With some tweaking and construction, we can use PyPSA’s plotting to create some really cool visualizations of the resulting net hydrogen flows in the network:</p>
+<p>But, to get something neat, you might need to code it yourself. Indeed, with some tweaking and construction, we can use PyPSA’s plotting to create some really cool visualizations of the resulting net hydrogen flows in the network.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_net_H2_flows</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regions</span><span class="p">,</span> <span class="n">countries</span><span class="o">=</span><span class="p">[],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_net_H2_flows</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regions</span><span class="p">,</span> <span class="n">countries</span><span class="o">=</span><span class="p">[],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)):</span>
     <span class="n">network</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="c1"># if &quot;H2 pipeline&quot; not in n.links.carrier.unique():</span>
-    <span class="c1">#     return</span>
+    <span class="k">if</span> <span class="s2">&quot;H2 pipeline&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">carrier</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+        <span class="k">return</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">countries</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
 
@@ -2202,8 +2162,8 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="c1"># drop pipelines and storages from energy balance</span>
     <span class="n">h2_energy_balance</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">h2_energy_balance</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">to_drop</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1"># filter for countries</span>
-    <span class="c1"># h2_energy_balance = h2_energy_balance.loc[countries,:,:]</span>
-    <span class="c1"># regions = regions.loc[countries]</span>
+    <span class="n">h2_energy_balance</span> <span class="o">=</span> <span class="n">h2_energy_balance</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">countries</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">regions</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">countries</span><span class="p">]</span>
 
     <span class="n">regions</span><span class="p">[</span><span class="s2">&quot;H2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">h2_energy_balance</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -2214,7 +2174,9 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="c1"># Drop non-hydrogen buses so they don&#39;t clutter the plot</span>
     <span class="c1"># And filter for countries</span>
     <span class="n">network</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier != &#39;H2&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># network.buses.drop(network.buses.query(&quot;country not in @countries&quot;).index, inplace=True)</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;country not in @countries&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
     <span class="c1"># drop all links which are not H2 pipelines</span>
     <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
@@ -2239,10 +2201,21 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">flow</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">min_energy</span><span class="p">)</span>
 
     <span class="c1"># drop links not connecting countries in country list</span>
-    <span class="c1"># network.links.drop(network.links.loc[((~network.links.bus0.str.contains(&#39;|&#39;.join(countries))) | (~network.links.bus1.str.contains(&#39;|&#39;.join(countries))))].index, inplace=True)</span>
-    <span class="c1"># n.links.loc[((n.links.bus0.str.contains(&#39;|&#39;.join(countries))) &amp; (n.links.bus1.str.contains(&#39;|&#39;.join(countries))))]</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="p">(</span>
+                <span class="p">(</span><span class="o">~</span><span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">bus0</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">countries</span><span class="p">)))</span>
+                <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">bus1</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">countries</span><span class="p">)))</span>
+            <span class="p">)</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">EqualEarth</span><span class="p">()</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">()</span>
+    <span class="n">map_opts</span><span class="p">[</span><span class="s2">&quot;boundaries&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">x</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">coords</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">y</span>
+    <span class="p">]</span>
     <span class="n">regions</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">proj4_init</span><span class="p">)</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">proj</span><span class="p">})</span>
@@ -2291,7 +2264,7 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 
     <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
     <span class="n">sizes_str</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="s2">&quot; over&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Hydrogen flows</span><span class="si">{</span><span class="n">sizes_str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2"> GWh&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Net H2 flows</span><span class="si">{</span><span class="n">sizes_str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2"> GWh&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">]</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">/</span> <span class="n">linewidth_factor</span>
     <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="o">*</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">]</span>
     <span class="n">add_legend_lines</span><span class="p">(</span>
@@ -2303,6 +2276,15 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
     <span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+
+<span class="n">map_opts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">71</span><span class="p">],</span>
+    <span class="s2">&quot;geomap_colors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ocean&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;land&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -2315,13 +2297,10 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 </div>
 </div>
 </div>
+<p>Or, if you want to zoom on specific countries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
-    <span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">n</span><span class="o">.</span><span class="n">loads</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier == &#39;electricity&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
-    <span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># GW</span>
-<span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;GW&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Electric load&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_net_H2_flows</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">h2_regions</span><span class="p">,</span> <span class="n">countries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;CH&quot;</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -2369,11 +2348,11 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
       </div>
     </a>
     <a class="right-next"
-       href="oet-extension/00-reference.html"
+       href="background1-python.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
+        <p class="prev-next-title">Background: Intro to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2399,23 +2378,21 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-structured-data-to-optimisation">From structured data to optimisation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pypsa-a-simple-dispatch-problem">Introduction to pypsa: a simple dispatch problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pypsa-a-minimal-dispatch-problem">Introduction to pypsa: a minimal dispatch problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-electricity-market-problem">Simple electricity market problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-basic-network">Building a basic network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation">Optimisation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-pypsa-model">Explore pypsa model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation">Optimisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-pypsa-model">Explore pypsa model</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-session-1-building-the-reference-grids">Hands-on Session 1: Building the reference grids</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-reference-grids">Building the reference grids</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-example-data">Load example data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-bidding-zones">Explore bidding zones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-electricity-reference-grid">Explore the Electricity reference grid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-hydrogen-reference-grid">Explore the Hydrogen reference grid</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-session-2-extracting-insights-visualization">Hands-on Session 2: Extracting insights &amp; Visualization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-visualization">Extracting insights &amp; Visualization</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-solved-model">Import the solved model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-insights-from-the-network-using-pypsa-statistics">Extract insights from the network using <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-using-pypsa-statistics">Visualizing results using <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code></a></li>

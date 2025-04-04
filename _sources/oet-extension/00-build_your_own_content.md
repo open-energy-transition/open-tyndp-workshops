@@ -20,9 +20,9 @@ This guide helps you in building your own **Data Science for Energy System Model
 
 <!-- If you want to see what others have created, you can visit -->
 
-Before starting, please make sure that you are using the correct python environment that have at least all the python package dependencies from `environment.yaml` or `requirements.txt`. The instruction are [here if you are using conda (reccomended)](../intro.md#with-conda-recommended) and [here if you are using pip](../intro.md#with-pip).
+Before starting, please make sure that you are using the correct python environment that have at least all the python package dependencies from `environment.yaml` or `requirements.txt`. The instruction are [here if you are using conda (recommended)](../intro.md#with-conda-recommended) and [here if you are using pip](../intro.md#with-pip).
 
-To follow this tutorial, basic usage of Git is a prerequisit. Here are some resources and tutorials to help you get started with Git:
+To follow this tutorial, basic usage of Git is a prerequisite. Here are some resources and tutorials to help you get started with Git:
 
 * [Atlassian: Getting Git right](https://www.atlassian.com/git)
 * [PyPSA: Git](https://pypsa-earth.readthedocs.io/en/latest/software_hints.html#git)
@@ -95,7 +95,7 @@ you can test run the changes locally by running the `jupyter-book build data-sci
 ### 3a. Add your own logo
 
 If you want your institution to be placed in the top left corner of this website, we recommend that you follow these steps:
-* name your institue logo in as `logo_int.png` and place it inside the data-science-for-esm folder.
+* name your institute logo in as `logo_int.png` and place it inside the data-science-for-esm folder.
 * Run `oet-extension/merge_logo.py` to combine your institute with as smaller image of TU Berlin's and OET's logo
 * Within `_config.yml`, make sure that the logo is directed to `logo: logo_merged.png`.
 
