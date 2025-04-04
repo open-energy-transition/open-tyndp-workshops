@@ -4,7 +4,7 @@ on:
   # Trigger the workflow on push to main branch with changes
   push:
     branches:
-    - main
+    - feature/Workshop-1-notebook
 
 permissions:
   pages: write
