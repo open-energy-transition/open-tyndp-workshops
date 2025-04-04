@@ -5,5 +5,9 @@ format: jb-book
 root: intro
 chapters:
 - file: 20250409-workshop-pypsa-01
+- file: background1-python
+- file: background2-numpy
+- file: background3-pandas
+- file: background4-geopandas
 
 - file: oet-extension/00-reference.md
