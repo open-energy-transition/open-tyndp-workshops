@@ -27,7 +27,7 @@ For running the notebook using Google Colab you can simply launch it by clicking
 
 #### Installing the package manager `conda`
 
-If you don't want to use Google Colab for For running this Python and nearly all of the software packages in the scientific python
+If you don't want to use Google Colab you will need to install the packages locally. For running this Python and nearly all of the software packages in the scientific python
 ecosystem are [open-source](https://opensource.org/). Coordinating the
 compatibility between these different packages and their multiple versions can be difficult! Fortunately, the problem is solved by using a Python
 _distribution_ and/or _package manager_. You should use a package manager!
