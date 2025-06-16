@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: Open Energy Transition gGmbH
+#
+# SPDX-License-Identifier: MIT
+
+rule all:
+    input:
+        "data_sorted.csv"
+
+rule filter_data:
+    input:
+        "data_raw.csv"
+    output:
+        "data_filtered.csv"
+    script:
+        "scripts/filter_data.py"
+
+rule sort_data:
+    input:
+        "data_filtered.csv"
+    output:
+        "data_sorted.csv"
+    script:
+        "scripts/sort_data.py"
