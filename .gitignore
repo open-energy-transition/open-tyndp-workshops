@@ -1,5 +1,6 @@
 .ipynb-checkpoints
 open-tyndp-workshops/data
+.idea
 *.geojson
 *.nc
 *.tiff
