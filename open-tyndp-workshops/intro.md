@@ -4,10 +4,13 @@ Welcome to the website covering a series of hands-on workshops facilitated by Op
 With every workshop a new notebook will be added to this website investigating different functionalities of PyPSA and implementations for the Open-TYNDP workflow.
 
 The workshops will, one by one, introduce modellers to the basics of the PyPSA framework and investigate important features of the TYNDP Scenario Building introduced by the OET team.
-Notably, this will include workshops on:
+Notably, this will include:
 
 - Electricity and H2 reference grids
-- Offshore Hubs, time series data, benchmarking framework & Snakemake workflows
+- PyPSA framework introduction
+- Snakemake workflows
+- Open-TYNDP benchmarking framework
+- Offshore Hubs
 - Demand profiles
 - Existing supply infrastructure (PEMMDB) & climate data (PECD)
 - EVs, Synthetic fuels & Hybrid Heat Pumps
