@@ -7,7 +7,7 @@ The workshops will, one by one, introduce modellers to the basics of the PyPSA f
 Notably, this will include workshops on:
 
 - Electricity and H2 reference grids
-- Hydrogen imports, Offshore Hubs & Snakemake workflows
+- Offshore Hubs, time series data, benchmarking framework & Snakemake workflows
 - Demand profiles
 - Existing supply infrastructure (PEMMDB) & climate data (PECD)
 - EVs, Synthetic fuels & Hybrid Heat Pumps

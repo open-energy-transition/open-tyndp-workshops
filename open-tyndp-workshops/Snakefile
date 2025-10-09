@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+from pathlib import Path
+
 rule all:
     input:
         "data/benchmark.png",
@@ -42,5 +44,5 @@ rule plot_benchmark:
         "data/base_2030_solved.nc"
     output:
         "data/benchmark.{ext}"
-    shell:
-        "touch {output}"
+    run:
+        Path(output[0]).touch()
