@@ -4,20 +4,43 @@
 
 rule all:
     input:
-        "data_sorted.csv"
+        "data/benchmark.png",
+        "data/benchmark.pdf"
 
-rule filter_data:
-    input:
-        "data_raw.csv"
+rule retrieve_data:
     output:
-        "data_filtered.csv"
-    script:
-        "scripts/filter_data.py"
+        "data/data_raw.csv"
+    shell:
+        "wget -O {output} https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv"
 
-rule sort_data:
+rule build_data:
     input:
-        "data_filtered.csv"
+        "data/data_raw.csv"
     output:
-        "data_sorted.csv"
+        "data/data_filtered.csv"
     script:
-        "scripts/sort_data.py"
+        "scripts/build_data.py"
+
+rule prepare_network:
+    input:
+        "data/data_filtered.csv"
+    output:
+        "data/base_2030.nc"
+    script:
+        "scripts/prepare_network.py"
+
+rule solve_network:
+    input:
+        "data/base_2030.nc"
+    output:
+        "data/base_2030_solved.nc"
+    shell:
+        "cp {input} {output}"
+
+rule plot_benchmark:
+    input:
+        "data/base_2030_solved.nc"
+    output:
+        "data/benchmark.{ext}"
+    shell:
+        "touch {output}"

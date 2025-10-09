@@ -7,7 +7,10 @@ open-tyndp-workshops/data
 *.tif
 *.html
 *.png
+*.svg
 open-tyndp-workshops/tmp/
 open-tyndp-workshops/_build/
 open-tyndp-workshops/tmp.csv
 *cleared.ipynb
+.snakemake/
+CLAUDE.md
