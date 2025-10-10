@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 chapters:
 - file: 20250409-workshop-pypsa-01
+- file: 20250624-workshop-pypsa-02
 - file: background1-python
 - file: background2-numpy
 - file: background3-pandas
