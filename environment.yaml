@@ -38,6 +38,7 @@ dependencies:
 - openpyxl
 - libgdal-hdf5
 - libgdal-netcdf
+- pdf2image
 
   # geodata utilities
 - shapely>2
