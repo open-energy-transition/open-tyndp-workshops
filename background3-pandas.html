@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -182,6 +182,11 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
 
 
 
@@ -1518,7 +1523,7 @@ Name: capacity, dtype: bool
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="_images/26b2f27f56178e6e8e255858a3100adedbc39dedfdbf1597aeec46c1543b67cf.png" src="_images/26b2f27f56178e6e8e255858a3100adedbc39dedfdbf1597aeec46c1543b67cf.png" />
+<img alt="_images/aeadd909e59be9bc719141098653ca75ae4fd38af6255d06b09c3f191033c7e5.png" src="_images/aeadd909e59be9bc719141098653ca75ae4fd38af6255d06b09c3f191033c7e5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1531,7 +1536,7 @@ Name: capacity, dtype: bool
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="_images/765d7f7055a96691c97b0945d33af138e696d1ade3e3c8b650e0a916ae0eeac5.png" src="_images/765d7f7055a96691c97b0945d33af138e696d1ade3e3c8b650e0a916ae0eeac5.png" />
+<img alt="_images/bc19bc27d2d8bc954f5f97e616d03ea26f837750cea683601bee2edfd35edac0.png" src="_images/bc19bc27d2d8bc954f5f97e616d03ea26f837750cea683601bee2edfd35edac0.png" />
 </div>
 </div>
 <p>A common operation is to change the resolution of a dataset by resampling in time, which Pandas exposes through the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#resampling">resample</a> function.</p>
@@ -1549,7 +1554,7 @@ Name: capacity, dtype: bool
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="_images/6513a08cd25d9189bba44a840ee95209fcab991007af2daab5a31e810fc078d8.png" src="_images/6513a08cd25d9189bba44a840ee95209fcab991007af2daab5a31e810fc078d8.png" />
+<img alt="_images/f30374a4e8d63f31aee25c3baf27a9763e2c7dfd2d5ee913363389dde12cbebb.png" src="_images/f30374a4e8d63f31aee25c3baf27a9763e2c7dfd2d5ee913363389dde12cbebb.png" />
 </div>
 </div>
 </section>
@@ -1910,10 +1915,10 @@ Name: Capacity, Length: 242, dtype: float64
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p><strong>Task 1:</strong> Provide a list of unique fuel types included in the power plants dataset.</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Fueltype</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -1931,10 +1936,10 @@ Name: Capacity, Length: 242, dtype: float64
 </div>
 <p><strong>Task 2:</strong> Filter the dataset by power plants with the fuel type “Hard Coal”. How many hard coal power plants are there?</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coal</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Fueltype</span> <span class="o">==</span> <span class="s2">&quot;Hard Coal&quot;</span><span class="p">]</span>
@@ -2242,10 +2247,10 @@ Name: Capacity, Length: 242, dtype: float64
 </div>
 <p><strong>Task 3:</strong> Identify the three largest coal power plants. In which countries are they located? When were they built?</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coal</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">coal</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
@@ -2383,10 +2388,10 @@ Name: Capacity, Length: 242, dtype: float64
 </div>
 <p><strong>Task 4:</strong> What is the average “DateIn” of each “Fueltype”? Which type of power plants is the oldest on average?</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">DateIn</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
@@ -2416,10 +2421,10 @@ Name: DateIn, dtype: float64
 </div>
 <p><strong>Task 5:</strong> In the time series provided, calculate the annual average capacity factors of wind and solar.</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -2440,10 +2445,10 @@ dtype: float64
 </div>
 <p><strong>Task 6:</strong> In the time series provided, calculate and plot the monthly average electricity price.</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[</span><span class="s2">&quot;prices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -2454,7 +2459,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="_images/e5dc980f7811bb5d428b3d4a48779da48aece11a8782df753852ffffc4764a03.png" src="_images/e5dc980f7811bb5d428b3d4a48779da48aece11a8782df753852ffffc4764a03.png" />
+<img alt="_images/37367db8fe3135854cb76d0a1e60ff543a81c746b48ed8ad616b068aa39d4814.png" src="_images/37367db8fe3135854cb76d0a1e60ff543a81c746b48ed8ad616b068aa39d4814.png" />
 </div>
 </details>
 </div>
