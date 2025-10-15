@@ -39,12 +39,16 @@ dependencies:
 - libgdal-hdf5
 - libgdal-netcdf
 - pdf2image
+- numexpr
+- pyyaml
+- tables
 
   # geodata utilities
 - shapely>2
 - pyepsg
 - cartopy>=0.22
 - country_converter
+- mapclassify
 
   # plotting
 - matplotlib>=3.6
@@ -53,6 +57,7 @@ dependencies:
 - holoviews
 - geoviews>=1.10
 - graphviz
+- folium
 
   # publishing
 - jupyter-book
