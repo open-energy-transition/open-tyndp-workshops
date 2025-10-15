@@ -1,0 +1,2089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Workshop 2: Introduction to Snakemake, new features update &amp; benchmarking &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20250624-workshop-pypsa-02';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Background: Introduction to the basics of Python" href="background1-python.html" />
+    <link rel="prev" title="Workshop 1: Introduction to PyPSA &amp; TYNDP reference grids" href="20250409-workshop-pypsa-01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <script>document.write(`<img src="_static/logo_merged.png" class="logo__image only-dark" alt="Open-TYNDP Workshops - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background4-geopandas.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/open-energy-transition/open-tyndp-workshops/blob/main/open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2F20250624-workshop-pypsa-02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/20250624-workshop-pypsa-02.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Workshop 2: Introduction to Snakemake, new features update & benchmarking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakemake-tool">The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-explore-the-folder">Task 2: Explore the folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triggering-a-workflow-run-on-open-tyndp">Triggering a workflow run on Open-TYNDP</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#update-on-new-features">Update on new features</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand-profiles">Electricity demand profiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pecd-capacity-factors">PECD capacity factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-compute-average-capacity-factor">Task 3: Compute average capacity factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onshore-wind-and-solar">Onshore wind and solar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-verify-onshore-wind-trajectories">Task 4: Verify onshore wind trajectories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offshore-hubs">Offshore Hubs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-extract-existing-offshore-capacities">Task 5: Extract existing offshore capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h2-imports">H2 imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-investigate-h2-import-corridors">Task 6: Investigate H2 import corridors</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-framework">Benchmarking framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Task 2: Explore the folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Task 3: Compute average capacity factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Task 4: Verify onshore wind trajectories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Task 5: Extract existing offshore capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Task 6: Investigate H2 import corridors</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="workshop-2-introduction-to-snakemake-new-features-update-benchmarking">
+<h1>Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking<a class="headerlink" href="#workshop-2-introduction-to-snakemake-new-features-update-benchmarking" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;pypsa&lt;1.0&quot;</span><span class="w"> </span>pandas<span class="w"> </span>geopandas<span class="w"> </span>xarray<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>cartopy<span class="w"> </span>snakemake<span class="w"> </span>graphviz<span class="w"> </span>snakemake-storage-plugin-http<span class="w"> </span>pdf2image<span class="w"> </span>atlite<span class="w"> </span>fiona<span class="w"> </span>powerplantmatching
+!apt-get<span class="w"> </span>install<span class="w"> </span>poppler-utils
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
+<span class="c1"># !pip install &quot;pypsa&lt;1.0&quot; pandas geopandas xarray matplotlib seaborn cartopy snakemake graphviz snakemake-storage-plugin-http pdf2image atlite fiona powerplantmatching</span>
+<span class="c1"># !apt-get install poppler-utils</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Code</span><span class="p">,</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">IFrame</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultipleLocator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">add_legend_circles</span><span class="p">,</span>
+    <span class="n">add_legend_lines</span><span class="p">,</span>
+    <span class="n">add_legend_patches</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">nice_names</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data/data_raw.csv&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/network_NT_presolve_highres_2030.nc&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-02/network_NT_presolve_highres_2030.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Snakefile&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/main/open-tyndp-workshops/Snakefile&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists. Skipping download.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
+    <span class="o">!</span><span class="w"> </span>unzip<span class="w"> </span>-q<span class="w"> </span>-o<span class="w"> </span>data/open-tyndp.zip<span class="w"> </span>-d<span class="w"> </span>data/open-tyndp
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/data_raw.csv from GCP storage.
+File available in data/data_raw.csv.
+Retrieving data/open-tyndp.zip from GCP storage.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">HTTPError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:240,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span><span class="sd"> Retrieve a URL into a temporary location on disk.</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span><span class="sd"> </span>
+<span class="sd">   (...)    236 data file as well as the resulting HTTPMessage object.</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="n">url_type</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">_splittype</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">240</span> <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">closing</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="n">headers</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>     <span class="c1"># Just return the local path and the &quot;headers&quot; for file://</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span>     <span class="c1"># URLs. No sense in performing a copy unless requested.</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:215,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">215</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:521,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span>     <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">521</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:630,</span> in <span class="ni">HTTPErrorProcessor.http_response</span><span class="nt">(self, request, response)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span> <span class="c1"># According to RFC 2616, &quot;2xx&quot; code indicates that the client&#39;s</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span> <span class="c1"># request was successfully received, understood, and accepted.</span>
+<span class="g g-Whitespace">    </span><span class="mi">629</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">630</span>     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span> <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:559,</span> in <span class="ni">OpenerDirector.error</span><span class="nt">(self, proto, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">557</span> <span class="k">if</span> <span class="n">http_err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;http_error_default&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">orig_args</span>
+<span class="ne">--&gt; </span><span class="mi">559</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:492,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">490</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">492</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span>         <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:639,</span> in <span class="ni">HTTPDefaultErrorHandler.http_error_default</span><span class="nt">(self, req, fp, code, msg, hdrs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span> <span class="k">def</span><span class="w"> </span><span class="nf">http_error_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">639</span>     <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+
+<span class="ne">HTTPError</span>: HTTP Error 404: Not Found
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-snakemake-tool">
+<h1>The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool<a class="headerlink" href="#the-snakemake-tool" title="Link to this heading">#</a></h1>
+<p><img alt="" src="_images/snakemake_logo.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> workflow management system is a tool to create reproducible and scalable data analyses.
+Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid, and cloud environments, without the need to modify the workflow definition.</p>
+<p>Snakemake follows the <a class="reference external" href="https://www.gnu.org/software/make">GNU Make</a> paradigm: workflows are defined in terms of so-called <code class="docutils literal notranslate"><span class="pre">rules</span></code> that specify how to create a set of output files from a set of input files. Dependencies between the rules are determined automatically, creating a DAG (directed acyclic graph) of jobs that can be automatically parallelized.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation for this package is available at <a class="reference external" href="https://snakemake.readthedocs.io/">https://snakemake.readthedocs.io/</a>. You can also check out a <a class="reference external" href="https://slides.com/johanneskoester/snakemake-tutorial">slide deck Snakemake Tutorial</a> by Johannes Köster (2024).</p>
+<p>Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J., 2021. Sustainable data analysis with Snakemake. F1000Res 10, 33.</p>
+</div>
+<section id="a-minimal-snakemake-example">
+<h2>A minimal Snakemake example<a class="headerlink" href="#a-minimal-snakemake-example" title="Link to this heading">#</a></h2>
+<p>To check out how this looks in practice, we’ve prepared a minimal Snakemake example workflow that processes some data. The minimal workflow consists of the following rules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">retrieve_data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build_data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prepare_network</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solve_network</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code></p></li>
+</ul>
+<p>These rules are illustrative and mimic the Open-TYNDP structure and nomenclature.</p>
+<center>
+<p><img alt="" src="_images/minimal_workflow.png" /></p>
+</center><p>We have already loaded the raw data file used in this minimal example into our working directory.</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be called twice with two different filename extensions. For this, we are taking advantage of the concept of wildcards (<code class="docutils literal notranslate"><span class="pre">ext</span></code>). Snakemake will automatically resolve the wildcards using the dependency graph. In this case, the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule takes as input both a <code class="docutils literal notranslate"><span class="pre">png</span></code> and a <code class="docutils literal notranslate"><span class="pre">pdf</span></code> figure which propagates back throughout the workflow.</p>
+<section id="the-snakefile-and-rules">
+<h3>The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code><a class="headerlink" href="#the-snakefile-and-rules" title="Link to this heading">#</a></h3>
+<p>The rules need to be defined in a so-called <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> that sits in your current working directory. For our minimal example the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Code</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Snakefile&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;Python&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can check out the scripts under <code class="docutils literal notranslate"><span class="pre">scripts</span></code>. You will see that they are simplistic and only serve an illustrative purpose.</p>
+<p>You can also observe how the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is defined to take advantage of the wildcards. This reduces the redundancy in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>. Wildcards are defined between <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> in the rule definition.</p>
+</section>
+<section id="calling-a-workflow">
+<h3>Calling a workflow<a class="headerlink" href="#calling-a-workflow" title="Link to this heading">#</a></h3>
+<p>You can trigger the workflow by specifying a target file, like <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code>, or any intermediate file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>data/benchmark.pdf
+</pre></div>
+</div>
+<p>Alternatively, you can also execute the workflow by calling a rule that produces an intermediate file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>build_data
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> You cannot call a rule that includes a wildcard without specifying what the wildcard should be filled with. Otherwise, Snakemake will not know what to propagate back.</p>
+<p>Or you can call the common rule <code class="docutils literal notranslate"><span class="pre">all</span></code> which can be used to execute the entire workflow. It takes the final workflow output as its input and thus requires all previous dependent rules to be run as well:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>all
+</pre></div>
+</div>
+<p>Because we defined the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule as first in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>, this rule is assumed to be the default and the following also works:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call
+</pre></div>
+</div>
+<p>A very important feature is the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag which executes a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code>. It is recommended to always first execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> before the actual execution of a workflow. This simply prints out the DAG of the workflow to investigate without actually executing it.</p>
+<p>Let’s try this out and investigate the output:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be executed twice due to wildcards.</p>
+</section>
+<section id="visualizing-the-dag-of-a-workflow">
+<h3>Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow<a class="headerlink" href="#visualizing-the-dag-of-a-workflow" title="Link to this heading">#</a></h3>
+<p>You can also visualize the DAG of jobs using the <code class="docutils literal notranslate"><span class="pre">--dag</span></code> flag and the Graphviz <code class="docutils literal notranslate"><span class="pre">dot</span></code> command. This will not run the workflow but only create the visualization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/digraph/,\$p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>&gt;<span class="w"> </span>dag_minimal.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_minimal.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rules that need to be executed will be presented as plain lines, while those that have already been executed will be presented as dotted lines. An alternative to the DAG is the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code>. This graph is typically less crowded as you will only visualize the dependency graph of rules. This representation is leaner than the DAG because rules are not repeated for wildcards.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/digraph/,\$p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>&gt;<span class="w"> </span>rulegraph_minimal.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_minimal.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is only represented once.</p>
+<p>Alternatively, you can also visualize a <code class="docutils literal notranslate"><span class="pre">filegraph</span></code>, which is similar to the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code> but includes some information about the inputs and outputs to each of the rules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--filegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/digraph/,\$p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tsvg<span class="w"> </span>&gt;<span class="w"> </span>filegraph_minimal.svg
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s2">&quot;filegraph_minimal.svg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="task-1-executing-a-workflow-with-snakemake">
+<h2>Task 1: Executing a workflow with Snakemake<a class="headerlink" href="#task-1-executing-a-workflow-with-snakemake" title="Link to this heading">#</a></h2>
+<p><strong>a)</strong> For our minimal example, execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> to produce the intermediate file <code class="docutils literal notranslate"><span class="pre">data/base_2030.nc</span></code>.</p>
+<p><strong>b)</strong> Execute the entire workflow and investigate what happens if you try to execute the workflow again.</p>
+<p><strong>c)</strong> Delete the final output file <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code> and investigate what happens if you try to execute the workflow again.</p>
+<p><strong>d)</strong> Change a value in the raw input data file <code class="docutils literal notranslate"><span class="pre">data/data_raw.csv</span></code> and save it again, overwriting the original file. Investigate what happens if you try to execute the workflow again.</p>
+<p>Hint: You can also just <code class="docutils literal notranslate"><span class="pre">touch</span></code> the file by executing <code class="docutils literal notranslate"><span class="pre">Path(&quot;data/data_raw.csv&quot;).touch()</span></code>. This will mimic a file edit.</p>
+<p><strong>e)</strong> (Optional) Open the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and add a second rule that processes the file <code class="docutils literal notranslate"><span class="pre">data_raw_2.csv</span></code> using the same script as the <code class="docutils literal notranslate"><span class="pre">build_data</span></code> rule. Add the output of this new rule as a second input to the <code class="docutils literal notranslate"><span class="pre">prepare_network</span></code> rule.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution c)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution d)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution e)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discover-open-tyndp-file-structure">
+<h2>Discover Open-TYNDP file structure<a class="headerlink" href="#discover-open-tyndp-file-structure" title="Link to this heading">#</a></h2>
+<p>We have already retrieved a prebuilt version of the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> GitHub repository into our working directory. This folder contains a run of Open-TYNDP for NT and DE scenarios, with 2030 and 2040 as planning horizons. We removed the atlite cutout from the archive and compressed the archive using <code class="docutils literal notranslate"><span class="pre">zip</span> <span class="pre">-r</span> <span class="pre">open-tyndp.zip</span> <span class="pre">.</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository contains the following structure. Directories of particular interest are marked in bold:</p>
+<ul class="simple">
+<li><p><strong>benchmarks</strong>: will store Snakemake benchmarks (does not exist initially)</p></li>
+<li><p><strong>config</strong>: configurations used in the study</p></li>
+<li><p>cutouts: will store raw weather data cutouts from atlite (does not exist initially)</p></li>
+<li><p><strong>data</strong>: includes input data that is not produced by any Snakemake rule. Various different input files are retrieved from external storage and stored in this directory</p></li>
+<li><p>doc: includes all files necessary to build the readthedocs documentation of PyPSA-Eur</p></li>
+<li><p><strong>envs</strong>: includes all the mamba environment specifications to run the workflow</p></li>
+<li><p>logs: will store log files (does not exist initially)</p></li>
+<li><p>notebooks: includes all the notebooks used for ad-hoc analysis</p></li>
+<li><p>report: contains all files necessary to build the report; plots and result files are generated automatically</p></li>
+<li><p><strong>rules</strong>: includes all the Snakemake rules loaded in the Snakefile</p></li>
+<li><p><strong>resources</strong>: will store intermediate results of the workflow which can be picked up again by subsequent rules (does not exist initially)</p></li>
+<li><p><strong>results</strong>: will store the solved PyPSA network data, summary files and output plots (does not exist initially)</p></li>
+<li><p><strong>scripts</strong>: includes all the Python scripts executed by the Snakemake rules to build the model</p></li>
+</ul>
+</section>
+<section id="task-2-explore-the-folder">
+<h2>Task 2: Explore the folder<a class="headerlink" href="#task-2-explore-the-folder" title="Link to this heading">#</a></h2>
+<p><strong>a)</strong> Can you find the TYNDP specific data input files?</p>
+<p><strong>b)</strong> Where can you check which scenario and planning horizons were used to generate the current results?</p>
+<p>Hint: Search for <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code>.</p>
+<p><strong>c)</strong> Can you find the hydrogen grid map in the output files for the NT scenario in 2040?</p>
+<p>Hint: Search for <code class="docutils literal notranslate"><span class="pre">base_s_all__-h2_network_2040.pdf</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution c)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-snakemake-to-launch-the-open-tyndp-workflow">
+<h2>Using Snakemake to launch the Open-TYNDP workflow<a class="headerlink" href="#using-snakemake-to-launch-the-open-tyndp-workflow" title="Link to this heading">#</a></h2>
+<p>We now need to change our working directory to the Open-TYNDP directory we previously retrieved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Be aware that to run the previous section of this notebook, you will need to restore the default working directory using <code class="docutils literal notranslate"><span class="pre">os.chdir(&quot;../../&quot;)</span></code>.</p>
+<p>Let’s check that we are indeed in the new directory now:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use Snakemake to call some of the rules to produce outputs with the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> PyPSA model.</p>
+<p>We will use the prepared TYNDP configuration file (<code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>) and schedule a dry-run with <code class="docutils literal notranslate"><span class="pre">-n</span></code> as we only want to investigate the DAG of the workflow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, there is nothing to be done since all necessary outputs are already present in the files. However, we can still explore the set of rules defined in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and the other <code class="docutils literal notranslate"><span class="pre">.smk</span></code> files. First, we can plot the rule graph, then the full DAG.</p>
+<p>The corresponding rule graph to this workflow will look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/digraph/,\$p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>&gt;<span class="w"> </span>rulegraph_open_tyndp.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_open_tyndp.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding DAG to this workflow will look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/digraph/,\$p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>&gt;<span class="w"> </span>dag_open_tyndp.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_open_tyndp.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, this workflow is much more complex than our minimal example from the beginning. Since we already executed the entire workflow for this demonstration, all the rules are presented as dotted lines in the DAG.</p>
+<p>You will also notice that the DAG is much larger than the rule graph. This is because Open-TYNDP leverages wildcards quite extensively to generalize rule definitions and to parallelize tasks.</p>
+<p>Nevertheless, the general idea remains the same. We retrieve data which we consequently process, then we prepare the model network and we solve it before we postprocess the results (summary, plotting, benchmarks).</p>
+</section>
+<section id="triggering-a-workflow-run-on-open-tyndp">
+<h2>Triggering a workflow run on Open-TYNDP<a class="headerlink" href="#triggering-a-workflow-run-on-open-tyndp" title="Link to this heading">#</a></h2>
+<p>Let’s simulate a completed optimization by updating the timestamp of the solved network file (base_s_all___2040.nc), which is saved as the final step of the optimization process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results/tyndp/NT/networks/base_s_all___2040.nc&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now see that Snakemake triggers all the rules that depend on the solved network. In this case, these are all the postprocessing rules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because of the complexity of the workflow, we are not executing this. However, if you are running this notebook on your local machine, you can also use the <code class="docutils literal notranslate"><span class="pre">conda</span></code> package manager to install the <code class="docutils literal notranslate"><span class="pre">pypsa-eur</span></code> environment and run the workflow instead of dry-runs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">--</span><span class="n">file</span> <span class="n">envs</span><span class="o">/&lt;</span><span class="n">YourSystemOS</span><span class="o">&gt;.</span><span class="n">lock</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="update-on-new-features">
+<h1>Update on new features<a class="headerlink" href="#update-on-new-features" title="Link to this heading">#</a></h1>
+<p>This workshop focuses on the 2030 NT scenario and the 2040 DE scenario. Since our last workshop, we have added four major features to the model:</p>
+<ol class="arabic simple">
+<li><p>TYNDP electricity demand and PECD capacity factors time series,</p></li>
+<li><p>Onshore wind and solar TYNDP technologies (incl. PEMMDB existing capacities and trajectories),</p></li>
+<li><p>Offshore hubs (incl. the offshore topology, all associated technologies, potential constraints and trajectories),</p></li>
+<li><p>Hydrogen import corridors.</p></li>
+</ol>
+<p>The Open-TYNDP data we retrieved contains networks with low time resolution (6H). This is illustrative; however, since we are focusing on time series, we will use another network with hourly resolution. We will import this pre-solved network for NT 2030.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_NT_2030h</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="s2">&quot;../network_NT_presolve_highres_2030.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="electricity-demand-profiles">
+<h2>Electricity demand profiles<a class="headerlink" href="#electricity-demand-profiles" title="Link to this heading">#</a></h2>
+<p>We can then explore the electricity demand profiles that are attached to the network. Can you remember how to access time-varying attributes of components in PyPSA?</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loads_2030</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span>
+<span class="n">loads_2030</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s plot the electricity demand time series:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">loads_2030</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Load [GW]&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Electricity Load Time Series - NT - 2030&quot;</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is very overwhelming to look at. Let’s filter that down a bit…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Group country profiles together and select a week</span>
+<span class="n">country_mapping</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier==&#39;AC&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">country</span>
+<span class="n">loads_2030_by_country</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">country_mapping</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2009-03-01&quot;</span><span class="p">:</span><span class="s2">&quot;2009-03-07&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;GB&quot;</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">loads_2030_by_country</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Load [GW]&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Electricity Load Time Series - NT - 2030&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you might remember, we can also use the <strong>PyPSA Statistics</strong> module that we introduced in the last workshop to interactively visualize these electricity demand inputs from the network. For this to work, we need a solved network.</p>
+<p>Let’s load our pre-solved networks, so we can use the statistics module to analyze it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import networks</span>
+<span class="n">n_NT_2030</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="s2">&quot;results/tyndp/NT/networks/base_s_all___2030.nc&quot;</span><span class="p">)</span>
+<span class="n">n_DE_2040</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="s2">&quot;results/tyndp/DE/networks/base_s_all___2040.nc&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fix missing colors</span>
+<span class="n">n_NT_2030</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>
+<span class="n">n_NT_2030</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>
+<span class="n">n_DE_2040</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>
+<span class="n">n_DE_2040</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s define helper variables</span>
+<span class="n">s_NT_2030</span> <span class="o">=</span> <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">statistics</span>
+<span class="n">s_DE_2040</span> <span class="o">=</span> <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">statistics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s access the load data using <code class="docutils literal notranslate"><span class="pre">statistics.withdrawal()</span></code>. The electricity load is attached to the <code class="docutils literal notranslate"><span class="pre">low</span> <span class="pre">voltage</span></code> buses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_NT_2030</span><span class="o">.</span><span class="n">withdrawal</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;low voltage&quot;</span><span class="p">,</span> <span class="n">comps</span><span class="o">=</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> <span class="n">aggregate_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As previously, we can plot all the countries at the same time, but now using the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> module…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">facet_grid</span> <span class="o">=</span> <span class="n">s_NT_2030</span><span class="o">.</span><span class="n">withdrawal</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;low voltage&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Electricity demand Time Series - NT - 2030&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Load [MW]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, plotting individual countries is now easier. Let’s present two countries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">facet_col</span> <span class="o">=</span> <span class="n">s_NT_2030</span><span class="o">.</span><span class="n">withdrawal</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;low voltage&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;carrier == &#39;electricity&#39; and country in [&#39;DE&#39;, &#39;FR&#39;]&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Electricity demand Time Series - NT - 2030&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Load [MW]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Load [MW]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the statistics module is a powerful tool to explore your results. You can find more information about it in the <a class="reference internal" href="20250409-workshop-pypsa-01.html#extracting-insights-visualization"><span class="std std-ref">first workshop notebook</span></a> and in the official <a class="reference external" href="https://docs.pypsa.org/latest/user-guide/plotting/charts/">PyPSA documentation</a>.</p>
+</section>
+<section id="pecd-capacity-factors">
+<h2>PECD capacity factors<a class="headerlink" href="#pecd-capacity-factors" title="Link to this heading">#</a></h2>
+<p>The Pan-European Climate Database (PECD) provides capacity factor profiles for all the different renewable technologies used in the TYNDP. We processed these input data files into a Python and PyPSA friendly input format.</p>
+<p>Let’s start by looking at the processed capacity factor time series for Solar PV Rooftop for 2030. These processed data are stored in the <code class="docutils literal notranslate"><span class="pre">resources</span></code> directory, as they are an output of <code class="docutils literal notranslate"><span class="pre">build_renewable_profiles_pecd</span></code>. We will filter the data to a set of countries and a week.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cf_pv_rftp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;resources/tyndp/NT/pecd_data_LFSolarPVRooftop_2030.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2009-07-01&quot;</span><span class="p">:</span><span class="s2">&quot;2009-07-04&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;SE04&quot;</span><span class="p">,</span> <span class="s2">&quot;DE00&quot;</span><span class="p">,</span> <span class="s2">&quot;FR00&quot;</span><span class="p">,</span> <span class="s2">&quot;ES00&quot;</span><span class="p">]]</span>
+<span class="n">cf_pv_rftp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using a heatmap, we can better grasp the content of the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cf_pv_rftp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Factor&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Capacity Factor Time Series - NT - 2030 - March 1-4&quot;</span><span class="p">)</span>
+<span class="n">tick_positions</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf_pv_rftp</span><span class="p">),</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">tick_positions</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span>
+    <span class="n">cf_pv_rftp</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">tick_positions</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Node&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also present the data in a line plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">cf_pv_rftp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Capacity Factor Time Series - NT - 2030 - March 1-4&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Capacity Factor&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3-compute-average-capacity-factor">
+<h2>Task 3: Compute average capacity factor<a class="headerlink" href="#task-3-compute-average-capacity-factor" title="Link to this heading">#</a></h2>
+<p><strong>a)</strong> Locate the resource file with onshore wind capacity factors used for NT in 2030.</p>
+<p><strong>b)</strong> Compute the average onshore wind capacity factor for all the countries in the PECD.</p>
+<p><strong>c)</strong> Verify one of the values directly in the network.</p>
+<p>Hint: Capacity factors are defined as time-varying parameters of generators and are called <code class="docutils literal notranslate"><span class="pre">p_max_pu</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution c)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="onshore-wind-and-solar">
+<h2>Onshore wind and solar<a class="headerlink" href="#onshore-wind-and-solar" title="Link to this heading">#</a></h2>
+<p>The TYNDP provides existing capacities with the Pan-European Market Modelling database (PEMMDB) and expansion trajectories for given investment candidates and expandable technologies. For the implemented onshore wind and solar technologies, these have been included in beta release v0.3 of the Open-TYNDP model.</p>
+<p>It is possible to retrieve those values from the networks as they are added as <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> of the generators. However, for simplicity, we will import the values directly from the processed input files for the DE scenario. This allows us to investigate the entire trajectory path at once instead of reading one network per planning horizon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;resources/tyndp/DE/tyndp_trajectories.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">trj</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similar to the capacity factor time series, we want to focus on the Solar PV Rooftop technology and its trajectory path. Let’s take Germany (DE00) to investigate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trj_pv_rftp_de</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">trj</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier == &#39;solar-pv-rooftop&#39; and bus == &#39;DE00&#39;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;pyear&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;pyear&quot;</span><span class="p">)[[</span><span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># GW</span>
+<span class="p">)</span>
+<span class="n">trj_pv_rftp_de</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have collected the data, we can create a nice visualization of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Solar PV Rooftop Capacity Trajectories - DE scenario - DE00&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Planning Year&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Capacity [GW]&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#E63946&quot;</span><span class="p">,</span> <span class="s2">&quot;#1D3557&quot;</span><span class="p">],</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;*--&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#457B9D&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trajectory Range&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">trj_pv_rftp_de</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s access the network for the DE scenario to compare one of these trajectory values for 2040.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trj_pv_rftp_de_nc</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier == &#39;solar-pv-rooftop&#39; and bus == &#39;DE00&#39;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_index</span><span class="p">()[[</span><span class="s2">&quot;p_nom_opt&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># in GW</span>
+<span class="p">)</span>
+<span class="n">trj_pv_rftp_de_nc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assets remain in the PyPSA network throughout their entire operational lifetime. The year in an asset’s name (e.g “2030”) indicates its build year, not the cumulative capacity in that investment period.</p>
+<p>Example: In the 2040 planning year, your network contains:</p>
+<ul class="simple">
+<li><p>Generators named “2030” (built in 2030, still operational)</p></li>
+<li><p>Generators named “2040” (newly built in 2040)</p></li>
+</ul>
+<p>Each generator stores information that depends on its build year (such as efficiency and costs), and after optimization, it contains the cost-optimal capacity that is added in that specific year.</p>
+<p>As we can see, the <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> values for 2040 do not match the reported trajectory values above. The TYNDP trajectories are cumulative trajectories. This means that 2040 generators are bound to extend the optimal capacity of the still operational generators of 2030.</p>
+<p>Therefore, if we add the existing capacity (<code class="docutils literal notranslate"><span class="pre">p_nom_opt</span></code>) from 2030 to the <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> values from 2040, we will obtain the reported trajectory values shown above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">trj_pv_rftp_de_nc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DE00 0 solar-pv-rooftop-2040&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">+</span> <span class="n">trj_pv_rftp_de_nc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DE00 0 solar-pv-rooftop-2030&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_opt&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4-verify-onshore-wind-trajectories">
+<h2>Task 4: Verify onshore wind trajectories<a class="headerlink" href="#task-4-verify-onshore-wind-trajectories" title="Link to this heading">#</a></h2>
+<p>Verify onshore wind trajectories in the network itself.</p>
+<p>Hint: This can be quick if you can copy and reuse the existing code used above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="offshore-hubs">
+<h2>Offshore Hubs<a class="headerlink" href="#offshore-hubs" title="Link to this heading">#</a></h2>
+<p>To implement the offshore methodology, new carriers (<em>i.e.</em>, technologies) are introduced. All the offshore technologies start with <code class="docutils literal notranslate"><span class="pre">offwind</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">offwind_carriers</span> <span class="o">=</span> <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Carrier.str.contains(&#39;offwind&#39;)&quot;</span><span class="p">)</span>
+<span class="n">offwind_carriers_i</span> <span class="o">=</span> <span class="n">offwind_carriers</span><span class="o">.</span><span class="n">index</span>
+<span class="n">offwind_carriers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see in the table above, all the offshore technologies are implemented. We model technologies that are a combination of the following:</p>
+<ul class="simple">
+<li><p>both <code class="docutils literal notranslate"><span class="pre">ac</span></code> and <code class="docutils literal notranslate"><span class="pre">dc</span></code> zones, as well as <code class="docutils literal notranslate"><span class="pre">h2</span></code> generating windfarms;</p></li>
+<li><p>both fixed-bottom (<code class="docutils literal notranslate"><span class="pre">fb</span></code>) and floating (<code class="docutils literal notranslate"><span class="pre">fl</span></code>) foundations;</p></li>
+<li><p>both radial (<code class="docutils literal notranslate"><span class="pre">r</span></code>) and hub (<code class="docutils literal notranslate"><span class="pre">oh</span></code>) connections.</p></li>
+</ul>
+<p>We also introduce new offshore buses, both for electricity and hydrogen. Electricity buses use <code class="docutils literal notranslate"><span class="pre">AC_OH</span></code> as the carrier, while hydrogen buses use <code class="docutils literal notranslate"><span class="pre">H2_OH</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_NT_2030</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier.str.contains(&#39;OH&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s narrow down this list to a single country.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buses</span> <span class="o">=</span> <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier.str.contains(&#39;OH&#39;) and country==&#39;BE&#39;&quot;</span><span class="p">)</span>
+<span class="n">buses_i</span> <span class="o">=</span> <span class="n">buses</span><span class="o">.</span><span class="n">index</span>
+<span class="n">buses</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">n.plot.explore()</span></code>, we can easily get an overview of the network topology. Let’s clean the network before exploring it to only focus on the electrical offshore topology.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_explore_ac_oh</span> <span class="o">=</span> <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">n_explore_ac_oh</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span>
+    <span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="n">n_explore_ac_oh</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier not in [&#39;AC_OH&#39;]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>
+<span class="n">n_explore_ac_oh</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can search the network for generators that are defined with those carriers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_NT_2030</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier in @offwind_carriers_i&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s focus on a specific country:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_NT_2030</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier in @offwind_carriers_i and bus in @buses_i&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-5-extract-existing-offshore-capacities">
+<h2>Task 5: Extract existing offshore capacities<a class="headerlink" href="#task-5-extract-existing-offshore-capacities" title="Link to this heading">#</a></h2>
+<p>Extract existing offshore capacities for the country of your choice using the statistics module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also explore the data with the statistics module. First, we can create bar charts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">facet_grid</span> <span class="o">=</span> <span class="n">s_DE_2040</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;AC_OH&quot;</span><span class="p">,</span> <span class="s2">&quot;H2_OH&quot;</span><span class="p">],</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;carrier.str.startswith(&#39;offwind&#39;) and country in [&#39;NL&#39;, &#39;GB&#39;]&quot;</span><span class="p">,</span>
+    <span class="n">facet_col</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Offshore wind capacities - DE - 2040&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we can create maps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s clean a network copy to only keep offshore data</span>
+<span class="n">n_map</span> <span class="o">=</span> <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">n_map</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="n">n_map</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier not in [&#39;AC&#39;, &#39;AC_OH&#39;, &#39;H2_OH&#39;]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">n_map</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="n">n_map</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;not carrier.str.startswith(&#39;offwind&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>
+<span class="n">n_map</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span> <span class="n">n_map</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">n_map</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span> <span class="n">n_map</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define map projection</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_projection</span><span class="p">(</span><span class="n">plotting_params</span><span class="p">):</span>
+    <span class="n">proj_kwargs</span> <span class="o">=</span> <span class="n">plotting_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;projection&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;EqualEarth&quot;</span><span class="p">))</span>
+    <span class="n">proj_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ccrs</span><span class="p">,</span> <span class="n">proj_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">proj_func</span><span class="p">(</span><span class="o">**</span><span class="n">proj_kwargs</span><span class="p">)</span>
+
+
+<span class="n">proj</span> <span class="o">=</span> <span class="n">load_projection</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;EqualEarth&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the map</span>
+<span class="n">subplot_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">proj</span><span class="p">}</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="n">subplot_kw</span><span class="p">)</span>
+<span class="n">n_map</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;AC_OH&quot;</span><span class="p">,</span> <span class="s2">&quot;H2_OH&quot;</span><span class="p">],</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">bus_area_fraction</span><span class="o">=</span><span class="mf">0.006</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Offshore wind capacities - DE - 2040&quot;</span><span class="p">,</span>
+    <span class="n">legend_circles_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the map above, we can see the two types of offshore wind connections. Radially connected capacities are attached to and plotted on the mainland node, hence offshore capacities “on land”. In contrast, offshore hub capacities are attached to and plotted on the actual offshore nodes.</p>
+<p>The NT scenario is a dispatch scenario. This is implemented in PyPSA using the argument <code class="docutils literal notranslate"><span class="pre">p_nom_extendable</span> <span class="pre">=</span> <span class="pre">False</span></code>. However, for the two other scenarios, we need to model capacity expansion.</p>
+<p>Currently, the model is configured to do myopic optimization. This means that only the capacities of the current planning horizon are expandable. Generators of the previous planning horizons are fixed at their optimal capacities. Let’s verify this in the network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s explore offshore wind generators in Denmark</span>
+<span class="n">c_buses</span> <span class="o">=</span> <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;country == &#39;DK&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="p">(</span>
+    <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier in @offwind_carriers_i and bus in @c_buses&quot;</span><span class="p">)[</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;build_year&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p_nom&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p_nom_max&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p_nom_opt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p_nom_extendable&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;build_year&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see multiple columns in the table:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">build_year</span></code>, the build year of the asset (input)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_nom</span></code>, the nominal power (input)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code>, if expansion is enabled, the minimum value of the nominal capacity (input)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code>, if expansion is enabled, the maximum value of the nominal capacity (input)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_nom_opt</span></code>, the optimized nominal capacity (output)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_nom_extendable</span></code>, if expansion is enabled for that asset (input)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code> reflects the existing capacities defined in the TYNDP, while the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> represents the layer potential. We also implemented constraints to ensure we respect the zone potentials and the trajectories defined in the data:</p>
+<ul class="simple">
+<li><p>A constraint limits the expansion of DC and H2 sitting on the same location, as the sum of the two capacities cannot exceed the layer potential.</p></li>
+<li><p>A constraint sets the maximum potential per zone, taking into account the zone trajectories.</p></li>
+</ul>
+</section>
+<section id="h2-imports">
+<h2>H2 imports<a class="headerlink" href="#h2-imports" title="Link to this heading">#</a></h2>
+<p>There have also been some important additions to the H2 infrastructure since our last workshop. The different H2 import corridors are now included in the model with a simple pipeline transport representation, similar to the H2 reference grid.</p>
+<p>The import pipelines are implemented using PyPSA’s link component. As is convention in PyPSA, this means <code class="docutils literal notranslate"><span class="pre">bus0</span></code> represents the external import node and <code class="docutils literal notranslate"><span class="pre">bus1</span></code> the importing country’s Hydrogen Zone 2 node.</p>
+<p>We can investigate our NT network and list the importing nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2_import</span> <span class="o">=</span> <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">&quot;H2 import&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">h2_import</span><span class="o">.</span><span class="n">bus1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see from the <code class="docutils literal notranslate"><span class="pre">p_nom_extendable</span></code> attribute of these links, the H2 import corridors cannot be endogenously expanded by the model but are rather fixed inputs as in the TYNDP 2024 methodology.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2_import</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2_import</span><span class="p">[[</span><span class="s2">&quot;bus0&quot;</span><span class="p">,</span> <span class="s2">&quot;bus1&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_extendable&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can investigate our DE network to create a similar plot to what we created last time. Let’s import some handy plotting functions from the open-tyndp workflow for this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># It is generally NOT a recommended practice to ignore deprecation warnings.</span>
+<span class="c1"># However, for the purposes of this workshop, we will make use of it to make our output less noisy</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scripts.plot_base_hydrogen_network</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_h2_map_base</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And plot the H2 reference grid together with the import corridors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">map_opts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">71</span><span class="p">],</span>
+    <span class="s2">&quot;geomap_colors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ocean&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;land&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">plot_h2_map_base</span><span class="p">(</span>
+    <span class="n">network</span><span class="o">=</span><span class="n">n_DE_2040</span><span class="p">,</span>
+    <span class="n">map_opts</span><span class="o">=</span><span class="n">map_opts</span><span class="p">,</span>
+    <span class="n">map_fn</span><span class="o">=</span><span class="s2">&quot;../../../h2_import_corridors_DE2040.png&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;../../../h2_import_corridors_DE2040.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-6-investigate-h2-import-corridors">
+<h2>Task 6: Investigate H2 import corridors<a class="headerlink" href="#task-6-investigate-h2-import-corridors" title="Link to this heading">#</a></h2>
+<p><strong>a)</strong> Extract and investigate the different import corridors for one specific country of your choice using our NT 2030 network.</p>
+<p><strong>b)</strong> Compare with DE 2040 data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="benchmarking-framework">
+<h1>Benchmarking framework<a class="headerlink" href="#benchmarking-framework" title="Link to this heading">#</a></h1>
+<p>Open-TYNDP introduces a benchmarking framework for continuous and systematic validation of Open-TYNDP model outputs against TYNDP 2024 scenarios. This framework provides flexible and scalable validation across multiple metrics and benchmarking methods.</p>
+<p>Comprehensive documentation of the framework can be found in the <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/benchmarking.html">documentation</a>.</p>
+<section id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h2>
+<p>The following metrics from the <a class="reference external" href="https://2024.entsos-tyndp-scenarios.eu/wp-content/uploads/2025/01/TYNDP_2024_Scenarios_Report_FInal_Version_250128_web.pdf">TYNDP 2024 Scenarios</a> report are considered relevant for benchmarking:</p>
+<ul class="simple">
+<li><p>Exogenous Inputs:</p>
+<ul>
+<li><p>Benchmark Final Energy demand by fuel, EU27 (TWh), (Fig 5, p24 and Fig 51, p63)</p></li>
+<li><p>Benchmark Electricity demand per sector, EU27 (TWh), (Fig 6, p25 and Fig 52, p63)</p></li>
+<li><p>Benchmark Methane demand by sector, EU27 (TWh), (Fig 8, p27 and Fig 53, p64)</p></li>
+<li><p>Benchmark Hydrogen demand by sector, EU27 (TWh), (Fig 10, p28 and Fig 54, p64)</p></li>
+</ul>
+</li>
+<li><p>Investment and dispatch modelling outputs:</p>
+<ul>
+<li><p>Benchmark of net installed capacity for electricity generation, EU27 (GW), (Fig 25, p39 and Fig 55, p65)</p></li>
+<li><p>Benchmark of electricity generation, EU27 (TWh), (Fig 26, p39 and Fig 56, p65)</p></li>
+<li><p>Benchmark methane supply, EU27 (TWh), (Fig 32, p45 and Fig 57, p66)</p></li>
+<li><p>Benchmark hydrogen supply, EU27 (TWh), (Fig 33, p46 and Fig 58, p67)</p></li>
+<li><p>Benchmark biomass supply, EU27 (TWh), (Fig 59, p67)</p></li>
+<li><p>Benchmark energy imports, EU27 (TWh), (Fig 40, p51 and Fig 60, p68)</p></li>
+<li><p>Hourly generation profile of power generation, Fig 30, p35</p></li>
+</ul>
+</li>
+</ul>
+<p>The benchmarking is based on a methodology proposed by <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0306261922011667">Wen et al. (2022)</a>. This methodology provides a multi-criteria approach to ensure: diversity, effectiveness, robustness, and compatibility.</p>
+<p>This methodology defines the following indicators:</p>
+<ul class="simple">
+<li><p><strong>Missing</strong>: Count of carriers/sectors dropped due to missing values</p></li>
+<li><p><strong>sMPE</strong> (Symmetric Mean Percentage Error): Indicates the direction of the deviation between modeled scenarios and TYNDP 2024 outcomes, showing if the output is overall overestimated or underestimated.</p></li>
+<li><p><strong>sMAPE</strong> (Symmetric Mean Absolute Percentage Error): Indicates the absolute magnitude of the deviations, avoiding the cancellation of negative and positive errors.</p></li>
+<li><p><strong>sMdAPE</strong> (Symmetric Median Absolute Percentage Error): Provides skewness information to complement sMAPE.</p></li>
+<li><p><strong>RMSLE</strong> (Root Mean Square Logarithmic Error): Complements the percentage errors since it shows the logarithmic deviation values.</p></li>
+<li><p><strong>Growth error</strong>: Shows the error on the temporal scale (i.e., between planning horizons). This indicator is ignored for dynamic time series (i.e., hourly generation profiles).</p></li>
+</ul>
+</section>
+<section id="outputs">
+<h2>Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open-TYNDP is under active development and is not yet feature-complete. The current <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/index.html#development-status">development status</a> and the general <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/limitations.html">Limitations</a> are important to understand before assessing the current benchmarking results.</p>
+</div>
+<p>We can now explore the content of the <code class="docutils literal notranslate"><span class="pre">results/tyndp/&lt;SCENARIO&gt;/validation</span></code> folder. It’s in this folder that all the benchmarking data is stored. First, let’s have a look at the summary figure. This figure presents the magnitude of the error for all indicators.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+    <span class="n">convert_from_path</span><span class="p">(</span><span class="s2">&quot;results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Associated with this figure, a table presents all the indicators for each metric.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that figures and tables will always include a version tag (in this case <code class="docutils literal notranslate"><span class="pre">v0.2+gb9516f6f1</span></code>) to clearly identify the version of the codebase used to produce the validation.</p>
+<p>The same benchmarking information is available for all the metrics. Let’s explore the quality of the power capacity metric.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+    <span class="n">convert_from_path</span><span class="p">(</span>
+        <span class="s2">&quot;results/tyndp/NT/validation/graphics_s_all___all_years/benchmark_power_capacity_eu27_cy2009_2030.pdf&quot;</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, a table associated with the figure shows the detailed benchmarking data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;results/tyndp/NT/validation/csvs_s_all___all_years/power_capacity_eu27_cy2009_s_all___all_years.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This feature is still work in progress and will be improved throughout the project.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="solutions">
+<h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Task 1: Executing a workflow with Snakemake<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution a)</span>
+<span class="c1"># ! snakemake -call data/base_2030.nc -n</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution b)</span>
+<span class="c1"># ! snakemake -call</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution c)</span>
+<span class="c1"># ! snakemake -call</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution d)</span>
+<span class="c1"># Path(&quot;data/data_raw.csv&quot;).touch()</span>
+<span class="c1"># ! snakemake -call</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution e)</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id2">
+<h2>Task 2: Explore the folder<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution a)</span>
+<span class="c1"># data/tyndp_2024_bundle</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution b)</span>
+<span class="c1"># config/config.tyndp.yaml</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution c)</span>
+<span class="c1"># results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id3">
+<h2>Task 3: Compute average capacity factor<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution a)</span>
+<span class="n">cf_onwind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;resources/tyndp/NT/pecd_data_Wind_Onshore_2030.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cf_onwind</span><span class="o">.</span><span class="n">head</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution b)</span>
+<span class="n">cf_onwind</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">cf_onwind</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">cf_onwind</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;country&quot;</span>
+
+<span class="n">cf_onwind_sorted</span> <span class="o">=</span> <span class="n">cf_onwind</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="n">cf_onwind_sorted</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">cf_onwind_sorted</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Average capacity factors - 2030&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Capacity factor [p.u]&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution c)</span>
+<span class="n">c_buses</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;country==&#39;IE&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="n">c_gen</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier==&#39;onwind&#39; and bus in @c_buses&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="n">c_cf</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="p">[</span><span class="n">c_gen</span><span class="p">]</span>
+<span class="n">c_cf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id4">
+<h2>Task 4: Verify onshore wind trajectories<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+<span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;resources/tyndp/DE/tyndp_trajectories.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bus==&#39;DE00&#39; and carrier == &#39;onwind&#39;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;pyear&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_index</span><span class="p">()[[</span><span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># in GW</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trj_onwind_de</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier == &#39;onwind&#39; and bus == &#39;DE00&#39;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_index</span><span class="p">()[[</span><span class="s2">&quot;p_nom_opt&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># in GW</span>
+<span class="p">)</span>
+<span class="n">trj_onwind_de</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">trj_onwind_de</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DE00 0 onwind-2040&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;p_nom_min&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_max&quot;</span><span class="p">]]</span>
+    <span class="o">+</span> <span class="n">trj_onwind_de</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DE00 0 onwind-2030&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom_opt&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id5">
+<h2>Task 5: Extract existing offshore capacities<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution</span>
+<span class="p">(</span>
+    <span class="n">s_NT_2030</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="p">(</span>
+        <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;AC_OH&quot;</span><span class="p">,</span> <span class="s2">&quot;H2_OH&quot;</span><span class="p">],</span>
+        <span class="n">comps</span><span class="o">=</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+        <span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;p_nom_opt&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bus.str.contains(&#39;BE&#39;) and carrier.str.startswith(&#39;offwind&#39;)&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id6">
+<h2>Task 6: Investigate H2 import corridors<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution a)</span>
+<span class="p">(</span>
+    <span class="n">n_NT_2030</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">&quot;H2 import&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bus1.str.contains(&#39;BE&#39;)&quot;</span><span class="p">)[</span>
+        <span class="p">[</span><span class="s2">&quot;bus0&quot;</span><span class="p">,</span> <span class="s2">&quot;bus1&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom&quot;</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution b)</span>
+<span class="p">(</span>
+    <span class="n">n_DE_2040</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">&quot;H2 import&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bus1.str.contains(&#39;BE&#39;)&quot;</span><span class="p">)[</span>
+        <span class="p">[</span><span class="s2">&quot;bus0&quot;</span><span class="p">,</span> <span class="s2">&quot;bus1&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom&quot;</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ""
+        },
+        kernelOptions: {
+            name: "",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = ''</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20250409-workshop-pypsa-01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="background1-python.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakemake-tool">The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-explore-the-folder">Task 2: Explore the folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triggering-a-workflow-run-on-open-tyndp">Triggering a workflow run on Open-TYNDP</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#update-on-new-features">Update on new features</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand-profiles">Electricity demand profiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pecd-capacity-factors">PECD capacity factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-compute-average-capacity-factor">Task 3: Compute average capacity factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onshore-wind-and-solar">Onshore wind and solar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-verify-onshore-wind-trajectories">Task 4: Verify onshore wind trajectories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offshore-hubs">Offshore Hubs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-extract-existing-offshore-capacities">Task 5: Extract existing offshore capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h2-imports">H2 imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-investigate-h2-import-corridors">Task 6: Investigate H2 import corridors</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-framework">Benchmarking framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Task 2: Explore the folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Task 3: Compute average capacity factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Task 4: Verify onshore wind trajectories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Task 5: Extract existing offshore capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Task 6: Investigate H2 import corridors</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
