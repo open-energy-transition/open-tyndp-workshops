@@ -1,8 +1,9 @@
 name: open-tyndp-workshops
 channels:
 - conda-forge
+- bioconda
 dependencies:
-- python>=3.12,<3.13
+- python>=3.12
 - pip
 
   # main packages
@@ -17,7 +18,7 @@ dependencies:
 - yaml
 - pyomo
 - netcdf4
-- pypsa>=0.31,<1.0
+- pypsa>=0.35.2,<1.0
 - atlite>=0.2.14
 - powerplantmatching>=0.6
 - rasterio>=1.3.2,<1.4
@@ -41,7 +42,6 @@ dependencies:
 - pdf2image
 - numexpr
 - pyyaml
-- tables
 
   # geodata utilities
 - shapely>2
@@ -57,6 +57,7 @@ dependencies:
 - holoviews
 - geoviews>=1.10
 - graphviz
+- fiona
 - folium
 
   # publishing
@@ -66,3 +67,4 @@ dependencies:
 
 - pip:
   - highspy
+  - tables
