@@ -1,23 +1,27 @@
-name: Deploy PR previews
+name: deploy PR previews
 
 on:
   pull_request:
     types:
-    - opened
-    - reopened
-    - synchronize
-    - closed
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
 concurrency: preview-${{ github.ref }}
 
 jobs:
   build-and-preview-book:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
 
-      # Install dependencies
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - uses: actions/checkout@v5
+
+    # Install dependencies
     - uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-version: latest
@@ -29,12 +33,12 @@ jobs:
         conda env update -n open-tyndp-workshops -f environment.yaml
         echo "Run conda list" && conda list
 
-      # Build the book
+    # Build the book
     - name: Build the book
       run: |
         jupyter-book build open-tyndp-workshops
 
-      # Deploy the preview
+    # Deploy the preview
     - name: Deploy preview
       uses: rossjrw/pr-preview-action@v1
       with:
