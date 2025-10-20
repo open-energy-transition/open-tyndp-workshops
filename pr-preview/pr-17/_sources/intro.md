@@ -82,20 +82,3 @@ The environment has to be activated whenever you open a new terminal,
 *before* starting a new Jupyter window with
 
     jupyter lab
-
-##### ... with `pip`
-
-If you want to use `pip` for managing your environment, download
-
-https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/requirements.txt
-
-There is a download button at the top-right corner.
-
-After navigating to the folder where the `requirements.txt` file is stored,
-you can install the required packages with
-
-    pip install -r requirements.txt
-
-This should allow you to start a new Jupyter window:
-
-    jupyter lab
