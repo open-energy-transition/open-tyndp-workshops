@@ -9,7 +9,8 @@ Course at TU Berlin to learn energy system modelling with data.
 If you'd like to develop and/or build the Data Science for Energy System Modelling book, you should:
 
 1. Clone this repository
-2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
+2. Install the environment by running `conda env create -n esm-ws-24-25 -f environment.yaml`
+3. Activate the environment by running `conda activate esm-ws-24-25`
 3. (Optional) Edit the books source files located in the `data-science-for-esm/` directory
 4. Run `jupyter-book clean data-science-for-esm/` to remove any existing builds
 5. Run `jupyter-book build data-science-for-esm/`
