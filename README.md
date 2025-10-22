@@ -11,7 +11,8 @@ and implementations for the Open-TYNDP workflow.
 If you'd like to develop and/or build the Open-TYNDP Workshops book, you should:
 
 1. Clone this repository
-2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
+2. Install the environment by running `conda env create -n open-tyndp-workshops -f environment.yaml`
+3. Activate the environment by running `conda activate open-tyndp-workshops`
 3. (Optional) Edit the books source files located in the `open-tyndp-workshops/` directory
 4. Run `jupyter-book clean open-tyndp-workshops/` to remove any existing builds
 5. Run `jupyter-book build open-tyndp-workshops/`
