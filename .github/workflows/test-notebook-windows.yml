@@ -4,15 +4,15 @@ on:
   push:
     branches: ['**']  # Run on any branch for testing
     paths:
-      - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
-      - 'environment.yaml'
-      - '.github/workflows/test-notebook-windows.yml'
+    - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
+    - 'environment.yaml'
+    - '.github/workflows/test-notebook-windows.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
-      - 'environment.yaml'
-      - '.github/workflows/test-notebook-windows.yml'
+    - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
+    - 'environment.yaml'
+    - '.github/workflows/test-notebook-windows.yml'
   workflow_dispatch:  # Allows manual triggering from GitHub UI
 
 jobs:
