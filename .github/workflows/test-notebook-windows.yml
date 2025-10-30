@@ -1,0 +1,154 @@
+name: Test Jupyter Notebook on Windows
+
+on:
+  push:
+    branches: ['**']  # Run on any branch for testing
+    paths:
+      - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
+      - 'environment.yaml'
+      - '.github/workflows/test-notebook-windows.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb'
+      - 'environment.yaml'
+      - '.github/workflows/test-notebook-windows.yml'
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  test-notebook:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        miniforge-version: latest
+        activate-environment: open-tyndp-workshops
+        channel-priority: strict
+        python-version: "3.12"
+        auto-activate-base: false
+
+    - name: Cache Conda environment
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.CONDA }}/envs
+        key: conda-windows-${{ runner.arch }}-${{ hashFiles('environment.yaml') }}
+        restore-keys: |
+          conda-windows-${{ runner.arch }}-
+
+    - name: Update Conda environment
+      run: |
+        conda env update -n open-tyndp-workshops -f environment.yaml
+        conda list
+
+    - name: Install additional Windows dependencies
+      run: |
+        # Install poppler for pdf2image (Windows equivalent of apt-get install poppler-utils)
+        conda install -c conda-forge poppler -y
+
+    - name: Install nbconvert and execution dependencies
+      run: |
+        conda install -c conda-forge nbconvert ipykernel -y
+
+    - name: Verify notebook exists
+      run: |
+        if [ -f "open-tyndp-workshops/20250624-workshop-pypsa-02.ipynb" ]; then
+          echo "Notebook found successfully"
+        else
+          echo "Error: Notebook not found"
+          exit 1
+        fi
+
+    - name: Execute notebook with detailed error reporting
+      run: |
+        cd open-tyndp-workshops
+        jupyter nbconvert --to notebook --execute \
+          --ExecutePreprocessor.timeout=600 \
+          --ExecutePreprocessor.kernel_name=python3 \
+          --output-dir=../notebook-output \
+          --output=20250624-workshop-pypsa-02-executed.ipynb \
+          --debug \
+          20250624-workshop-pypsa-02.ipynb 2>&1 | tee ../notebook-execution.log
+      continue-on-error: true
+      id: execute_notebook
+
+    - name: Check execution status and report errors
+      if: steps.execute_notebook.outcome == 'failure'
+      run: |
+        echo "::error::Notebook execution failed!"
+        echo "Checking for error details in the executed notebook..."
+
+        # Try to extract error information from the executed notebook
+        python -c "
+        import json
+        import sys
+
+        try:
+            with open('notebook-output/20250624-workshop-pypsa-02-executed.ipynb', 'r', encoding='utf-8') as f:
+                nb = json.load(f)
+
+            error_found = False
+            for i, cell in enumerate(nb['cells']):
+                if cell['cell_type'] == 'code':
+                    for output in cell.get('outputs', []):
+                        if output.get('output_type') == 'error':
+                            error_found = True
+                            ename = output.get('ename', 'Unknown')
+                            evalue = output.get('evalue', 'Unknown')
+                            traceback = '\n'.join(output.get('traceback', []))
+
+                            print(f'\n::error::Error in cell {i+1}')
+                            print(f'Error Type: {ename}')
+                            print(f'Error Message: {evalue}')
+                            print(f'\nCell Content:')
+                            print(cell.get('source', [''])[0] if isinstance(cell.get('source'), list) else cell.get('source', ''))
+                            print(f'\nFull Traceback:')
+                            print(traceback)
+                            break
+                if error_found:
+                    break
+
+            if not error_found:
+                print('::error::Notebook failed but no error cell found. Check execution log.')
+        except Exception as e:
+            print(f'::error::Could not parse notebook for errors: {e}')
+            print('Check the execution log artifact for details.')
+        "
+
+        exit 1
+
+    - name: Upload execution log
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: execution-log
+        path: notebook-execution.log
+        retention-days: 30
+
+    - name: Upload executed notebook
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: executed-notebook
+        path: notebook-output/20250624-workshop-pypsa-02-executed.ipynb
+        retention-days: 30
+
+    - name: Upload notebook outputs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: notebook-outputs
+        path: |
+          open-tyndp-workshops/data/
+          open-tyndp-workshops/*.png
+          open-tyndp-workshops/*.svg
+          open-tyndp-workshops/*.pdf
+        retention-days: 7
