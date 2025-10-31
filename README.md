@@ -6,7 +6,7 @@ and implementations for the Open-TYNDP workflow.
 
 ## Usage
 
-To follow and explore the series of hands-on workshops, you can visit the deployed [workshop page](https://open-energy-transition.github.io/open-tyndp-workshops/intro.html). There, you can also simply launch each notebook in a google colab notebook environment.
+To follow and explore the series of hands-on workshops, you can visit the deployed [workshop page](https://open-energy-transition.github.io/open-tyndp-workshops/intro.html). There, you can also simply launch each notebook in a Google Colab notebook environment by clicking the rocket logo in the top right corner.
 Alternatively, you can also build and explore the Open-TYNDP Workshops book locally.
 
 ### Building the book
