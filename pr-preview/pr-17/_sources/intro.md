@@ -64,7 +64,7 @@ For running this workshop notebook locally, it is necessary to install the requi
 Windows users have multiple options for this:
 
 - Recommended: Use [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) which will allow you to follow the Linux installation instructions for conda and the python environment.
-- Install Windows native conda via `Anaconda` (described above) or `miniconda` (described above), which gives you access to the "Anaconda Prompt" desktop application. From the Anaconda Prompt, you should be able to run `conda` and other shell commands. Visit the [Conda Website](https://docs.conda.io/projects/conda/en/stable/user-guide/install/windows.html).) for more information.
+- Install Windows native conda via `Anaconda` (described above) or `miniconda` (described above), which gives you access to the "Anaconda Prompt" desktop application. From the Anaconda Prompt, you should be able to run `conda` and other shell commands. Visit the [Conda Website](https://docs.conda.io/projects/conda/en/stable/user-guide/install/windows.html) for more information.
 
 #### Environment for these workshops: `open-tyndp-workshops`
 
