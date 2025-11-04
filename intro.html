@@ -400,11 +400,8 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-package-manager-conda">Installing the package manager <code class="docutils literal notranslate"><span class="pre">conda</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">Anaconda</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lightweight-miniconda">Lightweight <code class="docutils literal notranslate"><span class="pre">miniconda</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-for-these-workshops-open-tyndp-workshops">Environment for these workshops: <code class="docutils literal notranslate"><span class="pre">open-tyndp-workshops</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#with-conda-recommended">… with <code class="docutils literal notranslate"><span class="pre">conda</span></code> (recommended)</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#with-pip">… with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-user-installation">Windows user installation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-for-these-workshops-open-tyndp-workshops">Environment for these workshops: <code class="docutils literal notranslate"><span class="pre">open-tyndp-workshops</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -449,7 +446,7 @@ in a <a class="reference internal" href="#jupyter.org/"><span class="xref myst">
 <h3>Alternative: Local installation<a class="headerlink" href="#alternative-local-installation" title="Link to this heading">#</a></h3>
 <section id="installing-the-package-manager-conda">
 <h4>Installing the package manager <code class="docutils literal notranslate"><span class="pre">conda</span></code><a class="headerlink" href="#installing-the-package-manager-conda" title="Link to this heading">#</a></h4>
-<p>If you don’t want to use Google Colab you will need to install the packages locally. For running this Python and nearly all of the software packages in the scientific python
+<p>If you don’t want to use Google Colab you will need to install the packages locally. For running this, Python and nearly all of the software packages in the scientific python
 ecosystem are <a class="reference external" href="https://opensource.org/">open-source</a>. Coordinating the
 compatibility between these different packages and their multiple versions can be difficult! Fortunately, the problem is solved by using a Python
 <em>distribution</em> and/or <em>package manager</em>. You should use a package manager!</p>
@@ -472,13 +469,20 @@ Follow the link above to obtain a one-click installers for your operating system
 lightweight alternative installation called <code class="docutils literal notranslate"><span class="pre">miniconda</span></code>.
 Follow the link to the <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda Installation</a> page and use, for example, the <a class="reference external" href="https://docs.anaconda.com/miniconda/#quick-command-line-install">quick command line install</a>.</p>
 </section>
+<section id="windows-user-installation">
+<h4>Windows user installation<a class="headerlink" href="#windows-user-installation" title="Link to this heading">#</a></h4>
+<p>For running this workshop notebook locally, it is necessary to install the required environment using the conda package manager as described above.</p>
+<p>Windows users have multiple options for this:</p>
+<ul class="simple">
+<li><p>Recommended: Use <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a> which will allow you to follow the Linux installation instructions for conda and the python environment.</p></li>
+<li><p>Install Windows native conda via <code class="docutils literal notranslate"><span class="pre">Anaconda</span></code> (described above) or <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> (described above), which gives you access to the “Anaconda Prompt” desktop application. From the Anaconda Prompt, you should be able to run <code class="docutils literal notranslate"><span class="pre">conda</span></code> and other shell commands. Visit the <a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/install/windows.html">Conda Website</a> for more information.</p></li>
+</ul>
+</section>
 <section id="environment-for-these-workshops-open-tyndp-workshops">
 <h4>Environment for these workshops: <code class="docutils literal notranslate"><span class="pre">open-tyndp-workshops</span></code><a class="headerlink" href="#environment-for-these-workshops-open-tyndp-workshops" title="Link to this heading">#</a></h4>
-<section id="with-conda-recommended">
-<h5>… with <code class="docutils literal notranslate"><span class="pre">conda</span></code> (recommended)<a class="headerlink" href="#with-conda-recommended" title="Link to this heading">#</a></h5>
 <p>The latest environment specification for this course can be downloaded under the following link as a <a class="reference external" href="https://en.wikipedia.org/wiki/YAML"><code class="docutils literal notranslate"><span class="pre">YAML</span></code>-file</a>:</p>
 <p><a class="github reference external" href="https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/environment.yaml">open-energy-transition/open-tyndp-workshops</a></p>
-<p>There is a download button at the top-right corner.</p>
+<p>There is a download button in the top-right corner.</p>
 <p>After navigating to the folder where the <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> file is stored (<a class="reference external" href="https://tutorials.codebar.io/command-line/introduction/tutorial.html">here</a>’s a tutorial how to navigate with the command line),
 you can create this environment using <code class="docutils literal notranslate"><span class="pre">conda</span></code></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yaml
@@ -494,22 +498,6 @@ you can create this environment using <code class="docutils literal notranslate"
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter lab
 </pre></div>
 </div>
-</section>
-<section id="with-pip">
-<h5>… with <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#with-pip" title="Link to this heading">#</a></h5>
-<p>If you want to use <code class="docutils literal notranslate"><span class="pre">pip</span></code> for managing your environment, download</p>
-<p><a class="github reference external" href="https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/requirements.txt">open-energy-transition/open-tyndp-workshops</a></p>
-<p>There is a download button at the top-right corner.</p>
-<p>After navigating to the folder where the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is stored,
-you can install the required packages with</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
-</pre></div>
-</div>
-<p>This should allow you to start a new Jupyter window:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter lab
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -578,11 +566,8 @@ you can install the required packages with</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-package-manager-conda">Installing the package manager <code class="docutils literal notranslate"><span class="pre">conda</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">Anaconda</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lightweight-miniconda">Lightweight <code class="docutils literal notranslate"><span class="pre">miniconda</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-for-these-workshops-open-tyndp-workshops">Environment for these workshops: <code class="docutils literal notranslate"><span class="pre">open-tyndp-workshops</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#with-conda-recommended">… with <code class="docutils literal notranslate"><span class="pre">conda</span></code> (recommended)</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#with-pip">… with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-user-installation">Windows user installation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-for-these-workshops-open-tyndp-workshops">Environment for these workshops: <code class="docutils literal notranslate"><span class="pre">open-tyndp-workshops</span></code></a></li>
 </ul>
 </li>
 </ul>

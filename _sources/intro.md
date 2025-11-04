@@ -30,7 +30,7 @@ For running the notebook using Google Colab you can simply launch it by clicking
 
 #### Installing the package manager `conda`
 
-If you don't want to use Google Colab you will need to install the packages locally. For running this Python and nearly all of the software packages in the scientific python
+If you don't want to use Google Colab you will need to install the packages locally. For running this, Python and nearly all of the software packages in the scientific python
 ecosystem are [open-source](https://opensource.org/). Coordinating the
 compatibility between these different packages and their multiple versions can be difficult! Fortunately, the problem is solved by using a Python
 _distribution_ and/or _package manager_. You should use a package manager!
@@ -57,15 +57,22 @@ If you don't want to download a large file like the Anaconda Python Distribution
 lightweight alternative installation called `miniconda`.
 Follow the link to the [Miniconda Installation](https://docs.conda.io/en/latest/miniconda.html) page and use, for example, the [quick command line install](https://docs.anaconda.com/miniconda/#quick-command-line-install).
 
-#### Environment for these workshops: `open-tyndp-workshops`
+#### Windows user installation
 
-##### ... with `conda` (recommended)
+For running this workshop notebook locally, it is necessary to install the required environment using the conda package manager as described above.
+
+Windows users have multiple options for this:
+
+- Recommended: Use [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) which will allow you to follow the Linux installation instructions for conda and the python environment.
+- Install Windows native conda via `Anaconda` (described above) or `miniconda` (described above), which gives you access to the "Anaconda Prompt" desktop application. From the Anaconda Prompt, you should be able to run `conda` and other shell commands. Visit the [Conda Website](https://docs.conda.io/projects/conda/en/stable/user-guide/install/windows.html) for more information.
+
+#### Environment for these workshops: `open-tyndp-workshops`
 
 The latest environment specification for this course can be downloaded under the following link as a [`YAML`-file](https://en.wikipedia.org/wiki/YAML):
 
 https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/environment.yaml
 
-There is a download button at the top-right corner.
+There is a download button in the top-right corner.
 
 After navigating to the folder where the `environment.yaml` file is stored ([here](https://tutorials.codebar.io/command-line/introduction/tutorial.html)'s a tutorial how to navigate with the command line),
 you can create this environment using `conda`
@@ -80,22 +87,5 @@ This environment should be sufficient for all of your work in these workshops.
 
 The environment has to be activated whenever you open a new terminal,
 *before* starting a new Jupyter window with
-
-    jupyter lab
-
-##### ... with `pip`
-
-If you want to use `pip` for managing your environment, download
-
-https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/requirements.txt
-
-There is a download button at the top-right corner.
-
-After navigating to the folder where the `requirements.txt` file is stored,
-you can install the required packages with
-
-    pip install -r requirements.txt
-
-This should allow you to start a new Jupyter window:
 
     jupyter lab
