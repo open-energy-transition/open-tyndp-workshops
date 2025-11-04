@@ -6,12 +6,15 @@ and implementations for the Open-TYNDP workflow.
 
 ## Usage
 
+To follow and explore the series of hands-on workshops, you can visit the deployed [workshop page](https://open-energy-transition.github.io/open-tyndp-workshops/intro.html). There, you can also simply launch each notebook in a Google Colab notebook environment by clicking the rocket logo in the top right corner.
+Alternatively, you can also build and explore the Open-TYNDP Workshops book locally.
+
 ### Building the book
 
-If you'd like to develop and/or build the Open-TYNDP Workshops book, you should:
+If you'd like to develop and/or build the Open-TYNDP Workshops book locally, you should:
 
 1. Clone this repository
-2. Install the environment by running `conda env create -n open-tyndp-workshops -f environment.yaml`
+2. Install the environment by running `conda env create -f environment.yaml`
 3. Activate the environment by running `conda activate open-tyndp-workshops`
 3. (Optional) Edit the books source files located in the `open-tyndp-workshops/` directory
 4. Run `jupyter-book clean open-tyndp-workshops/` to remove any existing builds

@@ -61,7 +61,7 @@ dependencies:
 - folium
 
   # publishing
-- jupyter-book
+- jupyter-book<2.0.0
 - ghp-import
 - pre-commit
 
