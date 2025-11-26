@@ -428,9 +428,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-pypsa-explorer">Launching PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-jupyter-users-recommended-method">For Local Jupyter Users (Recommended Method)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
 </ul>
@@ -464,14 +474,14 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
 <p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span><span class="c1"># TODO</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>pypsa-explorer<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>numpy
 </pre></div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
-<span class="c1"># !pip install # TODO</span>
+<span class="c1"># !pip install pypsa pypsa-explorer pandas matplotlib numpy</span>
 </pre></div>
 </div>
 </div>
@@ -484,13 +494,27 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
 
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
 
 <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">nice_names</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pypsa_explorer&#39;
 </pre></div>
 </div>
 </div>
@@ -520,7 +544,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># TODO</span>
+    <span class="s2">&quot;data/results.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results.zip&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -533,19 +557,13 @@ document.write(`
         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp&#39;.
-Done
 </pre></div>
 </div>
 </div>
@@ -553,12 +571,126 @@ Done
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="explore-nt-scenario-results">
 <h1>Explore NT scenario results<a class="headerlink" href="#explore-nt-scenario-results" title="Link to this heading">#</a></h1>
+<section id="interactive-exploration-with-pypsa-explorer">
+<h2>Interactive exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h2>
+<p>PyPSA-Explorer is an interactive web dashboard that allows you to visualize and analyze energy system networks. It provides:</p>
+<ul class="simple">
+<li><p>Energy balance analysis with timeseries and aggregated views</p></li>
+<li><p>Capacity planning visualizations by carrier and region</p></li>
+<li><p>Economic analysis showing CAPEX/OPEX breakdowns</p></li>
+<li><p>Interactive geographical network maps</p></li>
+<li><p>Multi-network visualisation support</p></li>
+</ul>
+<p>Let’s load the NT scenario results and explore them using PyPSA-Explorer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load NT scenario networks for comparison</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/results/results/networks/&quot;</span>
+
+<span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
+<span class="n">networks</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;NT 2030&quot;</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="launching-pypsa-explorer">
+<h3>Launching PyPSA-Explorer<a class="headerlink" href="#launching-pypsa-explorer" title="Link to this heading">#</a></h3>
+<p>PyPSA-Explorer is available in two modes depending on your environment:</p>
+<ul class="simple">
+<li><p><strong>Local Jupyter</strong>: Terminal command (<strong>recommended</strong>) or inline display</p></li>
+<li><p><strong>Google Colab</strong>: The dashboard will launch inline, embedded directly in the notebook</p></li>
+</ul>
+<p>Follow the instructions below based on your environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detect if running on Google Colab</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">output</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running on Google Colab !&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running locally !&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="for-local-jupyter-users-recommended-method">
+<h4>For Local Jupyter Users (Recommended Method)<a class="headerlink" href="#for-local-jupyter-users-recommended-method" title="Link to this heading">#</a></h4>
+<p>If running locally, the <strong>recommended approach</strong> is to launch PyPSA-Explorer from the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/results/results/networks/base_s_all___2030.nc<span class="w"> </span>data/results/results/networks/base_s_all___2040.nc
+</pre></div>
+</div>
+<p>This will open the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
+<p><strong>Alternative</strong>: The cell below can also launch the dashboard inline (similar to Colab), but the terminal method is preferred for better performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Launching PyPSA-Explorer...&quot;</span><span class="p">)</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8050</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="c1"># Google Colab: Use built-in Dash Jupyter support</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Google Colab detected: Dashboard will appear below this cell.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note: It may take a few seconds to load.&quot;</span><span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">serve_kernel_port_as_iframe</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Local Jupyter: Inline display (terminal method recommended - see above)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Local environment detected: Launching inline display.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For better performance, consider using the terminal command instead (see above).&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dashboard will appear below this cell.&quot;</span><span class="p">)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s1">&#39;tab&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
-<h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
+</section>
+<section id="using-the-dashboard">
+<h3>Using the Dashboard<a class="headerlink" href="#using-the-dashboard" title="Link to this heading">#</a></h3>
+<p>Once the dashboard opens, you can:</p>
+<ol class="arabic simple">
+<li><p><strong>Energy Balance Tab</strong>: View production, consumption, and storage patterns</p>
+<ul class="simple">
+<li><p>Switch between timeseries and aggregated views</p></li>
+<li><p>Filter by energy carrier (electricity, hydrogen, etc.)</p></li>
+<li><p>Filter by country/region</p></li>
+</ul>
+</li>
+<li><p><strong>Capacity Tab</strong>: Analyze installed capacities</p>
+<ul class="simple">
+<li><p>Compare capacity buildout between 2030 and 2040 scenarios</p></li>
+<li><p>View by technology type and region</p></li>
+<li><p>Identify discrepancies with TYNDP 2024 targets</p></li>
+</ul>
+</li>
+<li><p><strong>Economics Tab</strong>: Examine costs and revenues</p>
+<ul class="simple">
+<li><p>CAPEX and OPEX breakdowns by technology</p></li>
+<li><p>Regional cost comparisons</p></li>
+<li><p>Investment requirements</p></li>
+</ul>
+</li>
+<li><p><strong>Network Map</strong>: Visualize the geographical network</p>
+<ul class="simple">
+<li><p>Interactive map with buses, lines, and generators</p></li>
+<li><p>Zoom and pan to explore specific regions</p></li>
+<li><p>View transmission constraints</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Tip:</strong> Use the scenario selector dropdown to switch between NT 2030 and NT 2040 for direct comparison.</p>
+</section>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="benchmark-results">
 <h1>Benchmark results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
+<h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
 <h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
@@ -576,16 +708,16 @@ Done
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: ""
+            mode: "python"
         },
         kernelOptions: {
-            name: "",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = ''</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -632,9 +764,19 @@ Done
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-pypsa-explorer">Launching PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-jupyter-users-recommended-method">For Local Jupyter Users (Recommended Method)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
 </ul>
