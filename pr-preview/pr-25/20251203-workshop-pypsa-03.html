@@ -590,7 +590,7 @@ document.write(`
 <span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
 <span class="n">networks</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;NT 2030&quot;</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">)</span>
+    <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -609,6 +609,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detect if running on Google Colab</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">output</span>
+
     <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running on Google Colab !&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -639,10 +640,12 @@ document.write(`
 <span class="k">else</span><span class="p">:</span>
     <span class="c1"># Local Jupyter: Inline display (terminal method recommended - see above)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Local environment detected: Launching inline display.&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For better performance, consider using the terminal command instead (see above).&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;For better performance, consider using the terminal command instead (see above).&quot;</span>
+    <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dashboard will appear below this cell.&quot;</span><span class="p">)</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s1">&#39;tab&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -708,16 +711,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ""
         },
         kernelOptions: {
-            name: "python3",
+            name: "",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = ''</script>
 
                 </article>
               
