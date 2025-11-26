@@ -505,20 +505,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pypsa_explorer&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -568,6 +554,19 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
+Unzipping data/results.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/results&#39;.
+Done
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="explore-nt-scenario-results">
@@ -596,6 +595,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+</div>
 </div>
 <section id="launching-pypsa-explorer">
 <h3>Launching PyPSA-Explorer<a class="headerlink" href="#launching-pypsa-explorer" title="Link to this heading">#</a></h3>
@@ -621,6 +628,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
+</pre></div>
+</div>
+</div>
 </div>
 <section id="for-local-jupyter-users-recommended-method">
 <h4>For Local Jupyter Users (Recommended Method)<a class="headerlink" href="#for-local-jupyter-users-recommended-method" title="Link to this heading">#</a></h4>
@@ -632,7 +644,7 @@ document.write(`
 <p><strong>Alternative</strong>: The cell below can also launch the dashboard inline, but the terminal method is preferred for better performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal methode recommended</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
 <span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch inline display</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
@@ -647,8 +659,8 @@ document.write(`
 <section id="for-google-colab-users">
 <h4>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h4>
 <p>If running on Google Colab, you need to start PyPSA-Explorer from the terminal before the iframe can display it.</p>
-<p>Run the following command in the terminal:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pypsa</span><span class="o">-</span><span class="n">explorer</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2030</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2030</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2040</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2040</span>
+<p>Run the following command in the Google Colab terminal:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pypsa</span><span class="o">-</span><span class="n">explorer</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2030</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2030</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2040</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2040</span>
 </pre></div>
 </div>
 <div class="cell docutils container">
