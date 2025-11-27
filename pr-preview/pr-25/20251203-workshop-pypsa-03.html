@@ -428,19 +428,26 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-pypsa-explorer">Launching PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-jupyter-users-recommended-method">For Local Jupyter Users (Recommended Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-demand">Hydrogen Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-demand">Methane Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-generation-capacities">Power Generation Capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-generation">Electricity Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-supply">Hydrogen Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
@@ -494,9 +501,11 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDFPageCountError</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
@@ -558,21 +567,63 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
-Unzipping data/results.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/results&#39;.
-Done
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="explore-nt-scenario-results">
-<h1>Explore NT scenario results<a class="headerlink" href="#explore-nt-scenario-results" title="Link to this heading">#</a></h1>
-<section id="interactive-exploration-with-pypsa-explorer">
-<h2>Interactive exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="interactive-exploration-with-pypsa-explorer">
+<h1>Interactive exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
 <p>PyPSA-Explorer is an interactive web dashboard that allows you to visualize and analyze energy system networks. It provides:</p>
 <ul class="simple">
 <li><p>Energy balance analysis with timeseries and aggregated views</p></li>
@@ -595,18 +646,8 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
-</div>
-</div>
-</div>
-<section id="launching-pypsa-explorer">
-<h3>Launching PyPSA-Explorer<a class="headerlink" href="#launching-pypsa-explorer" title="Link to this heading">#</a></h3>
-<p>PyPSA-Explorer is available in two modes depending on your environment:</p>
+<p>The PyPSA-Explorer package can be started in two modes depending on your environment:</p>
 <ul class="simple">
 <li><p><strong>Local Jupyter</strong>: Terminal command (<strong>recommended</strong>) or inline display</p></li>
 <li><p><strong>Google Colab</strong>: The dashboard will launch inline, embedded directly in the notebook</p></li>
@@ -628,14 +669,9 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
-</pre></div>
 </div>
-</div>
-</div>
-<section id="for-local-jupyter-users-recommended-method">
-<h4>For Local Jupyter Users (Recommended Method)<a class="headerlink" href="#for-local-jupyter-users-recommended-method" title="Link to this heading">#</a></h4>
+<section id="for-local-users">
+<h2>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h2>
 <p>If running locally, the <strong>recommended approach</strong> is to launch PyPSA-Explorer from the terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/results/results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/results/results/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
@@ -657,7 +693,7 @@ Done
 </div>
 </section>
 <section id="for-google-colab-users">
-<h4>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h4>
+<h2>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h2>
 <p>If running on Google Colab, you need to start PyPSA-Explorer from the terminal before the iframe can display it.</p>
 <p>Run the following command in the Google Colab terminal:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pypsa</span><span class="o">-</span><span class="n">explorer</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2030</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2030</span> <span class="n">data</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2040</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2040</span>
@@ -674,9 +710,8 @@ Done
 </div>
 <p><strong>Tip for Colab users:</strong> To view the dashboard in fullscreen mode, click the three dots (⋮) in the top-right corner of the output cell and select <strong>“View output fullscreen”</strong>.</p>
 </section>
-</section>
 <section id="using-the-dashboard">
-<h3>Using the Dashboard<a class="headerlink" href="#using-the-dashboard" title="Link to this heading">#</a></h3>
+<h2>Using the Dashboard<a class="headerlink" href="#using-the-dashboard" title="Link to this heading">#</a></h2>
 <p>Once the dashboard opens, you can:</p>
 <ol class="arabic simple">
 <li><p><strong>Energy Balance Tab</strong>: View production, consumption, and storage patterns</p>
@@ -711,9 +746,165 @@ Done
 <p><strong>Tip:</strong> Use the scenario selector dropdown to switch between NT 2030 and NT 2040 for direct comparison.</p>
 </section>
 </section>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="benchmark-results">
 <h1>Benchmark results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
+<p>In Workshop 2, we introduced a benchmarking framework to systematically compare Open-TYNDP model outputs against TYNDP 2024. This framework helps us:</p>
+<ul class="simple">
+<li><p><strong>Identify discrepancies</strong>: Compare demands, installed capacities and generation volumes between model results and TYNDP targets</p></li>
+<li><p><strong>Quantify differences</strong>: Calculate deviations by technology, country, and investment year</p></li>
+<li><p><strong>Guide improvements</strong>: Prioritize areas where the model requires improvements</p></li>
+</ul>
+<p>Let’s apply this framework to our NT 2030 and 2040 scenario results to understand where the current model implementation aligns with or diverges from TYNDP expectations.</p>
+<p>To do so, let’s first define a function to display benchmarks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
+    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/results/results/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">bench_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span>
+        <span class="p">]</span>
+    <span class="k">except</span> <span class="n">PDFPageCountError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File not found, skipping...&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">images</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>We start with an overview of the sMAPE across all carriers. This provides a high-level understanding of the magnitude of the error across all benchmarks, carriers and planning horizons. It can clearly be observed that some features were significantly improved since our introduction of the framework. However, there is also still room for improvement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+    <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results/results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="final-energy-demand">
+<h2>Final Energy Demand<a class="headerlink" href="#final-energy-demand" title="Link to this heading">#</a></h2>
+<p>Let’s now examine each benchmark category in detail, starting with final energy demand across all carriers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_final_energy_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="electricity-demand">
+<h2>Electricity Demand<a class="headerlink" href="#electricity-demand" title="Link to this heading">#</a></h2>
+<p>Electricity demand is an exogenous input to the model, directly taken from TYNDP 2024 data. Therefore, we get a perfect match between the model results and TYNDP 2024.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_elec_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hydrogen-demand">
+<h2>Hydrogen Demand<a class="headerlink" href="#hydrogen-demand" title="Link to this heading">#</a></h2>
+<p>Hydrogen demand is mainly defined exogenously. Therefore, we expect a good match between the model results and TYNDP 2024. The electricity generation, on the other hand, is endogenous.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="methane-demand">
+<h2>Methane Demand<a class="headerlink" href="#methane-demand" title="Link to this heading">#</a></h2>
+<p>Methane demand includes exogenous consumption, as well as endogenous demand for power generation and SMR (steam methane reforming).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="power-generation-capacities">
+<h2>Power Generation Capacities<a class="headerlink" href="#power-generation-capacities" title="Link to this heading">#</a></h2>
+<p>Installed generation capacities are now converging towards the values of TYNDP 2024. Both renewable and conventional capacities are now fully integrated from the PEMMDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_capacity_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="electricity-generation">
+<h2>Electricity Generation<a class="headerlink" href="#electricity-generation" title="Link to this heading">#</a></h2>
+<p>Actual electricity generation differs slightly from the TYNDP 2024 generation mix. However, the total generation values are close.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_generation_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hydrogen-supply">
+<h2>Hydrogen Supply<a class="headerlink" href="#hydrogen-supply" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="methane-supply">
+<h2>Methane Supply<a class="headerlink" href="#methane-supply" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="biomass-supply">
+<h2>Biomass Supply<a class="headerlink" href="#biomass-supply" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_biomass_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="energy-imports">
+<h2>Energy Imports<a class="headerlink" href="#energy-imports" title="Link to this heading">#</a></h2>
+<p>Energy imports include hydrogen, methane, liquids and solids. Currently, the model cannot import biomass.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_energy_imports_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
 <h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
@@ -734,16 +925,16 @@ Done
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: ""
+            mode: "python"
         },
         kernelOptions: {
-            name: "",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = ''</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -790,19 +981,26 @@ Done
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-nt-scenario-results">Explore NT scenario results</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-pypsa-explorer">Launching PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-jupyter-users-recommended-method">For Local Jupyter Users (Recommended Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-demand">Hydrogen Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-demand">Methane Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-generation-capacities">Power Generation Capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-generation">Electricity Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-supply">Hydrogen Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
