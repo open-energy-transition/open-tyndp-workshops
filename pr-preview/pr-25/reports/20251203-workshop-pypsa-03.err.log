@@ -37,7 +37,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['urls = {', '    "data/data_raw.csv": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv",', '    "data/open-tyndp.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip",', '    "data/network_NT_presolve_highres_2030.nc": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/network_NT_presolve_highres_2030.nc",', '    "Snakefile": "https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/main/open-tyndp-workshops/Snakefile",']
+['urls = {', '    "data/results.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results.zip",', '}', '', 'os.makedirs("data", exist_ok=True)']
 ...
 ['    print(f"Unzipping data/open-tyndp.zip.")', '    unzip_with_timestamps("data/open-tyndp.zip", "data/open-tyndp")', 'print(f"Open-TYNDP available in \'{to_dir}\'.")', '', 'print("Done")']
 -------------------

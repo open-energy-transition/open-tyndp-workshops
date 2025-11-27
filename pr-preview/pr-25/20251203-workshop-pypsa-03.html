@@ -448,7 +448,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-adjustments">Manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-constraints">Custom constraints</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
 </ul>
@@ -498,11 +505,13 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDFPageCountError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Code</span><span class="p">,</span> <span class="n">display</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -557,6 +566,12 @@ document.write(`
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results.zip.&quot;</span><span class="p">)</span>
     <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NT results available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
@@ -567,12 +582,56 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
-Unzipping data/results.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/results&#39;.
-Done
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -602,14 +661,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
-</div>
-</div>
 </div>
 <p>The PyPSA-Explorer package can be started in two modes depending on your environment:</p>
 <ul class="simple">
@@ -630,11 +681,6 @@ Done
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running locally !&quot;</span><span class="p">)</span>
 
 <span class="n">port</span> <span class="o">=</span> <span class="mi">8050</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
 </pre></div>
 </div>
 </div>
@@ -763,9 +809,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/edf65f11dc76874834bbe9a62cc083dd9b58dd726bd87309c7f1841e1ba8ba86.png" src="_images/edf65f11dc76874834bbe9a62cc083dd9b58dd726bd87309c7f1841e1ba8ba86.png" />
-</div>
 </div>
 </section>
 <section id="final-energy-demand">
@@ -776,9 +819,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_final_energy_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/95d5509be7676fb0b8239e72d7e7278edf90ae56b7fc257c69a857c1f5214cd8.png" src="_images/95d5509be7676fb0b8239e72d7e7278edf90ae56b7fc257c69a857c1f5214cd8.png" />
 </div>
 </div>
 </section>
@@ -791,9 +831,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/50b78af736c54a22676238fcc8740a743916b5d55af5f02de2ff6a7aa050f108.png" src="_images/50b78af736c54a22676238fcc8740a743916b5d55af5f02de2ff6a7aa050f108.png" />
-</div>
 </div>
 </section>
 <section id="hydrogen-demand">
@@ -804,9 +841,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/45ffb950954d31b0187db7867d3bf2cc9dd1b07c95a194407d0aa3bba78e36e1.png" src="_images/45ffb950954d31b0187db7867d3bf2cc9dd1b07c95a194407d0aa3bba78e36e1.png" />
 </div>
 </div>
 </section>
@@ -819,9 +853,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/b9707977a78f6c4109efc4efb44fb5a0dd76589eb95b24516a6df718d0db3bca.png" src="_images/b9707977a78f6c4109efc4efb44fb5a0dd76589eb95b24516a6df718d0db3bca.png" />
-</div>
 </div>
 </section>
 <section id="power-generation-capacities">
@@ -832,9 +863,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_capacity_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/1e243e0c19cbda647c69cedac675b1631df5503b06738978bb522c38d0ba2753.png" src="_images/1e243e0c19cbda647c69cedac675b1631df5503b06738978bb522c38d0ba2753.png" />
 </div>
 </div>
 </section>
@@ -847,9 +875,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/fbbd290b008294dfb173e1d90045f86a4e5a0fec052b9ecaa6336d294356a698.png" src="_images/fbbd290b008294dfb173e1d90045f86a4e5a0fec052b9ecaa6336d294356a698.png" />
-</div>
 </div>
 </section>
 <section id="hydrogen-supply">
@@ -861,9 +886,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/eac4923da2dc8aabb8cb1ece0c9752805f096d515ed51221be33f6df165cb16d.png" src="_images/eac4923da2dc8aabb8cb1ece0c9752805f096d515ed51221be33f6df165cb16d.png" />
-</div>
 </div>
 </section>
 <section id="methane-supply">
@@ -872,11 +894,6 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_supply_eu27_cy2009&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found, skipping...
 </pre></div>
 </div>
 </div>
@@ -891,9 +908,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/49683ca5d7e0da20f6676688c969e6253cb41840b5b38ff71b94566e75a1e589.png" src="_images/49683ca5d7e0da20f6676688c969e6253cb41840b5b38ff71b94566e75a1e589.png" />
-</div>
 </div>
 </section>
 <section id="energy-imports">
@@ -905,14 +919,112 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/da358b9772aebc13af954af881d9b490cb287dfd539a0cb6f1345082ce163195.png" src="_images/da358b9772aebc13af954af881d9b490cb287dfd539a0cb6f1345082ce163195.png" />
-</div>
 </div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
 <h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
+<p>An important exercise to working with any energy system model is changing input assumptions and this is particularly the case for any TYNDP model as assumptions are changing and many different configuration need to be tested and rerun many times.</p>
+<p>The Open-TYNDP model has multiple ways to modify assumptions and run different scenarios. There are three main options how one can make changes to the assumptions and inputs of the model:</p>
+<ul class="simple">
+<li><p><strong>Input data:</strong> Changing the input data in the data folder</p></li>
+<li><p><strong>Custom assumptions:</strong> Modifying cost and technology assumptions via the <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>  file</p></li>
+<li><p><strong>Custom constraints:</strong> Adding custom constraints in the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script</p></li>
+<li><p><strong>Manual adjustments:</strong> Making selected changes to specific components via the scenario configuration file <code class="docutils literal notranslate"><span class="pre">scenario.config.yaml</span></code></p></li>
+</ul>
+<section id="modifying-the-input-data">
+<h2>Modifying the input data<a class="headerlink" href="#modifying-the-input-data" title="Link to this heading">#</a></h2>
+<p>The first way you can make changes to the model is by modifying the input data directly.</p>
+<p>To do this, you can navigate into the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory of the open-tyndp repository and find the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_tree</span>
+
+<span class="n">target_directory</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/data/tyndp_2024_bundle&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">display_tree</span><span class="p">(</span><span class="n">target_directory</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here you can freely navigate into any of the input files and exchange any of the input files with you own input file of the <strong>same format</strong>.</p>
+</section>
+<section id="custom-assumptions">
+<h2>Custom assumptions<a class="headerlink" href="#custom-assumptions" title="Link to this heading">#</a></h2>
+<p>Now, if you want to include some custom assumptions related to e.g. the capital or marginal cost or the technical parameters of the different technologies, you can specify these in a long format csv table called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
+<p>Navigate into that folder again and look for that file. As you can see, there are already some example custom assumptions in that file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
+<span class="n">custom_cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, if you wanted to add you own custom assumptions, you can simply add a new row to this csv file which at least specifies the planning_horizon, the technology, the parameter, the value and the unit.</p>
+<p>This will then be included in the model when you rerun the Open-TYNDP workflow.</p>
+</section>
+<section id="manual-adjustments">
+<h2>Manual adjustments<a class="headerlink" href="#manual-adjustments" title="Link to this heading">#</a></h2>
+<p>The third way, you can modify Open-TYNDP assumptions is by including specific changes to components or specific units in the system.</p>
+<p>These are called <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> and can be added directly via th model configuration file for a your modelled scenarios.</p>
+<p>An example of this configuration section can be found in the default configuration file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_code_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">language</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Code</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">end</span><span class="p">]),</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1069</span><span class="p">,</span> <span class="mi">1076</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, if you want to specify a manual adjustment to a scenario that you are modelling, you can do so by adding such a section in your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>.</p>
+<p>Let’s have a look at that file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-1-add-manual-adjustments">
+<h2>Task 1: Add manual adjustments<a class="headerlink" href="#task-1-add-manual-adjustments" title="Link to this heading">#</a></h2>
+<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in the scenario configuration file <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code> by adding the following manual adjustments:</p>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+<p>Rerun the model and investigate the results using the PyPSA-Explorer.</p>
+<p>Hint: See our last workshop notebook on how to run a Snakemake workflow.</p>
+<p>Hint II: Remember to always start with a dry-run, i.e. adding a <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag to the end of your Snakemake call.</p>
+</section>
+<section id="custom-constraints">
+<h2>Custom constraints<a class="headerlink" href="#custom-constraints" title="Link to this heading">#</a></h2>
+<p>Lastly, you might want to add some custom constraints to the model. Since we have not yet covered this aspect of PyPSA, we will not go in to much detail here and will teach you about PyPSA constraints comprehensively in one of our next workshops.</p>
+<p>However, we still want to give you an idea of where you could add such a custom constraint that is not yet included in the model via any of the Component parameters.</p>
+<p>Note: An example, of a standard PyPSA constraint would be the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute of a Link component, that will be translated by PyPSA automatically into a binding upper limit constraint for the capacity of an expandable Link component.</p>
+<p>To do so, you can simply add your own custom code into the model. This level of customization is the great benefit of working with an open-source model.</p>
+<p>Please navigate into the scripts directory of the open-tyndp repository and find the script called <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this script you can find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code> where different custom constraints are added to model.</p>
+<p>For example, we have added a custom constraint for the TYNDP offshore hubs modelling by calling a sub-function: <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>.</p>
+<p>In the same way, you could add here your custom constraint to the model. Feel free to check out the custom constraints that are already included here.</p>
+<p>More on this will follow in on of the next workshops.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
 <h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
@@ -1006,7 +1118,14 @@ Done
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-adjustments">Manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-constraints">Custom constraints</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-todo">Task 1: # TODO</a></li>
 </ul>
