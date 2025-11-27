@@ -550,6 +550,8 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;data/results.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feature/workshop-03-notebook/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>  <span class="c1"># TODO: Update for version on main</span>
 <span class="p">}</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -582,56 +584,50 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
+File data/open-tyndp.zip already exists. Skipping download.
+File scripts/_helpers.py already exists. Skipping download.
+Unzipping data/results.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/results&#39;.
+Unzipping data/open-tyndp.zip.
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">12</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
+<span class="ne">BadZipFile</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">26</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+<span class="nn">Cell In[3], line 3,</span> in <span class="ni">unzip_with_timestamps</span><span class="nt">(zip_path, extract_to)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>             <span class="c1"># Extract the file</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>             <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
-<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1370,</span> in <span class="ni">ZipFile.__init__</span><span class="nt">(self, file, mode, compression, allowZip64, compresslevel, strict_timestamps, metadata_encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1368</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span>     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1370</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_RealGetContents</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span>     <span class="k">elif</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1372</span>         <span class="c1"># set the modified flag so central directory gets written</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span>         <span class="c1"># even if no files are added to the archive</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_didModify</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1437,</span> in <span class="ni">ZipFile._RealGetContents</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1436</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">endrec</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1437</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1438</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1439</span>     <span class="nb">print</span><span class="p">(</span><span class="n">endrec</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
-<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<span class="ne">BadZipFile</span>: File is not a zip file
 </pre></div>
 </div>
 </div>

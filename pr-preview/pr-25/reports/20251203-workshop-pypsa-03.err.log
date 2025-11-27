@@ -1,17 +1,4 @@
 Traceback (most recent call last):
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 782, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 214, in ensure_async
-    result = await obj
-             ^^^^^^^^^
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_client/channels.py", line 313, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
@@ -25,20 +12,87 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1005, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 600 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['urls = {', '    "data/results.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results.zip",', '}', '', 'os.makedirs("data", exist_ok=True)']
-...
-['    print(f"Unzipping data/open-tyndp.zip.")', '    unzip_with_timestamps("data/open-tyndp.zip", "data/open-tyndp")', 'print(f"Open-TYNDP available in \'{to_dir}\'.")', '', 'print("Done")']
--------------------
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+urls = {
+    "data/results.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results.zip",
+    "data/open-tyndp.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip",
+    "scripts/_helpers.py": "https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feature/workshop-03-notebook/open-tyndp-workshops/scripts/_helpers.py",  # TODO: Update for version on main
+}
+
+os.makedirs("data", exist_ok=True)
+os.makedirs("scripts", exist_ok=True)
+for name, url in urls.items():
+    if os.path.exists(name):
+        print(f"File {name} already exists. Skipping download.")
+    else:
+        print(f"Retrieving {name} from GCP storage.")
+        urlretrieve(url, name)
+        print(f"File available in {name}.")
+
+to_dir = "data/results"
+if not os.path.exists(to_dir):
+    print(f"Unzipping data/results.zip.")
+    unzip_with_timestamps("data/results.zip", "data/results")
+print(f"NT results available in '{to_dir}'.")
+
+to_dir = "data/open-tyndp"
+if not os.path.exists(to_dir):
+    print(f"Unzipping data/open-tyndp.zip.")
+    unzip_with_timestamps("data/open-tyndp.zip", "data/open-tyndp")
+print(f"Open-TYNDP available in '{to_dir}'.")
+
+print("Done")
+------------------
+
+----- stdout -----
+Retrieving data/results.zip from GCP storage.
+----- stdout -----
+File available in data/results.zip.
+File data/open-tyndp.zip already exists. Skipping download.
+File scripts/_helpers.py already exists. Skipping download.
+Unzipping data/results.zip.
+----- stdout -----
+NT results available in 'data/results'.
+Unzipping data/open-tyndp.zip.
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mBadZipFile[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 26[39m
+[32m     24[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m os.path.exists(to_dir):
+[32m     25[39m     [38;5;28mprint[39m([33mf[39m[33m"[39m[33mUnzipping data/open-tyndp.zip.[39m[33m"[39m)
+[32m---> [39m[32m26[39m     [43munzip_with_timestamps[49m[43m([49m[33;43m"[39;49m[33;43mdata/open-tyndp.zip[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mdata/open-tyndp[39;49m[33;43m"[39;49m[43m)[49m
+[32m     27[39m [38;5;28mprint[39m([33mf[39m[33m"[39m[33mOpen-TYNDP available in [39m[33m'[39m[38;5;132;01m{[39;00mto_dir[38;5;132;01m}[39;00m[33m'[39m[33m.[39m[33m"[39m)
+[32m     29[39m [38;5;28mprint[39m([33m"[39m[33mDone[39m[33m"[39m)
+
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 3[39m, in [36munzip_with_timestamps[39m[34m(zip_path, extract_to)[39m
+[32m      1[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34munzip_with_timestamps[39m(zip_path, extract_to):
+[32m      2[39m [38;5;250m    [39m[33;03m"""Unzip a file while preserving original file timestamps."""[39;00m
+[32m----> [39m[32m3[39m     [38;5;28;01mwith[39;00m [43mzipfile[49m[43m.[49m[43mZipFile[49m[43m([49m[43mzip_path[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mr[39;49m[33;43m"[39;49m[43m)[49m [38;5;28;01mas[39;00m zip_ref:
+[32m      4[39m         [38;5;28;01mfor[39;00m member [38;5;129;01min[39;00m zip_ref.infolist():
+[32m      5[39m             [38;5;66;03m# Extract the file[39;00m
+[32m      6[39m             zip_ref.extract(member, extract_to)
+
+[36mFile [39m[32m~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1370[39m, in [36mZipFile.__init__[39m[34m(self, file, mode, compression, allowZip64, compresslevel, strict_timestamps, metadata_encoding)[39m
+[32m   1368[39m [38;5;28;01mtry[39;00m:
+[32m   1369[39m     [38;5;28;01mif[39;00m mode == [33m'[39m[33mr[39m[33m'[39m:
+[32m-> [39m[32m1370[39m         [38;5;28;43mself[39;49m[43m.[49m[43m_RealGetContents[49m[43m([49m[43m)[49m
+[32m   1371[39m     [38;5;28;01melif[39;00m mode [38;5;129;01min[39;00m ([33m'[39m[33mw[39m[33m'[39m, [33m'[39m[33mx[39m[33m'[39m):
+[32m   1372[39m         [38;5;66;03m# set the modified flag so central directory gets written[39;00m
+[32m   1373[39m         [38;5;66;03m# even if no files are added to the archive[39;00m
+[32m   1374[39m         [38;5;28mself[39m._didModify = [38;5;28;01mTrue[39;00m
+
+[36mFile [39m[32m~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1437[39m, in [36mZipFile._RealGetContents[39m[34m(self)[39m
+[32m   1435[39m     [38;5;28;01mraise[39;00m BadZipFile([33m"[39m[33mFile is not a zip file[39m[33m"[39m)
+[32m   1436[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m endrec:
+[32m-> [39m[32m1437[39m     [38;5;28;01mraise[39;00m BadZipFile([33m"[39m[33mFile is not a zip file[39m[33m"[39m)
+[32m   1438[39m [38;5;28;01mif[39;00m [38;5;28mself[39m.debug > [32m1[39m:
+[32m   1439[39m     [38;5;28mprint[39m(endrec)
+
+[31mBadZipFile[39m: File is not a zip file
 
