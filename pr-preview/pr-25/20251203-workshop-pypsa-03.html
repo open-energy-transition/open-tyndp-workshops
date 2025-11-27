@@ -567,56 +567,12 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">12</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
-<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
-<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
+Unzipping data/results.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/results&#39;.
+Done
 </pre></div>
 </div>
 </div>
@@ -646,6 +602,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+</div>
 </div>
 <p>The PyPSA-Explorer package can be started in two modes depending on your environment:</p>
 <ul class="simple">
@@ -666,6 +630,11 @@ document.write(`
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running locally !&quot;</span><span class="p">)</span>
 
 <span class="n">port</span> <span class="o">=</span> <span class="mi">8050</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
 </pre></div>
 </div>
 </div>
@@ -760,13 +729,12 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
     <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">years</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
     <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/results/results/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">images</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">bench_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span>
+            <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">bench_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span>
         <span class="p">]</span>
     <span class="k">except</span> <span class="n">PDFPageCountError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File not found, skipping...&quot;</span><span class="p">)</span>
@@ -775,7 +743,7 @@ document.write(`
     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">images</span><span class="p">):</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -788,10 +756,15 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
-    <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results/results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">convert_from_path</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results/results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/edf65f11dc76874834bbe9a62cc083dd9b58dd726bd87309c7f1841e1ba8ba86.png" src="_images/edf65f11dc76874834bbe9a62cc083dd9b58dd726bd87309c7f1841e1ba8ba86.png" />
 </div>
 </div>
 </section>
@@ -804,6 +777,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/95d5509be7676fb0b8239e72d7e7278edf90ae56b7fc257c69a857c1f5214cd8.png" src="_images/95d5509be7676fb0b8239e72d7e7278edf90ae56b7fc257c69a857c1f5214cd8.png" />
+</div>
 </div>
 </section>
 <section id="electricity-demand">
@@ -814,6 +790,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_elec_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/50b78af736c54a22676238fcc8740a743916b5d55af5f02de2ff6a7aa050f108.png" src="_images/50b78af736c54a22676238fcc8740a743916b5d55af5f02de2ff6a7aa050f108.png" />
 </div>
 </div>
 </section>
@@ -826,6 +805,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/45ffb950954d31b0187db7867d3bf2cc9dd1b07c95a194407d0aa3bba78e36e1.png" src="_images/45ffb950954d31b0187db7867d3bf2cc9dd1b07c95a194407d0aa3bba78e36e1.png" />
+</div>
 </div>
 </section>
 <section id="methane-demand">
@@ -836,6 +818,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b9707977a78f6c4109efc4efb44fb5a0dd76589eb95b24516a6df718d0db3bca.png" src="_images/b9707977a78f6c4109efc4efb44fb5a0dd76589eb95b24516a6df718d0db3bca.png" />
 </div>
 </div>
 </section>
@@ -848,6 +833,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/1e243e0c19cbda647c69cedac675b1631df5503b06738978bb522c38d0ba2753.png" src="_images/1e243e0c19cbda647c69cedac675b1631df5503b06738978bb522c38d0ba2753.png" />
+</div>
 </div>
 </section>
 <section id="electricity-generation">
@@ -858,6 +846,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_generation_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fbbd290b008294dfb173e1d90045f86a4e5a0fec052b9ecaa6336d294356a698.png" src="_images/fbbd290b008294dfb173e1d90045f86a4e5a0fec052b9ecaa6336d294356a698.png" />
 </div>
 </div>
 </section>
@@ -870,6 +861,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/eac4923da2dc8aabb8cb1ece0c9752805f096d515ed51221be33f6df165cb16d.png" src="_images/eac4923da2dc8aabb8cb1ece0c9752805f096d515ed51221be33f6df165cb16d.png" />
+</div>
 </div>
 </section>
 <section id="methane-supply">
@@ -878,6 +872,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found, skipping...
 </pre></div>
 </div>
 </div>
@@ -892,6 +891,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/49683ca5d7e0da20f6676688c969e6253cb41840b5b38ff71b94566e75a1e589.png" src="_images/49683ca5d7e0da20f6676688c969e6253cb41840b5b38ff71b94566e75a1e589.png" />
+</div>
 </div>
 </section>
 <section id="energy-imports">
@@ -902,6 +904,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_energy_imports_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/da358b9772aebc13af954af881d9b490cb287dfd539a0cb6f1345082ce163195.png" src="_images/da358b9772aebc13af954af881d9b490cb287dfd539a0cb6f1345082ce163195.png" />
 </div>
 </div>
 </section>
@@ -925,16 +930,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ""
         },
         kernelOptions: {
-            name: "python3",
+            name: "",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = ''</script>
 
                 </article>
               
