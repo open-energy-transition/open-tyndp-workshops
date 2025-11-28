@@ -451,9 +451,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-adjustments">Manual adjustments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustments">Adjustments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-constraints">Custom constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
@@ -584,50 +584,63 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results.zip.
-File data/open-tyndp.zip already exists. Skipping download.
-File scripts/_helpers.py already exists. Skipping download.
-Unzipping data/results.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/results&#39;.
-Unzipping data/open-tyndp.zip.
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">BadZipFile</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">26</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+<span class="ne">HTTPError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results&quot;</span>
 
-<span class="nn">Cell In[3], line 3,</span> in <span class="ni">unzip_with_timestamps</span><span class="nt">(zip_path, extract_to)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>             <span class="c1"># Extract the file</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>             <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:240,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span><span class="sd"> Retrieve a URL into a temporary location on disk.</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span><span class="sd"> </span>
+<span class="sd">   (...)    236 data file as well as the resulting HTTPMessage object.</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="n">url_type</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">_splittype</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">240</span> <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">closing</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="n">headers</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>     <span class="c1"># Just return the local path and the &quot;headers&quot; for file://</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span>     <span class="c1"># URLs. No sense in performing a copy unless requested.</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1370,</span> in <span class="ni">ZipFile.__init__</span><span class="nt">(self, file, mode, compression, allowZip64, compresslevel, strict_timestamps, metadata_encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1368</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1369</span>     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1370</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_RealGetContents</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1371</span>     <span class="k">elif</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1372</span>         <span class="c1"># set the modified flag so central directory gets written</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span>         <span class="c1"># even if no files are added to the archive</span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_didModify</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:215,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">215</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1437,</span> in <span class="ni">ZipFile._RealGetContents</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1436</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">endrec</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1437</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1438</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1439</span>     <span class="nb">print</span><span class="p">(</span><span class="n">endrec</span><span class="p">)</span>
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:521,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span>     <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">521</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="k">return</span> <span class="n">response</span>
 
-<span class="ne">BadZipFile</span>: File is not a zip file
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:630,</span> in <span class="ni">HTTPErrorProcessor.http_response</span><span class="nt">(self, request, response)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span> <span class="c1"># According to RFC 2616, &quot;2xx&quot; code indicates that the client&#39;s</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span> <span class="c1"># request was successfully received, understood, and accepted.</span>
+<span class="g g-Whitespace">    </span><span class="mi">629</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">630</span>     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span> <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:559,</span> in <span class="ni">OpenerDirector.error</span><span class="nt">(self, proto, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">557</span> <span class="k">if</span> <span class="n">http_err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;http_error_default&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">orig_args</span>
+<span class="ne">--&gt; </span><span class="mi">559</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:492,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">490</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">492</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span>         <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:639,</span> in <span class="ni">HTTPDefaultErrorHandler.http_error_default</span><span class="nt">(self, req, fp, code, msg, hdrs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span> <span class="k">def</span><span class="w"> </span><span class="nf">http_error_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">639</span>     <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+
+<span class="ne">HTTPError</span>: HTTP Error 404: Not Found
 </pre></div>
 </div>
 </div>
@@ -920,18 +933,18 @@ Unzipping data/open-tyndp.zip.
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
 <h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
-<p>An important exercise to working with any energy system model is changing input assumptions and this is particularly the case for any TYNDP model as assumptions are changing and many different configuration need to be tested and rerun many times.</p>
-<p>The Open-TYNDP model has multiple ways to modify assumptions and run different scenarios. There are three main options how one can make changes to the assumptions and inputs of the model:</p>
+<p>A key requirement when working with any energy system model is to adjust input assumptions and see how results respond. This is especially true for TYNDP models, where assumptions evolve over time and many configurations need to be tested and re-run repeatedly.</p>
+<p>In Open-TYNDP, there are several straightforward ways to change assumptions and explore scenarios. In practice, you’ll mostly use one (or a mix) of these options:</p>
 <ul class="simple">
-<li><p><strong>Input data:</strong> Changing the input data in the data folder</p></li>
-<li><p><strong>Custom assumptions:</strong> Modifying cost and technology assumptions via the <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>  file</p></li>
-<li><p><strong>Custom constraints:</strong> Adding custom constraints in the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script</p></li>
-<li><p><strong>Manual adjustments:</strong> Making selected changes to specific components via the scenario configuration file <code class="docutils literal notranslate"><span class="pre">scenario.config.yaml</span></code></p></li>
+<li><p><strong>Input data:</strong> Update the relevant files in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p></li>
+<li><p><strong>Custom assumptions:</strong> Override cost and technology assumptions via <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>.</p></li>
+<li><p><strong>Adjustments:</strong> Make targeted changes to specific components through <code class="docutils literal notranslate"><span class="pre">scenario.config.yaml</span></code>.</p></li>
+<li><p><strong>Custom constraints:</strong> Add or adjust constraints directly in the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script.</p></li>
 </ul>
 <section id="modifying-the-input-data">
 <h2>Modifying the input data<a class="headerlink" href="#modifying-the-input-data" title="Link to this heading">#</a></h2>
-<p>The first way you can make changes to the model is by modifying the input data directly.</p>
-<p>To do this, you can navigate into the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory of the open-tyndp repository and find the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code>.</p>
+<p>The first way to make changes to the model is by editing the input data directly.</p>
+<p>To get started, navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the open-tyndp repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_tree</span>
@@ -943,12 +956,12 @@ Unzipping data/open-tyndp.zip.
 </div>
 </div>
 </div>
-<p>Here you can freely navigate into any of the input files and exchange any of the input files with you own input file of the <strong>same format</strong>.</p>
+<p>Here you can freely browse the input files and replace any of them with your own inputs, as long as it follows the <strong>same format</strong>.</p>
 </section>
 <section id="custom-assumptions">
 <h2>Custom assumptions<a class="headerlink" href="#custom-assumptions" title="Link to this heading">#</a></h2>
-<p>Now, if you want to include some custom assumptions related to e.g. the capital or marginal cost or the technical parameters of the different technologies, you can specify these in a long format csv table called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
-<p>Navigate into that folder again and look for that file. As you can see, there are already some example custom assumptions in that file:</p>
+<p>If you’d like to add custom assumptions, for example on capital costs, marginal costs, or technical parameters for specific technologies, you can do so in a long-format CSV table called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
+<p>So, head back to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory and open <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>. You’ll notice that the file already contains a few example assumptions to illustrate the structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
@@ -957,14 +970,14 @@ Unzipping data/open-tyndp.zip.
 </div>
 </div>
 </div>
-<p>Now, if you wanted to add you own custom assumptions, you can simply add a new row to this csv file which at least specifies the planning_horizon, the technology, the parameter, the value and the unit.</p>
-<p>This will then be included in the model when you rerun the Open-TYNDP workflow.</p>
+<p>If you want to add your own custom assumptions, simply insert a new row in this CSV. At a minimum, each row should specify the <code class="docutils literal notranslate"><span class="pre">planning_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">technology</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code>.</p>
+<p>These entries will automatically be picked up the when you rerun the Open-TYNDP workflow.</p>
 </section>
-<section id="manual-adjustments">
-<h2>Manual adjustments<a class="headerlink" href="#manual-adjustments" title="Link to this heading">#</a></h2>
-<p>The third way, you can modify Open-TYNDP assumptions is by including specific changes to components or specific units in the system.</p>
-<p>These are called <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> and can be added directly via th model configuration file for a your modelled scenarios.</p>
-<p>An example of this configuration section can be found in the default configuration file:</p>
+<section id="adjustments">
+<h2>Adjustments<a class="headerlink" href="#adjustments" title="Link to this heading">#</a></h2>
+<p>The third way to modify Open-TYNDP assumptions is by making targeted changes to specific components or units in the system.</p>
+<p>These are called <code class="docutils literal notranslate"><span class="pre">adjustments</span></code>, and you add them directly in the model configuration file for your scenarios.</p>
+<p>You can find an example of this section in the default configuration file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_code_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">language</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
@@ -982,8 +995,8 @@ Unzipping data/open-tyndp.zip.
 </div>
 </div>
 </div>
-<p>So, if you want to specify a manual adjustment to a scenario that you are modelling, you can do so by adding such a section in your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>.</p>
-<p>Let’s have a look at that file:</p>
+<p>So, if you want to make a manual adjustment to a scenario you’re modelling, you can do that by adding an <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> section to your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>.</p>
+<p>Let’s open that file and take a look:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -992,23 +1005,13 @@ Unzipping data/open-tyndp.zip.
 </div>
 </div>
 </section>
-<section id="task-1-add-manual-adjustments">
-<h2>Task 1: Add manual adjustments<a class="headerlink" href="#task-1-add-manual-adjustments" title="Link to this heading">#</a></h2>
-<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in the scenario configuration file <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code> by adding the following manual adjustments:</p>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
-<p>Rerun the model and investigate the results using the PyPSA-Explorer.</p>
-<p>Hint: See our last workshop notebook on how to run a Snakemake workflow.</p>
-<p>Hint II: Remember to always start with a dry-run, i.e. adding a <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag to the end of your Snakemake call.</p>
-</section>
 <section id="custom-constraints">
 <h2>Custom constraints<a class="headerlink" href="#custom-constraints" title="Link to this heading">#</a></h2>
-<p>Lastly, you might want to add some custom constraints to the model. Since we have not yet covered this aspect of PyPSA, we will not go in to much detail here and will teach you about PyPSA constraints comprehensively in one of our next workshops.</p>
-<p>However, we still want to give you an idea of where you could add such a custom constraint that is not yet included in the model via any of the Component parameters.</p>
-<p>Note: An example, of a standard PyPSA constraint would be the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute of a Link component, that will be translated by PyPSA automatically into a binding upper limit constraint for the capacity of an expandable Link component.</p>
-<p>To do so, you can simply add your own custom code into the model. This level of customization is the great benefit of working with an open-source model.</p>
-<p>Please navigate into the scripts directory of the open-tyndp repository and find the script called <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>.</p>
+<p>Lastly, you might want to add custom constraints to the model. Since we haven’t covered PyPSA constraints yet, we won’t go into detail here, but we’ll treat them comprehensively in one of our next workshops.</p>
+<p>Still, it’s useful to know where you <em>would</em> add a custom constraint that isn’t already represented through existing component parameters.</p>
+<p><strong>Note:</strong> An example for a standard PyPSA constraint is the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute of a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component. PyPSA automatically translates this into a binding upper-limit constraint on the capacity of an expandable <code class="docutils literal notranslate"><span class="pre">Link</span></code>.</p>
+<p>To add a custom constraint, you can insert your own code directly into the model. This kind of flexibility is one of the big advantages of working with an open-source setup.</p>
+<p>Please navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the<code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span><span class="p">)</span>
@@ -1016,10 +1019,20 @@ Unzipping data/open-tyndp.zip.
 </div>
 </div>
 </div>
-<p>In this script you can find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code> where different custom constraints are added to model.</p>
-<p>For example, we have added a custom constraint for the TYNDP offshore hubs modelling by calling a sub-function: <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>.</p>
-<p>In the same way, you could add here your custom constraint to the model. Feel free to check out the custom constraints that are already included here.</p>
-<p>More on this will follow in on of the next workshops.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>, you’ll find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code>. This is where additional custom constraints are added to the model.</p>
+<p>For instance, Open-TYNDP includes a custom constraint for the TYNDP offshore hubs by calling the nested function <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>.</p>
+<p>You can add your own constraint in the same place. Feel free to browse the constraints already implemented there to get a sense of the structure and style.</p>
+<p>We’ll cover how PyPSA constraints work in more depth in one of the next workshops.</p>
+</section>
+<section id="task-1-add-manual-adjustments">
+<h2>Task 1: Add manual adjustments<a class="headerlink" href="#task-1-add-manual-adjustments" title="Link to this heading">#</a></h2>
+<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code> by adding the following manual adjustments as explained before:</p>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+<p>Then rerun the model and explore the results in the PyPSA-Explorer.</p>
+<p><strong>Hint:</strong> If you need a reminder on running the Snakemake workflow, check the notebook from our last workshop.<br />
+<strong>Hint II:</strong> Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> at the end of your Snakemake command).</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
@@ -1117,9 +1130,9 @@ Unzipping data/open-tyndp.zip.
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-adjustments">Manual adjustments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustments">Adjustments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-constraints">Custom constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-add-manual-adjustments">Task 1: Add manual adjustments</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
