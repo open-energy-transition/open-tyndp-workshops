@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '20250624-workshop-pypsa-02';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -605,56 +607,20 @@ document.write(`
 Retrieving data/open-tyndp.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">18</span>         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/urllib/request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
-<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
-<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/open-tyndp.zip.
+Retrieving data/network_NT_presolve_highres_2030.nc from GCP storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/network_NT_presolve_highres_2030.nc.
+File Snakefile already exists. Skipping download.
+File scripts/build_data.py already exists. Skipping download.
+File scripts/prepare_network.py already exists. Skipping download.
+File scripts/filter_dag.py already exists. Skipping download.
+Unzipping data/open-tyndp.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp&#39;.
+Done
 </pre></div>
 </div>
 </div>
@@ -696,6 +662,131 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: Open Energy Transition gGmbH</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/benchmark.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data/benchmark.pdf&quot;</span>
+
+<span class="n">rule</span> <span class="n">retrieve_data</span><span class="p">:</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_raw.csv&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;wget -O </span><span class="si">{output}</span><span class="s2"> https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv&quot;</span>
+
+<span class="n">rule</span> <span class="n">build_data</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_raw.csv&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_filtered.csv&quot;</span>
+    <span class="n">script</span><span class="p">:</span>
+        <span class="s2">&quot;scripts/build_data.py&quot;</span>
+
+<span class="n">rule</span> <span class="n">prepare_network</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_filtered.csv&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030.nc&quot;</span>
+    <span class="n">script</span><span class="p">:</span>
+        <span class="s2">&quot;scripts/prepare_network.py&quot;</span>
+
+<span class="n">rule</span> <span class="n">solve_network</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030.nc&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030_solved.nc&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;cp </span><span class="si">{input}</span><span class="s2"> </span><span class="si">{output}</span><span class="s2">&quot;</span>
+
+<span class="n">rule</span> <span class="n">plot_benchmark</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030_solved.nc&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/benchmark.</span><span class="si">{ext}</span><span class="s2">&quot;</span>
+    <span class="n">run</span><span class="p">:</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+</pre></div>
+</div></div>
 </div>
 <p>You can check out the scripts under <code class="docutils literal notranslate"><span class="pre">scripts</span></code>. You will see that they are simplistic and only serve an illustrative purpose.</p>
 <p>You can also observe how the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is defined to take advantage of the wildcards. This reduces the redundancy in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>. Wildcards are defined between <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> in the rule definition.</p>
@@ -727,6 +818,85 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">host: runnervmg1sw1</span>
+<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+<span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                count</span>
+<span class=" -Color -Color-Yellow">---------------  -------</span>
+<span class=" -Color -Color-Yellow">all                    1</span>
+<span class=" -Color -Color-Yellow">build_data             1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
+<span class=" -Color -Color-Yellow">prepare_network        1</span>
+<span class=" -Color -Color-Yellow">solve_network          1</span>
+<span class=" -Color -Color-Yellow">total                  6</span>
+
+
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule build_data:</span>
+<span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
+<span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    jobid: 4</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule prepare_network:</span>
+<span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    jobid: 3</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule solve_network:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    jobid: 2</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule plot_benchmark:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    output: data/benchmark.png</span>
+<span class=" -Color -Color-Green">    jobid: 1</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    wildcards: ext=png</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule plot_benchmark:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
+<span class=" -Color -Color-Green">    jobid: 6</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:15:56 2025]</span>
+<span class=" -Color -Color-Green">rule all:</span>
+<span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
+<span class=" -Color -Color-Green">    jobid: 0</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                count</span>
+<span class=" -Color -Color-Yellow">---------------  -------</span>
+<span class=" -Color -Color-Yellow">all                    1</span>
+<span class=" -Color -Color-Yellow">build_data             1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
+<span class=" -Color -Color-Yellow">prepare_network        1</span>
+<span class=" -Color -Color-Yellow">solve_network          1</span>
+<span class=" -Color -Color-Yellow">total                  6</span>
+
+<span class=" -Color -Color-Yellow">Reasons:</span>
+<span class=" -Color -Color-Yellow">    (check individual jobs above for details)</span>
+<span class=" -Color -Color-Yellow">    input files updated by another job:</span>
+<span class=" -Color -Color-Yellow">        all, plot_benchmark, prepare_network, solve_network</span>
+<span class=" -Color -Color-Yellow">    output files have to be generated:</span>
+<span class=" -Color -Color-Yellow">        build_data, plot_benchmark, prepare_network, solve_network</span>
+<span class=" -Color -Color-Yellow">1 jobs have missing provenance/metadata so that it in part cannot be used to trigger re-runs.</span>
+<span class=" -Color -Color-Yellow">Rules with missing metadata: retrieve_data</span>
+<span class=" -Color -Color-Yellow">This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be executed twice due to wildcards.</p>
 </section>
@@ -741,12 +911,20 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_minimal.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" src="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" />
 </div>
 </div>
 <p>Rules that need to be executed will be presented as plain lines, while those that have already been executed will be presented as dotted lines. An alternative to the DAG is the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code>. This graph is typically less crowded as you will only visualize the dependency graph of rules. This representation is leaner than the DAG because rules are not repeated for wildcards.</p>
@@ -758,12 +936,20 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_minimal.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" src="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" />
 </div>
 </div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is only represented once.</p>
@@ -776,12 +962,20 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s2">&quot;filegraph_minimal.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" src="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" />
 </div>
 </div>
 </section>
@@ -897,12 +1091,37 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can now use Snakemake to call some of the rules to produce outputs with the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> PyPSA model.</p>
 <p>We will use the prepared TYNDP configuration file (<code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>) and schedule a dry-run with <code class="docutils literal notranslate"><span class="pre">-n</span></code> as we only want to investigate the DAG of the workflow:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Datafile downloads disabled in config[retrieve] or no internet access.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">host: runnervmg1sw1</span>
+<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Nothing to be done (all requested files are present and up to date).</span>
 </pre></div>
 </div>
 </div>
@@ -917,12 +1136,28 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_open_tyndp.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5f5132aca345c0d520401a353f8475a6af742d318aaaa34883862f40caf52800.png" src="_images/5f5132aca345c0d520401a353f8475a6af742d318aaaa34883862f40caf52800.png" />
 </div>
 </div>
 <p>The corresponding DAG to this workflow will look like this:</p>
@@ -934,12 +1169,28 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_open_tyndp.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a719daa134d6a3e659546c63353651d6fa632deeb48dbc172b4cbe011878d92a.png" src="_images/a719daa134d6a3e659546c63353651d6fa632deeb48dbc172b4cbe011878d92a.png" />
 </div>
 </div>
 <p>As you can see, this workflow is much more complex than our minimal example from the beginning. Since we already executed the entire workflow for this demonstration, all the rules are presented as dotted lines in the DAG.</p>
@@ -960,6 +1211,274 @@ Workflows are described via a human readable, Python based language. They can be
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Datafile downloads disabled in config[retrieve] or no internet access.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">host: runnervmg1sw1</span>
+<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                        count</span>
+<span class=" -Color -Color-Yellow">-----------------------  -------</span>
+<span class=" -Color -Color-Yellow">all                            1</span>
+<span class=" -Color -Color-Yellow">build_statistics               1</span>
+<span class=" -Color -Color-Yellow">make_benchmark                 1</span>
+<span class=" -Color -Color-Yellow">make_cumulative_costs          1</span>
+<span class=" -Color -Color-Yellow">make_global_summary            1</span>
+<span class=" -Color -Color-Yellow">make_summary                   1</span>
+<span class=" -Color -Color-Yellow">plot_balance_map               6</span>
+<span class=" -Color -Color-Yellow">plot_balance_timeseries        1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark                 1</span>
+<span class=" -Color -Color-Yellow">plot_heatmap_timeseries        1</span>
+<span class=" -Color -Color-Yellow">plot_hydrogen_network          1</span>
+<span class=" -Color -Color-Yellow">plot_offshore_network          2</span>
+<span class=" -Color -Color-Yellow">plot_power_network             1</span>
+<span class=" -Color -Color-Yellow">plot_summary                   1</span>
+<span class=" -Color -Color-Yellow">total                         20</span>
+
+
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_H2.log</span>
+<span class=" -Color -Color-Green">    jobid: 272</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_H2</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=H2</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_hydrogen_network:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/country_shapes.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_hydrogen_network/base_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 254</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_hydrogen_network/base_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    threads: 2</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=10000, mem_mib=9537</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_methanol.log</span>
+<span class=" -Color -Color-Green">    jobid: 275</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_methanol</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=methanol</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_AC.log</span>
+<span class=" -Color -Color-Green">    jobid: 271</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_AC</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=AC</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule build_statistics:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, data/tyndp_electricity_loss_factors.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    log: logs/tyndp/NT/build_statistics_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 227</span>
+<span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/build_statistics_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    threads: 4</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=4000, mem_mib=3815</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_gas.log</span>
+<span class=" -Color -Color-Green">    jobid: 273</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_gas</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=gas</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule make_summary:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/make_summary_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 240</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/make_summary_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_offshore_network:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_offshore_network_all___2040_DC_OH.log</span>
+<span class=" -Color -Color-Green">    jobid: 212</span>
+<span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/plot_offshore_network_all___2040_DC_OH</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=DC_OH</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=4000, mem_mib=3815</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_oil.log</span>
+<span class=" -Color -Color-Green">    jobid: 274</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_oil</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=oil</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_timeseries:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, matplotlibrc</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/graphics/balance_timeseries/s_all___2040</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_timeseries/base_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 284</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_timeseries/base_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    threads: 4</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=10000, mem_mib=9537</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_heatmap_timeseries:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, matplotlibrc</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_heatmap_timeseries/base_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 288</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_heatmap_timeseries/base_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    threads: 4</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=10000, mem_mib=9537</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_offshore_network:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_offshore_network_all___2040_H2 pipeline OH.log</span>
+<span class=" -Color -Color-Green">    jobid: 215</span>
+<span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/plot_offshore_network_all___2040_H2 pipeline OH</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=H2 pipeline OH</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=4000, mem_mib=3815</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_power_network:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_power_network/base_s_all___2040.log</span>
+<span class=" -Color -Color-Green">    jobid: 250</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_power_network/base_s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
+<span class=" -Color -Color-Green">    threads: 2</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=10000, mem_mib=9537</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_balance_map:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_balance_map/base_s_all___2040_co2 stored.log</span>
+<span class=" -Color -Color-Green">    jobid: 276</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/plot_balance_map/base_s_all___2040_co2 stored</span>
+<span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=co2 stored</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule make_global_summary:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/individual/nodal_costs_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2030.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2030.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2030.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2030.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2030.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2030.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2030.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2030.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2030.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2030.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/capacities.csv, results/tyndp/NT/csvs/energy.csv, results/tyndp/NT/csvs/energy_balance.csv, results/tyndp/NT/csvs/capacity_factors.csv, results/tyndp/NT/csvs/metrics.csv, results/tyndp/NT/csvs/curtailment.csv, results/tyndp/NT/csvs/prices.csv, results/tyndp/NT/csvs/weighted_prices.csv, results/tyndp/NT/csvs/market_values.csv, results/tyndp/NT/csvs/nodal_costs.csv, results/tyndp/NT/csvs/nodal_capacities.csv, results/tyndp/NT/csvs/nodal_energy_balance.csv, results/tyndp/NT/csvs/nodal_capacity_factors.csv</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/make_global_summary.log</span>
+<span class=" -Color -Color-Green">    jobid: 238</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/make_global_summary</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule make_benchmark:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/validation/resources/benchmarks_s_all___2030.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv, results/tyndp/NT/validation/resources/benchmarks_tyndp.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/csvs_s_all___all_years, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv</span>
+<span class=" -Color -Color-Green">    log: logs/tyndp/NT/make_benchmark_s_all___all_years.log</span>
+<span class=" -Color -Color-Green">    jobid: 230</span>
+<span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/make_benchmark_s_all___all_years</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=</span>
+<span class=" -Color -Color-Green">    threads: 4</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_summary:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/energy.csv, results/tyndp/NT/csvs/energy_balance.csv, data/eurostat/Balances-April2023, data/bundle/eea/UNFCCC_v23.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/graphs/costs.svg, results/tyndp/NT/graphs/energy.svg, results/tyndp/NT/graphs/balances-energy.svg</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_summary.log</span>
+<span class=" -Color -Color-Green">    jobid: 237</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/energy_balance.csv, results/tyndp/NT/csvs/energy.csv</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT</span>
+<span class=" -Color -Color-Green">    threads: 2</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=10000, mem_mib=9537</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule plot_benchmark:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/validation/resources/benchmarks_s_all___2030.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv, results/tyndp/NT/validation/resources/benchmarks_tyndp.csv, results/tyndp/NT/validation/resources/vp_data_tyndp.csv, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/graphics_s_all___all_years, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf</span>
+<span class=" -Color -Color-Green">    log: logs/tyndp/NT/plot_benchmark_s_all___all_years.log</span>
+<span class=" -Color -Color-Green">    jobid: 225</span>
+<span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/plot_benchmark_s_all___all_years</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=</span>
+<span class=" -Color -Color-Green">    threads: 4</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=8000, mem_mib=7630</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule make_cumulative_costs:</span>
+<span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/costs.csv</span>
+<span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/cumulative_costs.csv</span>
+<span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/make_cumulative_costs.log</span>
+<span class=" -Color -Color-Green">    jobid: 257</span>
+<span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/make_cumulative_costs</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/costs.csv</span>
+<span class=" -Color -Color-Green">    wildcards: run=NT</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;, mem_mb=4000, mem_mib=3815</span>
+<span class=" -Color -Color-Green">[Fri Nov 28 16:16:26 2025]</span>
+<span class=" -Color -Color-Green">rule all:</span>
+<span class=" -Color -Color-Green">    input: resources/tyndp/NT/maps/base_h2_network_all___2030.pdf, resources/tyndp/NT/maps/base_h2_network_all___2040.pdf, resources/tyndp/DE/maps/base_h2_network_all___2030.pdf, resources/tyndp/DE/maps/base_h2_network_all___2040.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2030_DC_OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2030_H2 pipeline OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2040_DC_OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2040_H2 pipeline OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2030_DC_OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2030_H2 pipeline OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2040_DC_OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2040_H2 pipeline OH.pdf, results/tyndp/NT/maps/base_s_all___2030-offshore_network_DC_OH.pdf, results/tyndp/NT/maps/base_s_all___2030-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/DE/maps/base_s_all___2030-offshore_network_DC_OH.pdf, results/tyndp/DE/maps/base_s_all___2030-offshore_network_H2 pipeline OH.pdf, results/tyndp/DE/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/DE/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/DE/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/NT/graphs/costs.svg, results/tyndp/DE/graphs/costs.svg, resources/tyndp/NT/maps/power-network.pdf, resources/tyndp/DE/maps/power-network.pdf, resources/tyndp/NT/maps/power-network-s-all.pdf, resources/tyndp/DE/maps/power-network-s-all.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2030.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/DE/maps/base_s_all__-costs-all_2030.pdf, results/tyndp/DE/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2030.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/DE/maps/base_s_all__-h2_network_2030.pdf, results/tyndp/DE/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/NT/csvs/cumulative_costs.csv, results/tyndp/DE/csvs/cumulative_costs.csv, results/tyndp/NT/maps/base_s_all___2030-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_H2.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_oil.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_co2 stored.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_AC.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_H2.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_gas.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_oil.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_methanol.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_co2 stored.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/NT/graphics/balance_timeseries/s_all___2030, results/tyndp/NT/graphics/balance_timeseries/s_all___2040, results/tyndp/DE/graphics/balance_timeseries/s_all___2030, results/tyndp/DE/graphics/balance_timeseries/s_all___2040, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2030, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040, results/tyndp/DE/graphics/heatmap_timeseries/s_all___2030, results/tyndp/DE/graphics/heatmap_timeseries/s_all___2040</span>
+<span class=" -Color -Color-Green">    jobid: 0</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040, results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/NT/graphs/costs.svg, results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/NT/csvs/cumulative_costs.csv, results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/NT/graphics/balance_timeseries/s_all___2040, results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=&lt;TBD&gt;</span>
+<span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                        count</span>
+<span class=" -Color -Color-Yellow">-----------------------  -------</span>
+<span class=" -Color -Color-Yellow">all                            1</span>
+<span class=" -Color -Color-Yellow">build_statistics               1</span>
+<span class=" -Color -Color-Yellow">make_benchmark                 1</span>
+<span class=" -Color -Color-Yellow">make_cumulative_costs          1</span>
+<span class=" -Color -Color-Yellow">make_global_summary            1</span>
+<span class=" -Color -Color-Yellow">make_summary                   1</span>
+<span class=" -Color -Color-Yellow">plot_balance_map               6</span>
+<span class=" -Color -Color-Yellow">plot_balance_timeseries        1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark                 1</span>
+<span class=" -Color -Color-Yellow">plot_heatmap_timeseries        1</span>
+<span class=" -Color -Color-Yellow">plot_hydrogen_network          1</span>
+<span class=" -Color -Color-Yellow">plot_offshore_network          2</span>
+<span class=" -Color -Color-Yellow">plot_power_network             1</span>
+<span class=" -Color -Color-Yellow">plot_summary                   1</span>
+<span class=" -Color -Color-Yellow">total                         20</span>
+
+<span class=" -Color -Color-Yellow">Reasons:</span>
+<span class=" -Color -Color-Yellow">    (check individual jobs above for details)</span>
+<span class=" -Color -Color-Yellow">    input files updated by another job:</span>
+<span class=" -Color -Color-Yellow">        all, make_benchmark, make_cumulative_costs, make_global_summary, plot_benchmark, plot_summary</span>
+<span class=" -Color -Color-Yellow">    updated input files:</span>
+<span class=" -Color -Color-Yellow">        build_statistics, make_summary, plot_balance_map, plot_balance_timeseries, plot_heatmap_timeseries, plot_hydrogen_network, plot_offshore_network, plot_power_network</span>
+<span class=" -Color -Color-Yellow">This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</span>
 </pre></div>
 </div>
 </div>
@@ -989,6 +1508,14 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v0.35.2 while current version is v1.0.4. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores
+</pre></div>
+</div>
+</div>
 </div>
 <section id="electricity-demand-profiles">
 <h2>Electricity demand profiles<a class="headerlink" href="#electricity-demand-profiles" title="Link to this heading">#</a></h2>
@@ -1000,6 +1527,197 @@ Workflows are described via a human readable, Python based language. They can be
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>AL00</th>
+      <th>AT00</th>
+      <th>BA00</th>
+      <th>BE00</th>
+      <th>BG00</th>
+      <th>CH00</th>
+      <th>CY00</th>
+      <th>CZ00</th>
+      <th>DE00</th>
+      <th>DKE1</th>
+      <th>...</th>
+      <th>PL00</th>
+      <th>PT00</th>
+      <th>RO00</th>
+      <th>RS00</th>
+      <th>SE01</th>
+      <th>SE02</th>
+      <th>SE03</th>
+      <th>SE04</th>
+      <th>SI00</th>
+      <th>SK00</th>
+    </tr>
+    <tr>
+      <th>snapshot</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2009-01-01 00:00:00</th>
+      <td>947.959412</td>
+      <td>9823.934937</td>
+      <td>1139.898666</td>
+      <td>12242.365509</td>
+      <td>5565.920746</td>
+      <td>7166.768456</td>
+      <td>514.413109</td>
+      <td>7134.304718</td>
+      <td>75929.264656</td>
+      <td>2167.298187</td>
+      <td>...</td>
+      <td>17104.075562</td>
+      <td>6068.504311</td>
+      <td>6906.502472</td>
+      <td>7191.248100</td>
+      <td>1653.199226</td>
+      <td>2470.068657</td>
+      <td>11584.612106</td>
+      <td>3193.297096</td>
+      <td>1356.612617</td>
+      <td>2899.493263</td>
+    </tr>
+    <tr>
+      <th>2009-01-01 01:00:00</th>
+      <td>833.057487</td>
+      <td>9821.063911</td>
+      <td>1086.608055</td>
+      <td>11888.769669</td>
+      <td>5414.886581</td>
+      <td>6796.788185</td>
+      <td>500.234436</td>
+      <td>7121.448853</td>
+      <td>73368.054413</td>
+      <td>2089.113052</td>
+      <td>...</td>
+      <td>16892.143913</td>
+      <td>5704.324791</td>
+      <td>6925.691902</td>
+      <td>6284.783302</td>
+      <td>1652.897522</td>
+      <td>2457.466545</td>
+      <td>11492.949509</td>
+      <td>3166.825447</td>
+      <td>1335.408936</td>
+      <td>3076.165970</td>
+    </tr>
+    <tr>
+      <th>2009-01-01 02:00:00</th>
+      <td>764.375237</td>
+      <td>9742.805717</td>
+      <td>1035.842484</td>
+      <td>11542.755981</td>
+      <td>5312.423264</td>
+      <td>6770.658478</td>
+      <td>491.265236</td>
+      <td>7024.643143</td>
+      <td>72445.216782</td>
+      <td>2038.800095</td>
+      <td>...</td>
+      <td>16826.266251</td>
+      <td>5277.870186</td>
+      <td>7063.218033</td>
+      <td>5642.247635</td>
+      <td>1648.209999</td>
+      <td>2433.868546</td>
+      <td>11348.999016</td>
+      <td>3118.911705</td>
+      <td>1323.218330</td>
+      <td>2980.385391</td>
+    </tr>
+    <tr>
+      <th>2009-01-01 03:00:00</th>
+      <td>732.734497</td>
+      <td>9807.876175</td>
+      <td>1011.463104</td>
+      <td>11343.939415</td>
+      <td>5259.545975</td>
+      <td>6653.832253</td>
+      <td>508.105309</td>
+      <td>6944.713936</td>
+      <td>73673.191757</td>
+      <td>2032.129326</td>
+      <td>...</td>
+      <td>17360.237389</td>
+      <td>5090.429459</td>
+      <td>7446.547157</td>
+      <td>5022.270302</td>
+      <td>1649.819946</td>
+      <td>2428.670639</td>
+      <td>11205.289032</td>
+      <td>3069.691803</td>
+      <td>1330.600349</td>
+      <td>3013.437683</td>
+    </tr>
+    <tr>
+      <th>2009-01-01 04:00:00</th>
+      <td>738.262611</td>
+      <td>9821.234138</td>
+      <td>1004.053360</td>
+      <td>11586.468903</td>
+      <td>5135.470093</td>
+      <td>6915.888031</td>
+      <td>555.610298</td>
+      <td>6776.687698</td>
+      <td>77914.759674</td>
+      <td>2045.791275</td>
+      <td>...</td>
+      <td>16662.134514</td>
+      <td>5030.606117</td>
+      <td>8229.326569</td>
+      <td>4536.644714</td>
+      <td>1671.352608</td>
+      <td>2452.380264</td>
+      <td>11084.080399</td>
+      <td>3037.241516</td>
+      <td>1424.730194</td>
+      <td>3260.762955</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 51 columns</p>
+</div></div></div>
 </div>
 <p>Let’s plot the electricity demand time series:</p>
 <div class="cell docutils container">
@@ -1017,6 +1735,9 @@ Workflows are described via a human readable, Python based language. They can be
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/aaafab4bcb760247b37754db0e92a13f79f88dfa3934ee5c21e4caba33df10f8.png" src="_images/aaafab4bcb760247b37754db0e92a13f79f88dfa3934ee5c21e4caba33df10f8.png" />
 </div>
 </div>
 <p>This is very overwhelming to look at. Let’s filter that down a bit…</p>
@@ -1042,6 +1763,63 @@ Workflows are described via a human readable, Python based language. They can be
 
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Group country profiles together and select a week</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">country_mapping</span> <span class="o">=</span> <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;carrier==&#39;AC&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">country</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">loads_2030_by_country</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">n_NT_2030h</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">country_mapping</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2009-03-01&quot;</span><span class="p">:</span><span class="s2">&quot;2009-03-07&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;GB&quot;</span><span class="p">]]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Create the plot</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/frame.py:9210,</span> in <span class="ni">DataFrame.groupby</span><span class="nt">(self, by, axis, level, as_index, sort, group_keys, observed, dropna)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9207</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">9208</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;You have to supply one of &#39;by&#39; and &#39;level&#39;&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">9210</span> <span class="k">return</span> <span class="n">DataFrameGroupBy</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">9211</span>     <span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9212</span>     <span class="n">keys</span><span class="o">=</span><span class="n">by</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9213</span>     <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9214</span>     <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9215</span>     <span class="n">as_index</span><span class="o">=</span><span class="n">as_index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9216</span>     <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9217</span>     <span class="n">group_keys</span><span class="o">=</span><span class="n">group_keys</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9218</span>     <span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9219</span>     <span class="n">dropna</span><span class="o">=</span><span class="n">dropna</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9220</span> <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/groupby/groupby.py:1331,</span> in <span class="ni">GroupBy.__init__</span><span class="nt">(self, obj, keys, axis, level, grouper, exclusions, selection, as_index, sort, group_keys, observed, dropna)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1328</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropna</span> <span class="o">=</span> <span class="n">dropna</span>
+<span class="g g-Whitespace">   </span><span class="mi">1330</span> <span class="k">if</span> <span class="n">grouper</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1331</span>     <span class="n">grouper</span><span class="p">,</span> <span class="n">exclusions</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">get_grouper</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1332</span>         <span class="n">obj</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1333</span>         <span class="n">keys</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1334</span>         <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1335</span>         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1336</span>         <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1337</span>         <span class="n">observed</span><span class="o">=</span><span class="kc">False</span> <span class="k">if</span> <span class="n">observed</span> <span class="ow">is</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span> <span class="k">else</span> <span class="n">observed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1338</span>         <span class="n">dropna</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dropna</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1339</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1341</span> <span class="k">if</span> <span class="n">observed</span> <span class="ow">is</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1342</span>     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ping</span><span class="o">.</span><span class="n">_passed_categorical</span> <span class="k">for</span> <span class="n">ping</span> <span class="ow">in</span> <span class="n">grouper</span><span class="o">.</span><span class="n">groupings</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/groupby/grouper.py:1043,</span> in <span class="ni">get_grouper</span><span class="nt">(obj, key, axis, level, sort, observed, validate, dropna)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1041</span>         <span class="n">in_axis</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">gpr</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">gpr</span><span class="p">,</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1042</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1043</span>         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">gpr</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gpr</span><span class="p">,</span> <span class="n">Grouper</span><span class="p">)</span> <span class="ow">and</span> <span class="n">gpr</span><span class="o">.</span><span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1045</span>     <span class="c1"># Add key to exclusions</span>
+<span class="g g-Whitespace">   </span><span class="mi">1046</span>     <span class="n">exclusions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gpr</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;Load&#39;
 </pre></div>
 </div>
 </div>
