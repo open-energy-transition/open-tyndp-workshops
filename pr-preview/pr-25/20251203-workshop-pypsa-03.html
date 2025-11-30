@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking &#8212; Open-TYNDP Workshops</title>
+    <title>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking &#8212; Open-TYNDP Workshops</title>
   
   
   
@@ -191,7 +191,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
 
 
 
@@ -417,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Workshop 3: Explore NT scenario results, modify assumptions & benchmarking</h1>
+    <h1>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -427,14 +427,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark Results</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
@@ -472,23 +472,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="workshop-3-explore-nt-scenario-results-modify-assumptions-benchmarking">
-<h1>Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking<a class="headerlink" href="#workshop-3-explore-nt-scenario-results-modify-assumptions-benchmarking" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="workshop-3-exploring-nt-scenario-results-modifying-assumptions-and-benchmarking">
+<h1>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking<a class="headerlink" href="#workshop-3-exploring-nt-scenario-results-modifying-assumptions-and-benchmarking" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At the end of this notebook, you will be able to:</p>
 <ul class="simple">
-<li><p>Navigate and analyze NT scenario results</p></li>
-<li><p>Interpret current discrepancies between model outputs and the TYNDP 2024 NT scenario</p></li>
-<li><p>Compare 2030 and 2040 scenarios using PyPSA-Explorer</p></li>
+<li><p>Navigate and analyze NT scenario results using PyPSA-Explorer</p></li>
+<li><p>Interpret discrepancies between model outputs and TYNDP 2024 NT scenario</p></li>
+<li><p>Compare 2030 and 2040 scenarios interactively</p></li>
 <li><p>Modify model assumptions and generate new scenario results</p></li>
 <li><p>Apply the benchmarking framework to identify areas for model improvement</p></li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
-<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<p>If you have not set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work, download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the required packages by executing the following command in a Jupyter cell at the top of the notebook:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>pypsa-explorer<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>numpy
 </pre></div>
 </div>
@@ -599,10 +599,10 @@ Done
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="interactive-exploration-with-pypsa-explorer">
-<h1>Interactive exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
-<p>PyPSA-Explorer is an interactive web dashboard that allows you to visualize and analyze energy system networks. It provides:</p>
+<h1>Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
+<p>PyPSA-Explorer is an interactive web dashboard for visualizing and analyzing energy system networks. It provides:</p>
 <ul class="simple">
-<li><p>Energy balance analysis with timeseries and aggregated views</p></li>
+<li><p>Energy balance analysis with time series and aggregated views</p></li>
 <li><p>Capacity planning visualizations by carrier and region</p></li>
 <li><p>Economic analysis showing CAPEX/OPEX breakdowns</p></li>
 <li><p>Interactive geographical network maps</p></li>
@@ -631,12 +631,12 @@ Done
 </div>
 </div>
 </div>
-<p>The PyPSA-Explorer package can be started in two modes depending on your environment:</p>
+<p>PyPSA-Explorer can be launched in different ways depending on your environment:</p>
 <ul class="simple">
-<li><p><strong>Local Jupyter</strong>: Terminal command (<strong>recommended</strong>) or inline display</p></li>
-<li><p><strong>Google Colab</strong>: The dashboard will launch inline, embedded directly in the notebook</p></li>
+<li><p><strong>Local Jupyter</strong>: Use the terminal command (recommended) or inline display</p></li>
+<li><p><strong>Google Colab</strong>: The dashboard launches inline, embedded directly in the notebook</p></li>
 </ul>
-<p>Follow the instructions below based on your environment.</p>
+<p>Follow the instructions below for your environment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detect if running on Google Colab</span>
@@ -665,8 +665,8 @@ Done
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251127_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251127_results/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
 </div>
-<p>This will open the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
-<p><strong>Alternative</strong>: The cell below can also launch the dashboard inline, but the terminal method is preferred for better performance.</p>
+<p>This opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
+<p><strong>Alternative</strong>: The cell below can launch the dashboard inline within the notebook, but the terminal method offers better performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
@@ -683,9 +683,9 @@ Done
 </section>
 <section id="for-google-colab-users">
 <h2>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h2>
-<p>If running on Google Colab, you need to start PyPSA-Explorer from the terminal before the iframe can display it.</p>
-<p>Run the following command in the Google Colab terminal:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pypsa</span><span class="o">-</span><span class="n">explorer</span> <span class="n">data</span><span class="o">/</span><span class="mi">20251127</span><span class="n">_results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2030</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2030</span> <span class="n">data</span><span class="o">/</span><span class="mi">20251127</span><span class="n">_results</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">base_s_all___2040</span><span class="o">.</span><span class="n">nc</span><span class="p">:</span><span class="n">NT_2040</span>
+<p>If running on Google Colab, start PyPSA-Explorer from the terminal before displaying it in the notebook.</p>
+<p>Run this command in the Google Colab terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251127_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251127_results/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -701,23 +701,22 @@ Done
 </section>
 <section id="using-the-dashboard">
 <h2>Using the Dashboard<a class="headerlink" href="#using-the-dashboard" title="Link to this heading">#</a></h2>
-<p>Once the dashboard opens, you can:</p>
+<p>Once the dashboard opens, explore these tabs:</p>
 <ol class="arabic simple">
-<li><p><strong>Energy Balance Tab</strong>: View production, consumption, and storage patterns</p>
+<li><p><strong>Energy Balance</strong>: View production, consumption, and storage patterns</p>
 <ul class="simple">
-<li><p>Switch between timeseries and aggregated views</p></li>
+<li><p>Switch between time series and aggregated views</p></li>
 <li><p>Filter by energy carrier (electricity, hydrogen, etc.)</p></li>
 <li><p>Filter by country/region</p></li>
 </ul>
 </li>
-<li><p><strong>Capacity Tab</strong>: Analyze installed capacities</p>
+<li><p><strong>Capacity</strong>: Analyze installed capacities</p>
 <ul class="simple">
 <li><p>Compare capacity buildout between 2030 and 2040 scenarios</p></li>
 <li><p>View by technology type and region</p></li>
-<li><p>Identify discrepancies with TYNDP 2024 targets</p></li>
 </ul>
 </li>
-<li><p><strong>Economics Tab</strong>: Examine costs and revenues</p>
+<li><p><strong>Economics</strong>: Examine costs and revenues</p>
 <ul class="simple">
 <li><p>CAPEX and OPEX breakdowns by technology</p></li>
 <li><p>Regional cost comparisons</p></li>
@@ -728,23 +727,22 @@ Done
 <ul class="simple">
 <li><p>Interactive map with buses, lines, and generators</p></li>
 <li><p>Zoom and pan to explore specific regions</p></li>
-<li><p>View transmission constraints</p></li>
 </ul>
 </li>
 </ol>
-<p><strong>Tip:</strong> Use the scenario selector dropdown to switch between NT 2030 and NT 2040 for direct comparison.</p>
+<p><strong>Tip:</strong> Use the scenario buttons in the top-right corner to switch between NT 2030 and NT 2040.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="benchmark-results">
-<h1>Benchmark results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
+<h1>Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
 <p>In Workshop 2, we introduced a benchmarking framework to systematically compare Open-TYNDP model outputs against TYNDP 2024. This framework helps us:</p>
 <ul class="simple">
-<li><p><strong>Identify discrepancies</strong>: Compare demands, installed capacities and generation volumes between model results and TYNDP targets</p></li>
-<li><p><strong>Quantify differences</strong>: Calculate deviations by technology, country, and investment year</p></li>
-<li><p><strong>Guide improvements</strong>: Prioritize areas where the model requires improvements</p></li>
+<li><p><strong>Identify discrepancies</strong>: Compare demands, installed capacities, and generation volumes between model results and TYNDP targets</p></li>
+<li><p><strong>Quantify differences</strong>: Calculate deviations by technology and investment year</p></li>
+<li><p><strong>Guide improvements</strong>: Prioritize areas where the model requires refinement</p></li>
 </ul>
-<p>Let’s apply this framework to our NT 2030 and 2040 scenario results to understand where the current model implementation aligns with or diverges from TYNDP expectations.</p>
-<p>To do so, let’s first define a function to display benchmarks.</p>
+<p>Let’s apply this framework to our NT 2030 and 2040 scenario results to understand where the current model aligns with or diverges from TYNDP expectations.</p>
+<p>First, we’ll define a helper function to display benchmarks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
@@ -772,7 +770,8 @@ Done
 </div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>We start with an overview of the sMAPE across all carriers. This provides a high-level understanding of the magnitude of the error across all benchmarks, carriers and planning horizons. It can clearly be observed that some features were significantly improved since our introduction of the framework. However, there is also still room for improvement.</p>
+<p>We begin with an overview of the Symmetric Mean Absolute Percentage Error (sMAPE) across all carriers. As a reminder, sMAPE measures the absolute magnitude of deviations while avoiding cancellation of negative and positive errors. This provides a high-level view of error magnitudes across all benchmarks, carriers, and planning horizons.</p>
+<p>You can observe that some features have been significantly improved since we introduced the framework. However, there is still room for further improvement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
@@ -790,7 +789,7 @@ Done
 </section>
 <section id="final-energy-demand">
 <h2>Final Energy Demand<a class="headerlink" href="#final-energy-demand" title="Link to this heading">#</a></h2>
-<p>Let’s now examine each benchmark category in detail, starting with final energy demand across all carriers.</p>
+<p>Let’s examine each benchmark category in detail, starting with final energy demand across all carriers. We observe that each carrier’s demand is now broadly reproduced. However, the exact methodology details to fully match the TYNDP scope remain unclear, which explains the remaining discrepancies even though these demands are exogenous inputs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_final_energy_demand_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -804,7 +803,7 @@ Done
 </section>
 <section id="electricity-demand">
 <h2>Electricity Demand<a class="headerlink" href="#electricity-demand" title="Link to this heading">#</a></h2>
-<p>Electricity demand is an exogenous input to the model, directly taken from TYNDP 2024 data. Therefore, we get a perfect match between the model results and TYNDP 2024.</p>
+<p>Electricity demand is an exogenous input to the model, taken directly from TYNDP 2024 data. Therefore, we achieve a perfect match between the model results and TYNDP 2024 for this input. Note that the final electricity demand equals the value of this exogenous input, which differs from the reference value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_elec_demand_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -818,7 +817,7 @@ Done
 </section>
 <section id="hydrogen-demand">
 <h2>Hydrogen Demand<a class="headerlink" href="#hydrogen-demand" title="Link to this heading">#</a></h2>
-<p>Hydrogen demand is mainly defined exogenously. Therefore, we expect a good match between the model results and TYNDP 2024. The electricity generation, on the other hand, is endogenous.</p>
+<p>Hydrogen demand is primarily defined exogenously, so we expect good alignment between model results and TYNDP 2024. Note that hydrogen generation, in contrast, is determined endogenously by the optimization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_demand_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -832,7 +831,7 @@ Done
 </section>
 <section id="methane-demand">
 <h2>Methane Demand<a class="headerlink" href="#methane-demand" title="Link to this heading">#</a></h2>
-<p>Methane demand includes exogenous consumption, as well as endogenous demand for power generation and SMR (steam methane reforming).</p>
+<p>Methane demand includes both exogenous consumption and endogenous demand for power generation and SMR (steam methane reforming). The exogenous consumption exactly reproduces the Supply Tool values. However, this is not yet aligned with the report values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_demand_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -846,7 +845,8 @@ Done
 </section>
 <section id="power-generation-capacities">
 <h2>Power Generation Capacities<a class="headerlink" href="#power-generation-capacities" title="Link to this heading">#</a></h2>
-<p>Installed generation capacities are now converging towards the values of TYNDP 2024. Both renewable and conventional capacities are now fully integrated from the PEMMDB.</p>
+<p>Installed generation capacities are now converging toward TYNDP 2024 values. Both renewable and conventional capacities are fully integrated from the PEMMDB. Open-TYNDP closely reproduces TYNDP 2024, except for coal where large discrepancies between data sources persist.</p>
+<p>CHP and small thermals, small-scale RES, and solar thermal technologies still need to be implemented. Currently, OCGT units are kept in the system and used as peaking units in Open-TYNDP because demand shedding is not yet implemented.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_capacity_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -860,7 +860,7 @@ Done
 </section>
 <section id="electricity-generation">
 <h2>Electricity Generation<a class="headerlink" href="#electricity-generation" title="Link to this heading">#</a></h2>
-<p>Actual electricity generation differs slightly from the TYNDP 2024 generation mix. However, the total generation values are close.</p>
+<p>Actual electricity generation differs slightly from the TYNDP 2024 generation mix. However, total generation values are closely aligned.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_generation_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -918,7 +918,7 @@ Done
 </section>
 <section id="energy-imports">
 <h2>Energy Imports<a class="headerlink" href="#energy-imports" title="Link to this heading">#</a></h2>
-<p>Energy imports include hydrogen, methane, liquids and solids. Currently, the model cannot import biomass.</p>
+<p>Energy imports include hydrogen, methane, liquids, and solids. Currently, the model cannot import biomass. Open-TYNDP values are overestimated because domestic production is not removed from the benchmarked values before comparison with TYNDP 2024.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_energy_imports_eu27_cy2009&quot;</span><span class="p">)</span>
@@ -933,18 +933,18 @@ Done
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
 <h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
-<p>A key requirement when working with any energy system model is to adjust input assumptions and see how results respond. This is especially true for TYNDP models, where assumptions evolve over time and many configurations need to be tested and re-run repeatedly.</p>
-<p>In Open-TYNDP, there are several straightforward ways to change assumptions and explore scenarios. In practice, you’ll mostly use one (or a mix) of these options:</p>
+<p>A key capability when working with any energy system model is adjusting input assumptions and observing how results respond. This is especially important for TYNDP models, where assumptions evolve over time and many configurations need testing and re-running.</p>
+<p>In Open-TYNDP, there are several straightforward ways to modify assumptions and explore scenarios:</p>
 <ul class="simple">
-<li><p><strong>Input data:</strong> Update the relevant files in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p></li>
-<li><p><strong>Custom assumptions:</strong> Override cost and technology assumptions via <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>.</p></li>
-<li><p><strong>Adjustments:</strong> Make targeted changes to specific components through <code class="docutils literal notranslate"><span class="pre">scenario.config.yaml</span></code>.</p></li>
-<li><p><strong>Custom constraints:</strong> Add or adjust constraints directly in the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script.</p></li>
+<li><p><strong>Input data</strong>: Update relevant files in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder</p></li>
+<li><p><strong>Custom assumptions</strong>: Override cost and technology assumptions via <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code></p></li>
+<li><p><strong>Adjustments</strong>: Make targeted changes to specific components through <code class="docutils literal notranslate"><span class="pre">scenario.config.yaml</span></code></p></li>
+<li><p><strong>Custom constraints</strong>: Add or adjust constraints directly in the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script</p></li>
 </ul>
 <section id="modifying-the-input-data">
 <h2>Modifying the input data<a class="headerlink" href="#modifying-the-input-data" title="Link to this heading">#</a></h2>
-<p>The first way to make changes to the model is by editing the input data directly.</p>
-<p>To get started, navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the open-tyndp repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder.</p>
+<p>The first method to modify the model is by editing the input data directly.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the open-tyndp repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_tree</span>
@@ -975,12 +975,12 @@ Done
 </div>
 </div>
 </div>
-<p>Here you can freely browse the input files and replace any of them with your own inputs, as long as it follows the <strong>same format</strong>.</p>
+<p>You can browse and replace any input files with your own, provided they follow the <strong>same format</strong>.</p>
 </section>
 <section id="custom-assumptions">
 <h2>Custom assumptions<a class="headerlink" href="#custom-assumptions" title="Link to this heading">#</a></h2>
-<p>If you’d like to add custom assumptions, for example on capital costs, marginal costs, or technical parameters for specific technologies, you can do so in a long-format CSV table called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
-<p>So, head back to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory and open <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code>. You’ll notice that the file already contains a few example assumptions to illustrate the structure:</p>
+<p>To add custom assumptions—such as capital costs, marginal costs, or technical parameters for specific technologies—use a long-format CSV table called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The file already contains example assumptions to illustrate the structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
@@ -1054,14 +1054,14 @@ Done
 </div>
 </div>
 </div>
-<p>If you want to add your own custom assumptions, simply insert a new row in this CSV. At a minimum, each row should specify the <code class="docutils literal notranslate"><span class="pre">planning_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">technology</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code>.</p>
-<p>These entries will automatically be picked up the when you rerun the Open-TYNDP workflow.</p>
+<p>To add your own custom assumptions, insert a new row in this CSV. At minimum, specify the <code class="docutils literal notranslate"><span class="pre">planning_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">technology</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code> for each entry. As shown in the file, you can also use the <code class="docutils literal notranslate"><span class="pre">all</span></code> argument to override a value for all technologies and/or all planning horizons.</p>
+<p>These entries are automatically applied when you rerun the Open-TYNDP workflow.</p>
 </section>
 <section id="adjustments">
 <h2>Adjustments<a class="headerlink" href="#adjustments" title="Link to this heading">#</a></h2>
-<p>The third way to modify Open-TYNDP assumptions is by making targeted changes to specific technologies in the system.</p>
+<p>The third method to modify Open-TYNDP assumptions is making targeted changes to specific technologies in the system.</p>
 <p>These are called <code class="docutils literal notranslate"><span class="pre">adjustments</span></code>, and you add them directly in the model configuration file for your scenarios.</p>
-<p>You can find an example of this section in the default configuration file:</p>
+<p>You can find an example in the default configuration file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_code_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">language</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
@@ -1079,14 +1079,14 @@ Done
 </div>
 </div>
 </div>
-<p>As you can see, it is possible to specify either a scaling factor or an absolute value for a given:</p>
+<p>As shown, you can specify either a scaling factor or an absolute value for a given:</p>
 <ul class="simple">
-<li><p>component type</p></li>
-<li><p>carrier (i.e. technology) and</p></li>
-<li><p>attribute</p></li>
+<li><p>Component type (e.g., Generator, Link)</p></li>
+<li><p>Carrier (i.e., technology)</p></li>
+<li><p>Attribute (e.g., marginal_cost, efficiency)</p></li>
 </ul>
-<p>So, if you want to make a manual adjustment to a scenario you’re modelling, you can do that by adding an <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> section to your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>.</p>
-<p>Let’s open that file and take a look:</p>
+<p>To make a manual adjustment to a scenario you’re modeling, add an <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> section to your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>.</p>
+<p>Let’s open that file and examine its structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -1097,11 +1097,11 @@ Done
 </section>
 <section id="custom-constraints">
 <h2>Custom constraints<a class="headerlink" href="#custom-constraints" title="Link to this heading">#</a></h2>
-<p>Lastly, you might want to add custom constraints to the model. Since we haven’t covered PyPSA constraints yet, we won’t go into detail here, but we’ll treat them comprehensively in one of our next workshops.</p>
-<p>Still, it’s useful to know where you <em>would</em> add a custom constraint that isn’t already represented through existing component parameters.</p>
-<p><strong>Note:</strong> An example for a standard PyPSA constraint is the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute of a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component. PyPSA automatically translates this into a binding upper-limit constraint on the capacity of an expandable <code class="docutils literal notranslate"><span class="pre">Link</span></code>.</p>
-<p>To add a custom constraint, you can insert your own code directly into the model. This kind of flexibility is one of the big advantages of working with an open-source setup.</p>
-<p>Please navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the<code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script.</p>
+<p>You may also want to add custom constraints to the model. Since we haven’t covered PyPSA constraints yet, we won’t go into detail here, but we’ll cover them comprehensively in a future workshop.</p>
+<p>It’s useful to know where you <em>would</em> add a custom constraint that isn’t already represented through existing component parameters.</p>
+<p><strong>Note</strong>: An example of a standard PyPSA constraint is the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute of a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component. PyPSA automatically translates this into a binding upper-limit constraint on the capacity of an expandable <code class="docutils literal notranslate"><span class="pre">Link</span></code>.</p>
+<p>To add a custom constraint, insert your own code directly into the model. This flexibility is one of the key advantages of working with an open-source setup.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span><span class="p">)</span>
@@ -1110,28 +1110,28 @@ Done
 </div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>, you’ll find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code>. This is where additional custom constraints are added to the model.</p>
-<p>For instance, Open-TYNDP includes a custom constraint for the TYNDP offshore hubs by calling the nested function <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>.</p>
-<p>You can add your own constraint in the same place. Feel free to browse the constraints already implemented there to get a sense of the structure and style.</p>
-<p>We’ll cover how PyPSA constraints work in more depth in one of the next workshops.</p>
+<p>For instance, Open-TYNDP includes a custom constraint for TYNDP offshore hubs by calling the nested function <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>. As a reminder, this includes constraints to limit the expansion of DC and H2 wind farms at the same location, and to set the maximum potential per zone according to zone trajectories.</p>
+<p>You can add your own constraints in the same location. Browse the constraints already implemented to understand the structure and style.</p>
+<p>We’ll cover how PyPSA constraints work in depth in a future workshop.</p>
 </section>
 <section id="task-1-add-manual-adjustments">
 <h2>Task 1: Add manual adjustments<a class="headerlink" href="#task-1-add-manual-adjustments" title="Link to this heading">#</a></h2>
-<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code> by adding the following manual adjustments as explained before:</p>
+<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code> by adding the following manual adjustments:</p>
 <ul class="simple">
-<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040) (The supply of import H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the common carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>).</p></li>
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both years 2030 and 2040 (H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component).</p></li>
+<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
 <li><p>Remove the initial capacity (<code class="docutils literal notranslate"><span class="pre">p_nom</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code>) of all <code class="docutils literal notranslate"><span class="pre">solar-pv-utility</span></code> generators for 2030.</p></li>
 </ul>
-<p>Then rerun the model and explore the results in the PyPSA-Explorer.</p>
-<p><strong>Hint:</strong> If you need a reminder on running the Snakemake workflow, check the notebook from our last workshop.<br />
-<strong>Hint II:</strong> Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> at the end of your Snakemake command).</p>
+<p>Then rerun the model and explore the results in PyPSA-Explorer.</p>
+<p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the notebook from our last workshop.
+<strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
 <h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
 <section id="id1">
 <h2>Task 1: Add manual adjustments<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>The following section needs to be added to the <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario configuration in <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code>:</p>
+<p>Add the following section to the <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario configuration in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">adjustments</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">factor</span><span class="p">:</span>
@@ -1151,7 +1151,7 @@ Done
 <span class="w">            </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.78</span>
 </pre></div>
 </div>
-<p>As we learned last time, we first need to navigate into our open-tyndp repository to launch the workflow:</p>
+<p>As we learned previously, we need to navigate into the open-tyndp repository to launch the workflow:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
@@ -1159,7 +1159,7 @@ Done
 </div>
 </div>
 </div>
-<p>Let’s check that we are indeed in the new directory now:</p>
+<p>Verify that we are in the correct directory:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -1167,8 +1167,8 @@ Done
 </div>
 </div>
 </div>
-<p>Having added our adjustment to the <code class="docutils literal notranslate"><span class="pre">scenario.tyndp.yaml</span></code>, we can now use Snakemake to call the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> workflow again using the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration file.</p>
-<p>First, a dry-run…</p>
+<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can use Snakemake to run the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> workflow with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration file.</p>
+<p>First, perform a dry run:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
@@ -1176,8 +1176,8 @@ Done
 </div>
 </div>
 </div>
-<p>As you can see, because this scenario has been run before without the adjustments, Snakemake will only re-execute the rules that are affected by our manual adjustments.</p>
-<p>Now, let’s actually execute the workflow.</p>
+<p>As shown, because this scenario has been run previously without the adjustments, Snakemake will only re-execute the rules affected by our manual adjustments.</p>
+<p>Now execute the workflow:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml</span>
@@ -1252,14 +1252,14 @@ Done
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Explore NT scenario results, modify assumptions &amp; benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark Results</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
