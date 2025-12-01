@@ -458,6 +458,7 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">For Google Colab Users</a></li>
 </ul>
 </li>
 </ul>
@@ -489,14 +490,16 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>If you have not set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work, download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
 <p>Then install the required packages by executing the following command in a Jupyter cell at the top of the notebook:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>pypsa-explorer<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>numpy
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>pypsa-explorer<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>numpy<span class="w"> </span>pdf2image
+!apt-get<span class="w"> </span>install<span class="w"> </span>poppler-utils
 </pre></div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
-<span class="c1"># !pip install pypsa pypsa-explorer pandas matplotlib numpy</span>
+<span class="c1"># !pip install pypsa pypsa-explorer pandas matplotlib numpy pdf2image</span>
+<span class="c1"># !apt-get install poppler-utils</span>
 </pre></div>
 </div>
 </div>
@@ -591,8 +594,43 @@ Unzipping data/20251129_results.zip.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/20251129_results&#39;.
-Open-TYNDP available in &#39;data/open-tyndp&#39;.
-Done
+Unzipping data/open-tyndp.zip.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">BadZipFile</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">26</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[3], line 3,</span> in <span class="ni">unzip_with_timestamps</span><span class="nt">(zip_path, extract_to)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>             <span class="c1"># Extract the file</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>             <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1370,</span> in <span class="ni">ZipFile.__init__</span><span class="nt">(self, file, mode, compression, allowZip64, compresslevel, strict_timestamps, metadata_encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1368</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span>     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1370</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_RealGetContents</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span>     <span class="k">elif</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1372</span>         <span class="c1"># set the modified flag so central directory gets written</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span>         <span class="c1"># even if no files are added to the archive</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_didModify</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/zipfile/__init__.py:1437,</span> in <span class="ni">ZipFile._RealGetContents</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1436</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">endrec</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1437</span>     <span class="k">raise</span> <span class="n">BadZipFile</span><span class="p">(</span><span class="s2">&quot;File is not a zip file&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1438</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1439</span>     <span class="nb">print</span><span class="p">(</span><span class="n">endrec</span><span class="p">)</span>
+
+<span class="ne">BadZipFile</span>: File is not a zip file
 </pre></div>
 </div>
 </div>
@@ -629,14 +667,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
-</pre></div>
-</div>
-</div>
 </div>
 <p>PyPSA-Explorer can be launched in different ways depending on your environment:</p>
 <ul class="simple">
@@ -660,11 +690,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
-</pre></div>
-</div>
-</div>
 </div>
 <section id="for-local-users">
 <h2>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h2>
@@ -679,7 +704,7 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
 <span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch inline display</span>
 
-<span class="k">if</span> <span class="n">IN_COLAB</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
     <span class="c1"># Local Jupyter: Inline display</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -789,9 +814,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" src="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" />
-</div>
 </div>
 </section>
 <section id="final-energy-demand">
@@ -803,9 +825,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/26d6448eb2398baeb8eeac0eadc89ecffb36ef992cabe8be1c38324075394ab4.png" src="_images/26d6448eb2398baeb8eeac0eadc89ecffb36ef992cabe8be1c38324075394ab4.png" />
-</div>
 </div>
 </section>
 <section id="electricity-demand">
@@ -816,9 +835,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_elec_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f8b0096f1c8d4fd65cee3156d7e8f0f4b0342a7f92e3dc4dd17aef3d681fb40d.png" src="_images/f8b0096f1c8d4fd65cee3156d7e8f0f4b0342a7f92e3dc4dd17aef3d681fb40d.png" />
 </div>
 </div>
 </section>
@@ -832,9 +848,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/19ed134c01081680a4cd7499e39471373ab5a325339823ef726f829c03a4b6b0.png" src="_images/19ed134c01081680a4cd7499e39471373ab5a325339823ef726f829c03a4b6b0.png" />
-</div>
 </div>
 </section>
 <section id="electricity-generation">
@@ -845,9 +858,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_generation_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3f877958fc90e48964ab603f09c6f0e52120ef35b5501f853702bd312d486c89.png" src="_images/3f877958fc90e48964ab603f09c6f0e52120ef35b5501f853702bd312d486c89.png" />
 </div>
 </div>
 <p>We can also explore hourly timeseries balances.</p>
@@ -867,11 +877,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.descriptors:Multiple units found for carrier [&#39;AC&#39;, &#39;H2&#39;]: [&#39;MWh_el&#39; &#39;MWh_LHV&#39;]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="hydrogen-demand">
@@ -882,9 +887,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_demand_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/54f1f8cc0cf0057566f856bca97f792177fadddebfd700fcb0e81dc349f2a368.png" src="_images/54f1f8cc0cf0057566f856bca97f792177fadddebfd700fcb0e81dc349f2a368.png" />
 </div>
 </div>
 </section>
@@ -897,9 +899,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/991ead947a960fb57b85df151fd2916f652f3b8e26151dfe80539694d863ad66.png" src="_images/991ead947a960fb57b85df151fd2916f652f3b8e26151dfe80539694d863ad66.png" />
-</div>
 </div>
 </section>
 <section id="methane-demand">
@@ -911,9 +910,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/5d6c2b3b77c2470b6fff9de1a0405b095fd2b0dd4dee5d8866278262fca6485f.png" src="_images/5d6c2b3b77c2470b6fff9de1a0405b095fd2b0dd4dee5d8866278262fca6485f.png" />
-</div>
 </div>
 </section>
 <section id="methane-supply">
@@ -922,11 +918,6 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_supply_eu27_cy2009&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found, skipping...
 </pre></div>
 </div>
 </div>
@@ -941,11 +932,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found, skipping...
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="energy-imports">
@@ -956,9 +942,6 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_energy_imports_eu27_cy2009&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/691f8a135a91443727dd79ffe1f773fcf54a9f0498084e7a21343746234a906a.png" src="_images/691f8a135a91443727dd79ffe1f773fcf54a9f0498084e7a21343746234a906a.png" />
 </div>
 </div>
 </section>
@@ -987,25 +970,6 @@ Done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data
-└── tyndp_2024_bundle/
-    ├── Demand Profiles/
-    ├── EV Modelling Inputs/
-    ├── Hybrid Heat Pump Modelling Inputs/
-    ├── Hydro Inflows/
-    ├── Hydrogen/
-    ├── Investment Datasets/
-    ├── Line data/
-    ├── Nodes/
-    ├── Offshore hubs/
-    ├── PECD/
-    ├── PEMMDB2/
-    ├── TYNDP-2024-Scenarios-Package/
-    └── TYNDP-2024-Visualisation-Platform/
-</pre></div>
-</div>
-</div>
 </div>
 <p>You can browse and replace any input files with your own, provided they follow the <strong>same format</strong>.</p>
 </section>
@@ -1017,71 +981,6 @@ Done
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
 <span class="n">custom_cost</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">custom_cost</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/open-tyndp/data/custom_costs.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -1106,7 +1005,7 @@ Done
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1069</span><span class="p">,</span> <span class="mi">1076</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1069</span><span class="p">,</span> <span class="mi">1074</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1121,7 +1020,7 @@ Done
 <p>Let’s open that file and examine its structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1164,7 +1063,7 @@ Done
 <h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
 <section id="id1">
 <h2>Task 1: Add manual adjustments<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>Add the following section to the <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario configuration in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>:</p>
+<p>Add the following section to the <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario configuration in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">adjustments</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">factor</span><span class="p">:</span>
@@ -1184,10 +1083,12 @@ Done
 <span class="w">            </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.78</span>
 </pre></div>
 </div>
-<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can use Snakemake to run the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> workflow with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration file.</p>
-<p>For the workflow, we now need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment. The easiest way to do this, is by using the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager which will take care of all of our dependencies in the background.
-To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally for your operating system, you can follow the instructions on the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> documentation page.</p>
-<p>For execution on Google Colab we will install the Linux version into our runtime by executing:</p>
+<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can use Snakemake to run the open-tyndp workflow with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration file.</p>
+<p>For the workflow, we now need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
+<p>The new recommended way to do this for PyPSA models, is by using the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager which will take care of all of our dependencies in the background.</p>
+<p>Note that we are currently working on a robust setup for all operating systems and will focus on this specifically in our next workshop. If you want to use legacy conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">documentation</a>.</p>
+<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally for your operating system, you can follow the instructions on the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> <a class="reference external" href="https://pixi.sh/dev/installation/">documentation</a> page.</p>
+<p>For execution on Google Colab we will install the Linux &amp; macOS version into our runtime by executing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget -qO- https://pixi.sh/install.sh | sh
 </pre></div>
 </div>
@@ -1207,6 +1108,9 @@ To install <code class="docutils literal notranslate"><span class="pre">pixi</sp
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For execution on Google Colab we need to first install pixi before utilising the terminal to execute the workflow</span>
 <span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+<span class="c1"># In the terminal execute</span>
+<span class="c1"># exec bash -l</span>
+<span class="c1"># for changes to take effect</span>
 </pre></div>
 </div>
 </div>
@@ -1216,10 +1120,11 @@ To install <code class="docutils literal notranslate"><span class="pre">pixi</sp
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snakemake</span> <span class="o">-</span><span class="n">call</span> <span class="n">solve_sector_networks</span> <span class="o">--</span><span class="n">configfile</span> <span class="n">config</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">tyndp</span><span class="o">.</span><span class="n">yaml</span>
 </pre></div>
 </div>
-<p>Now, we can launch the <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code> again and investigate the results of our new run. First we want to add our new results to our networks dictionary:</p>
+<p>Now, we can launch the PyPSA-Explorer again and investigate the results of our new run. First we want to add our new results to our networks dictionary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/results/tyndp/NT-45SEG-20251129/networks/&quot;</span>
 <span class="n">networks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;NT 2030 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
@@ -1235,13 +1140,21 @@ To install <code class="docutils literal notranslate"><span class="pre">pixi</sp
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
 <span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch inline display</span>
 
-<span class="k">if</span> <span class="n">IN_COLAB</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
     <span class="c1"># Local Jupyter: Inline display</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+</section>
+<section id="id2">
+<h2>For Google Colab Users<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>If running on Google Colab, start PyPSA-Explorer from the terminal before displaying it in the notebook.</p>
+<p>Run this command in the Google Colab terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>results/tyndp/NT-52SEG-20251129/networks/base_s_all___2030.nc:NT_2030_new<span class="w"> </span>results/tyndp/NT-52SEG-20251129/networks/base_s_all___2040.nc:NT_2040_new
+</pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1350,6 +1263,7 @@ To install <code class="docutils literal notranslate"><span class="pre">pixi</sp
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Add manual adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">For Google Colab Users</a></li>
 </ul>
 </li>
 </ul>

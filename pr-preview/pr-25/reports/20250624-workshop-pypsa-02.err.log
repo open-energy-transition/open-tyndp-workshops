@@ -1,4 +1,17 @@
 Traceback (most recent call last):
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 214, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_client/channels.py", line 313, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
@@ -12,86 +25,20 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-# Group country profiles together and select a week
-country_mapping = n_NT_2030h.buses.query("carrier=='AC'").country
-loads_2030_by_country = (
-    n_NT_2030h.loads_t.p_set.T.rename(country_mapping, axis=0)
-    .groupby("Load")
-    .sum()
-    .T.loc["2009-03-01":"2009-03-07", ["FR", "DE", "GB"]]
-)
-
-# Create the plot
-fig, ax = plt.subplots()
-loads_2030_by_country.div(1e3).plot(
-    xlabel="Time",
-    ylabel="Load [GW]",
-    title="Electricity Load Time Series - NT - 2030",
-    ax=ax,
-)
-
-ax.grid(True, linestyle="--")
-ax.legend();
-------------------
-
-
-[31m---------------------------------------------------------------------------[39m
-[31mKeyError[39m                                  Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[33][39m[32m, line 5[39m
-[32m      1[39m [38;5;66;03m# Group country profiles together and select a week[39;00m
-[32m      2[39m country_mapping = n_NT_2030h.buses.query([33m"[39m[33mcarrier==[39m[33m'[39m[33mAC[39m[33m'[39m[33m"[39m).country
-[32m      3[39m loads_2030_by_country = (
-[32m      4[39m     [43mn_NT_2030h[49m[43m.[49m[43mloads_t[49m[43m.[49m[43mp_set[49m[43m.[49m[43mT[49m[43m.[49m[43mrename[49m[43m([49m[43mcountry_mapping[49m[43m,[49m[43m [49m[43maxis[49m[43m=[49m[32;43m0[39;49m[43m)[49m
-[32m----> [39m[32m5[39m [43m    [49m[43m.[49m[43mgroupby[49m[43m([49m[33;43m"[39;49m[33;43mLoad[39;49m[33;43m"[39;49m[43m)[49m
-[32m      6[39m     .sum()
-[32m      7[39m     .T.loc[[33m"[39m[33m2009-03-01[39m[33m"[39m:[33m"[39m[33m2009-03-07[39m[33m"[39m, [[33m"[39m[33mFR[39m[33m"[39m, [33m"[39m[33mDE[39m[33m"[39m, [33m"[39m[33mGB[39m[33m"[39m]]
-[32m      8[39m )
-[32m     10[39m [38;5;66;03m# Create the plot[39;00m
-[32m     11[39m fig, ax = plt.subplots()
-
-[36mFile [39m[32m~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/frame.py:9210[39m, in [36mDataFrame.groupby[39m[34m(self, by, axis, level, as_index, sort, group_keys, observed, dropna)[39m
-[32m   9207[39m [38;5;28;01mif[39;00m level [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m by [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
-[32m   9208[39m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([33m"[39m[33mYou have to supply one of [39m[33m'[39m[33mby[39m[33m'[39m[33m and [39m[33m'[39m[33mlevel[39m[33m'[39m[33m"[39m)
-[32m-> [39m[32m9210[39m [38;5;28;01mreturn[39;00m [43mDataFrameGroupBy[49m[43m([49m
-[32m   9211[39m [43m    [49m[43mobj[49m[43m=[49m[38;5;28;43mself[39;49m[43m,[49m
-[32m   9212[39m [43m    [49m[43mkeys[49m[43m=[49m[43mby[49m[43m,[49m
-[32m   9213[39m [43m    [49m[43maxis[49m[43m=[49m[43maxis[49m[43m,[49m
-[32m   9214[39m [43m    [49m[43mlevel[49m[43m=[49m[43mlevel[49m[43m,[49m
-[32m   9215[39m [43m    [49m[43mas_index[49m[43m=[49m[43mas_index[49m[43m,[49m
-[32m   9216[39m [43m    [49m[43msort[49m[43m=[49m[43msort[49m[43m,[49m
-[32m   9217[39m [43m    [49m[43mgroup_keys[49m[43m=[49m[43mgroup_keys[49m[43m,[49m
-[32m   9218[39m [43m    [49m[43mobserved[49m[43m=[49m[43mobserved[49m[43m,[49m
-[32m   9219[39m [43m    [49m[43mdropna[49m[43m=[49m[43mdropna[49m[43m,[49m
-[32m   9220[39m [43m[49m[43m)[49m
-
-[36mFile [39m[32m~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/groupby/groupby.py:1331[39m, in [36mGroupBy.__init__[39m[34m(self, obj, keys, axis, level, grouper, exclusions, selection, as_index, sort, group_keys, observed, dropna)[39m
-[32m   1328[39m [38;5;28mself[39m.dropna = dropna
-[32m   1330[39m [38;5;28;01mif[39;00m grouper [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
-[32m-> [39m[32m1331[39m     grouper, exclusions, obj = [43mget_grouper[49m[43m([49m
-[32m   1332[39m [43m        [49m[43mobj[49m[43m,[49m
-[32m   1333[39m [43m        [49m[43mkeys[49m[43m,[49m
-[32m   1334[39m [43m        [49m[43maxis[49m[43m=[49m[43maxis[49m[43m,[49m
-[32m   1335[39m [43m        [49m[43mlevel[49m[43m=[49m[43mlevel[49m[43m,[49m
-[32m   1336[39m [43m        [49m[43msort[49m[43m=[49m[43msort[49m[43m,[49m
-[32m   1337[39m [43m        [49m[43mobserved[49m[43m=[49m[38;5;28;43;01mFalse[39;49;00m[43m [49m[38;5;28;43;01mif[39;49;00m[43m [49m[43mobserved[49m[43m [49m[38;5;129;43;01mis[39;49;00m[43m [49m[43mlib[49m[43m.[49m[43mno_default[49m[43m [49m[38;5;28;43;01melse[39;49;00m[43m [49m[43mobserved[49m[43m,[49m
-[32m   1338[39m [43m        [49m[43mdropna[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mdropna[49m[43m,[49m
-[32m   1339[39m [43m    [49m[43m)[49m
-[32m   1341[39m [38;5;28;01mif[39;00m observed [38;5;129;01mis[39;00m lib.no_default:
-[32m   1342[39m     [38;5;28;01mif[39;00m [38;5;28many[39m(ping._passed_categorical [38;5;28;01mfor[39;00m ping [38;5;129;01min[39;00m grouper.groupings):
-
-[36mFile [39m[32m~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/core/groupby/grouper.py:1043[39m, in [36mget_grouper[39m[34m(obj, key, axis, level, sort, observed, validate, dropna)[39m
-[32m   1041[39m         in_axis, level, gpr = [38;5;28;01mFalse[39;00m, gpr, [38;5;28;01mNone[39;00m
-[32m   1042[39m     [38;5;28;01melse[39;00m:
-[32m-> [39m[32m1043[39m         [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m(gpr)
-[32m   1044[39m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(gpr, Grouper) [38;5;129;01mand[39;00m gpr.key [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[32m   1045[39m     [38;5;66;03m# Add key to exclusions[39;00m
-[32m   1046[39m     exclusions.add(gpr.key)
-
-[31mKeyError[39m: 'Load'
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 600 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['urls = {', '    "data/data_raw.csv": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv",', '    "data/open-tyndp.zip": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip",', '    "data/network_NT_presolve_highres_2030.nc": "https://storage.googleapis.com/open-tyndp-data-store/workshop-02/network_NT_presolve_highres_2030.nc",', '    "Snakefile": "https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/main/open-tyndp-workshops/Snakefile",']
+...
+['    print(f"Unzipping data/open-tyndp.zip.")', '    unzip_with_timestamps("data/open-tyndp.zip", "data/open-tyndp")', 'print(f"Open-TYNDP available in \'{to_dir}\'.")', '', 'print("Done")']
+-------------------
 
