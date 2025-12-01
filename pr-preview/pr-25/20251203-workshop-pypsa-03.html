@@ -549,7 +549,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;data/20251127_results.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/20251127_results.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/20251129_results.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/20251129_results.zip&quot;</span><span class="p">,</span>
     <span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-02/open-tyndp.zip&quot;</span><span class="p">,</span>
     <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feature/workshop-03-notebook/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>  <span class="c1"># TODO: Update for version on main</span>
 <span class="p">}</span>
@@ -564,10 +564,10 @@ document.write(`
         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/20251127_results&quot;</span>
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/20251129_results&quot;</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/20251127_results.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/20251127_results.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/20251127_results&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/20251129_results.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/20251129_results.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/20251129_results&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NT results available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
 <span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
@@ -581,16 +581,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/20251127_results.zip from GCP storage.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/20251129_results.zip from GCP storage.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/20251127_results.zip.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/20251129_results.zip.
 File data/open-tyndp.zip already exists. Skipping download.
 File scripts/_helpers.py already exists. Skipping download.
-Unzipping data/20251127_results.zip.
+Unzipping data/20251129_results.zip.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/20251127_results&#39;.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/20251129_results&#39;.
 Open-TYNDP available in &#39;data/open-tyndp&#39;.
 Done
 </pre></div>
@@ -612,7 +612,7 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load NT scenario networks for comparison</span>
-<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/20251127_results/networks/&quot;</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/20251129_results/networks/&quot;</span>
 
 <span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
 <span class="n">networks</span> <span class="o">=</span> <span class="p">{</span>
@@ -662,7 +662,7 @@ Done
 <section id="for-local-users">
 <h2>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h2>
 <p>If running locally, the <strong>recommended approach</strong> is to launch PyPSA-Explorer from the terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251127_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251127_results/networks/base_s_all___2040.nc:NT_2040
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251129_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251129_results/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
 </div>
 <p>This opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
@@ -685,7 +685,7 @@ Done
 <h2>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h2>
 <p>If running on Google Colab, start PyPSA-Explorer from the terminal before displaying it in the notebook.</p>
 <p>Run this command in the Google Colab terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251127_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251127_results/networks/base_s_all___2040.nc:NT_2040
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251129_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251129_results/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -748,7 +748,7 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
     <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">years</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
-    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/20251127_results/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
+    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/20251129_results/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">images</span> <span class="o">=</span> <span class="p">[</span>
@@ -776,14 +776,14 @@ Done
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
     <span class="n">convert_from_path</span><span class="p">(</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/20251127_results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/20251129_results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f4a01184bf1db7f5f390c585cd3b5dcddd8b4ad6c33ca048db8a9d4e4ab02266.png" src="_images/f4a01184bf1db7f5f390c585cd3b5dcddd8b4ad6c33ca048db8a9d4e4ab02266.png" />
+<img alt="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" src="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" />
 </div>
 </div>
 </section>
@@ -797,7 +797,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ba0a8b9accbdcfc22d141e4bfb89de8ea410b4219d71ef5fc0613f0b955ea71a.png" src="_images/ba0a8b9accbdcfc22d141e4bfb89de8ea410b4219d71ef5fc0613f0b955ea71a.png" />
+<img alt="_images/26d6448eb2398baeb8eeac0eadc89ecffb36ef992cabe8be1c38324075394ab4.png" src="_images/26d6448eb2398baeb8eeac0eadc89ecffb36ef992cabe8be1c38324075394ab4.png" />
 </div>
 </div>
 </section>
@@ -825,7 +825,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/25735cbf0d526358bf0f77b4ead8d7225df5112940bac9a65d1dab6162f01dcf.png" src="_images/25735cbf0d526358bf0f77b4ead8d7225df5112940bac9a65d1dab6162f01dcf.png" />
+<img alt="_images/54f1f8cc0cf0057566f856bca97f792177fadddebfd700fcb0e81dc349f2a368.png" src="_images/54f1f8cc0cf0057566f856bca97f792177fadddebfd700fcb0e81dc349f2a368.png" />
 </div>
 </div>
 </section>
@@ -839,7 +839,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e678c9cd70b22e5b55f8f8661551f078bfe6b302c4497350eaaf5285e6e6f133.png" src="_images/e678c9cd70b22e5b55f8f8661551f078bfe6b302c4497350eaaf5285e6e6f133.png" />
+<img alt="_images/5d6c2b3b77c2470b6fff9de1a0405b095fd2b0dd4dee5d8866278262fca6485f.png" src="_images/5d6c2b3b77c2470b6fff9de1a0405b095fd2b0dd4dee5d8866278262fca6485f.png" />
 </div>
 </div>
 </section>
@@ -854,7 +854,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3d690fad869ac108ed3058af37df9a6cc54264c3257fde2f9994d0a3896d3b9f.png" src="_images/3d690fad869ac108ed3058af37df9a6cc54264c3257fde2f9994d0a3896d3b9f.png" />
+<img alt="_images/19ed134c01081680a4cd7499e39471373ab5a325339823ef726f829c03a4b6b0.png" src="_images/19ed134c01081680a4cd7499e39471373ab5a325339823ef726f829c03a4b6b0.png" />
 </div>
 </div>
 </section>
@@ -868,7 +868,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cf4ecd70ee6c37390a453d7a4a01b1d02ae52bb3de1d9893acfabe983dc1fa42.png" src="_images/cf4ecd70ee6c37390a453d7a4a01b1d02ae52bb3de1d9893acfabe983dc1fa42.png" />
+<img alt="_images/3f877958fc90e48964ab603f09c6f0e52120ef35b5501f853702bd312d486c89.png" src="_images/3f877958fc90e48964ab603f09c6f0e52120ef35b5501f853702bd312d486c89.png" />
 </div>
 </div>
 </section>
@@ -882,7 +882,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e9745bd179b0844d72555933246e015d1762f1285e2656539ef7081e9b98230e.png" src="_images/e9745bd179b0844d72555933246e015d1762f1285e2656539ef7081e9b98230e.png" />
+<img alt="_images/991ead947a960fb57b85df151fd2916f652f3b8e26151dfe80539694d863ad66.png" src="_images/991ead947a960fb57b85df151fd2916f652f3b8e26151dfe80539694d863ad66.png" />
 </div>
 </div>
 </section>
@@ -912,7 +912,9 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2defb00d1e7399a981f083d3b2aaf608964b0f48ff7b14d85f909653a2d4b6c9.png" src="_images/2defb00d1e7399a981f083d3b2aaf608964b0f48ff7b14d85f909653a2d4b6c9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found, skipping...
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -926,7 +928,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ec51915bbbd2deef46c95e05de31c05863466eb4d3e58fee5b076e5d5ed8bb9b.png" src="_images/ec51915bbbd2deef46c95e05de31c05863466eb4d3e58fee5b076e5d5ed8bb9b.png" />
+<img alt="_images/691f8a135a91443727dd79ffe1f773fcf54a9f0498084e7a21343746234a906a.png" src="_images/691f8a135a91443727dd79ffe1f773fcf54a9f0498084e7a21343746234a906a.png" />
 </div>
 </div>
 </section>
