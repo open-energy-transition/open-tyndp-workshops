@@ -428,14 +428,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">1. Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark Results</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">2. Benchmark Results</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-capacities">Power Capacities</a></li>
@@ -446,9 +445,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">3. Modify assumptions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustments">Adjustments</a></li>
@@ -477,12 +477,19 @@ document.write(`
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At the end of this notebook, you will be able to:</p>
+<p><strong>1. Use PyPSA Explorer to analyze results</strong></p>
 <ul class="simple">
 <li><p>Navigate and analyze NT scenario results using PyPSA-Explorer</p></li>
-<li><p>Interpret discrepancies between model outputs and TYNDP 2024 NT scenario</p></li>
 <li><p>Compare 2030 and 2040 scenarios interactively</p></li>
-<li><p>Modify model assumptions and generate new scenario results</p></li>
-<li><p>Apply the benchmarking framework to identify areas for model improvement</p></li>
+</ul>
+<p><strong>2. Benchmark Open TYNDP against ENTSO-E TYNDP 2024</strong></p>
+<ul class="simple">
+<li><p>Interpret differences between model outputs and TYNDP 2024 NT scenario</p></li>
+<li><p>Identify potential data inconsistencies, methodological differences, areas where Open TYNDP can improve</p></li>
+</ul>
+<p><strong>3. Modify scenario assumptions</strong></p>
+<ul class="simple">
+<li><p>Learn different ways how to change model assumptions and generate new scenario results</p></li>
 </ul>
 </div>
 <div class="admonition note">
@@ -601,7 +608,7 @@ Done
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="interactive-exploration-with-pypsa-explorer">
-<h1>Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
+<h1>1. Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
 <p>PyPSA-Explorer is an interactive web dashboard for visualizing and analyzing energy system networks. It provides:</p>
 <ul class="simple">
 <li><p>Energy balance analysis with time series and aggregated views</p></li>
@@ -743,7 +750,7 @@ Done
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="benchmark-results">
-<h1>Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
+<h1>2. Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
 <p>In Workshop 2, we introduced a benchmarking framework to systematically compare Open-TYNDP model outputs against TYNDP 2024. This framework helps us:</p>
 <ul class="simple">
 <li><p><strong>Identify discrepancies</strong>: Compare demands, installed capacities, and generation volumes between model results and TYNDP targets</p></li>
@@ -777,25 +784,6 @@ Done
 </div>
 </div>
 </div>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>We begin with an overview of the Symmetric Mean Absolute Percentage Error (sMAPE) across all carriers. As a reminder, sMAPE measures the absolute magnitude of deviations while avoiding cancellation of negative and positive errors. This provides a high-level view of error magnitudes across all benchmarks, carriers, and planning horizons.</p>
-<p>You can observe that some features have been significantly improved since we introduced the framework. However, there is still room for further improvement.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
-    <span class="n">convert_from_path</span><span class="p">(</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/20251129_results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
-    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" src="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" />
-</div>
-</div>
-</section>
 <section id="final-energy-demand">
 <h2>Final Energy Demand<a class="headerlink" href="#final-energy-demand" title="Link to this heading">#</a></h2>
 <p>Let’s examine each benchmark category in detail, starting with final energy demand across all carriers. We observe that each carrier’s demand is now broadly reproduced. However, the exact methodology details to fully match the TYNDP scope remain unclear, which explains the remaining discrepancies even though these demands are exogenous inputs.</p>
@@ -964,9 +952,28 @@ Done
 </div>
 </div>
 </section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Finally, let’s look at an overview of the Symmetric Mean Absolute Percentage Error (sMAPE) across all carriers. As a reminder, sMAPE measures the absolute magnitude of deviations while avoiding cancellation of negative and positive errors. This provides a high-level view of error magnitudes across all benchmarks, carriers, and planning horizons.</p>
+<p>You can observe that some features have been significantly improved since we introduced the framework. However, there is still room for further improvement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+    <span class="n">convert_from_path</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/20251129_results/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" src="_images/47e0441e95ab8b0cc09089f8a0b28ff66067da1947f93ae9af9bd1717d3b9308.png" />
+</div>
+</div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
-<h1>Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
+<h1>3. Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
 <p>A key capability when working with any energy system model is adjusting input assumptions and observing how results respond. This is especially important for TYNDP models, where assumptions evolve over time and many configurations need testing and re-running.</p>
 <p>In Open-TYNDP, there are several straightforward ways to modify assumptions and explore scenarios:</p>
 <ul class="simple">
@@ -1150,7 +1157,7 @@ Done
 </section>
 <section id="task-1-add-manual-adjustments">
 <h2>Task 1: Add manual adjustments<a class="headerlink" href="#task-1-add-manual-adjustments" title="Link to this heading">#</a></h2>
-<p>Modify the existing <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code> by adding the following manual adjustments:</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
 <ul class="simple">
 <li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
 <li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
@@ -1159,7 +1166,7 @@ Done
 <p>Then rerun the model and explore the results in PyPSA-Explorer.</p>
 <p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the notebook from our last workshop.</p>
 <p><strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
-<p><strong>Hint III</strong>: As we only want to solve the networks, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
+<p><strong>Hint III</strong>: As we only want to solve the model without post-processing, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
@@ -1187,47 +1194,48 @@ Done
 </pre></div>
 </div>
 <p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can use Snakemake to run the open-tyndp workflow with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration file.</p>
-<p>For the workflow, we now need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
-<p>The new recommended way to do this for PyPSA models, is by using the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager which will take care of all of our dependencies in the background.</p>
+<p>For the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
+<p>The new recommended way to do this for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which will take care of all of our dependencies in the background.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We are currently working on a robust setup for all operating systems and will focus on this specifically in our next workshop.</p>
 <p>If you want to use legacy conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">documentation</a>.</p>
 </div>
-<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally for your operating system, you can follow the instructions on the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> <a class="reference external" href="https://pixi.sh/dev/installation/">documentation</a> page.</p>
-<p>For execution on Google Colab we will install the Linux &amp; macOS version into our runtime by executing:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget -qO- https://pixi.sh/install.sh | sh
+<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, please follow the steps in the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> <a class="reference external" href="https://pixi.sh/dev/installation/">documentation</a>.</p>
+<p>For execution on Google Colab, we’ll install the Linux/macOS version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </pre></div>
 </div>
-<p>We can then open a terminal window and as we learned previously, we need to navigate into the open-tyndp repository to launch the workflow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">data</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span>
+<p>Next, open a terminal window. As we learned previously, you’ll need to navigate into the open-tyndp repository before launching the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp
 </pre></div>
 </div>
-<p>Once we are in our open-tyndp repository, we can activate our environment shell using pixi which will allow us to easily execute the workflow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pixi</span> <span class="n">shell</span> <span class="o">-</span><span class="n">e</span> <span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span>
+<p>Once you’re in the open-tyndp repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
 </pre></div>
 </div>
-<p>Now, we can start by performing a dry run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snakemake</span> <span class="o">-</span><span class="n">call</span> <span class="n">solve_sector_networks</span> <span class="o">--</span><span class="n">configfile</span> <span class="n">config</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">tyndp</span><span class="o">.</span><span class="n">yaml</span> <span class="o">-</span><span class="n">n</span>
+<p>Now we can start with a dry run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
 </pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For execution on Google Colab we need to first install pixi before utilising the terminal to execute the workflow</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the next line for running this notebook on Colab</span>
 <span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
-<span class="c1"># In the terminal execute</span>
+<span class="c1"># In the Google Colab terminal execute</span>
 <span class="c1"># exec bash -l</span>
-<span class="c1"># for changes to take effect</span>
+<span class="c1"># for changes to take effect. You can now execute the workflow from the Google Colab terminal.</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>As shown, because this scenario has been run previously without the adjustments, Snakemake will only re-execute the rules affected by our manual adjustments.</p>
-<p>Now execute the workflow by calling in your terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snakemake</span> <span class="o">-</span><span class="n">call</span> <span class="n">solve_sector_networks</span> <span class="o">--</span><span class="n">configfile</span> <span class="n">config</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">tyndp</span><span class="o">.</span><span class="n">yaml</span>
+<p>As shown, because this scenario was run previously <em>without</em> the adjustments, Snakemake will only re-execute the rules that are affected by our manual changes.</p>
+<p>Now run the workflow for real by calling in your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml
 </pre></div>
 </div>
-<p>Now, we can launch the PyPSA-Explorer again and investigate the results of our new run. First we want to add our new results to our networks dictionary:</p>
+<p>Finally, let’s launch PyPSA-Explorer again and inspect the results of our new run.</p>
+<p>First, we add the new outputs to our <code class="docutils literal notranslate"><span class="pre">networks</span></code> dictionary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
@@ -1337,14 +1345,13 @@ Done
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">1. Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark Results</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">2. Benchmark Results</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-capacities">Power Capacities</a></li>
@@ -1355,9 +1362,10 @@ Done
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">3. Modify assumptions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-input-data">Modifying the input data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-assumptions">Custom assumptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustments">Adjustments</a></li>
