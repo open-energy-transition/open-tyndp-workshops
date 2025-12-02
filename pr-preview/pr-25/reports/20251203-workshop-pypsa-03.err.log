@@ -25,7 +25,7 @@ custom_cost
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[23][39m[32m, line 1[39m
+[36mCell[39m[36m [39m[32mIn[24][39m[32m, line 1[39m
 [32m----> [39m[32m1[39m custom_cost = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m"[39;49m[33;43mdata/open-tyndp/data/custom_costs.csv[39;49m[33;43m"[39;49m[43m)[49m
 [32m      2[39m custom_cost
 

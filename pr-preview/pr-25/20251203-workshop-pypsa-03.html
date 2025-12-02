@@ -699,16 +699,39 @@ Done
 </section>
 <section id="for-google-colab-users">
 <h2>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h2>
-<p>If running on Google Colab, start PyPSA-Explorer from the terminal before displaying it in the notebook.</p>
-<p>Run this command in the Google Colab terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/20251129_results/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/20251129_results/networks/base_s_all___2040.nc:NT_2040
+<p>To run the PyPSA-Explorer on Google Colab, we need a small workaround to display it properly inside the notebook.</p>
+<p>First, let’s define a handy helper function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting PyPSA Explorer for Google Colab...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create and start the app</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_server</span><span class="p">():</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;external&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">server_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_server</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Wait for server to initialize</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Server started on port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Display in iframe</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">serve_kernel_port_as_iframe</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="c1"># Google Colab: Use built-in Dash Jupyter support to display an iframe</span>
-    <span class="n">output</span><span class="o">.</span><span class="n">serve_kernel_port_as_iframe</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1032,7 +1055,7 @@ Done
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">custom_cost</span>
 
@@ -1239,13 +1262,16 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
-<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/results/tyndp/NT-45SEG-20251129/networks/&quot;</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/results/tyndp/NT-52SEG-20251129/networks/&quot;</span>
 <span class="n">networks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;NT 2030 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
         <span class="s2">&quot;NT 2040 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
     <span class="p">}</span>
 <span class="p">)</span>
+
+<span class="c1"># set a new port for the updated dashboard</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8051</span>
 </pre></div>
 </div>
 </div>
@@ -1263,16 +1289,10 @@ Done
 </div>
 </div>
 </div>
-<p>If running on Google Colab, start PyPSA-Explorer from the terminal before displaying it in the notebook.</p>
-<p>Run this command in the Google Colab terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>results/tyndp/NT-52SEG-20251129/networks/base_s_all___2030.nc:NT_2030_new<span class="w"> </span>results/tyndp/NT-52SEG-20251129/networks/base_s_all___2040.nc:NT_2040_new
-</pre></div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="c1"># Google Colab: Use built-in Dash Jupyter support to display an iframe</span>
-    <span class="n">output</span><span class="o">.</span><span class="n">serve_kernel_port_as_iframe</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
