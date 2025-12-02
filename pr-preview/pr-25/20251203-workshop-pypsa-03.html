@@ -1225,6 +1225,17 @@ Done
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </pre></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the next line for running this notebook on Colab</span>
+<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+<span class="c1"># In the Google Colab terminal you might need to execute</span>
+<span class="c1"># exec bash -l</span>
+<span class="c1"># for changes to take effect.</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Next, open a terminal window. As we learned previously, you’ll need to navigate into the open-tyndp repository before launching the workflow:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp
 </pre></div>
@@ -1236,17 +1247,6 @@ Done
 <p>Now we can start with a dry run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
 </pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the next line for running this notebook on Colab</span>
-<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
-<span class="c1"># In the Google Colab terminal execute</span>
-<span class="c1"># exec bash -l</span>
-<span class="c1"># for changes to take effect. You can now execute the workflow from the Google Colab terminal.</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>As shown, because this scenario was run previously <em>without</em> the adjustments, Snakemake will only re-execute the rules that are affected by our manual changes.</p>
 <p>Now run the workflow for real by calling in your terminal:</p>
