@@ -560,7 +560,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;data/results-1H.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results-1H-20251129.zip&quot;</span><span class="p">,</span>
     <span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/open-tyndp-20251129.zip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feature/workshop-03-notebook/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>  <span class="c1"># TODO: Update for version on main</span>
+    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/main/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -764,7 +764,7 @@ Done
 <p><strong>4. Network Map</strong></p>
 <ul class="simple">
 <li><p>Visualize the geographical network layout</p></li>
-<li><p>View an interactive map with buses, lines, and generators</p></li>
+<li><p>View an interactive map with network components</p></li>
 <li><p>Zoom and pan to explore specific regions</p></li>
 </ul>
 <p><strong>Tip:</strong> Use the scenario selector buttons in the top-right corner to switch between NT 2030 and NT 2040 scenarios.</p>
@@ -816,7 +816,6 @@ Done
 <li><p><strong>Scope discrepancies</strong>: The benchmarked and reference values use different scopes to report data (e.g., one uses EU27 while the other includes all modeled nodes)</p></li>
 <li><p><strong>Missing information or data</strong>: Default PyPSA-Eur values are used because the TYNDP assumptions have not yet been integrated</p></li>
 </ol>
-<p>Before diving into the results, it’s important to note that the benchmarking framework is strict regarding missing information. Specifically, sMAPE assigns a large error for missing carriers, which can distort the overall results. This underlines the need for a multi-criteria approach. However, for this assessment, we focus primarily on the sMAPE metric.</p>
 <section id="final-energy-demand">
 <h2>Final Energy Demand<a class="headerlink" href="#final-energy-demand" title="Link to this heading">#</a></h2>
 <p>Let’s examine each benchmark category in detail, starting with final energy demand across all carriers. We observe that demand for each carrier is now broadly reproduced. However, improvements are still needed to match the exact TYNDP post-processing methodology, and some discrepancies remain with exogenous inputs. Additionally, the benchmarked biofuels demand currently includes non-EU27 countries, which explains the larger value.</p>
@@ -985,6 +984,7 @@ Done
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Finally, let’s examine an overview of the Symmetric Mean Absolute Percentage Error (sMAPE) across all carriers. As a reminder, sMAPE measures the absolute magnitude of deviations while avoiding cancellation between positive and negative errors. This provides a high-level view of error magnitudes across all benchmarks, carriers, and planning horizons.</p>
 <p>Note that several features have been significantly improved since we introduced this framework. However, there remains room for further improvement.</p>
+<p>It’s important to note that the benchmarking framework is strict regarding missing information. Specifically, sMAPE assigns a large error for missing carriers, which can distort the overall results. This underlines the need for a multi-criteria approach. However, for this assessment, we focus primarily on the sMAPE metric.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
@@ -1196,7 +1196,40 @@ Done
 <p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the notebook from our last workshop.</p>
 <p><strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
 <p><strong>Hint III</strong>: As we only want to solve the model without post-processing, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
-<p><strong>Hint IV</strong>: The default solver is Gurobi (a commercial solver). You can change the solver to Highs (an open-source solver) by changing the following configuration: <code class="docutils literal notranslate"><span class="pre">solving:solver</span></code>.</p>
+<p><strong>Hint IV</strong>: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: <code class="docutils literal notranslate"><span class="pre">solving:solver</span></code>.</p>
+<p>To run the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
+<p>The recommended approach for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which handles all dependencies automatically.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.</p>
+<p>If you prefer to use conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">legacy installation documentation</a>.</p>
+</div>
+<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, follow the steps in the official <a class="reference external" href="https://pixi.sh/dev/installation/">pixi installation documentation</a>.</p>
+<p>For execution on Google Colab, install the Linux version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+<p>In the Google Colab terminal, you might need to execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span><span class="w"> </span>bash<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>for the changes to take effect if pixi is not recognized.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
+<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository before launching the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp
+</pre></div>
+</div>
+<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="solutions">
@@ -1223,42 +1256,11 @@ Done
 <span class="w">            </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.78</span>
 </pre></div>
 </div>
-<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can run the Open-TYNDP workflow using Snakemake with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration.</p>
-<p>To run the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
-<p>The recommended approach for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which handles all dependencies automatically.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.</p>
-<p>If you prefer to use conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">legacy installation documentation</a>.</p>
-</div>
-<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, follow the steps in the official <a class="reference external" href="https://pixi.sh/dev/installation/">pixi installation documentation</a>.</p>
-<p>For execution on Google Colab, install the Linux version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
-<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
-<span class="c1"># In the Google Colab terminal, you might need to execute:</span>
-<span class="c1"># exec bash -l</span>
-<span class="c1"># for the changes to take effect.</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository before launching the workflow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp
-</pre></div>
-</div>
-<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
-</pre></div>
-</div>
-<p>Now start with a dry run to preview which rules will execute:</p>
+<p>In a terminal window, we start with a dry run to preview which rules will execute:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
 </pre></div>
 </div>
+<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can run the Open-TYNDP workflow using Snakemake with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration.</p>
 <p>The dry run shows that, because this scenario was run previously <em>without</em> the adjustments, Snakemake will only re-execute the rules affected by your manual changes.</p>
 <p>Now run the workflow for real:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml
