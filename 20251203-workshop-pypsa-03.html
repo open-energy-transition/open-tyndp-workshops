@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '20251203-workshop-pypsa-03';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -191,7 +193,9 @@
 
 
 
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
 
 
 
@@ -460,6 +464,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Apply Manual Adjustments</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
 </ul>
 
             </nav>
@@ -516,6 +521,7 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
@@ -535,7 +541,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
@@ -551,6 +557,8 @@ document.write(`
 
             <span class="c1"># Set both access and modification times</span>
             <span class="n">os</span><span class="o">.</span><span class="n">utime</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">,</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_zip</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -558,9 +566,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;data/results-1H.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results-1H-20251129.zip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/open-tyndp-20251129.zip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/main/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/results-1H-20251129.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results-1H-20251129.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/open-tyndp-20251129.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/open-tyndp-20251129.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -569,20 +577,20 @@ document.write(`
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists. Skipping download.&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from GCP storage.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from storage.&quot;</span><span class="p">)</span>
         <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H&quot;</span>
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129&quot;</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results-1H.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results-1H.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results-1H&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results-1H-20251129.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results-1H-20251129.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results-1H-20251129&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NT results available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp&quot;</span>
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp-20251129.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20251129.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
@@ -590,17 +598,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results-1H.zip from GCP storage.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results-1H-20251129.zip from storage.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results-1H.zip.
-File data/open-tyndp.zip already exists. Skipping download.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results-1H-20251129.zip.
+Retrieving data/open-tyndp-20251129.zip from storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/open-tyndp-20251129.zip.
 File scripts/_helpers.py already exists. Skipping download.
-Unzipping data/results-1H.zip.
+Unzipping data/results-1H-20251129.zip.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/results-1H&#39;.
-Open-TYNDP available in &#39;data/open-tyndp&#39;.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/results-1H-20251129&#39;.
+Unzipping data/open-tyndp-20251129.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp-20251129&#39;.
 Done
 </pre></div>
 </div>
@@ -621,7 +635,7 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load NT scenario networks for comparison</span>
-<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H/networks/&quot;</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129/networks/&quot;</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">import_network</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -639,7 +653,13 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.5. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.5. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
@@ -678,7 +698,7 @@ Done
 <section id="for-local-users">
 <h2>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h2>
 <p>If you’re running locally, we <strong>recommend</strong> launching PyPSA-Explorer from the terminal for optimal performance:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/results-1H/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/results-1H/networks/base_s_all___2040.nc:NT_2040
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/results-1H-20251129/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/results-1H-20251129/networks/base_s_all___2040.nc:NT_2040
 </pre></div>
 </div>
 <p>This command opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
@@ -785,7 +805,7 @@ Done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
     <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">years</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
-    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
+    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">images</span> <span class="o">=</span> <span class="p">[</span>
@@ -989,7 +1009,7 @@ Done
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
     <span class="n">convert_from_path</span><span class="p">(</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results-1H/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results-1H-20251129/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -1014,13 +1034,13 @@ Done
 <p>Let’s explore each method in detail.</p>
 <section id="method-1-modifying-input-data">
 <h2>Method 1: Modifying Input Data<a class="headerlink" href="#method-1-modifying-input-data" title="Link to this heading">#</a></h2>
-<p>The most direct method to modify the model is by editing the input data files.</p>
-<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the open-tyndp repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder:</p>
+<p>The most direct method to modify the model is by editing the input data files. We’ve already retrieved a prebuilt version of the open-tyndp GitHub repository into our working directory dated to the 29th of November 2025.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_tree</span>
 
-<span class="n">target_directory</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/data/tyndp_2024_bundle&quot;</span>
+<span class="n">target_directory</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129/data/tyndp_2024_bundle&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 <span class="n">display_tree</span><span class="p">(</span><span class="n">target_directory</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1040,6 +1060,7 @@ Done
     ├── Offshore hubs/
     ├── PECD/
     ├── PEMMDB2/
+    ├── Supply Tool/
     ├── TYNDP-2024-Scenarios-Package/
     └── TYNDP-2024-Visualisation-Platform/
 </pre></div>
@@ -1054,76 +1075,163 @@ Done
 <p>Open <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> to see example entries that illustrate the required structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20251129/data/custom_costs.csv&quot;</span><span class="p">)</span>
 <span class="n">custom_cost</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/data/custom_costs.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">custom_cost</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/open-tyndp/data/custom_costs.csv&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>planning_horizon</th>
+      <th>technology</th>
+      <th>parameter</th>
+      <th>value</th>
+      <th>unit</th>
+      <th>source</th>
+      <th>further description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all</td>
+      <td>solar</td>
+      <td>marginal_cost</td>
+      <td>0.010</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>all</td>
+      <td>onwind</td>
+      <td>marginal_cost</td>
+      <td>0.015</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>all</td>
+      <td>offwind</td>
+      <td>marginal_cost</td>
+      <td>0.015</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>all</td>
+      <td>hydro</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>all</td>
+      <td>H2</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>all</td>
+      <td>electrolysis</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>all</td>
+      <td>fuel cell</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>all</td>
+      <td>battery</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>all</td>
+      <td>battery inverter</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>all</td>
+      <td>home battery storage</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>all</td>
+      <td>water tank charger</td>
+      <td>marginal_cost</td>
+      <td>0.030</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>all</td>
+      <td>central water pit charger</td>
+      <td>marginal_cost</td>
+      <td>0.025</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>To add your own custom assumptions, insert a new row in this CSV file. At minimum, specify the <code class="docutils literal notranslate"><span class="pre">planning_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">technology</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code> for each entry. As shown above, you can also use the <code class="docutils literal notranslate"><span class="pre">all</span></code> keyword to override a value for all technologies and/or all planning horizons simultaneously.</p>
 <p>These custom entries are automatically applied when you run the Open-TYNDP workflow.</p>
@@ -1145,10 +1253,98 @@ Done
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1069</span><span class="p">,</span> <span class="mi">1074</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1066</span><span class="p">,</span> <span class="mi">1075</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#adjustments</span>
+<span class="nt">adjustments</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">factor</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Link</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">electricity distribution grid</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">capital_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">absolute</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div></div>
 </div>
 <p>As shown, you can specify either a scaling factor or an absolute value for any combination of:</p>
 <ul class="simple">
@@ -1160,10 +1356,192 @@ Done
 <p>Let’s examine the structure of that file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: Contributors to Open-TYNDP &lt;https://github.com/open-energy-transition/open-tyndp&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="nt">NT</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+
+<span class="nt">NT-52SEG-20251129</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+<span class="w">  </span><span class="nt">clustering</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">temporal</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resolution_sector</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">52SEG</span>
+<span class="w">  </span><span class="nt">solving</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">solver</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">highs</span>
+<span class="w">      </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">highs-default</span>
+<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12h</span><span class="w"> </span><span class="c1">#runtime in humanfriendly style https://humanfriendly.readthedocs.io/en/latest/</span>
+
+<span class="nt">DE</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DE</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extendable_carriers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Generator</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">onwind</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-utility</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-rooftop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OCGT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CCGT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">force_biomass_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">force_biogas_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">land_transport_ice_share</span><span class="p">:</span><span class="w">  </span><span class="c1"># TODO Improve TYNDP 2024 approximations</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.96</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.44</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.16</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">135</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+
+<span class="nt">GA</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GA</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extendable_carriers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Generator</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">onwind</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-utility</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-rooftop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OCGT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CCGT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">force_biomass_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">force_biogas_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">land_transport_ice_share</span><span class="p">:</span><span class="w">  </span><span class="c1"># TODO Improve TYNDP 2024 approximations</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.96</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.73</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.50</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.34</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.17</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">398</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">400</span>
+</pre></div>
+</div></div>
 </div>
 </section>
 <section id="method-4-custom-constraints">
@@ -1171,13 +1549,186 @@ Done
 <p>You may also want to add custom constraints to the model. Since we haven’t covered PyPSA constraints in detail yet, we won’t dive deep here—we’ll cover them comprehensively in a future workshop. For now, it’s useful to know where you would add a custom constraint that isn’t already represented through existing component parameters. For more information, see the <a class="reference external" href="https://docs.pypsa.org/latest/user-guide/optimization/custom-constraints/">PyPSA documentation on custom constraints</a>.</p>
 <p><strong>Note</strong>: Many constraints are already built into PyPSA. For example, to add an upper limit on the expansion capacity of a Link, you can simply use the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute. PyPSA automatically translates this into a binding upper-limit constraint during optimization.</p>
 <p>For custom constraints that go beyond existing parameters, you can insert your own code directly into the model. This flexibility is one of the key advantages of working with an open-source framework.</p>
-<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script:</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extra_functionality</span><span class="p">(</span>
+    <span class="n">n</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">,</span>
+    <span class="n">snapshots</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">,</span>
+    <span class="n">planning_horizons</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">offshore_zone_trajectories_fn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">renewable_carriers_tyndp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add custom constraints and functionality.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : pypsa.Network</span>
+<span class="sd">        The PyPSA network instance with config and params attributes</span>
+<span class="sd">    snapshots : pd.DatetimeIndex</span>
+<span class="sd">        Simulation timesteps</span>
+<span class="sd">    planning_horizons : str, optional</span>
+<span class="sd">        The current planning horizon year or None in perfect foresight</span>
+<span class="sd">    offshore_zone_trajectories_fn: str, optional</span>
+<span class="sd">        Path to the file containing the offshore zone potentials trajectories</span>
+<span class="sd">    renewable_carriers_tyndp : list[str], optional</span>
+<span class="sd">        List of TYNDP renewable carriers</span>
+
+<span class="sd">    Collects supplementary constraints which will be passed to</span>
+<span class="sd">    ``pypsa.optimization.optimize``.</span>
+
+<span class="sd">    If you want to enforce additional custom constraints, this is a good</span>
+<span class="sd">    location to add them. The arguments ``opts`` and</span>
+<span class="sd">    ``snakemake.config`` are expected to be attached to the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">config</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;solving&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;constraints&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;BAU&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_BAU_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;SAFE&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_SAFE_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;CCL&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_CCL_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">planning_horizons</span><span class="p">)</span>
+
+    <span class="n">reserve</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;operational_reserve&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="n">reserve</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;activate&quot;</span><span class="p">):</span>
+        <span class="n">add_operational_reserve_margin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">EQ_o</span> <span class="o">:=</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;EQ&quot;</span><span class="p">]:</span>
+        <span class="n">add_EQ_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">EQ_o</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;EQ&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="p">{</span><span class="s2">&quot;solar-hsat&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span>
+        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">][</span><span class="s2">&quot;renewable_carriers&quot;</span><span class="p">]</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="p">{</span><span class="s2">&quot;solar-hsat&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span>
+        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">][</span><span class="s2">&quot;extendable_carriers&quot;</span><span class="p">][</span><span class="s2">&quot;Generator&quot;</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="n">add_solar_potential_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sector&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tes&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;urban central heat|urban decentral heat|rural heat&quot;</span><span class="p">,</span>
+            <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">add_TES_energy_to_power_ratio_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="n">add_TES_charger_ratio_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="n">add_battery_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">add_lossy_bidirectional_link_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">add_pipe_retrofit_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">_multi_invest</span><span class="p">:</span>
+        <span class="n">add_carbon_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+        <span class="n">add_carbon_budget_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+        <span class="n">add_retrofit_gas_boiler_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">add_co2_atmosphere_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;enhanced_geothermal&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_flexible_egs_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;imports&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_import_limit_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;offshore_hubs_tyndp&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_offshore_hubs_constraint</span><span class="p">(</span>
+            <span class="n">n</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">planning_horizons</span><span class="p">),</span>
+            <span class="n">offshore_zone_trajectories_fn</span><span class="p">,</span>
+            <span class="n">renewable_carriers_tyndp</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">custom_extra_functionality</span><span class="p">:</span>
+        <span class="n">source_path</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">custom_extra_functionality</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">source_path</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2"> does not exist&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">source_path</span><span class="p">))</span>
+        <span class="n">module_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">source_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="n">custom_extra_functionality</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="n">custom_extra_functionality</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">,</span> <span class="n">snakemake</span><span class="p">)</span>  <span class="c1"># pylint: disable=E0601</span>
+</pre></div>
+</div></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>, you’ll find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code>. This is where additional custom constraints are added to the optimization model before solving.</p>
 <p>For instance, Open-TYNDP includes a custom constraint for offshore hubs by calling the nested function <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>. This constraint limits the expansion of DC and H2 wind farms at the same location and enforces maximum potential per zone according to zone trajectories.</p>
@@ -1186,7 +1737,7 @@ Done
 </section>
 <section id="task-1-apply-manual-adjustments">
 <h2>Task 1: Apply Manual Adjustments<a class="headerlink" href="#task-1-apply-manual-adjustments" title="Link to this heading">#</a></h2>
-<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp-20251129/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
 <ul class="simple">
 <li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
 <li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
@@ -1222,11 +1773,11 @@ Done
 </div>
 </div>
 </div>
-<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository before launching the workflow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp
+<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository before launching the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp-20251129
 </pre></div>
 </div>
-<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
+<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
 </pre></div>
 </div>
@@ -1271,7 +1822,7 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
-<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp/results/tyndp/NT-52SEG-20251129/networks/&quot;</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129/results/tyndp/NT-52SEG-20251129/networks/&quot;</span>
 <span class="n">networks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;NT 2030 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
@@ -1281,6 +1832,20 @@ Done
 
 <span class="c1"># set a new port for the updated dashboard</span>
 <span class="n">port</span> <span class="o">=</span> <span class="mi">8051</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.5. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.5. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
 </pre></div>
 </div>
 </div>
@@ -1307,6 +1872,30 @@ Done
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="notebook-clean-up">
+<h1>Notebook clean up<a class="headerlink" href="#notebook-clean-up" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only clean up data when running in CI environment</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CI&quot;</span><span class="p">):</span>
+    <span class="n">rm_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;CI environment detected. Cleaning up notebook data by removing &#39;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">.zip&#39;.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">rm_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping cleanup (not in CI environment).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CI environment detected. Cleaning up notebook data by removing &#39;data/open-tyndp-20251129&#39; and &#39;data/open-tyndp-20251129.zip&#39;.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1406,6 +1995,7 @@ Done
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Apply Manual Adjustments</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
 </ul>
 
   </nav></div>
