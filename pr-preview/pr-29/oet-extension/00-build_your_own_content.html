@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Educators Build Your Own Content &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'oet-extension/00-build_your_own_content';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <script>document.write(`<img src="../_static/logo_merged.png" class="logo__image only-dark" alt="Open-TYNDP Workshops - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../20251203-workshop-pypsa-03.html">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background4-geopandas.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2Foet-extension/00-build_your_own_content.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/oet-extension/00-build_your_own_content.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Educators Build Your Own Content</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-fork">1. Create a New Fork</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages-setting">2. GitHub Pages Setting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification">3. Content Modification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">3a. Add your own logo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">4. Deploy Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-workflow-deployment">5. GitHub Workflow Deployment</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="educators-build-your-own-content">
+<h1>Educators Build Your Own Content<a class="headerlink" href="#educators-build-your-own-content" title="Link to this heading">#</a></h1>
+<p>This guide helps you in building your own <strong>Data Science for Energy System Modelling</strong> course based on a tailor-made <a class="reference external" href="https://jupyterbook.org/en/stable/start/create.html">Jupyter Book</a>. By following these instructions, you are able to:</p>
+<ul class="simple">
+<li><p>Duplicate the content of this course and use it as your learning material, i.e. lectures, or similar.</p></li>
+<li><p>Set up and deploy a static website like this course using <a class="reference external" href="https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-static-site-generators-with-python">Github Pages action</a></p></li>
+<li><p>Modify this course based on the Jupyter Book <a class="reference external" href="https://jupyterbook.org/en/stable/basics/organize.html">structure</a>.</p></li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">Video Tutorial</p>
+<div style="position: relative; width: 100%; padding-bottom: 56.25%">
+<iframe src="https://www.youtube.com/embed/mvOgmEgRIhc"
+        title="How to create you own energy modeling course" frameborder="0" allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        style="position: absolute; width: 95%; height: 95%;">
+</iframe>
+</div>
+</div>
+<!-- If you want to see what others have created, you can visit -->
+<p>Before starting, please make sure that you are using the correct python environment that have at least all the python package dependencies from <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> or <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. The instruction are <a class="reference internal" href="../intro.html#with-conda-recommended"><span class="std std-ref">here if you are using conda (recommended)</span></a> and <a class="reference internal" href="../intro.html#with-pip"><span class="std std-ref">here if you are using pip</span></a>.</p>
+<p>To follow this tutorial, basic usage of Git is a prerequisite. Here are some resources and tutorials to help you get started with Git:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.atlassian.com/git">Atlassian: Getting Git right</a></p></li>
+<li><p><a class="reference external" href="https://pypsa-earth.readthedocs.io/en/latest/software_hints.html#git">PyPSA: Git</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=HVsySz-h9r4">Corey Schafer: Git Tutorial for Beginners: Command-Line Fundamentals</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=mJ-qvsxPHpY">Nick White: Git Tutorial For Dummies</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=USjZcfj8yxE">Colt Steele: Learn Git in 15 Minutes</a>.</p></li>
+</ul>
+<section id="create-a-new-fork">
+<h2>1. Create a New Fork<a class="headerlink" href="#create-a-new-fork" title="Link to this heading">#</a></h2>
+<p>Create your fork of this repository by clicking on the figure below.</p>
+<p>In the <strong>Create a new fork</strong> pop-up menu, shown in the figure below, <em><ins>deselect</ins></em> the default <strong>Copy the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch only</strong> option.</p>
+<p>By doing so, you will reduce further branch creation, required by the workflow.</p>
+<div class="tip admonition">
+<p class="admonition-title">Fork this repository!</p>
+<center>
+<figure>
+    <a href='https://github.com/fneum/data-science-for-esm/fork'>
+    <img src='https://github.com/open-energy-transition/data-science-for-esm/raw/stanford/data-science-for-esm/_images/03_fork_option.png' alt='' width='95%' style='vertical-align:middle;border:5px solid goldenrod;margin:20px 0px' />
+    </a>
+    <figcaption>Clicking on the image above will lead directly to the <strong>Create a new fork</strong></figcaption>
+</figure>
+</center>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The purpose of this is to retain the initial <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, which is needed for the next section.</p>
+</div></blockquote>
+</section>
+<section id="github-pages-setting">
+<h2>2. GitHub Pages Setting<a class="headerlink" href="#github-pages-setting" title="Link to this heading">#</a></h2>
+<p>In your fork of this repository, there is a single GitHub Setting that needs modifying:</p>
+<ul class="simple">
+<li><p>In the GitHub repository <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-username&gt;/data-science-for-esm</span></code>, go to the GitHub <strong>Settings</strong> -&gt; <strong>Pages</strong> heading.</p></li>
+<li><p>In the <strong>GitHub Pages</strong> heading, go to the <strong>Branch</strong> section, and change the selection from <code class="docutils literal notranslate"><span class="pre">None</span></code> to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> <code class="docutils literal notranslate"><span class="pre">/root</span></code>.</p></li>
+</ul>
+<p>Once the branch has been selected, at the top of the page a URL will be provided:</p>
+<ul class="simple">
+<li><p><strong>Your site is live at <code class="docutils literal notranslate"><span class="pre">https://&lt;your-username&gt;.github.io/data-science-for-esm</span></code></strong>.</p></li>
+</ul>
+<center>
+<figure>
+    <a href='https://github.com/open-energy-transition/data-science-for-esm/settings/pages'>
+    <img src='https://raw.githubusercontent.com/open-energy-transition/data-science-for-esm/stanford/data-science-for-esm/_images/04_gh_pages-options.png' width='97%'style='vertical-align:middle;border:5px solid darkgreen;margin:30px 30px' />
+    </a>
+    <figcaption>Clicking on this figure will lead directly to the our <strong>GitHub Pages</strong> settings menu</figcaption>
+</figure>
+</center>
+</section>
+<section id="content-modification">
+<h2>3. Content Modification<a class="headerlink" href="#content-modification" title="Link to this heading">#</a></h2>
+<p>Modify the content in your computer by cloning your forked <code class="docutils literal notranslate"><span class="pre">data-science-for-esm</span></code> repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">data</span><span class="o">-</span><span class="n">science</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">esm</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="o">./</span><span class="n">data</span><span class="o">-</span><span class="n">science</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">esm</span>
+</pre></div>
+</div>
+<p>You can modify the content by adding, editing and removing markdown (<code class="docutils literal notranslate"><span class="pre">.md</span></code>) and jupyter notebook (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) files in the <code class="docutils literal notranslate"><span class="pre">data-science-for--esm</span></code> folder.</p>
+<ul class="simple">
+<li><p>Make sure that all attachments within the markdown and jupyter notebook are included as well.</p></li>
+<li><p>For a successful deployment of the website, please specify the files and order of those file in the <a class="reference external" href="https://jupyterbook.org/en/stable/structure/toc.html">Table Of Contents</a> <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>.</p></li>
+<li><p>To modify details of the website, such as the author, logo, other relevant GitHub and Google Collab links, modify the <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>.</p></li>
+</ul>
+<p>you can test run the changes locally by running the <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">data-science-for-esm</span></code> command.</p>
+<ul class="simple">
+<li><p>This command is in charge generating the HTML code which you can open from your browser.</p></li>
+<li><p>You can then run <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">clean</span> <span class="pre">data-science-for-esm</span></code> to remove the generated build.</p></li>
+<li><p>Further readings on how <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span></code> works are <a class="reference external" href="https://jupyterbook.org/en/stable/basics/build.html">here</a></p></li>
+</ul>
+<section id="a-add-your-own-logo">
+<h3>3a. Add your own logo<a class="headerlink" href="#a-add-your-own-logo" title="Link to this heading">#</a></h3>
+<p>If you want your institution to be placed in the top left corner of this website, we recommend that you follow these steps:</p>
+<ul class="simple">
+<li><p>name your institute logo in as <code class="docutils literal notranslate"><span class="pre">logo_int.png</span></code> and place it inside the data-science-for-esm folder.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">oet-extension/merge_logo.py</span></code> to combine your institute with as smaller image of TU Berlin’s and OET’s logo</p></li>
+<li><p>Within <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>, make sure that the logo is directed to <code class="docutils literal notranslate"><span class="pre">logo:</span> <span class="pre">logo_merged.png</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="deploy-settings">
+<h2>4. Deploy Settings<a class="headerlink" href="#deploy-settings" title="Link to this heading">#</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy.yml</span></code>file of the cloned repository, specify the branch other than the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, to be used by the workflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">on</span><span class="p">:</span>
+  <span class="c1"># Trigger the workflow on push to the main branch</span>
+  <span class="n">push</span><span class="p">:</span>
+    <span class="n">branches</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>Upon the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command to the specified branch, which in this example is the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, the workflow will be triggered.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;new changes applied&#39;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</section>
+<section id="github-workflow-deployment">
+<h2>5. GitHub Workflow Deployment<a class="headerlink" href="#github-workflow-deployment" title="Link to this heading">#</a></h2>
+<p>After a successful <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, Github will the deploy any workflow within the <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> folder.</p>
+<p>The workflow deployment is tracked by your repository’s status indicator, in this case a beige-brown dot  <strong><b><font color='peru'>⏺</font></strong></b></p>
+<ul class="simple">
+<li><p>This will take minutes to finished, especially for complex python commands in the Jupyter Notebooks.</p></li>
+<li><p>Clicking on it will show the running status, and the deployment details.</p></li>
+</ul>
+<center>
+<figure>
+    <!-- <a href='https://github.com/open-energy-transition/data-science-for-esm/settings/pages'> -->
+    <img src='https://raw.githubusercontent.com/mdzzg/data-science-for-esm/mdzzg/data-science-for-esm/_images/05_deployment_status.png' width='85%'style='vertical-align:middle;border:5px solid paleturquoise;margin:30px 30px' />
+    <!-- </a> -->
+    <figcaption>Deployment status upon <code>git push</code> to the branch specified in the <code>deploy.yml</code> file</figcaption>
+</figure>
+</center>
+<p>Upon the deployment finalization, the status indicator turns to:</p>
+<ul class="simple">
+<li><p>successful: a green thick <strong><b><font color='green'>🗸</font></strong></b></p>
+<ul>
+<li><p>you should be able to see the changes taking place, after some moments, at the specified <code class="docutils literal notranslate"><span class="pre">https://&lt;your-username&gt;.github.io/data-science-for-esm</span></code></p></li>
+</ul>
+</li>
+<li><p>unsuccessful: a red cross mark <font color="red">🗶</font></p>
+<ul>
+<li><p>indicating an error in the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>, or one of the content files, which need to be revisited.</p></li>
+</ul>
+</li>
+</ul>
+<center>
+<figure>
+    <!-- <a href='https://github.com/open-energy-transition/data-science-for-esm/settings/pages'> -->
+    <img src='https://raw.githubusercontent.com/open-energy-transition/data-science-for-esm/stanford/data-science-for-esm/_images/06_successful_deployment.png' width='85%'style='vertical-align:middle;border:5px solid paleturquoise;margin:30px 30px' />
+    <!-- </a> -->
+    <figcaption>Successful deployment, after a finalized <code>jupyter-book build</code> run</figcaption>
+</figure>
+</center>
+<!-- Congratulations on creating your own Data Science for Energy System Modeling course! Here are some examples of similar courses others have developed.
+
+If you’d like to add your course to this list, please reach out to XXX. -->
+<!-- # Internal Doc References -->
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./oet-extension"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-fork">1. Create a New Fork</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages-setting">2. GitHub Pages Setting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification">3. Content Modification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">3a. Add your own logo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">4. Deploy Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-workflow-deployment">5. GitHub Workflow Deployment</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

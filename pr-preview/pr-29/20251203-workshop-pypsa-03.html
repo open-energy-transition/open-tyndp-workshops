@@ -1,0 +1,2054 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20251203-workshop-pypsa-03';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Background: Introduction to the basics of Python" href="background1-python.html" />
+    <link rel="prev" title="Workshop 2: Introduction to Snakemake, new features update &amp; benchmarking" href="20250624-workshop-pypsa-02.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <script>document.write(`<img src="_static/logo_merged.png" class="logo__image only-dark" alt="Open-TYNDP Workshops - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background4-geopandas.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/open-energy-transition/open-tyndp-workshops/blob/main/open-tyndp-workshops/20251203-workshop-pypsa-03.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2F20251203-workshop-pypsa-03.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/20251203-workshop-pypsa-03.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">1. Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">2. Benchmark Results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-capacities">Power Capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-generation">Electricity Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-demand">Hydrogen Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-supply">Hydrogen Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-demand">Methane Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">3. Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-modifying-input-data">Method 1: Modifying Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-custom-assumptions">Method 2: Custom Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-adjustments">Method 3: Adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-4-custom-constraints">Method 4: Custom Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-apply-manual-adjustments">Task 1: Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="workshop-3-exploring-nt-scenario-results-modifying-assumptions-and-benchmarking">
+<h1>Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking<a class="headerlink" href="#workshop-3-exploring-nt-scenario-results-modifying-assumptions-and-benchmarking" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At the end of this notebook, you will be able to:</p>
+<p><strong>1. Use PyPSA Explorer to analyze results</strong></p>
+<ul class="simple">
+<li><p>Navigate and analyze NT scenario results using PyPSA-Explorer</p></li>
+<li><p>Compare 2030 and 2040 scenarios interactively</p></li>
+</ul>
+<p><strong>2. Benchmark Open-TYNDP against ENTSO-E TYNDP 2024</strong></p>
+<ul class="simple">
+<li><p>Interpret differences between model outputs and TYNDP 2024 NT scenario</p></li>
+<li><p>Identify potential data inconsistencies, methodological differences, areas where Open-TYNDP can improve</p></li>
+</ul>
+<p><strong>3. Modify scenario assumptions</strong></p>
+<ul class="simple">
+<li><p>Learn different ways how to change model assumptions and generate new scenario results</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click the rocket button in the top right corner and launch “Colab”. If that doesn’t work, download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the required packages by executing the following command in a Jupyter cell at the top of the notebook:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pypsa<span class="w"> </span>pypsa-explorer<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>numpy<span class="w"> </span>pdf2image
+!apt-get<span class="w"> </span>install<span class="w"> </span>poppler-utils
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
+<span class="c1"># !pip install pypsa pypsa-explorer pandas matplotlib numpy pdf2image</span>
+<span class="c1"># !apt-get install poppler-utils</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDFPageCountError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Code</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">round</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">drop_zero</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">nice_names</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
+            <span class="c1"># Extract the file</span>
+            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
+
+            <span class="c1"># Get the extracted file path</span>
+            <span class="n">extracted_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extract_to</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="c1"># Get the modification time from the zip file</span>
+            <span class="n">date_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="n">member</span><span class="o">.</span><span class="n">date_time</span><span class="p">)</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">date_time</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+            <span class="c1"># Set both access and modification times</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">utime</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">,</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_zip</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data/results-1H-20251129.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/results-1H-20251129.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/open-tyndp-20251129.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-03/open-tyndp-20251129.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists. Skipping download.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from storage.&quot;</span><span class="p">)</span>
+        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results-1H-20251129.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results-1H-20251129.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results-1H-20251129&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NT results available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp-20251129.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20251129.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results-1H-20251129.zip from storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results-1H-20251129.zip.
+Retrieving data/open-tyndp-20251129.zip from storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/open-tyndp-20251129.zip.
+File scripts/_helpers.py already exists. Skipping download.
+Unzipping data/results-1H-20251129.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NT results available in &#39;data/results-1H-20251129&#39;.
+Unzipping data/open-tyndp-20251129.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp-20251129&#39;.
+Done
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="interactive-exploration-with-pypsa-explorer">
+<h1>1. Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h1>
+<p>PyPSA-Explorer is an interactive dashboard for visualizing and analyzing energy system networks. It provides:</p>
+<ul class="simple">
+<li><p>Energy balance analysis with both time series and aggregated views</p></li>
+<li><p>Capacity planning visualizations by technology and region</p></li>
+<li><p>Economic analysis showing CAPEX/OPEX breakdowns</p></li>
+<li><p>Interactive geographical network maps</p></li>
+<li><p>Support for visualising multiple networks</p></li>
+</ul>
+<p>Let’s load the NT scenario results and explore them interactively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load NT scenario networks for comparison</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129/networks/&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">import_network</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>
+    <span class="k">return</span> <span class="n">n</span>
+
+
+<span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
+<span class="n">networks</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;NT 2030&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+</div>
+</div>
+<p>PyPSA-Explorer can be launched in different ways depending on your environment:</p>
+<ul class="simple">
+<li><p><strong>Local Jupyter</strong>: Use the terminal command (recommended) or inline display</p></li>
+<li><p><strong>Google Colab</strong>: The dashboard launches inline, embedded directly in the notebook</p></li>
+</ul>
+<p>Follow the instructions below for your specific environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detect if running on Google Colab</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">output</span>
+
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running on Google Colab!&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook is running locally !&quot;</span><span class="p">)</span>
+
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8050</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook is running locally !
+</pre></div>
+</div>
+</div>
+</div>
+<section id="for-local-users">
+<h2>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h2>
+<p>If you’re running locally, we <strong>recommend</strong> launching PyPSA-Explorer from the terminal for optimal performance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>data/results-1H-20251129/networks/base_s_all___2030.nc:NT_2030<span class="w"> </span>data/results-1H-20251129/networks/base_s_all___2040.nc:NT_2040
+</pre></div>
+</div>
+<p>This command opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
+<p><strong>Alternative</strong>: The cell below can launch the dashboard inline within the notebook, though the terminal method provides better performance and responsiveness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
+<span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch inline display</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
+    <span class="c1"># Local Jupyter: Inline display</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-google-colab-users">
+<h2>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h2>
+<p>Running PyPSA-Explorer on Google Colab requires a small workaround to display the dashboard properly inside the notebook.</p>
+<p>First, let’s define a helper function to handle the setup:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting PyPSA Explorer for Google Colab...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create and start the app</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_server</span><span class="p">():</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;external&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">server_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_server</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Wait for server to initialize</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Server started on port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Display in iframe</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">serve_kernel_port_as_iframe</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Tip for Colab users:</strong> To view the dashboard in fullscreen mode, click the three dots (⋮) in the top-right corner of the output cell and select <strong>“View output fullscreen”</strong>.</p>
+</section>
+<section id="using-the-dashboard">
+<h2>Using the Dashboard<a class="headerlink" href="#using-the-dashboard" title="Link to this heading">#</a></h2>
+<p>Once the dashboard opens, you can explore these key features:</p>
+<p><strong>1. Energy Balance Tab</strong></p>
+<ul class="simple">
+<li><p>View production, consumption, and storage patterns over time</p></li>
+<li><p>Switch between time series and aggregated views</p></li>
+<li><p>Filter by energy carrier (electricity, hydrogen, etc.)</p></li>
+<li><p>Filter by country or region</p></li>
+</ul>
+<p><strong>2. Capacity Tab</strong></p>
+<ul class="simple">
+<li><p>Analyze installed capacities across scenarios</p></li>
+<li><p>Compare capacity buildout between 2030 and 2040</p></li>
+<li><p>View breakdowns by technology type and region</p></li>
+</ul>
+<p><strong>3. Economics Tab</strong></p>
+<ul class="simple">
+<li><p>Examine costs and revenues</p></li>
+<li><p>Review CAPEX and OPEX breakdowns by technology</p></li>
+<li><p>Compare regional cost distributions</p></li>
+<li><p>Assess investment requirements</p></li>
+</ul>
+<p><strong>4. Network Map</strong></p>
+<ul class="simple">
+<li><p>Visualize the geographical network layout</p></li>
+<li><p>View an interactive map with network components</p></li>
+<li><p>Zoom and pan to explore specific regions</p></li>
+</ul>
+<p><strong>Tip:</strong> Use the scenario selector buttons in the top-right corner to switch between NT 2030 and NT 2040 scenarios.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="benchmark-results">
+<h1>2. Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h1>
+<p>In Workshop 2, we introduced a benchmarking framework to systematically compare Open-TYNDP model outputs against the official TYNDP 2024 scenarios. This framework provides flexible and scalable validation across multiple metrics and methods, helping us to:</p>
+<ul class="simple">
+<li><p><strong>Identify discrepancies</strong>: Compare demands, installed capacities, and generation volumes between model results and TYNDP targets</p></li>
+<li><p><strong>Quantify differences</strong>: Calculate deviations by technology and investment year</p></li>
+<li><p><strong>Guide improvements</strong>: Prioritize areas where the model requires refinement</p></li>
+</ul>
+<p>Now, let’s apply this framework to our NT 2030 and 2040 scenario results to understand where the current model aligns with—or diverges from—TYNDP expectations.</p>
+<p>First, we’ll define a helper function to visualize the benchmarks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show_benchmarks</span><span class="p">(</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span> <span class="mi">2040</span><span class="p">],</span>
+    <span class="n">bench_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/results-1H-20251129/validation/graphics_s_all___all_years&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">convert_from_path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">bench_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span>
+        <span class="p">]</span>
+    <span class="k">except</span> <span class="n">PDFPageCountError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File not found, skipping...&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">images</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open-TYNDP is under active development and is not yet feature-complete. The current NT results presented below are preliminary results and several features still require improvement. These limitations must be understood when assessing the current benchmarking results.</p>
+</div>
+<p>When discussing the benchmarks, we can identify four categories of explanations for deviations from TYNDP 2024 reference values:</p>
+<ol class="arabic simple">
+<li><p><strong>Data source discrepancies</strong>: Two data sources don’t seem to align, and the methodology is insufficient to derive the correct interpretation</p></li>
+<li><p><strong>Partial feature integration in Open-TYNDP</strong>: A specific feature must be expanded to appropriately reflect the TYNDP methodology</p></li>
+<li><p><strong>Scope discrepancies</strong>: The benchmarked and reference values use different scopes to report data (e.g., one uses EU27 while the other includes all modeled nodes)</p></li>
+<li><p><strong>Missing information or data</strong>: Default PyPSA-Eur values are used because the TYNDP assumptions have not yet been integrated</p></li>
+</ol>
+<section id="final-energy-demand">
+<h2>Final Energy Demand<a class="headerlink" href="#final-energy-demand" title="Link to this heading">#</a></h2>
+<p>Let’s examine each benchmark category in detail, starting with final energy demand across all carriers. We observe that demand for each carrier is now broadly reproduced. However, improvements are still needed to match the exact TYNDP post-processing methodology, and some discrepancies remain with exogenous inputs. Additionally, the benchmarked biofuels demand currently includes non-EU27 countries, which explains the larger value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_final_energy_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/642860e2a2429d3c6e6ae03682218727345a5dd0055a1037816dee018718c698.png" src="_images/642860e2a2429d3c6e6ae03682218727345a5dd0055a1037816dee018718c698.png" />
+</div>
+</div>
+</section>
+<section id="electricity-demand">
+<h2>Electricity Demand<a class="headerlink" href="#electricity-demand" title="Link to this heading">#</a></h2>
+<p>Electricity demand is an exogenous input to the model, taken directly from TYNDP 2024 data. Therefore, we achieve perfect alignment between the model input and TYNDP 2024 for this metric. Note, however, that the final electricity demand equals this exogenous input value, which differs from the reference value reported in TYNDP 2024.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_elec_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8494b88cdb7036b7a6b9dd167cc0a98b0bee10ccc01edaab6e1fce19751ae2d9.png" src="_images/8494b88cdb7036b7a6b9dd167cc0a98b0bee10ccc01edaab6e1fce19751ae2d9.png" />
+</div>
+</div>
+</section>
+<section id="power-capacities">
+<h2>Power Capacities<a class="headerlink" href="#power-capacities" title="Link to this heading">#</a></h2>
+<p>Installed generation capacities are converging toward TYNDP 2024 values. Both renewable and conventional capacities have been fully integrated from the PEMMDB database. Open-TYNDP now closely reproduces TYNDP 2024 values, except for coal, where large discrepancies between data sources persist.</p>
+<p>Some technologies still require implementation, including CHP and small thermal units, small-scale renewable energy systems, and solar thermal installations. Currently, OCGT units are retained in the system and used as peaking units because demand shedding has not yet been implemented in Open-TYNDP.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_capacity_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b9c41169880234f1e064821e7bc1c0599b60e140c9e5a72b03ac8fd0a8fc1b8d.png" src="_images/b9c41169880234f1e064821e7bc1c0599b60e140c9e5a72b03ac8fd0a8fc1b8d.png" />
+</div>
+</div>
+</section>
+<section id="electricity-generation">
+<h2>Electricity Generation<a class="headerlink" href="#electricity-generation" title="Link to this heading">#</a></h2>
+<p>Actual electricity generation differs slightly from the TYNDP 2024 generation mix. Total generation values are closer to the reference but remain lower than reported values. As we’ll see later, lower power-to-gas (P2G) demand likely explains part of this difference. Additionally, electrical exchanges with non-modeled countries have not yet been integrated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_power_generation_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/84fd7340b9ddab99e246629d5362fdc2b87f90a70afceed2c1cdfb1a9c9b74fe.png" src="_images/84fd7340b9ddab99e246629d5362fdc2b87f90a70afceed2c1cdfb1a9c9b74fe.png" />
+</div>
+</div>
+<p>We can also explore the hourly time series energy balances in more detail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">networks</span><span class="p">[</span><span class="s2">&quot;NT 2030&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">iplot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
+    <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;H2&quot;</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carrier&quot;</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facet_row</span><span class="o">=</span><span class="s2">&quot;bus_carrier&quot;</span><span class="p">,</span>
+    <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;snapshot &lt;= &#39;2009-03-07&#39; and snapshot &gt;= &#39;2009-03-01&#39;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.descriptors:Multiple units found for carrier [&#39;AC&#39;, &#39;H2&#39;]: [&#39;MWh_el&#39; &#39;MWh_LHV&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hydrogen-demand">
+<h2>Hydrogen Demand<a class="headerlink" href="#hydrogen-demand" title="Link to this heading">#</a></h2>
+<p>Since hydrogen demand is primarily defined exogenously, we expect good alignment between model results and TYNDP 2024. However, we observe a large discrepancy for e-fuels production that still needs investigation. The power generation result is determined endogenously and matches the reference values well. Note that hydrogen generation, in contrast, is fully determined by the optimization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cd81c5d237cc9cf644e4b1022a0a9667e3496c962023973c663af817ba717b68.png" src="_images/cd81c5d237cc9cf644e4b1022a0a9667e3496c962023973c663af817ba717b68.png" />
+</div>
+</div>
+</section>
+<section id="hydrogen-supply">
+<h2>Hydrogen Supply<a class="headerlink" href="#hydrogen-supply" title="Link to this heading">#</a></h2>
+<p>Hydrogen supply is determined endogenously, and the results are generally convincing, except for power-to-gas (P2G). Since hydrogen demand is exogenous in the NT scenario, the missing P2G production can be explained by the lower hydrogen demand for e-fuels. Additionally, the ‘undefined for generation’ category still needs clarification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_hydrogen_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/125d078f7e7dc61da4b0ecba09d12de297418c652d25215d660b022579411ed8.png" src="_images/125d078f7e7dc61da4b0ecba09d12de297418c652d25215d660b022579411ed8.png" />
+</div>
+</div>
+</section>
+<section id="methane-demand">
+<h2>Methane Demand<a class="headerlink" href="#methane-demand" title="Link to this heading">#</a></h2>
+<p>Methane demand includes both exogenous and endogenous consumption for power generation and steam methane reforming (SMR). The exogenous consumption perfectly reproduces the Supply Tool values. However, alignment with the values reported in the TYNDP 2024 documentation is not yet achieved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_demand_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/daa479faf7ce651898ca46e60dfbef540a68759b638090ac6eedba4954113925.png" src="_images/daa479faf7ce651898ca46e60dfbef540a68759b638090ac6eedba4954113925.png" />
+</div>
+</div>
+</section>
+<section id="methane-supply">
+<h2>Methane Supply<a class="headerlink" href="#methane-supply" title="Link to this heading">#</a></h2>
+<p>While the current Open-TYNDP implementation supplies all required methane, it cannot yet accurately reproduce domestic production and imports across all carriers. Natural gas imports include non-EU27 imports, explaining the higher values. The same applies to biomethane.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_methane_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5e8b5be9c00e47bdc2feb93cbee955a1762e47119278b4999bdc44aa692b4b1b.png" src="_images/5e8b5be9c00e47bdc2feb93cbee955a1762e47119278b4999bdc44aa692b4b1b.png" />
+</div>
+</div>
+</section>
+<section id="biomass-supply">
+<h2>Biomass Supply<a class="headerlink" href="#biomass-supply" title="Link to this heading">#</a></h2>
+<p>The biomass supply correctly reproduces the distribution across different usage categories. However, we observe an overshoot for both biofuels and biomethane. This can be explained by a scope issue, as non-EU27 countries are included in the Open-TYNDP values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_biomass_supply_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7a16d08f9a3f79c173598fe4c61b86c1e5d243f73cfc7cd6db638e540bf16954.png" src="_images/7a16d08f9a3f79c173598fe4c61b86c1e5d243f73cfc7cd6db638e540bf16954.png" />
+</div>
+</div>
+</section>
+<section id="energy-imports">
+<h2>Energy Imports<a class="headerlink" href="#energy-imports" title="Link to this heading">#</a></h2>
+<p>Energy imports include hydrogen, methane, liquids, and solids. Currently, the model cannot directly import solid biomass. Open-TYNDP values are overestimated because non-EU27 countries contribute to the totals for liquids, methane, and solids. Furthermore, domestic production is not yet removed from the benchmarked values before comparison with TYNDP 2024.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_benchmarks</span><span class="p">(</span><span class="s2">&quot;benchmark_energy_imports_eu27_cy2009&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/09c43c325558dc9b373053bc207fe31299c76d6a5b6677bd9f76b5145e52567f.png" src="_images/09c43c325558dc9b373053bc207fe31299c76d6a5b6677bd9f76b5145e52567f.png" />
+</div>
+</div>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Finally, let’s examine an overview of the Symmetric Mean Absolute Percentage Error (sMAPE) across all carriers. As a reminder, sMAPE measures the absolute magnitude of deviations while avoiding cancellation between positive and negative errors. This provides a high-level view of error magnitudes across all benchmarks, carriers, and planning horizons.</p>
+<p>Note that several features have been significantly improved since we introduced this framework. However, there remains room for further improvement.</p>
+<p>It’s important to note that the benchmarking framework is strict regarding missing information. Specifically, sMAPE assigns a large error for missing carriers, which can distort the overall results. This underlines the need for a multi-criteria approach. However, for this assessment, we focus primarily on the sMAPE metric.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+    <span class="n">convert_from_path</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/results-1H-20251129/validation/kpis_eu27_s_all___all_years.pdf&quot;</span><span class="p">)</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/079e7283ee23c74f74bf68d5c124c62fdaf50aa8e2673fc7997dc89468217192.png" src="_images/079e7283ee23c74f74bf68d5c124c62fdaf50aa8e2673fc7997dc89468217192.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modify-assumptions">
+<h1>3. Modify assumptions<a class="headerlink" href="#modify-assumptions" title="Link to this heading">#</a></h1>
+<p>A key capability when working with any energy system model is the ability to adjust input assumptions and observe how results respond. This is especially important for TYNDP models, where assumptions evolve over time and multiple configurations need testing.</p>
+<p>In Open-TYNDP, there are several straightforward ways to modify assumptions and explore scenarios:</p>
+<ul class="simple">
+<li><p><strong>Input data</strong>: Update relevant files in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder</p></li>
+<li><p><strong>Custom assumptions</strong>: Override cost and technology parameters via <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code></p></li>
+<li><p><strong>Adjustments</strong>: Make targeted changes to specific components through configuration files</p></li>
+<li><p><strong>Custom constraints</strong>: Add or modify constraints directly in the optimization script</p></li>
+</ul>
+<p>Let’s explore each method in detail.</p>
+<section id="method-1-modifying-input-data">
+<h2>Method 1: Modifying Input Data<a class="headerlink" href="#method-1-modifying-input-data" title="Link to this heading">#</a></h2>
+<p>The most direct method to modify the model is by editing the input data files. We’ve already retrieved a prebuilt version of the open-tyndp GitHub repository into our working directory dated to the 29th of November 2025.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository and locate the <code class="docutils literal notranslate"><span class="pre">tyndp_2024_bundle</span></code> folder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_tree</span>
+
+<span class="n">target_directory</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129/data/tyndp_2024_bundle&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">display_tree</span><span class="p">(</span><span class="n">target_directory</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data
+└── tyndp_2024_bundle/
+    ├── Demand Profiles/
+    ├── EV Modelling Inputs/
+    ├── Hybrid Heat Pump Modelling Inputs/
+    ├── Hydro Inflows/
+    ├── Hydrogen/
+    ├── Investment Datasets/
+    ├── Line data/
+    ├── Nodes/
+    ├── Offshore hubs/
+    ├── PECD/
+    ├── PEMMDB2/
+    ├── Supply Tool/
+    ├── TYNDP-2024-Scenarios-Package/
+    └── TYNDP-2024-Visualisation-Platform/
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can browse and replace any input files with your own data, provided they follow the <strong>same format and structure</strong> as the original files.</p>
+</section>
+<section id="method-2-custom-assumptions">
+<h2>Method 2: Custom Assumptions<a class="headerlink" href="#method-2-custom-assumptions" title="Link to this heading">#</a></h2>
+<p>To override specific assumptions—such as capital costs, marginal costs, or technical parameters for particular technologies—use a long-format CSV file called <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">custom_cost.csv</span></code> to see example entries that illustrate the required structure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">custom_cost</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20251129/data/custom_costs.csv&quot;</span><span class="p">)</span>
+<span class="n">custom_cost</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>planning_horizon</th>
+      <th>technology</th>
+      <th>parameter</th>
+      <th>value</th>
+      <th>unit</th>
+      <th>source</th>
+      <th>further description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all</td>
+      <td>solar</td>
+      <td>marginal_cost</td>
+      <td>0.010</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>all</td>
+      <td>onwind</td>
+      <td>marginal_cost</td>
+      <td>0.015</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>all</td>
+      <td>offwind</td>
+      <td>marginal_cost</td>
+      <td>0.015</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>all</td>
+      <td>hydro</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>all</td>
+      <td>H2</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>all</td>
+      <td>electrolysis</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>all</td>
+      <td>fuel cell</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>all</td>
+      <td>battery</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>all</td>
+      <td>battery inverter</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>all</td>
+      <td>home battery storage</td>
+      <td>marginal_cost</td>
+      <td>0.000</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>all</td>
+      <td>water tank charger</td>
+      <td>marginal_cost</td>
+      <td>0.030</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>all</td>
+      <td>central water pit charger</td>
+      <td>marginal_cost</td>
+      <td>0.025</td>
+      <td>EUR/MWh</td>
+      <td>Default value to prevent mathematical degenera...</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To add your own custom assumptions, insert a new row in this CSV file. At minimum, specify the <code class="docutils literal notranslate"><span class="pre">planning_horizon</span></code>, <code class="docutils literal notranslate"><span class="pre">technology</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code> for each entry. As shown above, you can also use the <code class="docutils literal notranslate"><span class="pre">all</span></code> keyword to override a value for all technologies and/or all planning horizons simultaneously.</p>
+<p>These custom entries are automatically applied when you run the Open-TYNDP workflow.</p>
+</section>
+<section id="method-3-adjustments">
+<h2>Method 3: Adjustments<a class="headerlink" href="#method-3-adjustments" title="Link to this heading">#</a></h2>
+<p>The third method involves making targeted changes to specific technologies or components directly in the model configuration.</p>
+<p>These are called <code class="docutils literal notranslate"><span class="pre">adjustments</span></code>, and you define them in the scenario configuration file.</p>
+<p>Here’s an example from the default configuration file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_code_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">language</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Code</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">end</span><span class="p">]),</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/config/config.default.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1066</span><span class="p">,</span> <span class="mi">1075</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#adjustments</span>
+<span class="nt">adjustments</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">factor</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Link</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">electricity distribution grid</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">capital_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">absolute</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div></div>
+</div>
+<p>As shown, you can specify either a scaling factor or an absolute value for any combination of:</p>
+<ul class="simple">
+<li><p><strong>Component type</strong> (e.g., Generator, Link, Load)</p></li>
+<li><p><strong>Carrier</strong> (i.e., technology type)</p></li>
+<li><p><strong>Attribute</strong> (e.g., marginal_cost, efficiency, p_nom)</p></li>
+</ul>
+<p>To apply manual adjustments to a scenario you’re modeling, add an <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> section to your <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code> file.</p>
+<p>Let’s examine the structure of that file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: Contributors to Open-TYNDP &lt;https://github.com/open-energy-transition/open-tyndp&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="nt">NT</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+
+<span class="nt">NT-52SEG-20251129</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+<span class="w">  </span><span class="nt">clustering</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">temporal</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resolution_sector</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">52SEG</span>
+<span class="w">  </span><span class="nt">solving</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">solver</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">highs</span>
+<span class="w">      </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">highs-default</span>
+<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12h</span><span class="w"> </span><span class="c1">#runtime in humanfriendly style https://humanfriendly.readthedocs.io/en/latest/</span>
+
+<span class="nt">DE</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DE</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extendable_carriers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Generator</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">onwind</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-utility</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-rooftop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OCGT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CCGT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">force_biomass_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">force_biogas_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">land_transport_ice_share</span><span class="p">:</span><span class="w">  </span><span class="c1"># TODO Improve TYNDP 2024 approximations</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.96</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.44</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.16</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply Tool</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">135</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+
+<span class="nt">GA</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tyndp_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GA</span>
+<span class="w">  </span><span class="nt">electricity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extendable_carriers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Generator</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">onwind</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-utility</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar-pv-rooftop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-ac-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-r</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-dc-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fb-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">offwind-h2-fl-oh</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OCGT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CCGT</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">h2_zones_tyndp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">force_biomass_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">force_biogas_potential</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">land_transport_ice_share</span><span class="p">:</span><span class="w">  </span><span class="c1"># TODO Improve TYNDP 2024 approximations</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.96</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.73</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.50</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.34</span><span class="w">  </span><span class="c1"># interpolation</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.17</span>
+<span class="w">    </span><span class="nt">co2_sequestration_potential</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Values from TYNDP 2024 Supply</span>
+<span class="w">      </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48</span>
+<span class="w">      </span><span class="nt">2035</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">167</span>
+<span class="w">      </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">344</span>
+<span class="w">      </span><span class="nt">2045</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">398</span>
+<span class="w">      </span><span class="nt">2050</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">400</span>
+</pre></div>
+</div></div>
+</div>
+</section>
+<section id="method-4-custom-constraints">
+<h2>Method 4: Custom Constraints<a class="headerlink" href="#method-4-custom-constraints" title="Link to this heading">#</a></h2>
+<p>You may also want to add custom constraints to the model. Since we haven’t covered PyPSA constraints in detail yet, we won’t dive deep here—we’ll cover them comprehensively in a future workshop. For now, it’s useful to know where you would add a custom constraint that isn’t already represented through existing component parameters. For more information, see the <a class="reference external" href="https://docs.pypsa.org/latest/user-guide/optimization/custom-constraints/">PyPSA documentation on custom constraints</a>.</p>
+<p><strong>Note</strong>: Many constraints are already built into PyPSA. For example, to add an upper limit on the expansion capacity of a Link, you can simply use the <code class="docutils literal notranslate"><span class="pre">p_nom_max</span></code> attribute. PyPSA automatically translates this into a binding upper-limit constraint during optimization.</p>
+<p>For custom constraints that go beyond existing parameters, you can insert your own code directly into the model. This flexibility is one of the key advantages of working with an open-source framework.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository and open the <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code> script:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span>
+    <span class="s2">&quot;data/open-tyndp-20251129/scripts/solve_network.py&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">1268</span><span class="p">,</span> <span class="mi">1361</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extra_functionality</span><span class="p">(</span>
+    <span class="n">n</span><span class="p">:</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">,</span>
+    <span class="n">snapshots</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">,</span>
+    <span class="n">planning_horizons</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">offshore_zone_trajectories_fn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">renewable_carriers_tyndp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add custom constraints and functionality.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : pypsa.Network</span>
+<span class="sd">        The PyPSA network instance with config and params attributes</span>
+<span class="sd">    snapshots : pd.DatetimeIndex</span>
+<span class="sd">        Simulation timesteps</span>
+<span class="sd">    planning_horizons : str, optional</span>
+<span class="sd">        The current planning horizon year or None in perfect foresight</span>
+<span class="sd">    offshore_zone_trajectories_fn: str, optional</span>
+<span class="sd">        Path to the file containing the offshore zone potentials trajectories</span>
+<span class="sd">    renewable_carriers_tyndp : list[str], optional</span>
+<span class="sd">        List of TYNDP renewable carriers</span>
+
+<span class="sd">    Collects supplementary constraints which will be passed to</span>
+<span class="sd">    ``pypsa.optimization.optimize``.</span>
+
+<span class="sd">    If you want to enforce additional custom constraints, this is a good</span>
+<span class="sd">    location to add them. The arguments ``opts`` and</span>
+<span class="sd">    ``snakemake.config`` are expected to be attached to the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">config</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;solving&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;constraints&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;BAU&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_BAU_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;SAFE&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_SAFE_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;CCL&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_extendable</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">add_CCL_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">planning_horizons</span><span class="p">)</span>
+
+    <span class="n">reserve</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;operational_reserve&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="n">reserve</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;activate&quot;</span><span class="p">):</span>
+        <span class="n">add_operational_reserve_margin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">EQ_o</span> <span class="o">:=</span> <span class="n">constraints</span><span class="p">[</span><span class="s2">&quot;EQ&quot;</span><span class="p">]:</span>
+        <span class="n">add_EQ_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">EQ_o</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;EQ&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="p">{</span><span class="s2">&quot;solar-hsat&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span>
+        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">][</span><span class="s2">&quot;renewable_carriers&quot;</span><span class="p">]</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="p">{</span><span class="s2">&quot;solar-hsat&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span>
+        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">][</span><span class="s2">&quot;extendable_carriers&quot;</span><span class="p">][</span><span class="s2">&quot;Generator&quot;</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="n">add_solar_potential_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sector&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tes&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;urban central heat|urban decentral heat|rural heat&quot;</span><span class="p">,</span>
+            <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">add_TES_energy_to_power_ratio_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="n">add_TES_charger_ratio_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="n">add_battery_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">add_lossy_bidirectional_link_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">add_pipe_retrofit_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">_multi_invest</span><span class="p">:</span>
+        <span class="n">add_carbon_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+        <span class="n">add_carbon_budget_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+        <span class="n">add_retrofit_gas_boiler_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">add_co2_atmosphere_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;enhanced_geothermal&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_flexible_egs_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;imports&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_import_limit_constraint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">][</span><span class="s2">&quot;offshore_hubs_tyndp&quot;</span><span class="p">][</span><span class="s2">&quot;enable&quot;</span><span class="p">]:</span>
+        <span class="n">add_offshore_hubs_constraint</span><span class="p">(</span>
+            <span class="n">n</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">planning_horizons</span><span class="p">),</span>
+            <span class="n">offshore_zone_trajectories_fn</span><span class="p">,</span>
+            <span class="n">renewable_carriers_tyndp</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">custom_extra_functionality</span><span class="p">:</span>
+        <span class="n">source_path</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">custom_extra_functionality</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">source_path</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2"> does not exist&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">source_path</span><span class="p">))</span>
+        <span class="n">module_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">source_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="n">custom_extra_functionality</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="n">custom_extra_functionality</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">snapshots</span><span class="p">,</span> <span class="n">snakemake</span><span class="p">)</span>  <span class="c1"># pylint: disable=E0601</span>
+</pre></div>
+</div></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">solve_network.py</span></code>, you’ll find a function called <code class="docutils literal notranslate"><span class="pre">extra_functionality</span></code>. This is where additional custom constraints are added to the optimization model before solving.</p>
+<p>For instance, Open-TYNDP includes a custom constraint for offshore hubs by calling the nested function <code class="docutils literal notranslate"><span class="pre">add_offshore_hubs_constraint</span></code>. This constraint limits the expansion of DC and H2 wind farms at the same location and enforces maximum potential per zone according to zone trajectories.</p>
+<p>You can add your own constraints in the same location. Browse the existing constraint implementations to understand the structure and coding style.</p>
+<p>We’ll cover PyPSA constraint mechanics in depth in a future workshop.</p>
+</section>
+<section id="task-1-apply-manual-adjustments">
+<h2>Task 1: Apply Manual Adjustments<a class="headerlink" href="#task-1-apply-manual-adjustments" title="Link to this heading">#</a></h2>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp-20251129/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
+<ul class="simple">
+<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
+<li><p>Remove the initial capacity (<code class="docutils literal notranslate"><span class="pre">p_nom</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code>) of all <code class="docutils literal notranslate"><span class="pre">solar-pv-utility</span></code> generators for 2030.</p></li>
+</ul>
+<p>Then rerun the model and explore the results in PyPSA-Explorer.</p>
+<p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the notebook from our last workshop.</p>
+<p><strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
+<p><strong>Hint III</strong>: As we only want to solve the model without post-processing, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
+<p><strong>Hint IV</strong>: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: <code class="docutils literal notranslate"><span class="pre">solving:solver</span></code>.</p>
+<p>To run the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
+<p>The recommended approach for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which handles all dependencies automatically.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.</p>
+<p>If you prefer to use conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">legacy installation documentation</a>.</p>
+</div>
+<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, follow the steps in the official <a class="reference external" href="https://pixi.sh/dev/installation/">pixi installation documentation</a>.</p>
+<p>For execution on Google Colab, install the Linux version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+<p>In the Google Colab terminal, you might need to execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span><span class="w"> </span>bash<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>for the changes to take effect if pixi is not recognized.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
+<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository before launching the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp-20251129
+</pre></div>
+</div>
+<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="solutions">
+<h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Task 1: Apply Manual Adjustments<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Add the following <code class="docutils literal notranslate"><span class="pre">adjustments</span></code> section to the <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario configuration in <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">adjustments</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">sector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">factor</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Generator</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">import H2</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">marginal_cost</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.5</span>
+<span class="w">            </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3</span>
+<span class="w">        </span><span class="nt">solar-pv-utility</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">p_nom</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">absolute</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">Link</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">H2 Electrolysis</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">efficiency</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">2030</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.78</span>
+<span class="w">            </span><span class="nt">2040</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.78</span>
+</pre></div>
+</div>
+<p>In a terminal window, we start with a dry run to preview which rules will execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+<p>After adding the adjustments to <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code>, we can run the Open-TYNDP workflow using Snakemake with the standard <code class="docutils literal notranslate"><span class="pre">config.tyndp.yaml</span></code> configuration.</p>
+<p>The dry run shows that, because this scenario was run previously <em>without</em> the adjustments, Snakemake will only re-execute the rules affected by your manual changes.</p>
+<p>Now run the workflow for real:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--call<span class="w"> </span>solve_sector_networks<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml
+</pre></div>
+</div>
+<p>Finally, let’s launch PyPSA-Explorer again to inspect the results of our modified scenario.</p>
+<p>First, we load the new outputs into our <code class="docutils literal notranslate"><span class="pre">networks</span></code> dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load networks directly into dictionary for PyPSA-Explorer</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129/results/tyndp/NT-52SEG-20251129/networks/&quot;</span>
+<span class="n">networks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;NT 2030 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;NT 2040 new&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># set a new port for the updated dashboard</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8051</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
+<span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch inline display</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
+    <span class="c1"># Local Jupyter: Inline display</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="notebook-clean-up">
+<h1>Notebook clean up<a class="headerlink" href="#notebook-clean-up" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only clean up data when running in CI environment</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CI&quot;</span><span class="p">):</span>
+    <span class="n">rm_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20251129&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;CI environment detected. Cleaning up notebook data by removing &#39;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">.zip&#39;.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">rm_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping cleanup (not in CI environment).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CI environment detected. Cleaning up notebook data by removing &#39;data/open-tyndp-20251129&#39; and &#39;data/open-tyndp-20251129.zip&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ""
+        },
+        kernelOptions: {
+            name: "",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = ''</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20250624-workshop-pypsa-02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="background1-python.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">1. Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dashboard">Using the Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">2. Benchmark Results</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-energy-demand">Final Energy Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-demand">Electricity Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-capacities">Power Capacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electricity-generation">Electricity Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-demand">Hydrogen Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrogen-supply">Hydrogen Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-demand">Methane Demand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methane-supply">Methane Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biomass-supply">Biomass Supply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-imports">Energy Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-assumptions">3. Modify assumptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-modifying-input-data">Method 1: Modifying Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-custom-assumptions">Method 2: Custom Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-adjustments">Method 3: Adjustments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-4-custom-constraints">Method 4: Custom Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-apply-manual-adjustments">Task 1: Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 1: Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
