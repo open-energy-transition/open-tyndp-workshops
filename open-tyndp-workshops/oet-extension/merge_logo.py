@@ -61,7 +61,7 @@ def merge_institue_image(logo_C, logo_I):
 
 logo_entsoe = Image.open("../entsoe_logo.png")
 logo_entsog = Image.open("../entsog_logo.png")
-logo_OET = Image.open("../logo_OET.png")
+logo_OET = Image.open("logo_OET.png")
 
 logo_C = create_contribution_image(logo_entsoe, logo_entsog)
 logo = merge_institue_image(logo_C, logo_OET)
