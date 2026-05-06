@@ -595,13 +595,13 @@
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92387ae5-8ae8-49de-831d-f62a43929489">
-<span class="eqno">(1)<a class="headerlink" href="#equation-92387ae5-8ae8-49de-831d-f62a43929489" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fad65234-299d-40fa-b2b2-a3545c3d130a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-fad65234-299d-40fa-b2b2-a3545c3d130a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e04f61c2-b565-4288-9442-254a9537632f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-e04f61c2-b565-4288-9442-254a9537632f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-63d26978-3a14-404d-91f1-a6aafde969ac">
+<span class="eqno">(2)<a class="headerlink" href="#equation-63d26978-3a14-404d-91f1-a6aafde969ac" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -F_\ell &amp;\leq f_{\ell,t} \leq F_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} f_{\ell,t} &amp; \text{KCL : bus} \\
@@ -681,111 +681,594 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># By convention, PyPSA is imported without an alias:</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Other dependencies</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pypsa</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">21</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">__copyright__</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="s2">&quot;Copyright 2015-2025 PyPSA Developers, see https://docs.pypsa.org/latest/contributing/contributors.html, &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="s2">&quot;MIT License&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">clustering</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">common</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">components</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">costs</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">descriptors</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">examples</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">geo</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">optimization</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">plot</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="n">statistics</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa._options</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">option_context</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="n">options</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.collection</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetworkCollection</span>
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pypsa</span><span class="o">/</span><span class="n">examples</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">platformdirs</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_cache_dir</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa._options</span><span class="w"> </span><span class="kn">import</span> <span class="n">options</span>
-<span class="ne">---&gt; </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.networks</span><span class="w"> </span><span class="kn">import</span> <span class="n">Network</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version_base__</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+  const force = true;
+  const version = '3.9.0'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = false;
+  const Bokeh = root.Bokeh;
+  const BK_RE = /^https:\/\/cdn\.bokeh\.org\/bokeh\/(release|dev)\/bokeh-/;
+  const PN_RE = /^https:\/\/cdn\.holoviz\.org\/panel\/[^/]+\/dist\/panel/i;
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pypsa</span><span class="o">/</span><span class="n">networks</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
-<span class="ne">---&gt; </span><span class="mi">29</span> <span class="kn">import</span><span class="w"> </span><span class="nn">linopy</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">linopy</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">21</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.expressions</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearExpression</span><span class="p">,</span> <span class="n">QuadraticExpression</span><span class="p">,</span> <span class="n">merge</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_netcdf</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">Variables</span><span class="p">,</span> <span class="n">available_solvers</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.objective</span><span class="w"> </span><span class="kn">import</span> <span class="n">Objective</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.remote</span><span class="w"> </span><span class="kn">import</span> <span class="n">OetcHandler</span><span class="p">,</span> <span class="n">RemoteHandler</span>
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">linopy</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">63</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.matrices</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatrixAccessor</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.objective</span><span class="w"> </span><span class="kn">import</span> <span class="n">Objective</span>
-<span class="ne">---&gt; </span><span class="mi">63</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.remote</span><span class="w"> </span><span class="kn">import</span> <span class="n">OetcHandler</span><span class="p">,</span> <span class="n">RemoteHandler</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.solver_capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolverFeature</span><span class="p">,</span> <span class="n">solver_supports</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.solvers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="n">IO_APIS</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="n">available_solvers</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span> <span class="p">)</span>
+  function load_libs(css_urls, js_urls, js_modules, js_exports, Bokeh, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">linopy</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> Remote execution handlers for linopy models.</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> </span>
-<span class="sd">   (...)      8 - OetcHandler: Cloud-based execution via OET Cloud service</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.remote.oetc</span><span class="w"> </span><span class="kn">import</span> <span class="n">OetcCredentials</span><span class="p">,</span> <span class="n">OetcHandler</span><span class="p">,</span> <span class="n">OetcSettings</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linopy.remote.ssh</span><span class="w"> </span><span class="kn">import</span> <span class="n">RemoteHandler</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="s2">&quot;RemoteHandler&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="s2">&quot;OetcHandler&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="s2">&quot;OetcSettings&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="s2">&quot;OetcCredentials&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">]</span>
+    root._bokeh_onload_callbacks.push(callback);
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">linopy</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">oetc</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">google.oauth2</span><span class="w"> </span><span class="kn">import</span> <span class="n">service_account</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">requests</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequestException</span>
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">-</span><span class="n">workshops</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">cloud</span><span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">35</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright 2014 Google LLC</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">12</span> <span class="c1"># See the License for the specific language governing permissions and</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># limitations under the License.</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Shortcut methods for getting set up with Google Cloud Storage.</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="sd"> You&#39;ll typically use these to get started with the API:</span>
-<span class="sd">   (...)     31   machine).</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">35</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_distribution</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">__version__</span> <span class="o">=</span> <span class="n">get_distribution</span><span class="p">(</span><span class="s2">&quot;google-cloud-storage&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">version</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud.storage.batch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Batch</span>
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pkg_resources&#39;
-</pre></div>
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      const shouldSkip = skip.includes(escaped) || existing_scripts.includes(escaped)
+      const isBokehOrPanel = BK_RE.test(escaped) || PN_RE.test(escaped)
+      const missingOrBroken = Bokeh == null || Bokeh.Panel == null || (Bokeh.version != version && !Bokeh.versions?.has(version)) || Bokeh.versions?.get(version)?.Panel == null;
+      if (shouldSkip && !(isBokehOrPanel && missingOrBroken)) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.8.10/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.9.0.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.9.0.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.9.0.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.9.0.min.js", "https://cdn.holoviz.org/panel/1.8.10/dist/panel.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false;
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0;
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true;
+      root._bokeh_onload_callbacks = [];
+      const bokeh_loaded = Bokeh != null && ((Bokeh.version === version && Bokeh.Panel) || (Bokeh.versions?.has(version) && Bokeh.versions.get(version)?.Panel));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, Bokeh, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+        if (Bokeh != undefined && !reloading) {
+          const NewBokeh = root.Bokeh;
+          if (Bokeh.versions === undefined) {
+            Bokeh.versions = new Map();
+          }
+          if (NewBokeh.version !== Bokeh.version) {
+            Bokeh[NewBokeh.version] = NewBokeh;
+            Bokeh.versions.set(NewBokeh.version, NewBokeh);
+          }
+          root.Bokeh = Bokeh;
+        }
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><div id='341132bc-39f7-4fc4-9275-b8a35a06591e'>
+  <div id="ca66989a-71df-4a09-b00b-b255416d0d6b" data-root-id="341132bc-39f7-4fc4-9275-b8a35a06591e" style="display: contents;"></div>
 </div>
-</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"00f1162b-eb43-43a2-a6a8-c1d600f3c728":{"version":"3.9.0","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"98cc096c-3e55-4125-96c6-b156ba05021d","attributes":{"notifications":{"type":"object","name":"Notifications","id":"0cfe6ec1-795d-4a51-97c4-8d3450960604"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"341132bc-39f7-4fc4-9275-b8a35a06591e"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"e348fdc1-6ea2-4381-b065-5d26ddc1cfb5","attributes":{"plot_id":"341132bc-39f7-4fc4-9275-b8a35a06591e","comm_id":"b1dbf60b2d9a4d89b02d270845b8be33","client_comm_id":"fda11be317244feea497272fc9a75a33"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"00f1162b-eb43-43a2-a6a8-c1d600f3c728","roots":{"341132bc-39f7-4fc4-9275-b8a35a06591e":"ca66989a-71df-4a09-b00b-b255416d0d6b"},"root_ids":["341132bc-39f7-4fc4-9275-b8a35a06591e"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(version);
+    } else if (root.Bokeh.version === version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div></div>
 </div>
 <section id="minimal-electricity-market-problem">
 <h2>Minimal electricity market problem<a class="headerlink" href="#minimal-electricity-market-problem" title="Link to this heading">#</a></h2>
@@ -810,6 +1293,14 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty PyPSA Network &#39;Demo&#39;
+--------------------
+Components: none
+Snapshots: 1
+</pre></div>
+</div>
+</div>
 </div>
 <p>The second component we need are buses. <strong>Buses</strong> are the fundamental nodes of the network, to which all other components like loads, generators and transmission lines attach. They enforce energy conservation for all elements feeding in and out of it (i.e. Kirchhoff’s Current Law).</p>
 <p>Components can be added to the network <code class="docutils literal notranslate"><span class="pre">n</span></code> using the <code class="docutils literal notranslate"><span class="pre">n.add()</span></code> function. It takes the component name as a first argument, the name of the component as a second argument and possibly further parameters as keyword arguments. Let’s use this function, to add buses for each country to our network:</p>
@@ -828,6 +1319,76 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>v_nom</th>
+      <th>type</th>
+      <th>x</th>
+      <th>y</th>
+      <th>carrier</th>
+      <th>unit</th>
+      <th>location</th>
+      <th>v_mag_pu_set</th>
+      <th>v_mag_pu_min</th>
+      <th>v_mag_pu_max</th>
+      <th>control</th>
+      <th>generator</th>
+      <th>sub_network</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Springfield</th>
+      <td>380.0</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>AC</td>
+      <td></td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>PQ</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>You see there are many more attributes than we specified while adding the buses; many of them are filled with default parameters which were added. You can look up the field description, defaults and status (required input, optional input, output) for buses here <a class="reference external" href="https://pypsa.readthedocs.io/en/latest/components.html#bus">https://pypsa.readthedocs.io/en/latest/components.html#bus</a>, and analogous for all other components.</p>
 <p>You can also explore attributes yourself.</p>
@@ -840,6 +1401,284 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2897/4030119862.py:1: DeprecatedWarning: component_attrs is deprecated as of 1.0.0 and will be removed in 2.0.0. Use `self.components.&lt;component&gt;.defaults` instead.
+  n1.component_attrs[&quot;Bus&quot;]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>unit</th>
+      <th>default</th>
+      <th>description</th>
+      <th>status</th>
+      <th>static</th>
+      <th>varying</th>
+      <th>typ</th>
+      <th>dtype</th>
+    </tr>
+    <tr>
+      <th>attribute</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>name</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Unique name</td>
+      <td>Input (required)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>v_nom</th>
+      <td>float</td>
+      <td>kV</td>
+      <td>1.0</td>
+      <td>Nominal voltage</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Placeholder for bus type. Not implemented.</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td>float</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>Longitude; the Spatial Reference System Identi...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td>float</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>Latitude; the Spatial Reference System Identif...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>carrier</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td>AC</td>
+      <td>Carrier, such as "AC", "DC", "heat" or "gas".</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>unit</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Unit of the bus' carrier if the implicitly ass...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Location of the bus. Does not influence the op...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>v_mag_pu_set</th>
+      <td>static or series</td>
+      <td>per unit</td>
+      <td>1.0</td>
+      <td>Voltage magnitude set point, per unit of `v_nom`.</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>v_mag_pu_min</th>
+      <td>float</td>
+      <td>per unit</td>
+      <td>0.0</td>
+      <td>Minimum desired voltage, per unit of `v_nom`. ...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>v_mag_pu_max</th>
+      <td>float</td>
+      <td>per unit</td>
+      <td>inf</td>
+      <td>Maximum desired voltage, per unit of `v_nom`. ...</td>
+      <td>Input (optional)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>control</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td>PQ</td>
+      <td>P,Q,V control strategy for power flow, must be...</td>
+      <td>Output</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>generator</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Name of slack generator attached to slack bus.</td>
+      <td>Output</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>sub_network</th>
+      <td>string</td>
+      <td>NaN</td>
+      <td></td>
+      <td>Name of connected sub-network to which bus bel...</td>
+      <td>Output</td>
+      <td>True</td>
+      <td>False</td>
+      <td>&lt;class 'str'&gt;</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td>series</td>
+      <td>MW</td>
+      <td>0.0</td>
+      <td>active power at bus (positive if net generatio...</td>
+      <td>Output</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td>series</td>
+      <td>MVar</td>
+      <td>0.0</td>
+      <td>reactive power (positive if net generation at ...</td>
+      <td>Output</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>v_mag_pu</th>
+      <td>series</td>
+      <td>per unit</td>
+      <td>1.0</td>
+      <td>Voltage magnitude, per unit of `v_nom`</td>
+      <td>Output</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>v_ang</th>
+      <td>series</td>
+      <td>radians</td>
+      <td>0.0</td>
+      <td>Voltage angle</td>
+      <td>Output</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>marginal_price</th>
+      <td>series</td>
+      <td>currency/MWh</td>
+      <td>0.0</td>
+      <td>Shadow price from energy balance constraint</td>
+      <td>Output</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;class 'float'&gt;</td>
+      <td>float64</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">n.add()</span></code> function lets you add any component to the network object <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
 <div class="cell docutils container">
@@ -874,6 +1713,125 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bus</th>
+      <th>control</th>
+      <th>type</th>
+      <th>p_nom</th>
+      <th>p_nom_mod</th>
+      <th>p_nom_extendable</th>
+      <th>p_nom_min</th>
+      <th>p_nom_max</th>
+      <th>p_nom_set</th>
+      <th>p_min_pu</th>
+      <th>...</th>
+      <th>min_up_time</th>
+      <th>min_down_time</th>
+      <th>up_time_before</th>
+      <th>down_time_before</th>
+      <th>ramp_limit_up</th>
+      <th>ramp_limit_down</th>
+      <th>ramp_limit_start_up</th>
+      <th>ramp_limit_shut_down</th>
+      <th>weight</th>
+      <th>p_nom_opt</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gas</th>
+      <td>Springfield</td>
+      <td>PQ</td>
+      <td></td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>nuclear</th>
+      <td>Springfield</td>
+      <td>PQ</td>
+      <td></td>
+      <td>100.0</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 42 columns</p>
+</div></div></div>
 </div>
 <p>Next, we’re going to add the electricity demand.</p>
 <p>A positive value for <code class="docutils literal notranslate"><span class="pre">p_set</span></code> means consumption of power from the bus.</p>
@@ -896,19 +1854,71 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bus</th>
+      <th>carrier</th>
+      <th>type</th>
+      <th>p_set</th>
+      <th>q_set</th>
+      <th>sign</th>
+      <th>active</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Small town</th>
+      <td>Springfield</td>
+      <td>AC</td>
+      <td></td>
+      <td>120.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="optimisation">
 <h3>Optimisation<a class="headerlink" href="#optimisation" title="Link to this heading">#</a></h3>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For this dispatch problem, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-75d3002e-6071-4e66-9657-899833f6eba6">
-<span class="eqno">(3)<a class="headerlink" href="#equation-75d3002e-6071-4e66-9657-899833f6eba6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14595521-a674-4e7a-9857-8fd7c0b4e595">
+<span class="eqno">(3)<a class="headerlink" href="#equation-14595521-a674-4e7a-9857-8fd7c0b4e595" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{s,t};} \sum_{t,s} o_{s} g_{s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf3f89bc-811b-47dd-9417-2199ff1906f9">
-<span class="eqno">(4)<a class="headerlink" href="#equation-bf3f89bc-811b-47dd-9417-2199ff1906f9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-97606191-12c7-4ba1-9140-fcb793323b17">
+<span class="eqno">(4)<a class="headerlink" href="#equation-97606191-12c7-4ba1-9140-fcb793323b17" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{s,t} \leq G_{s}  &amp; \text{generation limits : generator} \\
 D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 \end{align}\]</div>
@@ -927,6 +1937,116 @@ D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2897/3770700743.py:1: FutureWarning: The default value of `include_objective_constant` will change from True to False in version 2.0. Set `include_objective_constant` explicitly to suppress this warning. Using False improves LP numerical conditioning by not including the objective constant as a variable.
+  n1.optimize(solver_name=&quot;highs&quot;)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">n1</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/pypsa/optimization/optimize.py:566,</span> in <span class="ni">OptimizationAccessor.__call__</span><span class="nt">(self, snapshots, multi_investment_periods, transmission_losses, linearized_unit_commitment, model_kwargs, extra_functionality, assign_all_duals, solver_name, solver_options, log_to_console, compute_infeasibilities, include_objective_constant, committable_big_m, meshed_thresholds, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span> <span class="n">n</span><span class="o">.</span><span class="n">_linearized_uc</span> <span class="o">=</span> <span class="n">linearized_unit_commitment</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span> <span class="n">n</span><span class="o">.</span><span class="n">consistency_check</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;unknown_buses&quot;</span><span class="p">])</span>
+<span class="ne">--&gt; </span><span class="mi">566</span> <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">567</span>     <span class="n">sns</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span>     <span class="n">multi_investment_periods</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span>     <span class="n">transmission_losses</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">570</span>     <span class="n">linearized_unit_commitment</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">571</span>     <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span>     <span class="n">include_objective_constant</span><span class="o">=</span><span class="n">include_objective_constant</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span>     <span class="n">committable_big_m</span><span class="o">=</span><span class="n">committable_big_m</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="n">meshed_thresholds</span><span class="o">=</span><span class="n">meshed_thresholds</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span>     <span class="o">**</span><span class="n">model_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span> <span class="k">if</span> <span class="n">extra_functionality</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span>     <span class="n">extra_functionality</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sns</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/pypsa/optimization/optimize.py:756,</span> in <span class="ni">OptimizationAccessor.create_model</span><span class="nt">(self, snapshots, multi_investment_periods, transmission_losses, linearized_unit_commitment, consistency_check, include_objective_constant, committable_big_m, meshed_thresholds, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span>     <span class="n">suffix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;-meshed-</span><span class="si">{</span><span class="n">prev</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">prev</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">755</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">buses</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">756</span>         <span class="n">define_nodal_balance_constraints</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">757</span>             <span class="n">n</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">758</span>             <span class="n">sns</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">759</span>             <span class="n">transmission_losses</span><span class="o">=</span><span class="n">transmission_losses</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">760</span>             <span class="n">buses</span><span class="o">=</span><span class="n">buses</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">761</span>             <span class="n">suffix</span><span class="o">=</span><span class="n">suffix</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">762</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">763</span>     <span class="n">prev</span> <span class="o">=</span> <span class="n">t</span>
+<span class="g g-Whitespace">    </span><span class="mi">765</span> <span class="n">define_kirchhoff_voltage_constraints</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sns</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/pypsa/optimization/constraints.py:1075,</span> in <span class="ni">define_nodal_balance_constraints</span><span class="nt">(n, sns, transmission_losses, buses, suffix)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1072</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span> <span class="n">cbuses</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">_as_xarray</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1075</span> <span class="n">cbuses</span> <span class="o">=</span> <span class="n">cbuses</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">active_assets</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1076</span> <span class="c1"># Only keep the first scenario if there are multiple</span>
+<span class="g g-Whitespace">   </span><span class="mi">1077</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">has_scenarios</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/dataarray.py:1717,</span> in <span class="ni">DataArray.sel</span><span class="nt">(self, indexers, method, tolerance, drop, **indexers_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1601</span> <span class="k">def</span><span class="w"> </span><span class="nf">sel</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1602</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1603</span>     <span class="n">indexers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1607</span>     <span class="o">**</span><span class="n">indexers_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1608</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1609</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return a new DataArray whose data is given by selecting index</span>
+<span class="g g-Whitespace">   </span><span class="mi">1610</span><span class="sd">     labels along the specified dimension(s).</span>
+<span class="g g-Whitespace">   </span><span class="mi">1611</span><span class="sd"> </span>
+<span class="sd">   (...)   1715     Dimensions without coordinates: points</span>
+<span class="g g-Whitespace">   </span><span class="mi">1716</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1717</span>     <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_temp_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1718</span>         <span class="n">indexers</span><span class="o">=</span><span class="n">indexers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1719</span>         <span class="n">drop</span><span class="o">=</span><span class="n">drop</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1720</span>         <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1721</span>         <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1722</span>         <span class="o">**</span><span class="n">indexers_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1723</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1724</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_temp_dataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/dataset.py:3014,</span> in <span class="ni">Dataset.sel</span><span class="nt">(self, indexers, method, tolerance, drop, **indexers_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3010</span>                 <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coord_names</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3011</span>                     <span class="n">query_results</span><span class="o">.</span><span class="n">drop_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3012</span>             <span class="n">query_results</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">no_scalar_variables</span>
+<span class="g g-Whitespace">   </span><span class="mi">3013</span> 
+<span class="ne">-&gt; </span><span class="mi">3014</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">indexers</span><span class="o">=</span><span class="n">query_results</span><span class="o">.</span><span class="n">dim_indexers</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="n">drop</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3015</span>         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">_overwrite_indexes</span><span class="p">(</span><span class="o">*</span><span class="n">query_results</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/dataset.py:2867,</span> in <span class="ni">Dataset.isel</span><span class="nt">(self, indexers, drop, missing_dims, **indexers_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2863</span>                 <span class="n">var</span> <span class="o">=</span> <span class="n">index_variables</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2864</span>             <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2865</span>                 <span class="n">var_indexers</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">indexers</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">dims</span><span class="p">}</span>
+<span class="g g-Whitespace">   </span><span class="mi">2866</span>                 <span class="k">if</span> <span class="n">var_indexers</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2867</span>                     <span class="n">var</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">var_indexers</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2868</span>                     <span class="k">if</span> <span class="n">drop</span> <span class="ow">and</span> <span class="n">var</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">coord_names</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2869</span>                         <span class="n">coord_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2870</span>                         <span class="k">continue</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/variable.py:1130,</span> in <span class="ni">Variable.isel</span><span class="nt">(self, indexers, missing_dims, **indexers_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1127</span> <span class="n">indexers</span> <span class="o">=</span> <span class="n">drop_dims_from_indexers</span><span class="p">(</span><span class="n">indexers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">,</span> <span class="n">missing_dims</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1129</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">indexers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1130</span> <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/variable.py:818,</span> in <span class="ni">Variable.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">805</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Return a new Variable object whose contents are consistent with</span>
+<span class="g g-Whitespace">    </span><span class="mi">806</span><span class="sd"> getting the provided key from the underlying data.</span>
+<span class="g g-Whitespace">    </span><span class="mi">807</span><span class="sd"> </span>
+<span class="sd">   (...)    815 array `x.values` directly.</span>
+<span class="g g-Whitespace">    </span><span class="mi">816</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span> <span class="n">dims</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">new_order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broadcast_indexes</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">818</span> <span class="n">indexable</span> <span class="o">=</span> <span class="n">as_indexable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> <span class="n">data</span> <span class="o">=</span> <span class="n">indexing</span><span class="o">.</span><span class="n">apply_indexer</span><span class="p">(</span><span class="n">indexable</span><span class="p">,</span> <span class="n">indexer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">822</span> <span class="k">if</span> <span class="n">new_order</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/core/indexing.py:1024,</span> in <span class="ni">as_indexable</span><span class="nt">(array)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1021</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="s2">&quot;__array_function__&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="k">return</span> <span class="n">NdArrayLikeIndexingAdapter</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1024</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid array type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: Invalid array type: &lt;class &#39;pandas.arrays.ArrowStringArray&#39;&gt;
 </pre></div>
 </div>
 </div>
