@@ -595,13 +595,13 @@
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59199b0f-b516-4a6c-ac5c-93404f1bf448">
-<span class="eqno">(1)<a class="headerlink" href="#equation-59199b0f-b516-4a6c-ac5c-93404f1bf448" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-92387ae5-8ae8-49de-831d-f62a43929489">
+<span class="eqno">(1)<a class="headerlink" href="#equation-92387ae5-8ae8-49de-831d-f62a43929489" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf2026be-a393-4135-8901-311e8c443091">
-<span class="eqno">(2)<a class="headerlink" href="#equation-cf2026be-a393-4135-8901-311e8c443091" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e04f61c2-b565-4288-9442-254a9537632f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-e04f61c2-b565-4288-9442-254a9537632f" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -F_\ell &amp;\leq f_{\ell,t} \leq F_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} f_{\ell,t} &amp; \text{KCL : bus} \\
@@ -902,13 +902,13 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <h3>Optimisation<a class="headerlink" href="#optimisation" title="Link to this heading">#</a></h3>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For this dispatch problem, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-44058fea-f9f1-4f98-a3fa-3f67b6a92161">
-<span class="eqno">(3)<a class="headerlink" href="#equation-44058fea-f9f1-4f98-a3fa-3f67b6a92161" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-75d3002e-6071-4e66-9657-899833f6eba6">
+<span class="eqno">(3)<a class="headerlink" href="#equation-75d3002e-6071-4e66-9657-899833f6eba6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{s,t};} \sum_{t,s} o_{s} g_{s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-85d38930-255d-4ec5-bdbe-995c1f28c18f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-85d38930-255d-4ec5-bdbe-995c1f28c18f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bf3f89bc-811b-47dd-9417-2199ff1906f9">
+<span class="eqno">(4)<a class="headerlink" href="#equation-bf3f89bc-811b-47dd-9417-2199ff1906f9" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{s,t} \leq G_{s}  &amp; \text{generation limits : generator} \\
 D_t &amp;= \sum_s g_{s,t} &amp; \text{market clearing : bus} \\
 \end{align}\]</div>
