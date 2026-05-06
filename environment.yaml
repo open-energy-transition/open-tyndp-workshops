@@ -45,6 +45,7 @@ dependencies:
 - pyyaml
 
   # geodata utilities
+- google-cloud-storage>=2.0
 - shapely>2
 - pyepsg
 - cartopy>=0.22
