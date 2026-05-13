@@ -1,0 +1,61 @@
+name: default
+channels:
+- conda-forge
+- bioconda
+- nodefaults
+dependencies:
+- python >=3.12
+- pip *
+- setuptools *
+- numpy *
+- scipy *
+- pandas >=2,<3
+- geopandas >=1
+- snakemake-minimal >=9
+- snakemake-storage-plugin-http >=0.3
+- xarray >=2024.3.0,<2025.7.0
+- networkx *
+- yaml *
+- pyomo *
+- netcdf4 *
+- pypsa >=0.35.2
+- atlite >=0.2.14
+- powerplantmatching >=0.6
+- rasterio >=1.3.2,<1.4
+- pysheds *
+- pyarrow *
+- numba *
+- highspy *
+- google-cloud-storage >=2.0
+- ipython *
+- jupyterlab *
+- tabula-py *
+- xlrd *
+- lxml *
+- pytables *
+- pyxlsb *
+- openpyxl *
+- libgdal-hdf5 *
+- libgdal-netcdf *
+- pdf2image *
+- numexpr *
+- pyyaml *
+- shapely >=2
+- pyepsg *
+- cartopy >=0.22
+- country_converter *
+- mapclassify *
+- matplotlib >=3.6
+- plotly *
+- hvplot *
+- holoviews *
+- geoviews >=1.10
+- graphviz *
+- fiona *
+- folium *
+- jupyter-book <2.0.0
+- ghp-import *
+- pre-commit *
+- pip
+- pip:
+  - pypsa-explorer

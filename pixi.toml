@@ -14,6 +14,11 @@ platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 build-book = "jupyter-book build open-tyndp-workshops"
 clean-book = "jupyter-book clean open-tyndp-workshops"
 rebuild-book = { depends-on = ["clean-book", "build-book"] }
+export-env-linux-64  = "pixi project export conda-environment --platform linux-64  envs/linux-64.yaml"
+export-env-osx-arm64 = "pixi project export conda-environment --platform osx-arm64 envs/osx-arm64.yaml"
+export-env-osx-64    = "pixi project export conda-environment --platform osx-64    envs/osx-64.yaml"
+export-env-win-64    = "pixi project export conda-environment --platform win-64    envs/win-64.yaml"
+export-envs          = { depends-on = ["export-env-linux-64", "export-env-osx-arm64", "export-env-osx-64", "export-env-win-64"] }
 
 # ── conda dependencies ────────────────────────────────────────────────────────
 

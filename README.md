@@ -11,16 +11,49 @@ Alternatively, you can also build and explore the Open-TYNDP Workshops book loca
 
 All notebooks are currently compatible with PyPSA v1.0.5.
 
-### Building the book
+### Running notebooks locally
 
-If you'd like to develop and/or build the Open-TYNDP Workshops book locally, you should:
+#### Using pixi (recommended)
+
+[pixi](https://pixi.sh) manages the exact locked environment from `pixi.lock` and works on Linux, macOS, and Windows.
 
 1. Clone this repository
-2. Install the environment by running `conda env create -f environment.yaml`
-3. Activate the environment by running `conda activate open-tyndp-workshops`
-3. (Optional) Edit the books source files located in the `open-tyndp-workshops/` directory
-4. Run `jupyter-book clean open-tyndp-workshops/` to remove any existing builds
-5. Run `jupyter-book build open-tyndp-workshops/`
+2. [Install pixi](https://pixi.sh/latest/#installation)
+3. Run `pixi install` to set up the environment
+4. Launch JupyterLab with `pixi run jupyter lab`
+
+#### Using conda (alternative)
+
+Pre-exported, fully-pinned conda environment files are provided in the `envs/` directory.
+
+1. Clone this repository
+2. Install the environment for your platform:
+   ```bash
+   # Linux
+   conda env create -f envs/linux-64.yaml
+   # macOS (Apple Silicon)
+   conda env create -f envs/osx-arm64.yaml
+   # macOS (Intel)
+   conda env create -f envs/osx-64.yaml
+   # Windows
+   conda env create -f envs/win-64.yaml
+   ```
+3. Activate the environment: `conda activate open-tyndp-workshops`
+4. Launch JupyterLab: `jupyter lab`
+
+### Building the book locally
+
+With pixi:
+
+```bash
+pixi run build-book
+```
+
+To clean and rebuild from scratch:
+
+```bash
+pixi run rebuild-book
+```
 
 A fully-rendered HTML version of the book will be built in `open-tyndp-workshops/_build/html/`.
 
