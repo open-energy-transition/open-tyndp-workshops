@@ -16,37 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -67,6 +70,7 @@
     <link rel="prev" title="Workshop 2: Introduction to Snakemake, new features update &amp; benchmarking" href="20250624-workshop-pypsa-02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -82,19 +86,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -102,7 +95,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -110,8 +102,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -157,21 +150,17 @@
     
     
     <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
-    <script>document.write(`<img src="_static/logo_merged.png" class="logo__image only-dark" alt="Open-TYNDP Workshops - Home"/>`);</script>
+    <img src="_static/logo_merged.png" class="logo__image only-dark pst-js-only" alt="Open-TYNDP Workshops - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -213,9 +202,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -376,7 +370,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -390,25 +384,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -653,13 +639,13 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
@@ -846,7 +832,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/642860e2a2429d3c6e6ae03682218727345a5dd0055a1037816dee018718c698.png" src="_images/642860e2a2429d3c6e6ae03682218727345a5dd0055a1037816dee018718c698.png" />
+<img alt="_images/b27597df309a635dd41de5eabb9be11c29353bf867770b89982cbabb270219ec.png" src="_images/b27597df309a635dd41de5eabb9be11c29353bf867770b89982cbabb270219ec.png" />
 </div>
 </div>
 </section>
@@ -860,7 +846,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8494b88cdb7036b7a6b9dd167cc0a98b0bee10ccc01edaab6e1fce19751ae2d9.png" src="_images/8494b88cdb7036b7a6b9dd167cc0a98b0bee10ccc01edaab6e1fce19751ae2d9.png" />
+<img alt="_images/110917cdde884b8e9a54649f208379ae0ecc001c72e6880b87207b4e1e446989.png" src="_images/110917cdde884b8e9a54649f208379ae0ecc001c72e6880b87207b4e1e446989.png" />
 </div>
 </div>
 </section>
@@ -875,7 +861,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b9c41169880234f1e064821e7bc1c0599b60e140c9e5a72b03ac8fd0a8fc1b8d.png" src="_images/b9c41169880234f1e064821e7bc1c0599b60e140c9e5a72b03ac8fd0a8fc1b8d.png" />
+<img alt="_images/ea57301f382f9b86158a125e3c593ea21be8e45637a3dd5f9e3a8d40ca150a90.png" src="_images/ea57301f382f9b86158a125e3c593ea21be8e45637a3dd5f9e3a8d40ca150a90.png" />
 </div>
 </div>
 </section>
@@ -889,7 +875,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/84fd7340b9ddab99e246629d5362fdc2b87f90a70afceed2c1cdfb1a9c9b74fe.png" src="_images/84fd7340b9ddab99e246629d5362fdc2b87f90a70afceed2c1cdfb1a9c9b74fe.png" />
+<img alt="_images/8518605dfaa60cbc7d5f3d10cbaf30f105aa4e3752e22404512bb5e14500bff3.png" src="_images/8518605dfaa60cbc7d5f3d10cbaf30f105aa4e3752e22404512bb5e14500bff3.png" />
 </div>
 </div>
 <p>We can also explore the hourly time series energy balances in more detail.</p>
@@ -926,7 +912,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cd81c5d237cc9cf644e4b1022a0a9667e3496c962023973c663af817ba717b68.png" src="_images/cd81c5d237cc9cf644e4b1022a0a9667e3496c962023973c663af817ba717b68.png" />
+<img alt="_images/f0e522f4c37e9c7f843d5b397f01d77369f64b1e35a6debc19cf72b5aa103aee.png" src="_images/f0e522f4c37e9c7f843d5b397f01d77369f64b1e35a6debc19cf72b5aa103aee.png" />
 </div>
 </div>
 </section>
@@ -940,7 +926,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/125d078f7e7dc61da4b0ecba09d12de297418c652d25215d660b022579411ed8.png" src="_images/125d078f7e7dc61da4b0ecba09d12de297418c652d25215d660b022579411ed8.png" />
+<img alt="_images/8212fb172054f55773774d59bafd619b1fa91655ff259d1613b65cfd64636a0f.png" src="_images/8212fb172054f55773774d59bafd619b1fa91655ff259d1613b65cfd64636a0f.png" />
 </div>
 </div>
 </section>
@@ -954,7 +940,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/daa479faf7ce651898ca46e60dfbef540a68759b638090ac6eedba4954113925.png" src="_images/daa479faf7ce651898ca46e60dfbef540a68759b638090ac6eedba4954113925.png" />
+<img alt="_images/2d1bb1f1aee5c1a1db9e1faa00456614c8ac69381d1e6b5e854b46add47bf7d5.png" src="_images/2d1bb1f1aee5c1a1db9e1faa00456614c8ac69381d1e6b5e854b46add47bf7d5.png" />
 </div>
 </div>
 </section>
@@ -968,7 +954,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5e8b5be9c00e47bdc2feb93cbee955a1762e47119278b4999bdc44aa692b4b1b.png" src="_images/5e8b5be9c00e47bdc2feb93cbee955a1762e47119278b4999bdc44aa692b4b1b.png" />
+<img alt="_images/e86df5fb45194485acbf4b0e3cf0b4ca428a8ec1af777f13981b510ae519bc24.png" src="_images/e86df5fb45194485acbf4b0e3cf0b4ca428a8ec1af777f13981b510ae519bc24.png" />
 </div>
 </div>
 </section>
@@ -982,7 +968,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a16d08f9a3f79c173598fe4c61b86c1e5d243f73cfc7cd6db638e540bf16954.png" src="_images/7a16d08f9a3f79c173598fe4c61b86c1e5d243f73cfc7cd6db638e540bf16954.png" />
+<img alt="_images/b665771f24a3ff9e181d4c74f9931764bed6f57786cfc56f286a33f14b40074f.png" src="_images/b665771f24a3ff9e181d4c74f9931764bed6f57786cfc56f286a33f14b40074f.png" />
 </div>
 </div>
 </section>
@@ -996,7 +982,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/09c43c325558dc9b373053bc207fe31299c76d6a5b6677bd9f76b5145e52567f.png" src="_images/09c43c325558dc9b373053bc207fe31299c76d6a5b6677bd9f76b5145e52567f.png" />
+<img alt="_images/8eda80673087ee2ef6c634b5ed5d04322b227a10bd4580bbeece5b7a80215f27.png" src="_images/8eda80673087ee2ef6c634b5ed5d04322b227a10bd4580bbeece5b7a80215f27.png" />
 </div>
 </div>
 </section>
@@ -1016,7 +1002,7 @@ Done
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/079e7283ee23c74f74bf68d5c124c62fdaf50aa8e2673fc7997dc89468217192.png" src="_images/079e7283ee23c74f74bf68d5c124c62fdaf50aa8e2673fc7997dc89468217192.png" />
+<img alt="_images/32cd45846dd7a90dd696aca1a2d185cdec554292d80e64906704c489bdd475d7.png" src="_images/32cd45846dd7a90dd696aca1a2d185cdec554292d80e64906704c489bdd475d7.png" />
 </div>
 </div>
 </section>
@@ -1836,13 +1822,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.0.6. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.0.4 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
@@ -1953,14 +1939,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">1. Interactive Exploration with PyPSA-Explorer</a><ul class="visible nav section-nav flex-column">
@@ -2045,8 +2033,8 @@ By Open Energy Transition
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

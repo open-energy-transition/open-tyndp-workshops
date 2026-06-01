@@ -16,37 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -67,6 +70,7 @@
     <link rel="prev" title="Background: Introduction to the basics of Python" href="background1-python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -82,19 +86,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -102,7 +95,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -110,8 +102,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -157,21 +150,17 @@
     
     
     <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
-    <script>document.write(`<img src="_static/logo_merged.png" class="logo__image only-dark" alt="Open-TYNDP Workshops - Home"/>`);</script>
+    <img src="_static/logo_merged.png" class="logo__image only-dark pst-js-only" alt="Open-TYNDP Workshops - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -213,9 +202,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -376,7 +370,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -390,25 +384,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -659,11 +645,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.82263214, 0.44528918],
-       [0.11589301, 0.1410297 ],
-       [0.36731052, 0.5072148 ],
-       [0.54593974, 0.8881784 ],
-       [0.67053103, 0.53596834]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.19653727, 0.2720133 ],
+       [0.53046461, 0.22157849],
+       [0.46797458, 0.49113408],
+       [0.12840944, 0.49391945],
+       [0.12150574, 0.58644911]])
 </pre></div>
 </div>
 </div>
@@ -768,7 +754,7 @@ It takes two arrays representing x and y values and creates two 2D grids: one fo
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.283185307179586
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(6.283185307179586)
 </pre></div>
 </div>
 </div>
@@ -849,7 +835,7 @@ It takes two arrays representing x and y values and creates two 2D grids: one fo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b24d46b34dc38dfadad4721fa0a1486b3125527e8153209bda08a8bf3579811f.png" src="_images/b24d46b34dc38dfadad4721fa0a1486b3125527e8153209bda08a8bf3579811f.png" />
+<img alt="_images/e1d779b2f043544b3123000e955a71de218b1d6cbe9ac667413f76a50a448b72.png" src="_images/e1d779b2f043544b3123000e955a71de218b1d6cbe9ac667413f76a50a448b72.png" />
 </div>
 </div>
 <p>There are many ways to visualize 2D data.
@@ -861,7 +847,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/50bf4cb0cdabee22fb9d4f9eecee6593e7174ae30b5933967768e7228c146ad8.png" src="_images/50bf4cb0cdabee22fb9d4f9eecee6593e7174ae30b5933967768e7228c146ad8.png" />
+<img alt="_images/56d30a12591d72256ab5797a179fa54bf63446869280a7deb4550bdce3f99c7a.png" src="_images/56d30a12591d72256ab5797a179fa54bf63446869280a7deb4550bdce3f99c7a.png" />
 </div>
 </div>
 </section>
@@ -885,10 +871,10 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fe2e8db97f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f36c06fc410&gt;
 </pre></div>
 </div>
-<img alt="_images/5cb62ce6141db970185152140c5e41822ea24774816d61d2eb00946688f96c8c.png" src="_images/5cb62ce6141db970185152140c5e41822ea24774816d61d2eb00946688f96c8c.png" />
+<img alt="_images/6766acd2ff18ae106ba110687be65e54e6ad213fe57015dbbb08b52377e2827c.png" src="_images/6766acd2ff18ae106ba110687be65e54e6ad213fe57015dbbb08b52377e2827c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -904,7 +890,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
        ...,
        [False, False, False, ..., False, False, False],
        [False, False, False, ..., False, False, False],
-       [False, False, False, ..., False, False, False]])
+       [False, False, False, ..., False, False, False]], shape=(50, 100))
 </pre></div>
 </div>
 </div>
@@ -916,7 +902,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.False_
 </pre></div>
 </div>
 </div>
@@ -968,10 +954,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fe2e8c2d2e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f36c099ee90&gt;
 </pre></div>
 </div>
-<img alt="_images/e6e09a402165a1ccc9b26a5cc641434e970d8804e38f116051b20d5159082ad5.png" src="_images/e6e09a402165a1ccc9b26a5cc641434e970d8804e38f116051b20d5159082ad5.png" />
+<img alt="_images/97df8e1da9e4130d3a648d437059eb94657d70963e38d706cc525fcf1908e123.png" src="_images/97df8e1da9e4130d3a648d437059eb94657d70963e38d706cc525fcf1908e123.png" />
 </div>
 </div>
 </section>
@@ -1018,7 +1004,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3083.038387807155
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-3083.038387807155)
 </pre></div>
 </div>
 </div>
@@ -1031,7 +1017,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.616607677561431
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.616607677561431)
 </pre></div>
 </div>
 </div>
@@ -1044,7 +1030,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6402280119141424
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.6402280119141424)
 </pre></div>
 </div>
 </div>
@@ -1066,10 +1052,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8c5bd40&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c0710cd0&gt;]
 </pre></div>
 </div>
-<img alt="_images/4ded748916cd2ce2c52ae350ab95a556446af98cbb46478b6952796fbe8fe8ca.png" src="_images/4ded748916cd2ce2c52ae350ab95a556446af98cbb46478b6952796fbe8fe8ca.png" />
+<img alt="_images/145ccaeeff7f9784c897eda7322e3c71cac191edc334aa1e528317df8bb055f8.png" src="_images/145ccaeeff7f9784c897eda7322e3c71cac191edc334aa1e528317df8bb055f8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1079,10 +1065,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8b04410&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c07caad0&gt;]
 </pre></div>
 </div>
-<img alt="_images/5014ad4be7a9c941f0329998fe5e3668736344d1cdc968e0d6d4e4e78bb81b28.png" src="_images/5014ad4be7a9c941f0329998fe5e3668736344d1cdc968e0d6d4e4e78bb81b28.png" />
+<img alt="_images/a65efc8069805ecbfd1e1cd980233adbd85382ee1243d545b27e6fde8dc9e6d4.png" src="_images/a65efc8069805ecbfd1e1cd980233adbd85382ee1243d545b27e6fde8dc9e6d4.png" />
 </div>
 </div>
 </section>
@@ -1121,7 +1107,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b8d5f4254d2016e645110a553722a902b2e20772c7ddc4e70f6b258b22b271d.png" src="_images/6b8d5f4254d2016e645110a553722a902b2e20772c7ddc4e70f6b258b22b271d.png" />
+<img alt="_images/bf9f0401cf091ba2b71e13a7684b361dd2cff1701fe7ceda2fdf7d3306c722e7.png" src="_images/bf9f0401cf091ba2b71e13a7684b361dd2cff1701fe7ceda2fdf7d3306c722e7.png" />
 </div>
 </div>
 <section id="subplots">
@@ -1134,7 +1120,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2d72e5d46f836f71c207cc597eb87e4f0e324ac0b56202b37d7eafc892b851fa.png" src="_images/2d72e5d46f836f71c207cc597eb87e4f0e324ac0b56202b37d7eafc892b851fa.png" />
+<img alt="_images/794a2b05d2be288aa20c79253ddbae963894de3e360a2cae6dde6d4c731dab7d.png" src="_images/794a2b05d2be288aa20c79253ddbae963894de3e360a2cae6dde6d4c731dab7d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1156,7 +1142,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6bc8bf8939757e7d3e64f5156d6f21d30cd965efa3ffb8d8f194aaf06d1501ef.png" src="_images/6bc8bf8939757e7d3e64f5156d6f21d30cd965efa3ffb8d8f194aaf06d1501ef.png" />
+<img alt="_images/672d7379d7bd1c5c52fb1d4e3a71e030aec44f461a7563cedf16ae6a380045e2.png" src="_images/672d7379d7bd1c5c52fb1d4e3a71e030aec44f461a7563cedf16ae6a380045e2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1196,10 +1182,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8a4eae0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c0640690&gt;]
 </pre></div>
 </div>
-<img alt="_images/3e75efcdddd78374bcc6b94688df066125b7def9f95facb18784f9e3c11b7733.png" src="_images/3e75efcdddd78374bcc6b94688df066125b7def9f95facb18784f9e3c11b7733.png" />
+<img alt="_images/bec9a6c7c15bf42034ea3ce89d8f36809f4a72d216ba0a39e788e9adff21ce6f.png" src="_images/bec9a6c7c15bf42034ea3ce89d8f36809f4a72d216ba0a39e788e9adff21ce6f.png" />
 </div>
 </div>
 <p>This does the same thing as</p>
@@ -1210,10 +1196,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8ad1e50&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c04bc2d0&gt;]
 </pre></div>
 </div>
-<img alt="_images/3e75efcdddd78374bcc6b94688df066125b7def9f95facb18784f9e3c11b7733.png" src="_images/3e75efcdddd78374bcc6b94688df066125b7def9f95facb18784f9e3c11b7733.png" />
+<img alt="_images/bec9a6c7c15bf42034ea3ce89d8f36809f4a72d216ba0a39e788e9adff21ce6f.png" src="_images/bec9a6c7c15bf42034ea3ce89d8f36809f4a72d216ba0a39e788e9adff21ce6f.png" />
 </div>
 </div>
 <p>This starts to matter when we have multiple axes to manage.</p>
@@ -1227,10 +1213,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8988ef0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c054f110&gt;]
 </pre></div>
 </div>
-<img alt="_images/de46264718675870cff368eff9b5842530562538ca168ec2e4d01de87db4b263.png" src="_images/de46264718675870cff368eff9b5842530562538ca168ec2e4d01de87db4b263.png" />
+<img alt="_images/e5c57552fd0abcdeb9e9de854b8066644c17fc26f860c16308baacc04ae1079c.png" src="_images/e5c57552fd0abcdeb9e9de854b8066644c17fc26f860c16308baacc04ae1079c.png" />
 </div>
 </div>
 </section>
@@ -1252,7 +1238,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/49d511cb688b2996fe6c85d6962f3e102c877d18fb3b9417cc8a9a8b15903ff8.png" src="_images/49d511cb688b2996fe6c85d6962f3e102c877d18fb3b9417cc8a9a8b15903ff8.png" />
+<img alt="_images/b42ebd54967948a34b2b893ceccd7b45144e424940e81ea9a08afb44d5a4e6ed.png" src="_images/b42ebd54967948a34b2b893ceccd7b45144e424940e81ea9a08afb44d5a4e6ed.png" />
 </div>
 </div>
 </section>
@@ -1266,11 +1252,11 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e886fe00&gt;,
- &lt;matplotlib.lines.Line2D at 0x7fe2e884d5b0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c02834d0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7f36c0283610&gt;]
 </pre></div>
 </div>
-<img alt="_images/e89847cceba5625124324f75ede4409ecc6676adc95327b8c8c990a8d0602311.png" src="_images/e89847cceba5625124324f75ede4409ecc6676adc95327b8c8c990a8d0602311.png" />
+<img alt="_images/d8a6fa411c7efb6819f89ad8fdc3c3b977be49cb0612c91505145b9f3951b2a1.png" src="_images/d8a6fa411c7efb6819f89ad8fdc3c3b977be49cb0612c91505145b9f3951b2a1.png" />
 </div>
 </div>
 <p>It’s simple to switch axes</p>
@@ -1282,11 +1268,11 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e870cb60&gt;,
- &lt;matplotlib.lines.Line2D at 0x7fe2e870cb30&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c030f250&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7f36c030f390&gt;]
 </pre></div>
 </div>
-<img alt="_images/46e8f21e1150a6d1910fa5fa2f72cba4632bddb9c30f4dc33f35a1c97759cedc.png" src="_images/46e8f21e1150a6d1910fa5fa2f72cba4632bddb9c30f4dc33f35a1c97759cedc.png" />
+<img alt="_images/56865909b26c2bf693959cb0dc2fef350e7ddd082729a73a8cff9eafe3a7bdf5.png" src="_images/56865909b26c2bf693959cb0dc2fef350e7ddd082729a73a8cff9eafe3a7bdf5.png" />
 </div>
 </div>
 <section id="line-styles">
@@ -1300,10 +1286,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8794410&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c01a3110&gt;]
 </pre></div>
 </div>
-<img alt="_images/1551a48be783b9ad13fae0365d545f74c73a2efa869d585bb3bcb11234c22e66.png" src="_images/1551a48be783b9ad13fae0365d545f74c73a2efa869d585bb3bcb11234c22e66.png" />
+<img alt="_images/9b163272fb89b12414f07af00e1ca63da10ce8e207007afb180d147ac78fa62f.png" src="_images/9b163272fb89b12414f07af00e1ca63da10ce8e207007afb180d147ac78fa62f.png" />
 </div>
 </div>
 </section>
@@ -1319,10 +1305,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e8b3f290&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c022ae90&gt;]
 </pre></div>
 </div>
-<img alt="_images/4ed0027eb74d03762ecacc36419d1b3300d4f15fe57eb0bc791026d509ec6ebf.png" src="_images/4ed0027eb74d03762ecacc36419d1b3300d4f15fe57eb0bc791026d509ec6ebf.png" />
+<img alt="_images/101a6987d592bcb42577fabe1d510372345f380083b94a11666f51308209d98c.png" src="_images/101a6987d592bcb42577fabe1d510372345f380083b94a11666f51308209d98c.png" />
 </div>
 </div>
 </section>
@@ -1338,10 +1324,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe2e89d7b60&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f36c00b6c10&gt;]
 </pre></div>
 </div>
-<img alt="_images/03d4c8f50e9cbd83a7206a10fd04e87b9a2668a0ccd89f92e9b7b97aa1161370.png" src="_images/03d4c8f50e9cbd83a7206a10fd04e87b9a2668a0ccd89f92e9b7b97aa1161370.png" />
+<img alt="_images/b23acb8ce4f0da790b8d189122f2bd43d3a264b7a6859802bd21fccba5b72bb5.png" src="_images/b23acb8ce4f0da790b8d189122f2bd43d3a264b7a6859802bd21fccba5b72bb5.png" />
 </div>
 </div>
 </section>
@@ -1360,7 +1346,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-3.0, 3.0)
 </pre></div>
 </div>
-<img alt="_images/47b68a7be638226d3ede863a04199907c91f3870c1074dc0f3e0470c8ac9923e.png" src="_images/47b68a7be638226d3ede863a04199907c91f3870c1074dc0f3e0470c8ac9923e.png" />
+<img alt="_images/181ff709e7cd1f5ec5ce8be33a2807f1f0784e480406358054533dfbb7fe2e6c.png" src="_images/181ff709e7cd1f5ec5ce8be33a2807f1f0784e480406358054533dfbb7fe2e6c.png" />
 </div>
 </div>
 </section>
@@ -1377,10 +1363,10 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7fe2e8669460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7f36d41c1d30&gt;
 </pre></div>
 </div>
-<img alt="_images/86b9544916c29b365ada8893db868586eca99ce5ea9071c46bd67681d4f3a465.png" src="_images/86b9544916c29b365ada8893db868586eca99ce5ea9071c46bd67681d4f3a465.png" />
+<img alt="_images/34e9ef5e6e30a94fe257825ba05d7d5024ee7e5f62ae1c11dc5c4abd6dfcf7ce.png" src="_images/34e9ef5e6e30a94fe257825ba05d7d5024ee7e5f62ae1c11dc5c4abd6dfcf7ce.png" />
 </div>
 </div>
 <p>There are many different colormaps available in matplotlib: <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html">https://matplotlib.org/stable/tutorials/colors/colormaps.html</a></p>
@@ -1402,7 +1388,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/03b848c19ed5bd3f4d0babe656c6acbce2e528b9cfb45ce00fce42f0e132d944.png" src="_images/03b848c19ed5bd3f4d0babe656c6acbce2e528b9cfb45ce00fce42f0e132d944.png" />
+<img alt="_images/b9826997f1555a119c897c80f9c9e53d257b226aeb59aa0244380e8968c8ff53.png" src="_images/b9826997f1555a119c897c80f9c9e53d257b226aeb59aa0244380e8968c8ff53.png" />
 </div>
 </div>
 </section>
@@ -1538,17 +1524,17 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[-1.07662133, -0.6574613 ,  0.42547439],
-        [ 0.34800373, -0.47590684,  0.55800316],
-        [ 0.83189597,  0.19359626, -0.56104755]],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[-0.32806734,  0.14493441,  0.07486791],
+        [ 0.01245368,  0.72555677,  0.26514264],
+        [-0.20001621, -0.87839978, -0.18001416]],
 
-       [[ 0.36473485, -0.83193068,  0.81223939],
-        [-0.60684549,  1.85932868,  0.15217775],
-        [ 0.30461061,  0.73583146, -0.88479624]],
+       [[ 0.37557741, -0.78560028, -1.3675507 ],
+        [ 0.44536775, -0.90826277, -2.25109594],
+        [-1.43371907, -0.77296513, -0.18561487]],
 
-       [[ 1.97034238,  0.03973306,  0.92943271],
-        [-0.82656872,  0.52159811,  1.73159705],
-        [ 0.46924717, -0.752115  ,  0.54459615]]])
+       [[ 0.90250336, -1.17181368, -0.69250571],
+        [-0.08380484, -0.81474721,  1.45377211],
+        [-1.37179836, -0.42073184, -0.38015136]]])
 </pre></div>
 </div>
 </div>
@@ -1707,7 +1693,7 @@ If the last two dimensions have the same length, then the two arrays can be broa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>325
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(325)
 </pre></div>
 </div>
 </div>
@@ -1827,14 +1813,16 @@ If the last two dimensions have the same length, then the two arrays can be broa
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-package">Importing a Package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndarrays">NDArrays</a></li>
@@ -1911,8 +1899,8 @@ By Open Energy Transition
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
