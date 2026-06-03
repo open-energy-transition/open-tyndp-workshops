@@ -1,18 +1,33 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 from IPython.display import Code, display
+from pdf2image import convert_from_path
+from pdf2image.exceptions import PDFPageCountError
+import matplotlib.pyplot as plt
 
 
-def display_tree(directory, prefix="", is_last=True, max_depth=None, current_depth=0):
+def display_tree(
+    directory: str | Path,
+    prefix: str = "",
+    is_last: bool = True,
+    max_depth: int | None = None,
+    current_depth: int = 0,
+) -> None:
     """
     Display directory structure as a tree.
 
-    Args:
-        directory: Path to the directory
-        prefix: Prefix for the current line (used for recursion)
-        is_last: Whether this is the last item in its parent directory
-        max_depth: Maximum depth to traverse (None for unlimited)
-        current_depth: Current depth level (used for recursion)
+    Parameters
+    ----------
+    directory : str or Path
+        Path to the directory.
+    prefix : str, optional
+        Prefix for the current line, used for recursion. Defaults to "".
+    is_last : bool, optional
+        Whether this is the last item in its parent directory. Defaults to True.
+    max_depth : int or None, optional
+        Maximum depth to traverse. None for unlimited. Defaults to None.
+    current_depth : int, optional
+        Current depth level, used for recursion. Defaults to 0.
     """
     directory = Path(directory)
 
@@ -47,3 +62,49 @@ def display_tree(directory, prefix="", is_last=True, max_depth=None, current_dep
             display_tree(
                 item, prefix + extension, is_last_item, max_depth, current_depth + 1
             )
+
+
+def show_benchmarks(
+    fn: str,
+    years: list = [2030, 2040],
+    bench_path: str = "data/results-1H-20251129/validation/graphics_s_all___all_years",
+    layout: str = "by_row",
+):
+    """
+    Display benchmark figures for one or more years side by side.
+
+    Parameters
+    ----------
+    fn : str
+        Base filename of the benchmark PDFs, without year suffix or file type suffix.
+    years : list of int, optional
+        Years to include in the plot. Defaults to [2030, 2040].
+    bench_path : str, optional
+        Path to the directory containing the benchmark PDF files.
+    layout : {"by_column", "by_row"}
+        Whether to arrange figures across columns (side by side) or
+        down rows (stacked). Defaults to "by_row".
+
+    Returns
+    -------
+    None
+        Displays the plot inline and returns nothing.
+    """
+    try:
+        images = [
+            convert_from_path(Path(bench_path, f"{fn}_{y}.pdf"))[0] for y in years
+        ]
+    except PDFPageCountError:
+        print("File not found, skipping...")
+        return
+
+    n = len(images)
+    nrows, ncols = (1, n) if layout == "by_column" else (n, 1)
+    fig, axes = plt.subplots(nrows, ncols)
+    axes = [axes] if n == 1 else axes.flatten()
+
+    for ax, img in zip(axes, images):
+        ax.imshow(img)
+        ax.axis("off")
+    plt.tight_layout()
+    plt.show()
