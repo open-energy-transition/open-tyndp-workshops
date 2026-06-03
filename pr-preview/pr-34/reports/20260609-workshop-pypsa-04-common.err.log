@@ -1,0 +1,61 @@
+Traceback (most recent call last):
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+subplot_kw = {"projection": proj}
+fig, ax = plt.subplots(figsize=(12, 12), subplot_kw=subplot_kw)
+s.energy_balance.plot.map(
+    bus_carrier="H2",
+    ax=ax,
+    bus_area_fraction=0.007,
+    flow_area_fraction=0.004,
+    legend_circles_kw=dict(
+        frameon=False,
+        labelspacing=0.8,
+        handletextpad=1.5,
+    ),
+    legend_arrows_kw=dict(
+        frameon=False,
+        labelspacing=0.8,
+        handletextpad=1.5,
+    ),
+);
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[21][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m subplot_kw = {[33m"projection"[39m: proj}
+[32m      2[39m fig, ax = plt.subplots(figsize=([32m12[39m, [32m12[39m), subplot_kw=subplot_kw)
+[32m      3[39m s.energy_balance.plot.map(
+[32m      4[39m     bus_carrier=[33m"H2"[39m,
+
+[31mNameError[39m: name 'proj' is not defined
+
