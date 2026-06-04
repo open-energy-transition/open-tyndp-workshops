@@ -1,0 +1,2628 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Background: Tabular data analysis with pandas &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'background3-pandas';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Background: Introduction to geopandas and cartopy" href="background4-geopandas.html" />
+    <link rel="prev" title="Background: Introduction to numpy and matplotlib" href="background2-numpy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <img src="_static/logo_merged.png" class="logo__image only-dark pst-js-only" alt="Open-TYNDP Workshops - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20251203-workshop-pypsa-03.html">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background4-geopandas.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/open-energy-transition/open-tyndp-workshops/blob/main/open-tyndp-workshops/background3-pandas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2Fbackground3-pandas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/background3-pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Background: Tabular data analysis with pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-imports">Package Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-data">Sorting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">Filtering Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series">Time Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-functionality">Groupby Functionality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="background-tabular-data-analysis-with-pandas">
+<h1>Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code><a class="headerlink" href="#background-tabular-data-analysis-with-pandas" title="Link to this heading">#</a></h1>
+<p><font size="2"><em>Copyright (c) 2025, Iegor Riepin</em></font></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>pandas<span class="w"> </span>numpy
+</pre></div>
+</div>
+</div>
+<p><a class="reference external" href="http://pandas.pydata.org/">Pandas</a> is a an open source library providing tabular data structures and data analysis <a class="reference external" href="http://tools.In">tools.In</a> other words, if you can imagine the data in an Excel spreadsheet, then Pandas is the tool for the job.</p>
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/creating_dataframe1.png" width="720px" /><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation for this package is available at <a class="reference external" href="https://pandas.pydata.org/docs/">https://pandas.pydata.org/docs/</a>.</p>
+</div>
+<section id="package-imports">
+<h2>Package Imports<a class="headerlink" href="#package-imports" title="Link to this heading">#</a></h2>
+<p>This will be our first experience with <em>importing</em> a package.</p>
+<p>Usually we import <code class="docutils literal notranslate"><span class="pre">pandas</span></code> with the <em>alias</em> <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
+<p>We might also need <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, Python’s main library for numerical computations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="series">
+<h2>Series<a class="headerlink" href="#series" title="Link to this heading">#</a></h2>
+<p>A Series represents a one-dimensional array of data. It is similar to a dictionary consisting of an <strong>index</strong> and <strong>values</strong>, but has more functions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Example data on Germany’s final six nuclear power plants is from <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_power_stations_in_Germany#Nuclear">Wikipedia</a>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Neckarwestheim&quot;</span><span class="p">,</span> <span class="s2">&quot;Isar 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Emsland&quot;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1269</span><span class="p">,</span> <span class="mi">1365</span><span class="p">,</span> <span class="mi">1290</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    1269
+Isar 2            1365
+Emsland           1290
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Neckarwestheim&quot;</span><span class="p">:</span> <span class="mi">1269</span><span class="p">,</span>
+    <span class="s2">&quot;Isar 2&quot;</span><span class="p">:</span> <span class="mi">1365</span><span class="p">,</span>
+    <span class="s2">&quot;Emsland&quot;</span><span class="p">:</span> <span class="mi">1290</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    1269
+Isar 2            1365
+Emsland           1290
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Arithmetic operations can be applied to the whole <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">**</span><span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    35.623026
+Isar 2            36.945906
+Emsland           35.916570
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can access the underlying index object if we need to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Neckarwestheim&#39;, &#39;Isar 2&#39;, &#39;Emsland&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get values back out using the index via the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;Isar 2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(1365)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or by raw position using <code class="docutils literal notranslate"><span class="pre">.iloc</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(1290)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can pass a list or array to loc to get multiple rows back:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;Neckarwestheim&quot;</span><span class="p">,</span> <span class="s2">&quot;Emsland&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    1269
+Emsland           1290
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataframe">
+<h2>DataFrame<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h2>
+<p>Series are limited to a single <strong>column</strong>. A more useful Pandas data structure is the <strong>DataFrame</strong>. A DataFrame is basically a bunch of series that share the same index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;capacity&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1269</span><span class="p">,</span> <span class="mi">1365</span><span class="p">,</span> <span class="mi">1290</span><span class="p">],</span>  <span class="c1"># MW</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;PWR&quot;</span><span class="p">,</span> <span class="s2">&quot;PWR&quot;</span><span class="p">,</span> <span class="s2">&quot;PWR&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;start_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1989</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1988</span><span class="p">],</span>
+    <span class="s2">&quot;end_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Neckarwestheim&quot;</span><span class="p">,</span> <span class="s2">&quot;Isar 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Emsland&quot;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A wide range of statistical functions are available on both Series and DataFrames.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>capacity      1269
+type           PWR
+start_year    1988
+end_year       NaN
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>capacity      1308.000000
+start_year    1988.333333
+end_year              NaN
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get a single column as a Series using python’s getitem syntax on the DataFrame object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    1269
+Isar 2            1365
+Emsland           1290
+Name: capacity, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Indexing works very similar to series</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;Emsland&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>capacity      1290
+type           PWR
+start_year    1988
+end_year       NaN
+Name: Emsland, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we can also specify the column(s) and row(s) we want to access</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;Emsland&quot;</span><span class="p">,</span> <span class="s2">&quot;start_year&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(1988)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also add new columns to the DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;reduced_capacity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">capacity</span> <span class="o">*</span> <span class="mf">0.8</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+      <th>reduced_capacity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+      <td>1015.2</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+      <td>1092.0</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+      <td>1032.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also remove columns or rows from a DataFrame:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This operation needs to be an <strong>inplace</strong> operation to be permanent.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;reduced_capacity&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also drop columns with only NaN values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Or fill it up with default “fallback” data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">2023</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>2023.0</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>2023.0</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>2023.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="sorting-data">
+<h2>Sorting Data<a class="headerlink" href="#sorting-data" title="Link to this heading">#</a></h2>
+<p>We can also sort the entries in dataframes, e.g. alphabetically by index or numerically by column values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;capacity&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="filtering-data">
+<h2>Filtering Data<a class="headerlink" href="#filtering-data" title="Link to this heading">#</a></h2>
+<p>We can also filter a DataFrame using a boolean series obtained from a condition. This is very useful to build subsets of the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">1300</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Neckarwestheim    False
+Isar 2             True
+Emsland           False
+Name: capacity, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also combine multiple conditions, but we need to wrap the conditions with brackets!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">start_year</span> <span class="o">&gt;=</span> <span class="mi">1988</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Or we make <a class="reference external" href="https://en.wikipedia.org/wiki/SQL">SQL-like</a> queries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;start_year == 1988&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mi">1300</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;start_year == 1988 and capacity &gt; @threshold&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Isar 2</th>
+      <td>1365</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modifying-values">
+<h2>Modifying Values<a class="headerlink" href="#modifying-values" title="Link to this heading">#</a></h2>
+<p>In many cases, we want to modify values in a dataframe based on some rule. To modify values, we need to use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">.iloc</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;Isar 2&quot;</span><span class="p">,</span> <span class="s2">&quot;capacity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1366</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1366</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Sometimes it can be useful to rename columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;reactor&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>reactor</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>PWR</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1366</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>PWR</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Sometimes it can be useful to replace values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;PWR&quot;</span><span class="p">:</span> <span class="s2">&quot;Pressurized water reactor&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>capacity</th>
+      <th>type</th>
+      <th>start_year</th>
+      <th>end_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Neckarwestheim</th>
+      <td>1269</td>
+      <td>Pressurized water reactor</td>
+      <td>1989</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Isar 2</th>
+      <td>1366</td>
+      <td>Pressurized water reactor</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Emsland</th>
+      <td>1290</td>
+      <td>Pressurized water reactor</td>
+      <td>1988</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="time-series">
+<h2>Time Series<a class="headerlink" href="#time-series" title="Link to this heading">#</a></h2>
+<p>Time indexes are great when handling time-dependent data.</p>
+<p>Let’s first read some time series data, using the <code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code> function, which takes a local file path ora link to an online resource.</p>
+<p>The example data hourly time series for Germany in 2015 for:</p>
+<ol class="arabic simple">
+<li><p>electricity demand from <a class="reference external" href="https://open-power-system-data.org/">OPSD</a> in GW</p></li>
+<li><p>onshore wind capacity factors from <a class="reference external" href="https://www.renewables.ninja/">renewables.ninja</a> in per-unit of installed capacity</p></li>
+<li><p>offshore wind capacity factors from <a class="reference external" href="https://www.renewables.ninja/">renewables.ninja</a> in per-unit of installed capacity</p></li>
+<li><p>solar PV capacity factors from <a class="reference external" href="https://www.renewables.ninja/">renewables.ninja</a> in per-unit of installed capacity</p></li>
+<li><p>electricity day-ahead spot market prices in €/MWh from EPEX Spot zone DE/AT/LU retrieved via <a class="reference external" href="https://www.smard.de/home">SMARD platform</a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;https://tubcloud.tu-berlin.de/s/pKttFadrbTKSJKF/download/time-series-lecture-2.csv&quot;</span>
+<span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>load</th>
+      <th>onwind</th>
+      <th>offwind</th>
+      <th>solar</th>
+      <th>prices</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-01-01 00:00:00</th>
+      <td>41.151</td>
+      <td>0.1566</td>
+      <td>0.7030</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 01:00:00</th>
+      <td>40.135</td>
+      <td>0.1659</td>
+      <td>0.6875</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 02:00:00</th>
+      <td>39.106</td>
+      <td>0.1746</td>
+      <td>0.6535</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 03:00:00</th>
+      <td>38.765</td>
+      <td>0.1745</td>
+      <td>0.6803</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 04:00:00</th>
+      <td>38.941</td>
+      <td>0.1826</td>
+      <td>0.7272</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can use Python’s <em>slicing</em> notation inside <code class="docutils literal notranslate"><span class="pre">.loc</span></code> to select a date range, and then use the built-in plotting feature of Pandas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01-01&quot;</span><span class="p">:</span><span class="s2">&quot;2015-03-01&quot;</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/2850f835ab860e5926624a0b00107b30666902b63cd824d30297e2e045c0832e.png" src="_images/2850f835ab860e5926624a0b00107b30666902b63cd824d30297e2e045c0832e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-05-01&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/0f3936707e618a9ca96987ae5061f1c81efed68a956e9c974e1c25d9bc1331b4.png" src="_images/0f3936707e618a9ca96987ae5061f1c81efed68a956e9c974e1c25d9bc1331b4.png" />
+</div>
+</div>
+<p>A common operation is to change the resolution of a dataset by resampling in time, which Pandas exposes through the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#resampling">resample</a> function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The resample periods are specified using pandas <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">offset index</a> syntax.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/ed3eecd736e1fc17e9b274b82818a50b3de678067902eedbf6d3fb8fe269cc40.png" src="_images/ed3eecd736e1fc17e9b274b82818a50b3de678067902eedbf6d3fb8fe269cc40.png" />
+</div>
+</div>
+</section>
+<section id="groupby-functionality">
+<h2>Groupby Functionality<a class="headerlink" href="#groupby-functionality" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects have a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method. The simplest way to think about it is that you pass another series, whose values are used to split the original object into different groups.</p>
+<p>Here’s an example which retrieves the total generation capacity per country:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/powerplantmatching/master/powerplants.csv&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Fueltype</th>
+      <th>Technology</th>
+      <th>Set</th>
+      <th>Country</th>
+      <th>Capacity</th>
+      <th>Efficiency</th>
+      <th>DateIn</th>
+      <th>DateRetrofit</th>
+      <th>DateOut</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Pumpspeicherkraftwerk Erzhausen</td>
+      <td>Hydro</td>
+      <td>Pumped Storage</td>
+      <td>Storage</td>
+      <td>Germany</td>
+      <td>200.0</td>
+      <td>0.75</td>
+      <td>1964.0</td>
+      <td>1998.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>La Plate Taille</td>
+      <td>Hydro</td>
+      <td>Pumped Storage</td>
+      <td>Store</td>
+      <td>Belgium</td>
+      <td>144.0</td>
+      <td>NaN</td>
+      <td>1970.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Illwerke Vkw Rodundwerk</td>
+      <td>Hydro</td>
+      <td>Reservoir</td>
+      <td>Store</td>
+      <td>Austria</td>
+      <td>495.0</td>
+      <td>0.75</td>
+      <td>1943.0</td>
+      <td>2011.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bissorte</td>
+      <td>Hydro</td>
+      <td>Pumped Storage</td>
+      <td>Store</td>
+      <td>France</td>
+      <td>818.0</td>
+      <td>NaN</td>
+      <td>1936.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Obervermuntwerk Maschine Turbine</td>
+      <td>Hydro</td>
+      <td>Pumped Storage</td>
+      <td>Storage</td>
+      <td>Austria</td>
+      <td>380.0</td>
+      <td>0.75</td>
+      <td>1943.0</td>
+      <td>2018.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">grouped</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Country
+Albania                    2683.566000
+Austria                   27057.130368
+Belgium                   24244.510150
+Bosnia and Herzegovina     5478.500000
+Bulgaria                  21015.140000
+Name: Capacity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s break apart this operation a bit. The workflow with <code class="docutils literal notranslate"><span class="pre">groupby</span></code> can be divided into three general steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Split</strong>: Partition the data into different groups based on some criterion.</p></li>
+<li><p><strong>Apply</strong>: Do some calculation within each group, e.g. minimum, maximum, sums.</p></li>
+<li><p><strong>Combine</strong>: Put the results back together into a single object.</p></li>
+</ol>
+<img src="https://miro.medium.com/max/1840/1*JbF6nhrQsn4f-TaSF6IR9g.png" width="720px" /><p>Grouping is not only possible on a single columns, but also on multiple columns. For instance,
+we might want to group the capacities by country <strong>and</strong> fuel type. To achieve this, we pass a list of functions to the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacities</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="s2">&quot;Fueltype&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">capacities</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Country         Fueltype     
+Albania         Hydro             2079.366
+                Solar              454.200
+                Wind               150.000
+Austria         Battery             40.320
+                Hard Coal         1471.000
+                                   ...    
+United Kingdom  Other               35.000
+                Solar            13679.900
+                Solid Biomass     4154.200
+                Waste             1948.150
+                Wind             39284.500
+Name: Capacity, Length: 327, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>By grouping by multiple attributes, our index becomes a <code class="docutils literal notranslate"><span class="pre">pd.MultiIndex</span></code> (a hierarchical index with multiple <em>levels</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacities</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MultiIndex([(&#39;Albania&#39;,     &#39;Hydro&#39;),
+            (&#39;Albania&#39;,     &#39;Solar&#39;),
+            (&#39;Albania&#39;,      &#39;Wind&#39;),
+            (&#39;Austria&#39;,   &#39;Battery&#39;),
+            (&#39;Austria&#39;, &#39;Hard Coal&#39;)],
+           names=[&#39;Country&#39;, &#39;Fueltype&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">.unstack</span></code> function to reshape the multi-indexed <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code> into a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> which has the second index level as columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacities</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Country</th>
+      <th>Spain</th>
+      <th>Sweden</th>
+      <th>Switzerland</th>
+      <th>Ukraine</th>
+      <th>United Kingdom</th>
+    </tr>
+    <tr>
+      <th>Fueltype</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Battery</th>
+      <td>118.9500</td>
+      <td>543.460000</td>
+      <td>68.000</td>
+      <td>1.0</td>
+      <td>6242.41</td>
+    </tr>
+    <tr>
+      <th>Biogas</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>11.000</td>
+      <td>NaN</td>
+      <td>66.50</td>
+    </tr>
+    <tr>
+      <th>Geothermal</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.00</td>
+    </tr>
+    <tr>
+      <th>Hard Coal</th>
+      <td>11204.6000</td>
+      <td>291.000000</td>
+      <td>NaN</td>
+      <td>23628.0</td>
+      <td>35856.60</td>
+    </tr>
+    <tr>
+      <th>Heat Storage</th>
+      <td>1049.5000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Hydro</th>
+      <td>17794.3648</td>
+      <td>14950.962323</td>
+      <td>18083.096</td>
+      <td>6590.2</td>
+      <td>4769.65</td>
+    </tr>
+    <tr>
+      <th>Hydrogen Storage</th>
+      <td>2.9500</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>2.23</td>
+    </tr>
+    <tr>
+      <th>Lignite</th>
+      <td>2729.0000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Mechanical Storage</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>NaN</td>
+      <td>5.00</td>
+    </tr>
+    <tr>
+      <th>Natural Gas</th>
+      <td>27830.4000</td>
+      <td>790.000000</td>
+      <td>98.800</td>
+      <td>3539.1</td>
+      <td>38353.60</td>
+    </tr>
+    <tr>
+      <th>Nuclear</th>
+      <td>8524.0000</td>
+      <td>11452.000000</td>
+      <td>3492.000</td>
+      <td>17635.0</td>
+      <td>19137.00</td>
+    </tr>
+    <tr>
+      <th>Oil</th>
+      <td>1083.6000</td>
+      <td>3109.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>668.50</td>
+    </tr>
+    <tr>
+      <th>Other</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>35.00</td>
+    </tr>
+    <tr>
+      <th>Solar</th>
+      <td>43737.5000</td>
+      <td>682.100000</td>
+      <td>96.700</td>
+      <td>5687.7</td>
+      <td>13679.90</td>
+    </tr>
+    <tr>
+      <th>Solid Biomass</th>
+      <td>611.1000</td>
+      <td>3185.600000</td>
+      <td>76.000</td>
+      <td>NaN</td>
+      <td>4154.20</td>
+    </tr>
+    <tr>
+      <th>Waste</th>
+      <td>230.2500</td>
+      <td>452.100000</td>
+      <td>212.500</td>
+      <td>NaN</td>
+      <td>1948.15</td>
+    </tr>
+    <tr>
+      <th>Wind</th>
+      <td>32492.9000</td>
+      <td>17741.800000</td>
+      <td>55.000</td>
+      <td>566.7</td>
+      <td>39284.50</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Task 1:</strong> Provide a list of unique fuel types included in the power plants dataset.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Fueltype</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Hydro&#39;, &#39;Hard Coal&#39;, &#39;Natural Gas&#39;, &#39;Lignite&#39;, &#39;Oil&#39;, &#39;Wind&#39;,
+       &#39;Solid Biomass&#39;, &#39;Waste&#39;, &#39;Solar&#39;, &#39;Geothermal&#39;, &#39;Battery&#39;,
+       &#39;Heat Storage&#39;, &#39;Nuclear&#39;, &#39;Other&#39;, &#39;Biogas&#39;, &#39;Mechanical Storage&#39;,
+       &#39;Hydrogen Storage&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Task 2:</strong> Filter the dataset by power plants with the fuel type “Hard Coal”. How many hard coal power plants are there?</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coal</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Fueltype</span> <span class="o">==</span> <span class="s2">&quot;Hard Coal&quot;</span><span class="p">]</span>
+<span class="n">coal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Fueltype</th>
+      <th>Technology</th>
+      <th>Set</th>
+      <th>Country</th>
+      <th>Capacity</th>
+      <th>Efficiency</th>
+      <th>DateIn</th>
+      <th>DateRetrofit</th>
+      <th>DateOut</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>Duration</th>
+      <th>Volume_Mm3</th>
+      <th>DamHeight_m</th>
+      <th>StorageCapacity_MWh</th>
+      <th>EIC</th>
+      <th>projectID</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>191</th>
+      <td>Salmisaari Phase</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>Store</td>
+      <td>Finland</td>
+      <td>177.0</td>
+      <td>NaN</td>
+      <td>1984.0</td>
+      <td>NaN</td>
+      <td>2025.0</td>
+      <td>60.165375</td>
+      <td>24.904517</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1200.0</td>
+      <td>{nan}</td>
+      <td>{'GEM': {'G100000108748'}, 'EESI': {'EESI-6315...</td>
+    </tr>
+    <tr>
+      <th>193</th>
+      <td>Aberthaw</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>United Kingdom</td>
+      <td>1725.0</td>
+      <td>NaN</td>
+      <td>1971.0</td>
+      <td>2008.0</td>
+      <td>2020.0</td>
+      <td>51.387312</td>
+      <td>-3.404664</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan}</td>
+      <td>{'GEM': {'G100000100010', 'G100000100009', 'G1...</td>
+    </tr>
+    <tr>
+      <th>194</th>
+      <td>Ostroleka Phase</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>CHP</td>
+      <td>Poland</td>
+      <td>681.1</td>
+      <td>NaN</td>
+      <td>1957.0</td>
+      <td>2000.0</td>
+      <td>2015.0</td>
+      <td>53.103611</td>
+      <td>21.612500</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan}</td>
+      <td>{'GEM': {'G100000107700', 'G100000107699', 'G1...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>Kozienice</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>Poland</td>
+      <td>2919.0</td>
+      <td>NaN</td>
+      <td>1972.0</td>
+      <td>NaN</td>
+      <td>2048.0</td>
+      <td>51.582930</td>
+      <td>21.547790</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan, nan, nan, nan, nan, nan, ...</td>
+      <td>{'GEM': {'G100000105923', 'G100000105926', 'G1...</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>Maasvlakte Uniper</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>Netherlands</td>
+      <td>2306.0</td>
+      <td>NaN</td>
+      <td>1975.0</td>
+      <td>NaN</td>
+      <td>2029.0</td>
+      <td>51.958734</td>
+      <td>4.027208</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan}</td>
+      <td>{'GEM': {'G100000106536', 'G100000106537', 'G1...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>165498</th>
+      <td>Poznan Garbary</td>
+      <td>Hard Coal</td>
+      <td>NaN</td>
+      <td>CHP</td>
+      <td>Poland</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>1929.0</td>
+      <td>NaN</td>
+      <td>2015.0</td>
+      <td>52.414100</td>
+      <td>16.944900</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan}</td>
+      <td>{'BEYONDCOAL': {'BEYOND-PL-158-1', 'BEYOND-PL-...</td>
+    </tr>
+    <tr>
+      <th>165499</th>
+      <td>Scholven Buer Scholven</td>
+      <td>Hard Coal</td>
+      <td>NaN</td>
+      <td>CHP</td>
+      <td>Germany</td>
+      <td>2220.0</td>
+      <td>NaN</td>
+      <td>1968.0</td>
+      <td>NaN</td>
+      <td>2031.0</td>
+      <td>51.602400</td>
+      <td>7.009900</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan, nan}</td>
+      <td>{'BEYONDCOAL': {'BEYOND-DE-100-3', 'BEYOND-DE-...</td>
+    </tr>
+    <tr>
+      <th>165500</th>
+      <td>Stalowa Wola</td>
+      <td>Hard Coal</td>
+      <td>NaN</td>
+      <td>CHP</td>
+      <td>Poland</td>
+      <td>250.0</td>
+      <td>NaN</td>
+      <td>1958.0</td>
+      <td>NaN</td>
+      <td>2021.0</td>
+      <td>50.550000</td>
+      <td>22.066700</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan}</td>
+      <td>{'BEYONDCOAL': {'BEYOND-PL-187-5', 'BEYOND-PL-...</td>
+    </tr>
+    <tr>
+      <th>165502</th>
+      <td>Voelklingen Fenne Model</td>
+      <td>Hard Coal</td>
+      <td>NaN</td>
+      <td>CHP</td>
+      <td>Germany</td>
+      <td>233.0</td>
+      <td>NaN</td>
+      <td>1982.0</td>
+      <td>NaN</td>
+      <td>2031.0</td>
+      <td>49.249100</td>
+      <td>6.879000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan}</td>
+      <td>{'BEYONDCOAL': {'BEYOND-DE-220-1'}}</td>
+    </tr>
+    <tr>
+      <th>165503</th>
+      <td>Wolfsburg North</td>
+      <td>Hard Coal</td>
+      <td>NaN</td>
+      <td>CHP</td>
+      <td>Germany</td>
+      <td>140.0</td>
+      <td>NaN</td>
+      <td>2000.0</td>
+      <td>NaN</td>
+      <td>2021.0</td>
+      <td>52.431700</td>
+      <td>10.787000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan}</td>
+      <td>{'BEYONDCOAL': {'BEYOND-DE-234-1', 'BEYOND-DE-...</td>
+    </tr>
+  </tbody>
+</table>
+<p>328 rows × 18 columns</p>
+</div></div></div>
+</details>
+</div>
+<p><strong>Task 3:</strong> Identify the three largest coal power plants. In which countries are they located? When were they built?</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coal</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">coal</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Fueltype</th>
+      <th>Technology</th>
+      <th>Set</th>
+      <th>Country</th>
+      <th>Capacity</th>
+      <th>Efficiency</th>
+      <th>DateIn</th>
+      <th>DateRetrofit</th>
+      <th>DateOut</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>Duration</th>
+      <th>Volume_Mm3</th>
+      <th>DamHeight_m</th>
+      <th>StorageCapacity_MWh</th>
+      <th>EIC</th>
+      <th>projectID</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>562</th>
+      <td>Drax Timepoint</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>United Kingdom</td>
+      <td>4206.0</td>
+      <td>NaN</td>
+      <td>1974.0</td>
+      <td>1974.0</td>
+      <td>2023.0</td>
+      <td>53.737196</td>
+      <td>-0.999021</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan, nan, nan}</td>
+      <td>{'GEM': {'G100000102466', 'G100000102462', 'G1...</td>
+    </tr>
+    <tr>
+      <th>588</th>
+      <td>Opole</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>Poland</td>
+      <td>3332.0</td>
+      <td>NaN</td>
+      <td>1993.0</td>
+      <td>NaN</td>
+      <td>2020.0</td>
+      <td>50.751820</td>
+      <td>17.881960</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan, nan, nan}</td>
+      <td>{'GEM': {'G100000107649', 'G100000107653', 'G1...</td>
+    </tr>
+    <tr>
+      <th>2514</th>
+      <td>Kryvorizka</td>
+      <td>Hard Coal</td>
+      <td>Steam Turbine</td>
+      <td>PP</td>
+      <td>Ukraine</td>
+      <td>2925.0</td>
+      <td>NaN</td>
+      <td>1963.0</td>
+      <td>NaN</td>
+      <td>2024.0</td>
+      <td>47.543204</td>
+      <td>33.659513</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{nan, nan, nan, nan, nan, nan, nan, nan, nan, ...</td>
+      <td>{'GEM': {'G100000105984', 'G100000105976', 'G1...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</details>
+</div>
+<p><strong>Task 4:</strong> What is the average “DateIn” of each “Fueltype”? Which type of power plants is the oldest on average?</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">DateIn</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fueltype
+Hard Coal             51.822630
+Hydro                 51.393134
+Lignite               45.510067
+Nuclear               43.344538
+Other                 23.950920
+Geothermal            21.117647
+Waste                 20.210667
+Oil                   20.165703
+Solid Biomass         17.119048
+Wind                  12.523960
+Biogas                12.459045
+Natural Gas           12.224814
+Solar                  6.951960
+Battery                1.391788
+Heat Storage                NaN
+Hydrogen Storage            NaN
+Mechanical Storage          NaN
+Name: DateIn, dtype: float64
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Task 5:</strong> In the time series provided, calculate the annual average capacity factors of wind and solar.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load       54.736992
+onwind      0.205556
+offwind     0.362993
+solar       0.122621
+prices     31.835717
+dtype: float64
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Task 6:</strong> In the time series provided, calculate and plot the monthly average electricity price.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[</span><span class="s2">&quot;prices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/2ad56954b8b4b386815626b45e8dbf0a79fa3e8aa20627eecd6c7ac813c667c0.png" src="_images/2ad56954b8b4b386815626b45e8dbf0a79fa3e8aa20627eecd6c7ac813c667c0.png" />
+</div>
+</details>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ""
+        },
+        kernelOptions: {
+            name: "",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = ''</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="background2-numpy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="background4-geopandas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-imports">Package Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-data">Sorting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">Filtering Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series">Time Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-functionality">Groupby Functionality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
