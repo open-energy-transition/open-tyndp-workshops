@@ -424,7 +424,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snakemake-and-pixi">Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
@@ -684,8 +683,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-05 11:08:18</span>
-<span class=" -Color -Color-Green">  Workflow ID: aea132b3-acd7-45d7-9f72-94fecb5dd279</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-05 11:21:11</span>
+<span class=" -Color -Color-Green">  Workflow ID: 019515c2-2e4c-487a-b61e-297b19d6dc84</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -713,28 +712,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Yellow">total                  6</span>
 
 
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -742,7 +741,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -750,11 +749,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:21:12 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -781,85 +780,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be executed twice due to wildcards.</p>
 </section>
-<section id="visualizing-the-dag-of-a-workflow">
-<h4>Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow<a class="headerlink" href="#visualizing-the-dag-of-a-workflow" title="Link to this heading">#</a></h4>
-<p>You can also visualize the DAG of jobs using the <code class="docutils literal notranslate"><span class="pre">--dag</span></code> flag and the Graphviz <code class="docutils literal notranslate"><span class="pre">dot</span></code> command. This will not run the workflow but only create the visualization:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_minimal.png
-<span class="c1"># For Windows run instead:</span>
-<span class="c1"># ! snakemake -call --dag | python scripts\\filter_dag.py | dot -Tpng -o dag_minimal.png</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_minimal.png&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" src="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" />
-</div>
-</div>
-<p>Rules that need to be executed will be presented as plain lines, while those that have already been executed will be presented as dotted lines. An alternative to the DAG is the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code>. This graph is typically less crowded as you will only visualize the dependency graph of rules. This representation is leaner than the DAG because rules are not repeated for wildcards.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>rulegraph_minimal.png
-<span class="c1"># For Windows run instead:</span>
-<span class="c1"># ! snakemake -call all --rulegraph | python scripts\\filter_dag.py | dot -Tpng -o rulegraph_minimal.png</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_minimal.png&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" src="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" />
-</div>
-</div>
-<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is only represented once.</p>
-<p>Alternatively, you can also visualize a <code class="docutils literal notranslate"><span class="pre">filegraph</span></code>, which is similar to the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code> but includes some information about the inputs and outputs to each of the rules.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--filegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tsvg<span class="w"> </span>-o<span class="w"> </span>filegraph_minimal.svg
-<span class="c1"># For Windows run instead:</span>
-<span class="c1"># ! snakemake -call all --filegraph | python scripts\\filter_dag.py | dot -Tsvg -o filegraph_minimal.svg</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s2">&quot;filegraph_minimal.svg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" src="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" />
-</div>
-</div>
-</section>
 </section>
 <section id="snakemake-and-pixi">
 <h3>Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#snakemake-and-pixi" title="Link to this heading">#</a></h3>
@@ -868,6 +788,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><p>we are able to wrap snakemake commands into pixi commands</p></li>
 <li><p>for remainder of notebook, we will use pixi</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
+<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="exploring-open-tyndp-cba-workflow">
@@ -996,9 +924,7 @@ remote: Counting objects:  84% (420/500)
 remote: Counting objects:  85% (425/500)
 remote: Counting objects:  86% (430/500)
 remote: Counting objects:  87% (435/500)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Counting objects:  88% (440/500)
+remote: Counting objects:  88% (440/500)
 remote: Counting objects:  89% (445/500)
 remote: Counting objects:  90% (450/500)
 remote: Counting objects:  91% (455/500)
@@ -1019,11 +945,13 @@ remote: Compressing objects:   3% (6/193)
 remote: Compressing objects:   4% (8/193)
 remote: Compressing objects:   5% (10/193)
 remote: Compressing objects:   6% (12/193)
-remote: Compressing objects:   7% (14/193)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   8% (16/193)
-remote: Compressing objects:   9% (18/193)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   7% (14/193)
+remote: Compressing objects:   8% (16/193)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   9% (18/193)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (20/193)
@@ -1034,7 +962,9 @@ remote: Compressing objects:  14% (28/193)
 remote: Compressing objects:  15% (29/193)
 remote: Compressing objects:  16% (31/193)
 remote: Compressing objects:  17% (33/193)
-remote: Compressing objects:  18% (35/193)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  18% (35/193)
 remote: Compressing objects:  19% (37/193)
 remote: Compressing objects:  20% (39/193)
 remote: Compressing objects:  21% (41/193)
@@ -1118,242 +1048,229 @@ remote: Compressing objects:  98% (190/193)
 remote: Compressing objects:  99% (192/193)
 remote: Compressing objects: 100% (193/193)
 remote: Compressing objects: 100% (193/193), done.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   0% (1/43013)
+Receiving objects:   0% (1/43013)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (431/43013)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   2% (861/43013)
+Receiving objects:   2% (861/43013)
 Receiving objects:   3% (1291/43013)
 Receiving objects:   4% (1721/43013)
 Receiving objects:   5% (2151/43013)
 Receiving objects:   6% (2581/43013)
+Receiving objects:   7% (3011/43013)
+Receiving objects:   8% (3442/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   7% (3011/43013)
-Receiving objects:   8% (3442/43013)
-Receiving objects:   9% (3872/43013)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   9% (3872/43013)
 Receiving objects:  10% (4302/43013)
 Receiving objects:  11% (4732/43013)
 Receiving objects:  12% (5162/43013)
 Receiving objects:  13% (5592/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6022/43013), 16.67 MiB | 33.33 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6022/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6452/43013), 16.67 MiB | 33.33 MiB/s
-Receiving objects:  16% (6883/43013), 16.67 MiB | 33.33 MiB/s
-Receiving objects:  17% (7313/43013), 16.67 MiB | 33.33 MiB/s
-Receiving objects:  17% (7492/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6452/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7743/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6883/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  17% (7313/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8173/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  20% (8603/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  21% (9033/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  22% (9463/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7743/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  23% (9893/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  24% (10324/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  25% (10754/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  26% (11184/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  27% (11614/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  28% (12044/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8173/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  20% (8603/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  21% (9033/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  29% (12474/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  30% (12904/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  31% (13335/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  32% (13765/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  22% (9463/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  23% (9893/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  24% (10324/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  25% (10754/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  26% (11184/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  27% (11614/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  28% (12044/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14195/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  34% (14625/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  35% (15055/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  36% (15485/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  37% (15915/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  38% (16345/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  39% (16776/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  40% (17206/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  29% (12474/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  30% (12904/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  31% (13335/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  32% (13765/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  33% (14195/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  34% (14625/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  35% (15055/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  36% (15485/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  37% (15915/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  38% (16345/43013), 25.28 MiB | 50.55 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  41% (17636/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  42% (18066/43013), 37.87 MiB | 37.87 MiB/s
-Receiving objects:  43% (18496/43013), 37.87 MiB | 37.87 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  39% (16776/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  40% (17206/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  41% (17636/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  42% (18066/43013), 25.28 MiB | 50.55 MiB/s
+Receiving objects:  42% (18180/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  43% (18496/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18926/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  45% (19356/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  46% (19786/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  47% (20217/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  48% (20647/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  49% (21077/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18926/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  45% (19356/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  46% (19786/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  47% (20217/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  48% (20647/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21507/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  51% (21937/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  49% (21077/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  50% (21507/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  51% (21937/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22367/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  53% (22797/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  54% (23228/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  55% (23658/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  56% (24088/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22367/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  53% (22797/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  54% (23228/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  55% (23658/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  56% (24088/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  57% (24518/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24518/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  58% (24948/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  58% (24948/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25378/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  60% (25808/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  61% (26238/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25378/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  60% (25808/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  61% (26238/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  62% (26669/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  62% (26669/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  63% (27099/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (27099/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  64% (27529/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  65% (27959/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  66% (28389/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  67% (28819/43013), 53.84 MiB | 53.84 MiB/s
+Receiving objects:  68% (29249/43013), 53.84 MiB | 53.84 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27529/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  65% (27959/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  66% (28389/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  67% (28819/43013), 58.89 MiB | 39.00 MiB/s
-Receiving objects:  68% (29249/43013), 58.89 MiB | 39.00 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29679/43013), 80.43 MiB | 53.61 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  68% (29672/43013), 80.30 MiB | 39.95 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29835/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29679/43013), 80.30 MiB | 39.95 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30110/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  71% (30540/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  72% (30970/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  73% (31400/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  74% (31830/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  75% (32260/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30110/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  71% (30540/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  72% (30970/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  73% (31400/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  74% (31830/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  75% (32260/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  76% (32690/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  77% (33121/43013), 102.30 MiB | 40.77 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  76% (32690/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  77% (33121/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  77% (33406/43013), 102.30 MiB | 40.77 MiB/s
-Receiving objects:  78% (33551/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  78% (33551/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  79% (33981/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33981/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34411/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  81% (34841/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  82% (35271/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34411/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  81% (34841/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  82% (35271/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35701/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  84% (36131/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  85% (36562/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  86% (36992/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35701/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  84% (36131/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37422/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  88% (37852/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  89% (38282/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  90% (38712/43013), 110.66 MiB | 55.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  85% (36562/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  86% (36992/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (39142/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  92% (39572/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  93% (40003/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  94% (40433/43013), 110.66 MiB | 55.33 MiB/s
+Receiving objects:  95% (40863/43013), 141.41 MiB | 56.56 MiB/s
+Receiving objects:  96% (41293/43013), 141.41 MiB | 56.56 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37422/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  88% (37852/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  89% (38282/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  90% (38712/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  97% (41723/43013), 141.41 MiB | 56.56 MiB/s
+Receiving objects:  98% (42153/43013), 141.41 MiB | 56.56 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (39142/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  92% (39572/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  93% (40003/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  94% (40433/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  95% (40863/43013), 124.22 MiB | 41.28 MiB/s
-Receiving objects:  96% (41293/43013), 124.22 MiB | 41.28 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42583/43013), 141.41 MiB | 56.56 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  97% (41723/43013), 124.22 MiB | 41.28 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (42153/43013), 124.22 MiB | 41.28 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42583/43013), 124.22 MiB | 41.28 MiB/s
-remote: Total 43013 (delta 444), reused 310 (delta 307), pack-reused 42513 (from 4)
-Receiving objects: 100% (43013/43013), 147.47 MiB | 42.03 MiB/s
-Receiving objects: 100% (43013/43013), 147.85 MiB | 41.97 MiB/s, done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Total 43013 (delta 444), reused 310 (delta 307), pack-reused 42513 (from 4)
+Receiving objects: 100% (43013/43013), 141.41 MiB | 56.56 MiB/s
+Receiving objects: 100% (43013/43013), 147.85 MiB | 55.97 MiB/s, done.
 Resolving deltas:   0% (0/33483)
 Resolving deltas:   1% (335/33483)
+Resolving deltas:   2% (670/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (670/33483)
-Resolving deltas:   3% (1005/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   3% (1005/33483)
 Resolving deltas:   4% (1340/33483)
+Resolving deltas:   5% (1675/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   5% (1675/33483)
-Resolving deltas:   6% (2009/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   6% (2009/33483)
 Resolving deltas:   7% (2344/33483)
 Resolving deltas:   8% (2679/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (3014/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3349/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  11% (3684/33483)
+Resolving deltas:  10% (3349/33483)
+Resolving deltas:  11% (3684/33483)
 Resolving deltas:  12% (4018/33483)
-Resolving deltas:  13% (4353/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4353/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4688/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5023/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  16% (5358/33483)
+Resolving deltas:  16% (5358/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5693/33483)
 Resolving deltas:  18% (6027/33483)
-Resolving deltas:  19% (6362/33483)
-Resolving deltas:  20% (6697/33483)
-Resolving deltas:  21% (7032/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  22% (7367/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  19% (6362/33483)
+Resolving deltas:  20% (6697/33483)
+Resolving deltas:  21% (7033/33483)
+Resolving deltas:  22% (7367/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7702/33483)
-Resolving deltas:  24% (8036/33483)
-Resolving deltas:  25% (8371/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (8036/33483)
+Resolving deltas:  25% (8372/33483)
 Resolving deltas:  26% (8706/33483)
 Resolving deltas:  27% (9041/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  28% (9376/33483)
+Resolving deltas:  28% (9376/33483)
 Resolving deltas:  29% (9711/33483)
-Resolving deltas:  30% (10045/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10380/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  30% (10045/33483)
+Resolving deltas:  31% (10380/33483)
 Resolving deltas:  32% (10715/33483)
-Resolving deltas:  33% (11050/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  33% (11050/33483)
 Resolving deltas:  34% (11385/33483)
 Resolving deltas:  35% (11720/33483)
 Resolving deltas:  36% (12054/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  37% (12389/33483)
+Resolving deltas:  37% (12389/33483)
 Resolving deltas:  38% (12724/33483)
 Resolving deltas:  39% (13059/33483)
 </pre></div>
@@ -1362,79 +1279,79 @@ Resolving deltas:  39% (13059/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13729/33483)
+Resolving deltas:  42% (14063/33483)
+Resolving deltas:  43% (14398/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (14063/33483)
-Resolving deltas:  43% (14398/33483)
-Resolving deltas:  44% (14733/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  44% (14733/33483)
 Resolving deltas:  45% (15068/33483)
 Resolving deltas:  46% (15403/33483)
 Resolving deltas:  47% (15738/33483)
+Resolving deltas:  48% (16072/33483)
+Resolving deltas:  49% (16407/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  48% (16072/33483)
-Resolving deltas:  49% (16407/33483)
-Resolving deltas:  49% (16673/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  49% (16666/33483)
 Resolving deltas:  50% (16742/33483)
 Resolving deltas:  51% (17077/33483)
 Resolving deltas:  52% (17412/33483)
 Resolving deltas:  53% (17746/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  54% (18081/33483)
+Resolving deltas:  54% (18081/33483)
 Resolving deltas:  55% (18416/33483)
 Resolving deltas:  56% (18751/33483)
 Resolving deltas:  57% (19086/33483)
 Resolving deltas:  58% (19421/33483)
 Resolving deltas:  59% (19755/33483)
 Resolving deltas:  60% (20090/33483)
-Resolving deltas:  61% (20425/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  62% (20760/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  61% (20425/33483)
+Resolving deltas:  62% (20760/33483)
 Resolving deltas:  63% (21095/33483)
 Resolving deltas:  64% (21430/33483)
 Resolving deltas:  65% (21764/33483)
 Resolving deltas:  66% (22099/33483)
-Resolving deltas:  67% (22434/33483)
-Resolving deltas:  68% (22769/33483)
-Resolving deltas:  69% (23105/33483)
-Resolving deltas:  70% (23439/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  71% (23773/33483)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  67% (22434/33483)
+Resolving deltas:  68% (22769/33483)
+Resolving deltas:  69% (23104/33483)
+Resolving deltas:  70% (23439/33483)
+Resolving deltas:  71% (23773/33483)
 Resolving deltas:  72% (24108/33483)
 Resolving deltas:  73% (24443/33483)
 Resolving deltas:  74% (24778/33483)
 Resolving deltas:  75% (25113/33483)
-Resolving deltas:  76% (25448/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  76% (25448/33483)
 Resolving deltas:  77% (25782/33483)
 Resolving deltas:  78% (26117/33483)
 Resolving deltas:  79% (26452/33483)
 Resolving deltas:  80% (26787/33483)
-Resolving deltas:  81% (27123/33483)
+Resolving deltas:  81% (27122/33483)
 Resolving deltas:  82% (27457/33483)
 Resolving deltas:  83% (27791/33483)
 Resolving deltas:  84% (28126/33483)
 Resolving deltas:  85% (28461/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  86% (28796/33483)
+Resolving deltas:  86% (28796/33483)
 Resolving deltas:  87% (29131/33483)
 Resolving deltas:  88% (29466/33483)
 Resolving deltas:  89% (29800/33483)
-Resolving deltas:  90% (30135/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  90% (30135/33483)
 Resolving deltas:  91% (30470/33483)
 Resolving deltas:  92% (30805/33483)
 Resolving deltas:  93% (31140/33483)
 Resolving deltas:  94% (31475/33483)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  95% (31809/33483)
+Resolving deltas:  95% (31809/33483)
 Resolving deltas:  96% (32144/33483)
 Resolving deltas:  97% (32479/33483)
-Resolving deltas:  98% (32814/33483)
-Resolving deltas:  99% (33149/33483)
+Resolving deltas:  98% (32815/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  99% (33149/33483)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33483/33483)
@@ -1823,14 +1740,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
-<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run snakemake -call cba --configfile config/config.tyndp.yaml --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects -n</span>
 </pre></div>
 </div>
@@ -2000,7 +1909,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snakemake-and-pixi">Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
