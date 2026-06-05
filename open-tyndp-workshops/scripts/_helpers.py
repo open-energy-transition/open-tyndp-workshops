@@ -139,3 +139,9 @@ def run_pypsa_explorer_in_colab(networks, port):
 
     # Display in iframe
     output.serve_kernel_port_as_iframe(port, height=1500)
+
+
+def display_code_lines(filename, language, start, end):
+    with open(filename) as f:
+        lines = f.readlines()
+    return Code("".join(lines[start - 1 : end]), language=language)
