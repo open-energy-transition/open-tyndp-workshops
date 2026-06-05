@@ -588,10 +588,14 @@ Done
 </div>
 </div>
 </div>
-<p>And we’ll also import a handy helper function that we introduced last workshop to showcase benchmarking figures.</p>
+<p>And we’ll also import some handy helper functions that we introduced in the last workshops.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">show_benchmarks</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">show_benchmarks</span><span class="p">,</span>
+    <span class="n">display_code_lines</span><span class="p">,</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1057,11 +1061,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_5701a">
+<table id="T_bb2e8">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_5701a_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
+      <th id="T_bb2e8_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1070,112 +1074,112 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </thead>
   <tbody>
     <tr>
-      <th id="T_5701a_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_5701a_row0_col0" class="data row0 col0" >-4.50</td>
+      <th id="T_bb2e8_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_bb2e8_row0_col0" class="data row0 col0" >-4.50</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_5701a_row1_col0" class="data row1 col0" >21.12</td>
+      <th id="T_bb2e8_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_bb2e8_row1_col0" class="data row1 col0" >21.12</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
-      <td id="T_5701a_row2_col0" class="data row2 col0" >53.94</td>
+      <th id="T_bb2e8_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
+      <td id="T_bb2e8_row2_col0" class="data row2 col0" >53.94</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
-      <td id="T_5701a_row3_col0" class="data row3 col0" >-3,936.13</td>
+      <th id="T_bb2e8_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
+      <td id="T_bb2e8_row3_col0" class="data row3 col0" >-3,936.13</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
-      <td id="T_5701a_row4_col0" class="data row4 col0" >322.81</td>
+      <th id="T_bb2e8_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
+      <td id="T_bb2e8_row4_col0" class="data row4 col0" >322.81</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
-      <td id="T_5701a_row5_col0" class="data row5 col0" >5.19</td>
+      <th id="T_bb2e8_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
+      <td id="T_bb2e8_row5_col0" class="data row5 col0" >5.19</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
-      <td id="T_5701a_row6_col0" class="data row6 col0" >9.19</td>
+      <th id="T_bb2e8_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
+      <td id="T_bb2e8_row6_col0" class="data row6 col0" >9.19</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
-      <td id="T_5701a_row7_col0" class="data row7 col0" >7.94</td>
+      <th id="T_bb2e8_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
+      <td id="T_bb2e8_row7_col0" class="data row7 col0" >7.94</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
-      <td id="T_5701a_row8_col0" class="data row8 col0" >3.04</td>
+      <th id="T_bb2e8_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
+      <td id="T_bb2e8_row8_col0" class="data row8 col0" >3.04</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
-      <td id="T_5701a_row9_col0" class="data row9 col0" >-238.52</td>
+      <th id="T_bb2e8_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
+      <td id="T_bb2e8_row9_col0" class="data row9 col0" >-238.52</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
-      <td id="T_5701a_row10_col0" class="data row10 col0" >14.29</td>
+      <th id="T_bb2e8_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
+      <td id="T_bb2e8_row10_col0" class="data row10 col0" >14.29</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row11" class="row_heading level0 row11" >Lignite</th>
-      <td id="T_5701a_row11_col0" class="data row11 col0" >15.27</td>
+      <th id="T_bb2e8_level0_row11" class="row_heading level0 row11" >Lignite</th>
+      <td id="T_bb2e8_row11_col0" class="data row11 col0" >15.27</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row12" class="row_heading level0 row12" >Nuclear</th>
-      <td id="T_5701a_row12_col0" class="data row12 col0" >634.13</td>
+      <th id="T_bb2e8_level0_row12" class="row_heading level0 row12" >Nuclear</th>
+      <td id="T_bb2e8_row12_col0" class="data row12 col0" >634.13</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_5701a_row13_col0" class="data row13 col0" >141.82</td>
+      <th id="T_bb2e8_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_bb2e8_row13_col0" class="data row13 col0" >141.82</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
-      <td id="T_5701a_row14_col0" class="data row14 col0" >9.74</td>
+      <th id="T_bb2e8_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
+      <td id="T_bb2e8_row14_col0" class="data row14 col0" >9.74</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
-      <td id="T_5701a_row15_col0" class="data row15 col0" >302.74</td>
+      <th id="T_bb2e8_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
+      <td id="T_bb2e8_row15_col0" class="data row15 col0" >302.74</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
-      <td id="T_5701a_row16_col0" class="data row16 col0" >2.86</td>
+      <th id="T_bb2e8_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
+      <td id="T_bb2e8_row16_col0" class="data row16 col0" >2.86</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
-      <td id="T_5701a_row17_col0" class="data row17 col0" >111.56</td>
+      <th id="T_bb2e8_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
+      <td id="T_bb2e8_row17_col0" class="data row17 col0" >111.56</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
-      <td id="T_5701a_row18_col0" class="data row18 col0" >1.62</td>
+      <th id="T_bb2e8_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
+      <td id="T_bb2e8_row18_col0" class="data row18 col0" >1.62</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
-      <td id="T_5701a_row19_col0" class="data row19 col0" >932.01</td>
+      <th id="T_bb2e8_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
+      <td id="T_bb2e8_row19_col0" class="data row19 col0" >932.01</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
-      <td id="T_5701a_row20_col0" class="data row20 col0" >90.37</td>
+      <th id="T_bb2e8_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
+      <td id="T_bb2e8_row20_col0" class="data row20 col0" >90.37</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
-      <td id="T_5701a_row21_col0" class="data row21 col0" >211.10</td>
+      <th id="T_bb2e8_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
+      <td id="T_bb2e8_row21_col0" class="data row21 col0" >211.10</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
-      <td id="T_5701a_row22_col0" class="data row22 col0" >-8.50</td>
+      <th id="T_bb2e8_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
+      <td id="T_bb2e8_row22_col0" class="data row22 col0" >-8.50</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
-      <td id="T_5701a_row23_col0" class="data row23 col0" >320.71</td>
+      <th id="T_bb2e8_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
+      <td id="T_bb2e8_row23_col0" class="data row23 col0" >320.71</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row24" class="row_heading level0 row24" >Run of River</th>
-      <td id="T_5701a_row24_col0" class="data row24 col0" >200.71</td>
+      <th id="T_bb2e8_level0_row24" class="row_heading level0 row24" >Run of River</th>
+      <td id="T_bb2e8_row24_col0" class="data row24 col0" >200.71</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
-      <td id="T_5701a_row25_col0" class="data row25 col0" >268.51</td>
+      <th id="T_bb2e8_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
+      <td id="T_bb2e8_row25_col0" class="data row25 col0" >268.51</td>
     </tr>
     <tr>
-      <th id="T_5701a_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
-      <td id="T_5701a_row26_col0" class="data row26 col0" >506.26</td>
+      <th id="T_bb2e8_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
+      <td id="T_bb2e8_row26_col0" class="data row26 col0" >506.26</td>
     </tr>
   </tbody>
 </table>
@@ -1314,12 +1318,12 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_c12d2">
+<table id="T_7416c">
   <thead>
     <tr>
       <th class="index_name level0" >network</th>
-      <th id="T_c12d2_level0_col0" class="col_heading level0 col0" >NT 2030</th>
-      <th id="T_c12d2_level0_col1" class="col_heading level0 col1" >NT 2040</th>
+      <th id="T_7416c_level0_col0" class="col_heading level0 col0" >NT 2030</th>
+      <th id="T_7416c_level0_col1" class="col_heading level0 col1" >NT 2040</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1329,149 +1333,149 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
   </thead>
   <tbody>
     <tr>
-      <th id="T_c12d2_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_c12d2_row0_col0" class="data row0 col0" >-4.50</td>
-      <td id="T_c12d2_row0_col1" class="data row0 col1" >-16.81</td>
+      <th id="T_7416c_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_7416c_row0_col0" class="data row0 col0" >-4.50</td>
+      <td id="T_7416c_row0_col1" class="data row0 col1" >-16.81</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_c12d2_row1_col0" class="data row1 col0" >21.12</td>
-      <td id="T_c12d2_row1_col1" class="data row1 col1" >21.45</td>
+      <th id="T_7416c_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_7416c_row1_col0" class="data row1 col0" >21.12</td>
+      <td id="T_7416c_row1_col1" class="data row1 col1" >21.45</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
-      <td id="T_c12d2_row2_col0" class="data row2 col0" >-3,613.67</td>
-      <td id="T_c12d2_row2_col1" class="data row2 col1" >-4,289.51</td>
+      <th id="T_7416c_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
+      <td id="T_7416c_row2_col0" class="data row2 col0" >-3,613.67</td>
+      <td id="T_7416c_row2_col1" class="data row2 col1" >-4,289.51</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
-      <td id="T_c12d2_row3_col0" class="data row3 col0" >322.81</td>
-      <td id="T_c12d2_row3_col1" class="data row3 col1" >208.61</td>
+      <th id="T_7416c_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
+      <td id="T_7416c_row3_col0" class="data row3 col0" >322.81</td>
+      <td id="T_7416c_row3_col1" class="data row3 col1" >208.61</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
-      <td id="T_c12d2_row4_col0" class="data row4 col0" >5.19</td>
-      <td id="T_c12d2_row4_col1" class="data row4 col1" >5.98</td>
+      <th id="T_7416c_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
+      <td id="T_7416c_row4_col0" class="data row4 col0" >5.19</td>
+      <td id="T_7416c_row4_col1" class="data row4 col1" >5.98</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
-      <td id="T_c12d2_row5_col0" class="data row5 col0" >9.19</td>
-      <td id="T_c12d2_row5_col1" class="data row5 col1" >3.12</td>
+      <th id="T_7416c_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
+      <td id="T_7416c_row5_col0" class="data row5 col0" >9.19</td>
+      <td id="T_7416c_row5_col1" class="data row5 col1" >3.12</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
-      <td id="T_c12d2_row6_col0" class="data row6 col0" >7.94</td>
-      <td id="T_c12d2_row6_col1" class="data row6 col1" >7.25</td>
+      <th id="T_7416c_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
+      <td id="T_7416c_row6_col0" class="data row6 col0" >7.94</td>
+      <td id="T_7416c_row6_col1" class="data row6 col1" >7.25</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
-      <td id="T_c12d2_row7_col0" class="data row7 col0" >3.04</td>
-      <td id="T_c12d2_row7_col1" class="data row7 col1" >8.15</td>
+      <th id="T_7416c_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
+      <td id="T_7416c_row7_col0" class="data row7 col0" >3.04</td>
+      <td id="T_7416c_row7_col1" class="data row7 col1" >8.15</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
-      <td id="T_c12d2_row8_col0" class="data row8 col0" >-238.52</td>
-      <td id="T_c12d2_row8_col1" class="data row8 col1" >-932.35</td>
+      <th id="T_7416c_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
+      <td id="T_7416c_row8_col0" class="data row8 col0" >-238.52</td>
+      <td id="T_7416c_row8_col1" class="data row8 col1" >-932.35</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
-      <td id="T_c12d2_row9_col0" class="data row9 col0" >14.29</td>
-      <td id="T_c12d2_row9_col1" class="data row9 col1" >14.40</td>
+      <th id="T_7416c_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
+      <td id="T_7416c_row9_col0" class="data row9 col0" >14.29</td>
+      <td id="T_7416c_row9_col1" class="data row9 col1" >14.40</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row10" class="row_heading level0 row10" >Lignite</th>
-      <td id="T_c12d2_row10_col0" class="data row10 col0" >15.27</td>
-      <td id="T_c12d2_row10_col1" class="data row10 col1" >14.17</td>
+      <th id="T_7416c_level0_row10" class="row_heading level0 row10" >Lignite</th>
+      <td id="T_7416c_row10_col0" class="data row10 col0" >15.27</td>
+      <td id="T_7416c_row10_col1" class="data row10 col1" >14.17</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row11" class="row_heading level0 row11" >Nuclear</th>
-      <td id="T_c12d2_row11_col0" class="data row11 col0" >634.13</td>
-      <td id="T_c12d2_row11_col1" class="data row11 col1" >627.40</td>
+      <th id="T_7416c_level0_row11" class="row_heading level0 row11" >Nuclear</th>
+      <td id="T_7416c_row11_col0" class="data row11 col0" >634.13</td>
+      <td id="T_7416c_row11_col1" class="data row11 col1" >627.40</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
-      <td id="T_c12d2_row12_col0" class="data row12 col0" >141.82</td>
-      <td id="T_c12d2_row12_col1" class="data row12 col1" >518.59</td>
+      <th id="T_7416c_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
+      <td id="T_7416c_row12_col0" class="data row12 col0" >141.82</td>
+      <td id="T_7416c_row12_col1" class="data row12 col1" >518.59</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
-      <td id="T_c12d2_row13_col0" class="data row13 col0" >9.74</td>
-      <td id="T_c12d2_row13_col1" class="data row13 col1" >51.82</td>
+      <th id="T_7416c_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
+      <td id="T_7416c_row13_col0" class="data row13 col0" >9.74</td>
+      <td id="T_7416c_row13_col1" class="data row13 col1" >51.82</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
-      <td id="T_c12d2_row14_col0" class="data row14 col0" >302.74</td>
-      <td id="T_c12d2_row14_col1" class="data row14 col1" >463.42</td>
+      <th id="T_7416c_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
+      <td id="T_7416c_row14_col0" class="data row14 col0" >302.74</td>
+      <td id="T_7416c_row14_col1" class="data row14 col1" >463.42</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
-      <td id="T_c12d2_row15_col0" class="data row15 col0" >2.86</td>
-      <td id="T_c12d2_row15_col1" class="data row15 col1" >18.67</td>
+      <th id="T_7416c_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
+      <td id="T_7416c_row15_col0" class="data row15 col0" >2.86</td>
+      <td id="T_7416c_row15_col1" class="data row15 col1" >18.67</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
-      <td id="T_c12d2_row16_col0" class="data row16 col0" >111.56</td>
-      <td id="T_c12d2_row16_col1" class="data row16 col1" >259.56</td>
+      <th id="T_7416c_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
+      <td id="T_7416c_row16_col0" class="data row16 col0" >111.56</td>
+      <td id="T_7416c_row16_col1" class="data row16 col1" >259.56</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
-      <td id="T_c12d2_row17_col0" class="data row17 col0" >1.62</td>
-      <td id="T_c12d2_row17_col1" class="data row17 col1" >2.12</td>
+      <th id="T_7416c_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
+      <td id="T_7416c_row17_col0" class="data row17 col0" >1.62</td>
+      <td id="T_7416c_row17_col1" class="data row17 col1" >2.12</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
-      <td id="T_c12d2_row18_col0" class="data row18 col0" >932.01</td>
-      <td id="T_c12d2_row18_col1" class="data row18 col1" >1,339.81</td>
+      <th id="T_7416c_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
+      <td id="T_7416c_row18_col0" class="data row18 col0" >932.01</td>
+      <td id="T_7416c_row18_col1" class="data row18 col1" >1,339.81</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
-      <td id="T_c12d2_row19_col0" class="data row19 col0" >90.37</td>
-      <td id="T_c12d2_row19_col1" class="data row19 col1" >115.26</td>
+      <th id="T_7416c_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
+      <td id="T_7416c_row19_col0" class="data row19 col0" >90.37</td>
+      <td id="T_7416c_row19_col1" class="data row19 col1" >115.26</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
-      <td id="T_c12d2_row20_col0" class="data row20 col0" >211.10</td>
-      <td id="T_c12d2_row20_col1" class="data row20 col1" >219.50</td>
+      <th id="T_7416c_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
+      <td id="T_7416c_row20_col0" class="data row20 col0" >211.10</td>
+      <td id="T_7416c_row20_col1" class="data row20 col1" >219.50</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
-      <td id="T_c12d2_row21_col0" class="data row21 col0" >-8.50</td>
-      <td id="T_c12d2_row21_col1" class="data row21 col1" >-17.13</td>
+      <th id="T_7416c_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
+      <td id="T_7416c_row21_col0" class="data row21 col0" >-8.50</td>
+      <td id="T_7416c_row21_col1" class="data row21 col1" >-17.13</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
-      <td id="T_c12d2_row22_col0" class="data row22 col0" >320.71</td>
-      <td id="T_c12d2_row22_col1" class="data row22 col1" >331.90</td>
+      <th id="T_7416c_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
+      <td id="T_7416c_row22_col0" class="data row22 col0" >320.71</td>
+      <td id="T_7416c_row22_col1" class="data row22 col1" >331.90</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row23" class="row_heading level0 row23" >Run of River</th>
-      <td id="T_c12d2_row23_col0" class="data row23 col0" >200.71</td>
-      <td id="T_c12d2_row23_col1" class="data row23 col1" >207.65</td>
+      <th id="T_7416c_level0_row23" class="row_heading level0 row23" >Run of River</th>
+      <td id="T_7416c_row23_col0" class="data row23 col0" >200.71</td>
+      <td id="T_7416c_row23_col1" class="data row23 col1" >207.65</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
-      <td id="T_c12d2_row24_col0" class="data row24 col0" >506.26</td>
-      <td id="T_c12d2_row24_col1" class="data row24 col1" >806.74</td>
+      <th id="T_7416c_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
+      <td id="T_7416c_row24_col0" class="data row24 col0" >506.26</td>
+      <td id="T_7416c_row24_col1" class="data row24 col1" >806.74</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
-      <td id="T_c12d2_row25_col0" class="data row25 col0" >53.94</td>
-      <td id="T_c12d2_row25_col1" class="data row25 col1" >92.24</td>
+      <th id="T_7416c_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
+      <td id="T_7416c_row25_col0" class="data row25 col0" >53.94</td>
+      <td id="T_7416c_row25_col1" class="data row25 col1" >92.24</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
-      <td id="T_c12d2_row26_col0" class="data row26 col0" >3,613.67</td>
-      <td id="T_c12d2_row26_col1" class="data row26 col1" >4,289.51</td>
+      <th id="T_7416c_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
+      <td id="T_7416c_row26_col0" class="data row26 col0" >3,613.67</td>
+      <td id="T_7416c_row26_col1" class="data row26 col1" >4,289.51</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
-      <td id="T_c12d2_row27_col0" class="data row27 col0" >-3,936.13</td>
-      <td id="T_c12d2_row27_col1" class="data row27 col1" >-4,855.13</td>
+      <th id="T_7416c_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
+      <td id="T_7416c_row27_col0" class="data row27 col0" >-3,936.13</td>
+      <td id="T_7416c_row27_col1" class="data row27 col1" >-4,855.13</td>
     </tr>
     <tr>
-      <th id="T_c12d2_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
-      <td id="T_c12d2_row28_col0" class="data row28 col0" >268.51</td>
-      <td id="T_c12d2_row28_col1" class="data row28 col1" >473.37</td>
+      <th id="T_7416c_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
+      <td id="T_7416c_row28_col0" class="data row28 col0" >268.51</td>
+      <td id="T_7416c_row28_col1" class="data row28 col1" >473.37</td>
     </tr>
   </tbody>
 </table>
@@ -1758,14 +1762,7 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <section id="for-google-colab-users">
 <h4>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h4>
 <p>Running PyPSA-Explorer on Google Colab requires a small workaround to display the dashboard properly inside the notebook.</p>
-<p>We will import the useful helper function we introduced in the last workshop to handle this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_pypsa_explorer_in_colab</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>We already imported a useful helper function we introduced in the last workshop to handle this: <code class="docutils literal notranslate"><span class="pre">run_pypsa_explorer_in_colab()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
@@ -1893,7 +1890,7 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">voll</span> <span class="o">*</span> <span class="mf">0.98</span><span class="p">))</span>  <span class="c1"># Add 2% of numerical tolerance</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>

@@ -60,7 +60,7 @@ ax.tick_params(axis="x", rotation=45)
 
 [31m---------------------------------------------------------------------------[39m
 [31mTypeError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[31][39m[32m, line 12[39m
+[36mCell[39m[36m [39m[32mIn[30][39m[32m, line 12[39m
 [32m      8[39m     )
 [32m      9[39m     .pipe([38;5;28;01mlambda[39;00m x: x.where(x < voll * [32m0.98[39m))  [38;5;66;03m# Add 2% of numerical tolerance[39;00m
 [32m     10[39m     .mean(axis=[32m1[39m)
