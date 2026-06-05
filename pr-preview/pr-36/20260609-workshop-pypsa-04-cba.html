@@ -66,6 +66,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Background: Introduction to the basics of Python" href="background1-python.html" />
+    <link rel="prev" title="Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking" href="20251203-workshop-pypsa-03.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -116,8 +118,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -171,7 +171,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
 
 
@@ -188,6 +188,8 @@
 
 
 
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Workshop 4 (CBA)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
@@ -428,28 +430,22 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba-workflow">Exploring Open-TYNDP CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-a-new-climate-year-and-run-it">Task X: Create a new climate year and run it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-your-own-climate-year-and-run-it">Task X: Create your own climate year and run it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-task-running-and-solving-a-cba-project-with-a-pre-solved-network">Advanced task: Running and solving a CBA project with a pre-solved network</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-manual-adjustments">Apply Manual Adjustments</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow">Task 1: Run coupled and decoupled SB-CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-dag">Visualize DAG</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a></li>
 </ul>
 
             </nav>
@@ -688,8 +684,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-05 08:21:00</span>
-<span class=" -Color -Color-Green">  Workflow ID: 1475f11f-239f-401f-8721-3f9192ccd8bc</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-05 10:39:42</span>
+<span class=" -Color -Color-Green">  Workflow ID: 828880ac-96c1-42e7-9784-25a358560bb2</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -717,28 +713,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Yellow">total                  6</span>
 
 
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -746,7 +742,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -754,11 +750,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 08:21:01 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -910,8 +906,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </section>
 </section>
-<section id="discover-open-tyndp-file-structure">
-<h2>Discover Open-TYNDP file structure<a class="headerlink" href="#discover-open-tyndp-file-structure" title="Link to this heading">#</a></h2>
+<section id="exploring-open-tyndp-cba-workflow">
+<h2>Exploring Open-TYNDP CBA workflow<a class="headerlink" href="#exploring-open-tyndp-cba-workflow" title="Link to this heading">#</a></h2>
 <section id="cloning-the-open-tyndp-project">
 <h3>Cloning the Open-TYNDP project<a class="headerlink" href="#cloning-the-open-tyndp-project" title="Link to this heading">#</a></h3>
 <p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
@@ -928,10 +924,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.chdir(&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/data/&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Clone the Open-TYNDP repository directly:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/open-energy-transition/open-tyndp.git
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: add conditional feature to first check that we&#39;re in /data/ and only clone if not already in the correct directory</span>
+<span class="o">!</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/open-energy-transition/open-tyndp.git
 </pre></div>
 </div>
 </div>
@@ -939,529 +943,522 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;open-tyndp&#39;...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 43002, done.
-remote: Counting objects:   0% (1/644)
-remote: Counting objects:   1% (7/644)
-remote: Counting objects:   2% (13/644)
-remote: Counting objects:   3% (20/644)
-remote: Counting objects:   4% (26/644)
-remote: Counting objects:   5% (33/644)
-remote: Counting objects:   6% (39/644)
-remote: Counting objects:   7% (46/644)
-remote: Counting objects:   8% (52/644)
-remote: Counting objects:   9% (58/644)
-remote: Counting objects:  10% (65/644)
-remote: Counting objects:  11% (71/644)
-remote: Counting objects:  12% (78/644)
-remote: Counting objects:  13% (84/644)
-remote: Counting objects:  14% (91/644)
-remote: Counting objects:  15% (97/644)
-remote: Counting objects:  16% (104/644)
-remote: Counting objects:  17% (110/644)
-remote: Counting objects:  18% (116/644)
-remote: Counting objects:  19% (123/644)
-remote: Counting objects:  20% (129/644)
-remote: Counting objects:  21% (136/644)
-remote: Counting objects:  22% (142/644)
-remote: Counting objects:  23% (149/644)
-remote: Counting objects:  24% (155/644)
-remote: Counting objects:  25% (161/644)
-remote: Counting objects:  26% (168/644)
-remote: Counting objects:  27% (174/644)
-remote: Counting objects:  28% (181/644)
-remote: Counting objects:  29% (187/644)
-remote: Counting objects:  30% (194/644)
-remote: Counting objects:  31% (200/644)
-remote: Counting objects:  32% (207/644)
-remote: Counting objects:  33% (213/644)
-remote: Counting objects:  34% (219/644)
-remote: Counting objects:  35% (226/644)
-remote: Counting objects:  36% (232/644)
-remote: Counting objects:  37% (239/644)
-remote: Counting objects:  38% (245/644)
-remote: Counting objects:  39% (252/644)
-remote: Counting objects:  40% (258/644)
-remote: Counting objects:  41% (265/644)
-remote: Counting objects:  42% (271/644)
-remote: Counting objects:  43% (277/644)
-remote: Counting objects:  44% (284/644)
-remote: Counting objects:  45% (290/644)
-remote: Counting objects:  46% (297/644)
-remote: Counting objects:  47% (303/644)
-remote: Counting objects:  48% (310/644)
-remote: Counting objects:  49% (316/644)
-remote: Counting objects:  50% (322/644)
-remote: Counting objects:  51% (329/644)
-remote: Counting objects:  52% (335/644)
-remote: Counting objects:  53% (342/644)
-remote: Counting objects:  54% (348/644)
-remote: Counting objects:  55% (355/644)
-remote: Counting objects:  56% (361/644)
-remote: Counting objects:  57% (368/644)
-remote: Counting objects:  58% (374/644)
-remote: Counting objects:  59% (380/644)
-remote: Counting objects:  60% (387/644)
-remote: Counting objects:  61% (393/644)
-remote: Counting objects:  62% (400/644)
-remote: Counting objects:  63% (406/644)
-remote: Counting objects:  64% (413/644)
-remote: Counting objects:  65% (419/644)
-remote: Counting objects:  66% (426/644)
-remote: Counting objects:  67% (432/644)
-remote: Counting objects:  68% (438/644)
-remote: Counting objects:  69% (445/644)
-remote: Counting objects:  70% (451/644)
-remote: Counting objects:  71% (458/644)
-remote: Counting objects:  72% (464/644)
-remote: Counting objects:  73% (471/644)
-remote: Counting objects:  74% (477/644)
-remote: Counting objects:  75% (483/644)
-remote: Counting objects:  76% (490/644)
-remote: Counting objects:  77% (496/644)
-remote: Counting objects:  78% (503/644)
-remote: Counting objects:  79% (509/644)
-remote: Counting objects:  80% (516/644)
-remote: Counting objects:  81% (522/644)
-remote: Counting objects:  82% (529/644)
-remote: Counting objects:  83% (535/644)
-remote: Counting objects:  84% (541/644)
-remote: Counting objects:  85% (548/644)
-remote: Counting objects:  86% (554/644)
-remote: Counting objects:  87% (561/644)
-remote: Counting objects:  88% (567/644)
-remote: Counting objects:  89% (574/644)
-remote: Counting objects:  90% (580/644)
-remote: Counting objects:  91% (587/644)
-remote: Counting objects:  92% (593/644)
-remote: Counting objects:  93% (599/644)
-remote: Counting objects:  94% (606/644)
-remote: Counting objects:  95% (612/644)
-remote: Counting objects:  96% (619/644)
-remote: Counting objects:  97% (625/644)
-remote: Counting objects:  98% (632/644)
-remote: Counting objects:  99% (638/644)
-remote: Counting objects: 100% (644/644)
-remote: Counting objects: 100% (644/644), done.
-remote: Compressing objects:   0% (1/255)
-remote: Compressing objects:   1% (3/255)
-remote: Compressing objects:   2% (6/255)
-remote: Compressing objects:   3% (8/255)
-remote: Compressing objects:   4% (11/255)
-remote: Compressing objects:   5% (13/255)
-remote: Compressing objects:   6% (16/255)
-remote: Compressing objects:   7% (18/255)
-remote: Compressing objects:   8% (21/255)
-remote: Compressing objects:   9% (23/255)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 43013, done.
+remote: Counting objects:   0% (1/543)
+remote: Counting objects:   1% (6/543)
+remote: Counting objects:   2% (11/543)
+remote: Counting objects:   3% (17/543)
+remote: Counting objects:   4% (22/543)
+remote: Counting objects:   5% (28/543)
+remote: Counting objects:   6% (33/543)
+remote: Counting objects:   7% (39/543)
+remote: Counting objects:   8% (44/543)
+remote: Counting objects:   9% (49/543)
+remote: Counting objects:  10% (55/543)
+remote: Counting objects:  11% (60/543)
+remote: Counting objects:  12% (66/543)
+remote: Counting objects:  13% (71/543)
+remote: Counting objects:  14% (77/543)
+remote: Counting objects:  15% (82/543)
+remote: Counting objects:  16% (87/543)
+remote: Counting objects:  17% (93/543)
+remote: Counting objects:  18% (98/543)
+remote: Counting objects:  19% (104/543)
+remote: Counting objects:  20% (109/543)
+remote: Counting objects:  21% (115/543)
+remote: Counting objects:  22% (120/543)
+remote: Counting objects:  23% (125/543)
+remote: Counting objects:  24% (131/543)
+remote: Counting objects:  25% (136/543)
+remote: Counting objects:  26% (142/543)
+remote: Counting objects:  27% (147/543)
+remote: Counting objects:  28% (153/543)
+remote: Counting objects:  29% (158/543)
+remote: Counting objects:  30% (163/543)
+remote: Counting objects:  31% (169/543)
+remote: Counting objects:  32% (174/543)
+remote: Counting objects:  33% (180/543)
+remote: Counting objects:  34% (185/543)
+remote: Counting objects:  35% (191/543)
+remote: Counting objects:  36% (196/543)
+remote: Counting objects:  37% (201/543)
+remote: Counting objects:  38% (207/543)
+remote: Counting objects:  39% (212/543)
+remote: Counting objects:  40% (218/543)
+remote: Counting objects:  41% (223/543)
+remote: Counting objects:  42% (229/543)
+remote: Counting objects:  43% (234/543)
+remote: Counting objects:  44% (239/543)
+remote: Counting objects:  45% (245/543)
+remote: Counting objects:  46% (250/543)
+remote: Counting objects:  47% (256/543)
+remote: Counting objects:  48% (261/543)
+remote: Counting objects:  49% (267/543)
+remote: Counting objects:  50% (272/543)
+remote: Counting objects:  51% (277/543)
+remote: Counting objects:  52% (283/543)
+remote: Counting objects:  53% (288/543)
+remote: Counting objects:  54% (294/543)
+remote: Counting objects:  55% (299/543)
+remote: Counting objects:  56% (305/543)
+remote: Counting objects:  57% (310/543)
+remote: Counting objects:  58% (315/543)
+remote: Counting objects:  59% (321/543)
+remote: Counting objects:  60% (326/543)
+remote: Counting objects:  61% (332/543)
+remote: Counting objects:  62% (337/543)
+remote: Counting objects:  63% (343/543)
+remote: Counting objects:  64% (348/543)
+remote: Counting objects:  65% (353/543)
+remote: Counting objects:  66% (359/543)
+remote: Counting objects:  67% (364/543)
+remote: Counting objects:  68% (370/543)
+remote: Counting objects:  69% (375/543)
+remote: Counting objects:  70% (381/543)
+remote: Counting objects:  71% (386/543)
+remote: Counting objects:  72% (391/543)
+remote: Counting objects:  73% (397/543)
+remote: Counting objects:  74% (402/543)
+remote: Counting objects:  75% (408/543)
+remote: Counting objects:  76% (413/543)
+remote: Counting objects:  77% (419/543)
+remote: Counting objects:  78% (424/543)
+remote: Counting objects:  79% (429/543)
+remote: Counting objects:  80% (435/543)
+remote: Counting objects:  81% (440/543)
+remote: Counting objects:  82% (446/543)
+remote: Counting objects:  83% (451/543)
+remote: Counting objects:  84% (457/543)
+remote: Counting objects:  85% (462/543)
+remote: Counting objects:  86% (467/543)
+remote: Counting objects:  87% (473/543)
+remote: Counting objects:  88% (478/543)
+remote: Counting objects:  89% (484/543)
+remote: Counting objects:  90% (489/543)
+remote: Counting objects:  91% (495/543)
+remote: Counting objects:  92% (500/543)
+remote: Counting objects:  93% (505/543)
+remote: Counting objects:  94% (511/543)
+remote: Counting objects:  95% (516/543)
+remote: Counting objects:  96% (522/543)
+remote: Counting objects:  97% (527/543)
+remote: Counting objects:  98% (533/543)
+remote: Counting objects:  99% (538/543)
+remote: Counting objects: 100% (543/543)
+remote: Counting objects: 100% (543/543), done.
+remote: Compressing objects:   0% (1/201)
+remote: Compressing objects:   1% (3/201)
+remote: Compressing objects:   2% (5/201)
+remote: Compressing objects:   3% (7/201)
+remote: Compressing objects:   4% (9/201)
+remote: Compressing objects:   5% (11/201)
+remote: Compressing objects:   6% (13/201)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (26/255)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   7% (15/201)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  11% (29/255)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   8% (17/201)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  12% (31/255)
-remote: Compressing objects:  13% (34/255)
-remote: Compressing objects:  14% (36/255)
-remote: Compressing objects:  15% (39/255)
-remote: Compressing objects:  16% (41/255)
-remote: Compressing objects:  17% (44/255)
-remote: Compressing objects:  18% (46/255)
-remote: Compressing objects:  19% (49/255)
-remote: Compressing objects:  20% (51/255)
-remote: Compressing objects:  21% (54/255)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   9% (19/201)
+remote: Compressing objects:  10% (21/201)
+remote: Compressing objects:  11% (23/201)
+remote: Compressing objects:  12% (25/201)
+remote: Compressing objects:  13% (27/201)
+remote: Compressing objects:  14% (29/201)
+remote: Compressing objects:  15% (31/201)
+remote: Compressing objects:  16% (33/201)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  22% (57/255)
-remote: Compressing objects:  23% (59/255)
-remote: Compressing objects:  24% (62/255)
-remote: Compressing objects:  25% (64/255)
-remote: Compressing objects:  26% (67/255)
-remote: Compressing objects:  27% (69/255)
-remote: Compressing objects:  28% (72/255)
-remote: Compressing objects:  29% (74/255)
-remote: Compressing objects:  30% (77/255)
-remote: Compressing objects:  31% (80/255)
-remote: Compressing objects:  32% (82/255)
-remote: Compressing objects:  33% (85/255)
-remote: Compressing objects:  34% (87/255)
-remote: Compressing objects:  35% (90/255)
-remote: Compressing objects:  36% (92/255)
-remote: Compressing objects:  37% (95/255)
-remote: Compressing objects:  38% (97/255)
-remote: Compressing objects:  39% (100/255)
-remote: Compressing objects:  40% (102/255)
-remote: Compressing objects:  41% (105/255)
-remote: Compressing objects:  42% (108/255)
-remote: Compressing objects:  43% (110/255)
-remote: Compressing objects:  44% (113/255)
-remote: Compressing objects:  45% (115/255)
-remote: Compressing objects:  46% (118/255)
-remote: Compressing objects:  47% (120/255)
-remote: Compressing objects:  48% (123/255)
-remote: Compressing objects:  49% (125/255)
-remote: Compressing objects:  50% (128/255)
-remote: Compressing objects:  51% (131/255)
-remote: Compressing objects:  52% (133/255)
-remote: Compressing objects:  53% (136/255)
-remote: Compressing objects:  54% (138/255)
-remote: Compressing objects:  55% (141/255)
-remote: Compressing objects:  56% (143/255)
-remote: Compressing objects:  57% (146/255)
-remote: Compressing objects:  58% (148/255)
-remote: Compressing objects:  59% (151/255)
-remote: Compressing objects:  60% (153/255)
-remote: Compressing objects:  61% (156/255)
-remote: Compressing objects:  62% (159/255)
-remote: Compressing objects:  63% (161/255)
-remote: Compressing objects:  64% (164/255)
-remote: Compressing objects:  65% (166/255)
-remote: Compressing objects:  66% (169/255)
-remote: Compressing objects:  67% (171/255)
-remote: Compressing objects:  68% (174/255)
-remote: Compressing objects:  69% (176/255)
-remote: Compressing objects:  70% (179/255)
-remote: Compressing objects:  71% (182/255)
-remote: Compressing objects:  72% (184/255)
-remote: Compressing objects:  73% (187/255)
-remote: Compressing objects:  74% (189/255)
-remote: Compressing objects:  75% (192/255)
-remote: Compressing objects:  76% (194/255)
-remote: Compressing objects:  77% (197/255)
-remote: Compressing objects:  78% (199/255)
-remote: Compressing objects:  79% (202/255)
-remote: Compressing objects:  80% (204/255)
-remote: Compressing objects:  81% (207/255)
-remote: Compressing objects:  82% (210/255)
-remote: Compressing objects:  83% (212/255)
-remote: Compressing objects:  84% (215/255)
-remote: Compressing objects:  85% (217/255)
-remote: Compressing objects:  86% (220/255)
-remote: Compressing objects:  87% (222/255)
-remote: Compressing objects:  88% (225/255)
-remote: Compressing objects:  89% (227/255)
-remote: Compressing objects:  90% (230/255)
-remote: Compressing objects:  91% (233/255)
-remote: Compressing objects:  92% (235/255)
-remote: Compressing objects:  93% (238/255)
-remote: Compressing objects:  94% (240/255)
-remote: Compressing objects:  95% (243/255)
-remote: Compressing objects:  96% (245/255)
-remote: Compressing objects:  97% (248/255)
-remote: Compressing objects:  98% (250/255)
-remote: Compressing objects:  99% (253/255)
-remote: Compressing objects: 100% (255/255)
-remote: Compressing objects: 100% (255/255), done.
-Receiving objects:   0% (1/43002)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  17% (35/201)
+remote: Compressing objects:  18% (37/201)
+remote: Compressing objects:  19% (39/201)
+remote: Compressing objects:  20% (41/201)
+remote: Compressing objects:  21% (43/201)
+remote: Compressing objects:  22% (45/201)
+remote: Compressing objects:  23% (47/201)
+remote: Compressing objects:  24% (49/201)
+remote: Compressing objects:  25% (51/201)
+remote: Compressing objects:  26% (53/201)
+remote: Compressing objects:  27% (55/201)
+remote: Compressing objects:  28% (57/201)
+remote: Compressing objects:  29% (59/201)
+remote: Compressing objects:  30% (61/201)
+remote: Compressing objects:  31% (63/201)
+remote: Compressing objects:  32% (65/201)
+remote: Compressing objects:  33% (67/201)
+remote: Compressing objects:  34% (69/201)
+remote: Compressing objects:  35% (71/201)
+remote: Compressing objects:  36% (73/201)
+remote: Compressing objects:  37% (75/201)
+remote: Compressing objects:  38% (77/201)
+remote: Compressing objects:  39% (79/201)
+remote: Compressing objects:  40% (81/201)
+remote: Compressing objects:  41% (83/201)
+remote: Compressing objects:  42% (85/201)
+remote: Compressing objects:  43% (87/201)
+remote: Compressing objects:  44% (89/201)
+remote: Compressing objects:  45% (91/201)
+remote: Compressing objects:  46% (93/201)
+remote: Compressing objects:  47% (95/201)
+remote: Compressing objects:  48% (97/201)
+remote: Compressing objects:  49% (99/201)
+remote: Compressing objects:  50% (101/201)
+remote: Compressing objects:  51% (103/201)
+remote: Compressing objects:  52% (105/201)
+remote: Compressing objects:  53% (107/201)
+remote: Compressing objects:  54% (109/201)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (431/43002)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  55% (111/201)
+remote: Compressing objects:  56% (113/201)
+remote: Compressing objects:  57% (115/201)
+remote: Compressing objects:  58% (117/201)
+remote: Compressing objects:  59% (119/201)
+remote: Compressing objects:  60% (121/201)
+remote: Compressing objects:  61% (123/201)
+remote: Compressing objects:  62% (125/201)
+remote: Compressing objects:  63% (127/201)
+remote: Compressing objects:  64% (129/201)
+remote: Compressing objects:  65% (131/201)
+remote: Compressing objects:  66% (133/201)
+remote: Compressing objects:  67% (135/201)
+remote: Compressing objects:  68% (137/201)
+remote: Compressing objects:  69% (139/201)
+remote: Compressing objects:  70% (141/201)
+remote: Compressing objects:  71% (143/201)
+remote: Compressing objects:  72% (145/201)
+remote: Compressing objects:  73% (147/201)
+remote: Compressing objects:  74% (149/201)
+remote: Compressing objects:  75% (151/201)
+remote: Compressing objects:  76% (153/201)
+remote: Compressing objects:  77% (155/201)
+remote: Compressing objects:  78% (157/201)
+remote: Compressing objects:  79% (159/201)
+remote: Compressing objects:  80% (161/201)
+remote: Compressing objects:  81% (163/201)
+remote: Compressing objects:  82% (165/201)
+remote: Compressing objects:  83% (167/201)
+remote: Compressing objects:  84% (169/201)
+remote: Compressing objects:  85% (171/201)
+remote: Compressing objects:  86% (173/201)
+remote: Compressing objects:  87% (175/201)
+remote: Compressing objects:  88% (177/201)
+remote: Compressing objects:  89% (179/201)
+remote: Compressing objects:  90% (181/201)
+remote: Compressing objects:  91% (183/201)
+remote: Compressing objects:  92% (185/201)
+remote: Compressing objects:  93% (187/201)
+remote: Compressing objects:  94% (189/201)
+remote: Compressing objects:  95% (191/201)
+remote: Compressing objects:  96% (193/201)
+remote: Compressing objects:  97% (195/201)
+remote: Compressing objects:  98% (197/201)
+remote: Compressing objects:  99% (199/201)
+remote: Compressing objects: 100% (201/201)
+remote: Compressing objects: 100% (201/201), done.
+Receiving objects:   0% (1/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   2% (861/43002)
-Receiving objects:   3% (1291/43002)
-Receiving objects:   4% (1721/43002)
-Receiving objects:   5% (2151/43002)
-Receiving objects:   6% (2581/43002)
-Receiving objects:   7% (3011/43002)
-Receiving objects:   8% (3441/43002)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (431/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   9% (3871/43002)
-Receiving objects:  10% (4301/43002)
-Receiving objects:  11% (4731/43002)
-Receiving objects:  12% (5161/43002)
-Receiving objects:  13% (5591/43002)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   2% (861/43013)
+Receiving objects:   3% (1291/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6021/43002), 20.53 MiB | 41.04 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   4% (1721/43013)
+Receiving objects:   5% (2151/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6451/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  16% (6881/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  17% (7311/43002), 20.53 MiB | 41.04 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   6% (2581/43013)
+Receiving objects:   7% (3011/43013)
+Receiving objects:   8% (3442/43013)
+Receiving objects:   9% (3872/43013)
+Receiving objects:  10% (4302/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7741/43002), 20.53 MiB | 41.04 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  11% (4732/43013)
+Receiving objects:  12% (5162/43013)
+Receiving objects:  13% (5592/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8171/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  20% (8601/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  21% (9031/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  22% (9461/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  23% (9891/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  24% (10321/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  25% (10751/43002), 20.53 MiB | 41.04 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6022/43013), 4.88 MiB | 9.68 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  26% (11181/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  27% (11611/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  28% (12041/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  29% (12471/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  30% (12901/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  31% (13331/43002), 20.53 MiB | 41.04 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6452/43013), 4.88 MiB | 9.68 MiB/s
+Receiving objects:  16% (6883/43013), 4.88 MiB | 9.68 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  32% (13761/43002), 20.53 MiB | 41.04 MiB/s
-Receiving objects:  32% (13877/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  33% (14191/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  34% (14621/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  35% (15051/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  36% (15481/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  37% (15911/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  38% (16341/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  39% (16771/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  40% (17201/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  41% (17631/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  17% (7313/43013), 4.88 MiB | 9.68 MiB/s
+Receiving objects:  17% (7492/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  42% (18061/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  43% (18491/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7743/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  19% (8173/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  20% (8603/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18921/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  45% (19351/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  46% (19781/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  47% (20211/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  48% (20641/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  49% (21071/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  50% (21501/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  21% (9033/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  22% (9463/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  23% (9893/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  24% (10324/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  25% (10754/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  26% (11184/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  27% (11614/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  51% (21932/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  28% (12044/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  29% (12474/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  30% (12904/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  31% (13335/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  32% (13765/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22362/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  53% (22792/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  54% (23222/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  55% (23652/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  56% (24082/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  57% (24512/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  58% (24942/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14195/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  34% (14625/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  35% (15055/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  36% (15485/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  37% (15915/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  38% (16345/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  39% (16776/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  40% (17206/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  41% (17636/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  42% (18066/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  43% (18496/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25372/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18926/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  45% (19356/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  46% (19786/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  47% (20217/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  48% (20647/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  60% (25802/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  61% (26232/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  62% (26662/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  49% (21077/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  50% (21507/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  51% (21937/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (27092/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  64% (27522/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  65% (27952/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  66% (28382/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  67% (28812/43002), 50.69 MiB | 50.68 MiB/s
-Receiving objects:  68% (29242/43002), 50.69 MiB | 50.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22367/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  53% (22797/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  54% (23228/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  55% (23658/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  56% (24088/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  57% (24518/43013), 38.44 MiB | 38.32 MiB/s
+Receiving objects:  58% (24948/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29672/43002), 77.09 MiB | 51.39 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25378/43013), 38.44 MiB | 38.32 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29817/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  60% (25808/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  61% (26238/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  62% (26669/43013), 69.18 MiB | 45.97 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30102/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  71% (30532/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  72% (30962/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  73% (31392/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (27099/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  64% (27529/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  65% (27959/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  66% (28389/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  67% (28819/43013), 69.18 MiB | 45.97 MiB/s
+Receiving objects:  68% (29249/43013), 69.18 MiB | 45.97 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  74% (31822/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  75% (32252/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  76% (32682/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  77% (33112/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29679/43013), 69.18 MiB | 45.97 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  78% (33542/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  79% (33972/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29817/43013), 101.27 MiB | 50.51 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34402/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  81% (34832/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  82% (35262/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30110/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  71% (30540/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  72% (30970/43013), 101.27 MiB | 50.51 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35692/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  84% (36122/43002), 106.65 MiB | 53.32 MiB/s
-Receiving objects:  85% (36552/43002), 106.65 MiB | 53.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  73% (31400/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  74% (31830/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  75% (32260/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  76% (32690/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  77% (33121/43013), 101.27 MiB | 50.51 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  86% (36982/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  87% (37412/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  88% (37842/43002), 136.29 MiB | 54.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  78% (33551/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  79% (33981/43013), 101.27 MiB | 50.51 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  89% (38272/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  90% (38702/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  91% (39132/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  92% (39562/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  93% (39992/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  94% (40422/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  95% (40852/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  96% (41282/43002), 136.29 MiB | 54.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34411/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  81% (34841/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  82% (35271/43013), 101.27 MiB | 50.51 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  97% (41712/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects:  98% (42142/43002), 136.29 MiB | 54.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35701/43013), 101.27 MiB | 50.51 MiB/s
+Receiving objects:  84% (36131/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  85% (36562/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  86% (36992/43013), 134.74 MiB | 53.79 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42572/43002), 136.29 MiB | 54.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37422/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  88% (37852/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  89% (38282/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  90% (38712/43013), 134.74 MiB | 53.79 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Total 43002 (delta 554), reused 422 (delta 389), pack-reused 42358 (from 3)
-Receiving objects: 100% (43002/43002), 136.29 MiB | 54.51 MiB/s
-Receiving objects: 100% (43002/43002), 147.25 MiB | 54.32 MiB/s, done.
-Resolving deltas:   0% (0/33497)
-Resolving deltas:   1% (335/33497)
-Resolving deltas:   2% (670/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (39142/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  92% (39572/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  93% (40003/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  94% (40433/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  95% (40863/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  96% (41293/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects:  97% (41723/43013), 134.74 MiB | 53.79 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   3% (1005/33497)
-Resolving deltas:   4% (1340/33497)
-Resolving deltas:   5% (1675/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (42153/43013), 134.74 MiB | 53.79 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   6% (2010/33497)
-Resolving deltas:   7% (2345/33497)
-Resolving deltas:   8% (2680/33497)
-Resolving deltas:   9% (3015/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42583/43013), 134.74 MiB | 53.79 MiB/s
+remote: Total 43013 (delta 488), reused 345 (delta 342), pack-reused 42470 (from 4)
+Receiving objects: 100% (43013/43013), 134.74 MiB | 53.79 MiB/s
+Receiving objects: 100% (43013/43013), 147.81 MiB | 54.05 MiB/s, done.
+Resolving deltas:   0% (0/33494)
+Resolving deltas:   1% (335/33494)
+Resolving deltas:   2% (670/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3350/33497)
-Resolving deltas:  11% (3685/33497)
-Resolving deltas:  12% (4020/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   3% (1005/33494)
+Resolving deltas:   4% (1340/33494)
+Resolving deltas:   5% (1675/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4355/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   6% (2010/33494)
+Resolving deltas:   7% (2345/33494)
+Resolving deltas:   8% (2680/33494)
+Resolving deltas:   9% (3015/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4690/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3350/33494)
+Resolving deltas:  11% (3685/33494)
+Resolving deltas:  12% (4020/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5025/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4355/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  16% (5360/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4690/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5695/33497)
-Resolving deltas:  18% (6030/33497)
-Resolving deltas:  19% (6365/33497)
-Resolving deltas:  20% (6700/33497)
-Resolving deltas:  21% (7035/33497)
-Resolving deltas:  22% (7370/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5025/33494)
+Resolving deltas:  16% (5360/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7705/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5694/33494)
+Resolving deltas:  18% (6029/33494)
+Resolving deltas:  19% (6364/33494)
+Resolving deltas:  20% (6699/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (8040/33497)
-Resolving deltas:  25% (8375/33497)
-Resolving deltas:  26% (8710/33497)
-Resolving deltas:  27% (9045/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  21% (7034/33494)
+Resolving deltas:  22% (7369/33494)
+Resolving deltas:  23% (7704/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  28% (9380/33497)
-Resolving deltas:  29% (9715/33497)
-Resolving deltas:  30% (10050/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (8039/33494)
+Resolving deltas:  25% (8374/33494)
+Resolving deltas:  26% (8709/33494)
+Resolving deltas:  27% (9044/33494)
+Resolving deltas:  28% (9379/33494)
+Resolving deltas:  29% (9714/33494)
+Resolving deltas:  30% (10049/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10385/33497)
-Resolving deltas:  32% (10720/33497)
-Resolving deltas:  33% (11055/33497)
-Resolving deltas:  34% (11389/33497)
-Resolving deltas:  35% (11724/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10384/33494)
+Resolving deltas:  32% (10719/33494)
+Resolving deltas:  33% (11054/33494)
+Resolving deltas:  34% (11388/33494)
+Resolving deltas:  35% (11723/33494)
+Resolving deltas:  36% (12059/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  36% (12059/33497)
-Resolving deltas:  37% (12394/33497)
-Resolving deltas:  38% (12729/33497)
-Resolving deltas:  39% (13064/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  37% (12393/33494)
+Resolving deltas:  38% (12729/33494)
+Resolving deltas:  39% (13063/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13399/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13398/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13649/33497)
-Resolving deltas:  41% (13734/33497)
-Resolving deltas:  42% (14069/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13733/33494)
+Resolving deltas:  42% (14068/33494)
+Resolving deltas:  43% (14403/33494)
+Resolving deltas:  44% (14738/33494)
+Resolving deltas:  45% (15073/33494)
+Resolving deltas:  46% (15408/33494)
+Resolving deltas:  47% (15743/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  43% (14404/33497)
-Resolving deltas:  44% (14740/33497)
-Resolving deltas:  45% (15074/33497)
-Resolving deltas:  46% (15409/33497)
-Resolving deltas:  47% (15744/33497)
-Resolving deltas:  48% (16079/33497)
-Resolving deltas:  49% (16414/33497)
-Resolving deltas:  50% (16749/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  48% (16078/33494)
+Resolving deltas:  49% (16413/33494)
+Resolving deltas:  50% (16747/33494)
+Resolving deltas:  51% (17082/33494)
+Resolving deltas:  52% (17417/33494)
+Resolving deltas:  53% (17752/33494)
+Resolving deltas:  54% (18087/33494)
+Resolving deltas:  55% (18422/33494)
+Resolving deltas:  56% (18757/33494)
+Resolving deltas:  57% (19092/33494)
+Resolving deltas:  58% (19427/33494)
+Resolving deltas:  59% (19762/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  51% (17084/33497)
-Resolving deltas:  52% (17419/33497)
-Resolving deltas:  53% (17754/33497)
-Resolving deltas:  54% (18089/33497)
-Resolving deltas:  55% (18424/33497)
-Resolving deltas:  56% (18759/33497)
-Resolving deltas:  57% (19094/33497)
-Resolving deltas:  58% (19429/33497)
-Resolving deltas:  59% (19764/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  60% (20097/33494)
+Resolving deltas:  61% (20432/33494)
+Resolving deltas:  62% (20767/33494)
+Resolving deltas:  63% (21103/33494)
+Resolving deltas:  64% (21437/33494)
+Resolving deltas:  65% (21772/33494)
+Resolving deltas:  66% (22107/33494)
+Resolving deltas:  67% (22441/33494)
+Resolving deltas:  68% (22777/33494)
+Resolving deltas:  69% (23111/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  60% (20099/33497)
-Resolving deltas:  61% (20434/33497)
-Resolving deltas:  62% (20769/33497)
-Resolving deltas:  63% (21104/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  70% (23446/33494)
+Resolving deltas:  71% (23781/33494)
+Resolving deltas:  72% (24116/33494)
+Resolving deltas:  73% (24451/33494)
+Resolving deltas:  74% (24786/33494)
+Resolving deltas:  75% (25121/33494)
+Resolving deltas:  76% (25456/33494)
+Resolving deltas:  77% (25791/33494)
+Resolving deltas:  78% (26126/33494)
+Resolving deltas:  79% (26461/33494)
+Resolving deltas:  80% (26796/33494)
+Resolving deltas:  81% (27131/33494)
+Resolving deltas:  82% (27466/33494)
+Resolving deltas:  83% (27801/33494)
+Resolving deltas:  84% (28135/33494)
+Resolving deltas:  85% (28470/33494)
+Resolving deltas:  86% (28805/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  64% (21439/33497)
-Resolving deltas:  65% (21774/33497)
-Resolving deltas:  66% (22109/33497)
-Resolving deltas:  67% (22443/33497)
-Resolving deltas:  68% (22778/33497)
-Resolving deltas:  69% (23113/33497)
-Resolving deltas:  70% (23448/33497)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  87% (29140/33494)
+Resolving deltas:  88% (29475/33494)
+Resolving deltas:  89% (29810/33494)
+Resolving deltas:  90% (30145/33494)
+Resolving deltas:  91% (30480/33494)
+Resolving deltas:  92% (30815/33494)
+Resolving deltas:  93% (31150/33494)
+Resolving deltas:  94% (31485/33494)
+Resolving deltas:  95% (31820/33494)
+Resolving deltas:  96% (32155/33494)
+Resolving deltas:  97% (32490/33494)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  71% (23783/33497)
-Resolving deltas:  72% (24118/33497)
-Resolving deltas:  73% (24453/33497)
-Resolving deltas:  74% (24788/33497)
-Resolving deltas:  75% (25123/33497)
-Resolving deltas:  76% (25458/33497)
-Resolving deltas:  77% (25793/33497)
-Resolving deltas:  78% (26128/33497)
-Resolving deltas:  79% (26463/33497)
-Resolving deltas:  80% (26798/33497)
-Resolving deltas:  81% (27133/33497)
-Resolving deltas:  82% (27468/33497)
-Resolving deltas:  83% (27803/33497)
-Resolving deltas:  84% (28138/33497)
-Resolving deltas:  85% (28474/33497)
-Resolving deltas:  86% (28808/33497)
-Resolving deltas:  87% (29143/33497)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  88% (29478/33497)
-Resolving deltas:  89% (29813/33497)
-Resolving deltas:  90% (30148/33497)
-Resolving deltas:  91% (30483/33497)
-Resolving deltas:  92% (30818/33497)
-Resolving deltas:  93% (31153/33497)
-Resolving deltas:  94% (31488/33497)
-Resolving deltas:  95% (31823/33497)
-Resolving deltas:  96% (32158/33497)
-Resolving deltas:  97% (32493/33497)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  98% (32828/33497)
-Resolving deltas:  99% (33163/33497)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33497/33497)
-Resolving deltas: 100% (33497/33497), done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  98% (32825/33494)
+Resolving deltas:  99% (33160/33494)
+Resolving deltas: 100% (33494/33494)
+Resolving deltas: 100% (33494/33494), done.
 </pre></div>
 </div>
 </div>
@@ -1508,6 +1505,7 @@ nothing to commit, working tree clean
 </div>
 </div>
 </div>
+<p>(add instruction to install pixi - copy from workshop 3)</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1545,6 +1543,22 @@ nothing to commit, working tree clean
 <h3>Running a coupled SB-&gt;CBA workflow<a class="headerlink" href="#running-a-coupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
 <p>To run the CBA workflow, the <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> runs the full process: taking a solved SB network -&gt; performing the TOOT/PINT analysis on a project -&gt; calculating the CBA indicators.</p>
 <p>The default Open-TYNDP settings can be found in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> file.</p>
+<p>TODO: add chunks of config file (refer to previous workshop about manual adjustments)</p>
+<ul class="simple">
+<li><p>add snippets of default values (runs, horizons, snapshots, projects, etc)</p></li>
+</ul>
+<p>mention:</p>
+<ul class="simple">
+<li><p>because of notebook environment, we are focusing on command line changes, but in reality it’s easier to modify in config files directly using dedicated IDE</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use filter to create viz of DAG for the CBA workflow</span>
+<span class="c1"># can add this pre-created figure in this section</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>First, let’s check what running the full could look like by doing a dry-run of <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1609,13 +1623,45 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 </section>
 </section>
+<section id="task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">
+<h3>Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code><a class="headerlink" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Change the config settings to match above</p>
+<ul>
+<li><p>Change scenario name in config.tyndp.yaml</p></li>
+<li><p>Change parameters within NT in scenarios.tyndp.yaml</p></li>
+</ul>
+</li>
+<li><p>Come back here</p></li>
+<li><p>Run simplified command line</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Should give the same output as above, without the arguments</span>
+<span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="running-different-and-multiple-climate-years">
 <h3>Running different and multiple climate years<a class="headerlink" href="#running-different-and-multiple-climate-years" title="Link to this heading">#</a></h3>
 <p>(Add some info here about how different climate scenarios are defined? Navigate into <code class="docutils literal notranslate"><span class="pre">config/scenarios.yaml</span></code>?)</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>add snippets of yaml here to show as examples</p></li>
+<li><p>can also show live</p></li>
+<li><p>stress that in practice it’s easier to modify in yaml</p></li>
+</ul>
 <p>First, we again need to run up to the checkpoint for the different climate years:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;, &quot;NT-cyears&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -1651,17 +1697,44 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
 <p>Note how the total count of steps is much higher (especially for CBA-specific steps such as <code class="docutils literal notranslate"><span class="pre">make_indicators</span></code> and weather-dependent steps such as <code class="docutils literal notranslate"><span class="pre">build_renewable_profiles_pecd</span></code>) when multiple climate years are run.</p>
 </section>
-<section id="task-x-create-a-new-climate-year-and-run-it">
-<h3>Task X: Create a new climate year and run it<a class="headerlink" href="#task-x-create-a-new-climate-year-and-run-it" title="Link to this heading">#</a></h3>
-<p>Go into <code class="docutils literal notranslate"><span class="pre">config.scenarios.yaml</span></code> to create your own climate year run.</p>
+<section id="task-x-create-your-own-climate-year-and-run-it">
+<h3>Task X: Create your own climate year and run it<a class="headerlink" href="#task-x-create-your-own-climate-year-and-run-it" title="Link to this heading">#</a></h3>
+<p>Go into <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code> to create your own climate year run.</p>
 <p>Hints:</p>
 <ol class="arabic simple">
-<li><p>Copy an existing climate year run (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>) and modify the details to your liking.</p></li>
+<li><p>Copy an existing climate year run (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>) and modify the details to your liking. Change the name.</p></li>
 <li><p>You would need to first run the new climate year up until the checkpoint.</p></li>
 <li><p>After the checkpoint, you can use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> to run the full workflow for your new climate year.</p></li>
 </ol>
+<p>Warning:
+We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at the moment.</p>
+<p>Mention the benefit: if we have more climate years in the year, this is how we would add it.</p>
 </section>
 <section id="running-a-decoupled-sb-cba-workflow">
 <h3>Running a decoupled SB-&gt;CBA Workflow<a class="headerlink" href="#running-a-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
@@ -1670,7 +1743,7 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 <p>This can be easily done by setting the <code class="docutils literal notranslate"><span class="pre">cba.use_presolved</span></code> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>. By default, this downloads and uses the latest release we have (at the time of this workshop, that is v0.7.1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;latest&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;latest&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
 </pre></div>
 </div>
 </div>
@@ -1682,602 +1755,194 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 <p>Note how the number of steps has decreased down from over 100 to just ~37, and we see some new steps not previously seen before, such as <code class="docutils literal notranslate"><span class="pre">retrieve_presolved_sb_networks</span></code>.</p>
 </section>
+<section id="advanced-task-running-and-solving-a-cba-project-with-a-pre-solved-network">
+<h3>Advanced task: Running and solving a CBA project with a pre-solved network<a class="headerlink" href="#advanced-task-running-and-solving-a-cba-project-with-a-pre-solved-network" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Checkout to workshop branch</p></li>
+<li><p>Mention warning that it takes 15 minutes to solve</p></li>
+<li><p>Let people run it during the break</p></li>
+</ul>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="extras">
 <h1>extras<a class="headerlink" href="#extras" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
-            <span class="c1"># Extract the file</span>
-            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def unzip_with_timestamps(zip_path, extract_to, keep_zip=True):</span>
+<span class="c1">#     &quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
+<span class="c1">#     with zipfile.ZipFile(zip_path, &quot;r&quot;) as zip_ref:</span>
+<span class="c1">#         for member in zip_ref.infolist():</span>
+<span class="c1">#             # Extract the file</span>
+<span class="c1">#             zip_ref.extract(member, extract_to)</span>
 
-            <span class="c1"># Get the extracted file path</span>
-            <span class="n">extracted_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extract_to</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1">#             # Get the extracted file path</span>
+<span class="c1">#             extracted_path = os.path.join(extract_to, member.filename)</span>
 
-            <span class="c1"># Get the modification time from the zip file</span>
-            <span class="n">date_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="n">member</span><span class="o">.</span><span class="n">date_time</span><span class="p">)</span>
-            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">date_time</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+<span class="c1">#             # Get the modification time from the zip file</span>
+<span class="c1">#             date_time = datetime(*member.date_time)</span>
+<span class="c1">#             timestamp = date_time.timestamp()</span>
 
-            <span class="c1"># Set both access and modification times</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">utime</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">,</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">))</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_zip</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_path</span><span class="p">)</span>
+<span class="c1">#             # Set both access and modification times</span>
+<span class="c1">#             os.utime(extracted_path, (timestamp, timestamp))</span>
+<span class="c1">#     if not keep_zip:</span>
+<span class="c1">#         os.remove(zip_path)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;data/results-0.7.1.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/outcomes/0.7.1/results-0.7.1.zip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-04/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># urls = {</span>
+<span class="c1">#     &quot;data/results-0.7.1.zip&quot;: &quot;https://storage.googleapis.com/open-tyndp-data-store/outcomes/0.7.1/results-0.7.1.zip&quot;,</span>
+<span class="c1">#     &quot;scripts/_helpers.py&quot;: &quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;,</span>
+<span class="c1">#     &quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;: &quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-04/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;,</span>
+<span class="c1"># }</span>
 
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists. Skipping download.&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from storage.&quot;</span><span class="p">)</span>
-        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="c1"># os.makedirs(&quot;data&quot;, exist_ok=True)</span>
+<span class="c1"># os.makedirs(&quot;scripts&quot;, exist_ok=True)</span>
+<span class="c1"># for name, url in urls.items():</span>
+<span class="c1">#     if os.path.exists(name):</span>
+<span class="c1">#         print(f&quot;File {name} already exists. Skipping download.&quot;)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         print(f&quot;Retrieving {name} from storage.&quot;)</span>
+<span class="c1">#         urlretrieve(url, name)</span>
+<span class="c1">#         print(f&quot;File available in {name}.&quot;)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results-0.7.1&quot;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results-0.7.1.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results-0.7.1.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results-0.7.1&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latest NT results for Open-TYNDP v0.7.1 are available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+<span class="c1"># to_dir = &quot;data/results-0.7.1&quot;</span>
+<span class="c1"># if not os.path.exists(to_dir):</span>
+<span class="c1">#     print(f&quot;Unzipping data/results-0.7.1.zip.&quot;)</span>
+<span class="c1">#     unzip_with_timestamps(&quot;data/results-0.7.1.zip&quot;, &quot;data/results-0.7.1&quot;)</span>
+<span class="c1"># print(f&quot;Latest NT results for Open-TYNDP v0.7.1 are available in &#39;{to_dir}&#39;.&quot;)</span>
 
-<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.&quot;</span><span class="p">)</span>
-    <span class="n">unzip_with_timestamps</span><span class="p">(</span>
-        <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+<span class="c1"># to_dir = &quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span>
+<span class="c1"># if not os.path.exists(to_dir):</span>
+<span class="c1">#     print(f&quot;Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.&quot;)</span>
+<span class="c1">#     unzip_with_timestamps(</span>
+<span class="c1">#         &quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;,</span>
+<span class="c1">#         &quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;,</span>
+<span class="c1">#     )</span>
+<span class="c1"># print(f&quot;Open-TYNDP available in &#39;{to_dir}&#39;.&quot;)</span>
 
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results-0.7.1.zip from storage.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results-0.7.1.zip.
-File scripts/_helpers.py already exists. Skipping download.
-Retrieving data/open-tyndp-20260604-feat-cba-presolved-networks.zip from storage.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/open-tyndp-20260604-feat-cba-presolved-networks.zip.
-Unzipping data/results-0.7.1.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Latest NT results for Open-TYNDP v0.7.1 are available in &#39;data/results-0.7.1&#39;.
-Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp-20260604-feat-cba-presolved-networks&#39;.
-Done
+<span class="c1"># print(&quot;Done&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="using-snakemake-to-launch-the-open-tyndp-workflow">
-<h2>Using Snakemake to launch the Open-TYNDP workflow<a class="headerlink" href="#using-snakemake-to-launch-the-open-tyndp-workflow" title="Link to this heading">#</a></h2>
-<p>We now need to change our working directory to the Open-TYNDP directory we previously retrieved.</p>
-<div class="cell docutils container">
+<!-- ## Using Snakemake to launch the Open-TYNDP workflow --><!-- We now need to change our working directory to the Open-TYNDP directory we previously retrieved. --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.chdir(&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Be aware that to run the previous section of this notebook, you will need to restore the default working directory using <code class="docutils literal notranslate"><span class="pre">os.chdir(&quot;../../&quot;)</span></code>.</p>
-<p>Let’s check that we are indeed in the new directory now:</p>
-<div class="cell docutils container">
+<!-- Be aware that to run the previous section of this notebook, you will need to restore the default working directory using `os.chdir("../../")`.
+
+Let's check that we are indeed in the new directory now: --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.getcwd()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can now use Snakemake to call some of the rules to produce outputs with the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> PyPSA model.</p>
-<p>We will use the prepared TYNDP configuration file (<code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>) and schedule a dry-run with <code class="docutils literal notranslate"><span class="pre">-n</span></code> as we only want to investigate the DAG of the workflow:</p>
-<div class="cell docutils container">
+<!-- We can now use Snakemake to call some of the rules to produce outputs with the `open-tyndp` PyPSA model. 
+
+We will use the prepared TYNDP configuration file (`config/config.tyndp.yaml`) and schedule a dry-run with `-n` as we only want to investigate the DAG of the workflow: --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi shell -e open-tyndp</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.environ[&quot;PATH&quot;] = os.path.expanduser(&quot;~/.pixi/bin&quot;) + &quot;:&quot; + os.environ[&quot;PATH&quot;]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi shell -e open-tyndp</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
-usage: snakemake [-h] [--dry-run] [--profile PROFILE]
-                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
-                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
-                 [--resources NAME=INT [NAME=INT ...]]
-                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
-                 [--max-threads MAX_THREADS]
-                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
-                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
-                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
-                 [--default-resources [NAME=INT ...]]
-                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
-                 [--preemptible-retries PREEMPTIBLE_RETRIES]
-                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
-                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
-                 [--directory DIR] [--touch] [--keep-going]
-                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
-                 [--force] [--executor {local,dryrun,touch}] [--forceall]
-                 [--forcerun [TARGET ...]]
-                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
-                 [--prioritize TARGET [TARGET ...]]
-                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
-                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
-                 [--shadow-prefix DIR]
-                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
-                 [--scheduler [{greedy,ilp}]]
-                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
-                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
-                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
-                 [--report [FILE]] [--report-after-run]
-                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
-                 [--reporter PLUGIN] [--draft-notebook TARGET]
-                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
-                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
-                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
-                 [--list-rules] [--list-target-rules]
-                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
-                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
-                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
-                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
-                 [--list-changes {params,code,input}] [--list-input-changes]
-                 [--list-params-changes] [--list-untracked]
-                 [--delete-all-output | --delete-temp-output]
-                 [--keep-incomplete] [--drop-metadata] [--version]
-                 [--printshellcmds] [--debug-dag] [--nocolor]
-                 [--quiet [{all,host,progress,reason,rules} ...]]
-                 [--print-compilation] [--verbose] [--force-use-threads]
-                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
-                 [--max-inventory-time SECONDS] [--trust-io-cache]
-                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
-                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
-                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
-                 [--runtime-source-cache-path PATH]
-                 [--queue-input-wait-time SECONDS]
-                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
-                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
-                 [--keep-storage-local-copies] [--not-retrieve-storage]
-                 [--target-files-omit-workdir-adjustment]
-                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
-                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
-                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
-                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
-                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
-                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
-                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
-                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
-                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
-                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
-                 [--scheduler-greediness SCHEDULER_GREEDINESS]
-                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
-                 [--debug] [--runtime-profile FILE]
-                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
-                 [--show-failed-logs] [--logger {} [{} ...]]
-                 [--job-deploy-sources] [--benchmark-extended]
-                 [--persistence-backend {db,file}]
-                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
-                 [--container-image IMAGE] [--immediate-submit]
-                 [--jobscript SCRIPT] [--jobname NAME]
-                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
-                 [--container-cleanup-images] [--use-conda]
-                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
-                 [--conda-prefix DIR] [--conda-cleanup-envs]
-                 [--conda-cleanup-pkgs [{tarballs,cache}]]
-                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
-                 [--use-apptainer] [--apptainer-prefix DIR]
-                 [--apptainer-args ARGS] [--use-envmodules]
-                 [--deploy-sources QUERY CHECKSUM]
-                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
-                 [--mode {subprocess,default,remote}]
-                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
-                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
-                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
-                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--report-html-path VALUE]
-                 [--report-html-stylesheet-path VALUE]
-                 [--scheduler-greedy-greediness VALUE]
-                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
-                 [--scheduler-ilp-solver VALUE]
-                 [--scheduler-ilp-solver-path VALUE]
-                 [targets ...]
-snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call cba --configfile config/config.tyndp.yaml -n</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>As you can see, there is nothing to be done since all necessary outputs are already present in the files. However, we can still explore the set of rules defined in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and the other <code class="docutils literal notranslate"><span class="pre">.smk</span></code> files. First, we can plot the rule graph, then the full DAG.</p>
-<p>The corresponding rule graph to this workflow will look like this:</p>
-<div class="cell docutils container">
+<!-- As you can see, there is nothing to be done since all necessary outputs are already present in the files. However, we can still explore the set of rules defined in the `Snakefile` and the other `.smk` files. First, we can plot the rule graph, then the full DAG.
+
+The corresponding rule graph to this workflow will look like this: --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>../../scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>rulegraph_open_tyndp.png
-<span class="c1"># For Windows run instead:</span>
-<span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --rulegraph | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o rulegraph_open_tyndp.png</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks/../../scripts/filter_dag.py&#39;: [Errno 2] No such file or directory
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
-usage: snakemake [-h] [--dry-run] [--profile PROFILE]
-                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
-                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
-                 [--resources NAME=INT [NAME=INT ...]]
-                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
-                 [--max-threads MAX_THREADS]
-                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
-                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
-                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
-                 [--default-resources [NAME=INT ...]]
-                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
-                 [--preemptible-retries PREEMPTIBLE_RETRIES]
-                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
-                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
-                 [--directory DIR] [--touch] [--keep-going]
-                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
-                 [--force] [--executor {local,dryrun,touch}] [--forceall]
-                 [--forcerun [TARGET ...]]
-                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
-                 [--prioritize TARGET [TARGET ...]]
-                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
-                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
-                 [--shadow-prefix DIR]
-                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
-                 [--scheduler [{greedy,ilp}]]
-                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
-                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
-                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
-                 [--report [FILE]] [--report-after-run]
-                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
-                 [--reporter PLUGIN] [--draft-notebook TARGET]
-                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
-                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
-                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
-                 [--list-rules] [--list-target-rules]
-                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
-                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
-                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
-                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
-                 [--list-changes {input,code,params}] [--list-input-changes]
-                 [--list-params-changes] [--list-untracked]
-                 [--delete-all-output | --delete-temp-output]
-                 [--keep-incomplete] [--drop-metadata] [--version]
-                 [--printshellcmds] [--debug-dag] [--nocolor]
-                 [--quiet [{all,host,progress,reason,rules} ...]]
-                 [--print-compilation] [--verbose] [--force-use-threads]
-                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
-                 [--max-inventory-time SECONDS] [--trust-io-cache]
-                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
-                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
-                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
-                 [--runtime-source-cache-path PATH]
-                 [--queue-input-wait-time SECONDS]
-                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
-                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
-                 [--keep-storage-local-copies] [--not-retrieve-storage]
-                 [--target-files-omit-workdir-adjustment]
-                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
-                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
-                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
-                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
-                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
-                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
-                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
-                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
-                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
-                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
-                 [--scheduler-greediness SCHEDULER_GREEDINESS]
-                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
-                 [--debug] [--runtime-profile FILE]
-                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
-                 [--show-failed-logs] [--logger {} [{} ...]]
-                 [--job-deploy-sources] [--benchmark-extended]
-                 [--persistence-backend {db,file}]
-                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
-                 [--container-image IMAGE] [--immediate-submit]
-                 [--jobscript SCRIPT] [--jobname NAME]
-                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
-                 [--container-cleanup-images] [--use-conda]
-                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
-                 [--conda-prefix DIR] [--conda-cleanup-envs]
-                 [--conda-cleanup-pkgs [{tarballs,cache}]]
-                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
-                 [--use-apptainer] [--apptainer-prefix DIR]
-                 [--apptainer-args ARGS] [--use-envmodules]
-                 [--deploy-sources QUERY CHECKSUM]
-                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
-                 [--mode {remote,default,subprocess}]
-                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
-                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
-                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
-                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--report-html-path VALUE]
-                 [--report-html-stylesheet-path VALUE]
-                 [--scheduler-greedy-greediness VALUE]
-                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
-                 [--scheduler-ilp-solver VALUE]
-                 [--scheduler-ilp-solver-path VALUE]
-                 [targets ...]
-snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call cba --configfile config/config.tyndp.yaml --rulegraph | python ../../scripts/filter_dag.py | dot -Tpng -o rulegraph_open_tyndp.png</span>
+<span class="c1"># # For Windows run instead:</span>
+<span class="c1"># # ! snakemake -call --configfile config/config.tyndp.yaml --rulegraph | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o rulegraph_open_tyndp.png</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_open_tyndp.png&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;rulegraph_open_tyndp.png&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;rulegraph_open_tyndp.png&#39;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image(&quot;rulegraph_open_tyndp.png&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The corresponding DAG to this workflow will look like this:</p>
-<div class="cell docutils container">
+<!-- The corresponding DAG to this workflow will look like this: --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>../../scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_open_tyndp.png
-<span class="c1"># For Windows run instead:</span>
-<span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --dag | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o dag_open_tyndp.png</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks/../../scripts/filter_dag.py&#39;: [Errno 2] No such file or directory
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
-usage: snakemake [-h] [--dry-run] [--profile PROFILE]
-                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
-                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
-                 [--resources NAME=INT [NAME=INT ...]]
-                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
-                 [--max-threads MAX_THREADS]
-                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
-                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
-                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
-                 [--default-resources [NAME=INT ...]]
-                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
-                 [--preemptible-retries PREEMPTIBLE_RETRIES]
-                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
-                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
-                 [--directory DIR] [--touch] [--keep-going]
-                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
-                 [--force] [--executor {local,dryrun,touch}] [--forceall]
-                 [--forcerun [TARGET ...]]
-                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
-                 [--prioritize TARGET [TARGET ...]]
-                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
-                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
-                 [--shadow-prefix DIR]
-                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
-                 [--scheduler [{greedy,ilp}]]
-                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
-                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
-                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
-                 [--report [FILE]] [--report-after-run]
-                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
-                 [--reporter PLUGIN] [--draft-notebook TARGET]
-                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
-                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
-                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
-                 [--list-rules] [--list-target-rules]
-                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
-                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
-                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
-                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
-                 [--list-changes {code,params,input}] [--list-input-changes]
-                 [--list-params-changes] [--list-untracked]
-                 [--delete-all-output | --delete-temp-output]
-                 [--keep-incomplete] [--drop-metadata] [--version]
-                 [--printshellcmds] [--debug-dag] [--nocolor]
-                 [--quiet [{all,host,progress,reason,rules} ...]]
-                 [--print-compilation] [--verbose] [--force-use-threads]
-                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
-                 [--max-inventory-time SECONDS] [--trust-io-cache]
-                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
-                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
-                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
-                 [--runtime-source-cache-path PATH]
-                 [--queue-input-wait-time SECONDS]
-                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
-                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
-                 [--keep-storage-local-copies] [--not-retrieve-storage]
-                 [--target-files-omit-workdir-adjustment]
-                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
-                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
-                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
-                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
-                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
-                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
-                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
-                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
-                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
-                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
-                 [--scheduler-greediness SCHEDULER_GREEDINESS]
-                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
-                 [--debug] [--runtime-profile FILE]
-                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
-                 [--show-failed-logs] [--logger {} [{} ...]]
-                 [--job-deploy-sources] [--benchmark-extended]
-                 [--persistence-backend {db,file}]
-                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
-                 [--container-image IMAGE] [--immediate-submit]
-                 [--jobscript SCRIPT] [--jobname NAME]
-                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
-                 [--container-cleanup-images] [--use-conda]
-                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
-                 [--conda-prefix DIR] [--conda-cleanup-envs]
-                 [--conda-cleanup-pkgs [{tarballs,cache}]]
-                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
-                 [--use-apptainer] [--apptainer-prefix DIR]
-                 [--apptainer-args ARGS] [--use-envmodules]
-                 [--deploy-sources QUERY CHECKSUM]
-                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
-                 [--mode {default,remote,subprocess}]
-                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
-                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
-                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
-                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
-                 [--report-html-path VALUE]
-                 [--report-html-stylesheet-path VALUE]
-                 [--scheduler-greedy-greediness VALUE]
-                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
-                 [--scheduler-ilp-solver VALUE]
-                 [--scheduler-ilp-solver-path VALUE]
-                 [targets ...]
-snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --dag | python ../../scripts/filter_dag.py | dot -Tpng -o dag_open_tyndp.png</span>
+<span class="c1"># # For Windows run instead:</span>
+<span class="c1"># # ! snakemake -call --configfile config/config.tyndp.yaml --dag | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o dag_open_tyndp.png</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_open_tyndp.png&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image(&quot;dag_open_tyndp.png&quot;)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+</div>
+<!-- ### Apply Manual Adjustments --><!-- Open `data/open-tyndp-20251129/config/scenarios.tyndp.yaml` and modify the existing `NT-52SEG-20251129` scenario by adding the following manual adjustments:
 
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+- Increase the `marginal_cost` of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a `Generator` component with the carrier name `import H2`.
+- Change the `efficiency` of `H2 Electrolysis` to 78% for both 2030 and 2040. H2 Electrolysis is added as a `Link` component.
+- Remove the initial capacity (`p_nom` and `p_nom_min`) of all `solar-pv-utility` generators for 2030.
 
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;dag_open_tyndp.png&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+Then rerun the model and explore the results in PyPSA-Explorer.
 
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+**Hint**: If you need a reminder on running the Snakemake workflow, refer to the section above.
 
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;dag_open_tyndp.png&#39;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<section id="apply-manual-adjustments">
-<h3>Apply Manual Adjustments<a class="headerlink" href="#apply-manual-adjustments" title="Link to this heading">#</a></h3>
-<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp-20251129/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
-<ul class="simple">
-<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
-<li><p>Remove the initial capacity (<code class="docutils literal notranslate"><span class="pre">p_nom</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code>) of all <code class="docutils literal notranslate"><span class="pre">solar-pv-utility</span></code> generators for 2030.</p></li>
-</ul>
-<p>Then rerun the model and explore the results in PyPSA-Explorer.</p>
-<p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the section above.</p>
-<p><strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
-<p><strong>Hint III</strong>: As we only want to solve the model without post-processing, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
-<p><strong>Hint IV</strong>: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: <code class="docutils literal notranslate"><span class="pre">solving:solver</span></code>.</p>
-<p>To run the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
-<p>The recommended approach for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which handles all dependencies automatically.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.</p>
-<p>If you prefer to use conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">legacy installation documentation</a>.</p>
-</div>
-<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, follow the steps in the official <a class="reference external" href="https://pixi.sh/dev/installation/">pixi installation documentation</a>.</p>
-<p>For execution on Google Colab, install the Linux version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-</pre></div>
-</div>
-<p>In the Google Colab terminal, you might need to execute:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span><span class="w"> </span>bash<span class="w"> </span>-l
-</pre></div>
-</div>
-<p>for the changes to take effect if pixi is not recognized.</p>
-<div class="cell docutils container">
+**Hint II**: Always start with a dry run first (add `-n` to your Snakemake command).
+
+**Hint III**: As we only want to solve the model without post-processing, we can call the rule `solve_sector_networks` instead of the `all` rule.
+
+**Hint IV**: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: `solving:solver`. --><!-- To run the workflow, we first need to install and activate the `open-tyndp` environment.
+
+The recommended approach for PyPSA models is to use the `pixi` environment manager, which handles all dependencies automatically. --><!-- :::{note} 
+We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.
+
+If you prefer to use conda to install the `open-tyndp` environment locally, refer to our [legacy installation documentation](https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda).
+::: --><!-- To install `pixi` locally on your operating system, follow the steps in the official [pixi installation documentation](https://pixi.sh/dev/installation/).
+
+For execution on Google Colab, install the Linux version of `pixi` in the runtime:
+
+```bash
+!wget -qO- https://pixi.sh/install.sh | sh
+```
+
+In the Google Colab terminal, you might need to execute:
+```bash
+exec bash -l
+```
+for the changes to take effect if pixi is not recognized. --><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
 <span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
@@ -2285,190 +1950,119 @@ snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose fro
 </div>
 </div>
 </div>
-<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository before launching the workflow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp-20251129
-</pre></div>
-</div>
-<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
-</pre></div>
-</div>
-</section>
-</section>
-<section id="task-1-run-coupled-and-decoupled-sb-cba-workflow">
-<h2>Task 1: Run coupled and decoupled SB-CBA workflow<a class="headerlink" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects<span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;, &quot;NT-cyears&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;: &quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;48H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39;</span><span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;4380H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true}}&#39;</span><span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="visualize-dag">
-<h2>Visualize DAG<a class="headerlink" href="#visualize-dag" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">56</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&quot;</span><span class="p">)</span>
+<!-- Next, open a terminal window. Navigate to the `open-tyndp-20251129` repository before launching the workflow:
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&#39;
+```bash
+cd data/open-tyndp-20251129
+``` --><!-- Once you're in the `open-tyndp-20251129` repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:
+
+```bash
+pixi shell -e open-tyndp
+``` --><!-- ## Task 1: Run coupled and decoupled SB-CBA workflow --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run snakemake -call cba --configfile config/config.tyndp.yaml --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects -n</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_minimal_2.png
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run snakemake -call cba --configfile config/config.tyndp.yaml --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; -n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.getcwd()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;, &quot;NT-cyears&quot;]}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;: &quot;NT-cyears&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; -n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; -n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;48H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39; -n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;4380H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true}}&#39; -n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<!-- ## Visualize DAG --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.chdir(&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call --dag | python scripts/filter_dag.py | dot -Tpng -o dag_minimal_2.png</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2501,6 +2095,24 @@ snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose fro
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="20251203-workshop-pypsa-03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="background1-python.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2530,28 +2142,22 @@ snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose fro
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba-workflow">Exploring Open-TYNDP CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-a-new-climate-year-and-run-it">Task X: Create a new climate year and run it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-your-own-climate-year-and-run-it">Task X: Create your own climate year and run it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-task-running-and-solving-a-cba-project-with-a-pre-solved-network">Advanced task: Running and solving a CBA project with a pre-solved network</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-manual-adjustments">Apply Manual Adjustments</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow">Task 1: Run coupled and decoupled SB-CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-dag">Visualize DAG</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a></li>
 </ul>
 
   </nav></div>
