@@ -4,6 +4,14 @@ from IPython.display import Code, display
 from pdf2image import convert_from_path
 from pdf2image.exceptions import PDFPageCountError
 import matplotlib.pyplot as plt
+from pypsa_explorer import create_app
+
+try:
+    from google.colab import output
+
+    print(f"This notebook is running on Google Colab!")
+except ImportError:
+    print(f"This notebook is running locally !")
 
 
 def display_tree(
@@ -108,3 +116,26 @@ def show_benchmarks(
         ax.axis("off")
     plt.tight_layout()
     plt.show()
+
+
+def run_pypsa_explorer_in_colab(networks, port):
+    print("Starting PyPSA Explorer for Google Colab...")
+
+    # Create and start the app
+    app = create_app(networks)
+
+    import threading
+    import time
+
+    def run_server():
+        app.run(jupyter_mode="external", port=port, debug=False)
+
+    server_thread = threading.Thread(target=run_server, daemon=True)
+    server_thread.start()
+
+    # Wait for server to initialize
+    time.sleep(5)
+    print(f"✓ Server started on port {port}")
+
+    # Display in iframe
+    output.serve_kernel_port_as_iframe(port, height=1500)
