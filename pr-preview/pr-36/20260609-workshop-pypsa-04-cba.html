@@ -427,7 +427,7 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snakemake-and-pixi">Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba-workflow">Exploring Open-TYNDP CBA workflow</a><ul class="nav section-nav flex-column">
@@ -684,8 +684,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-05 10:39:42</span>
-<span class=" -Color -Color-Green">  Workflow ID: 828880ac-96c1-42e7-9784-25a358560bb2</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-05 11:08:18</span>
+<span class=" -Color -Color-Green">  Workflow ID: aea132b3-acd7-45d7-9f72-94fecb5dd279</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -713,28 +713,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Yellow">total                  6</span>
 
 
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -742,7 +742,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -750,11 +750,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 10:39:42 2026]</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 11:08:18 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -861,49 +861,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </section>
 </section>
-<section id="task-1-executing-a-workflow-with-snakemake">
-<h3>Task 1: Executing a workflow with Snakemake<a class="headerlink" href="#task-1-executing-a-workflow-with-snakemake" title="Link to this heading">#</a></h3>
-<p><strong>a)</strong> For our minimal example, execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> to produce the intermediate file <code class="docutils literal notranslate"><span class="pre">data/base_2030.nc</span></code>.</p>
-<p><strong>b)</strong> Execute the entire workflow and investigate what happens if you try to execute the workflow again.</p>
-<p><strong>c)</strong> Delete the final output file <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code> and investigate what happens if you try to execute the workflow again.</p>
-<p><strong>d)</strong> Change a value in the raw input data file <code class="docutils literal notranslate"><span class="pre">data/data_raw.csv</span></code> and save it again, overwriting the original file. Investigate what happens if you try to execute the workflow again.</p>
-<p>Hint: You can also just <code class="docutils literal notranslate"><span class="pre">touch</span></code> the file by executing <code class="docutils literal notranslate"><span class="pre">Path(&quot;data/data_raw.csv&quot;).touch()</span></code>. This will mimic a file edit.</p>
-<p><strong>e)</strong> (Optional) Open the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and add a second rule that processes the file <code class="docutils literal notranslate"><span class="pre">data_raw_2.csv</span></code> using the same script as the <code class="docutils literal notranslate"><span class="pre">build_data</span></code> rule. Add the output of this new rule as a second input to the <code class="docutils literal notranslate"><span class="pre">prepare_network</span></code> rule.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution c)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution d)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution e)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="snakemake-and-pixi">
+<h3>Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#snakemake-and-pixi" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>we are using <code class="docutils literal notranslate"><span class="pre">pixi</span></code> for package/environment management</p></li>
+<li><p>we are able to wrap snakemake commands into pixi commands</p></li>
+<li><p>for remainder of notebook, we will use pixi</p></li>
+</ul>
 </section>
 </section>
 <section id="exploring-open-tyndp-cba-workflow">
@@ -944,221 +908,219 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 43013, done.
-remote: Counting objects:   0% (1/543)
-remote: Counting objects:   1% (6/543)
-remote: Counting objects:   2% (11/543)
-remote: Counting objects:   3% (17/543)
-remote: Counting objects:   4% (22/543)
-remote: Counting objects:   5% (28/543)
-remote: Counting objects:   6% (33/543)
-remote: Counting objects:   7% (39/543)
-remote: Counting objects:   8% (44/543)
-remote: Counting objects:   9% (49/543)
-remote: Counting objects:  10% (55/543)
-remote: Counting objects:  11% (60/543)
-remote: Counting objects:  12% (66/543)
-remote: Counting objects:  13% (71/543)
-remote: Counting objects:  14% (77/543)
-remote: Counting objects:  15% (82/543)
-remote: Counting objects:  16% (87/543)
-remote: Counting objects:  17% (93/543)
-remote: Counting objects:  18% (98/543)
-remote: Counting objects:  19% (104/543)
-remote: Counting objects:  20% (109/543)
-remote: Counting objects:  21% (115/543)
-remote: Counting objects:  22% (120/543)
-remote: Counting objects:  23% (125/543)
-remote: Counting objects:  24% (131/543)
-remote: Counting objects:  25% (136/543)
-remote: Counting objects:  26% (142/543)
-remote: Counting objects:  27% (147/543)
-remote: Counting objects:  28% (153/543)
-remote: Counting objects:  29% (158/543)
-remote: Counting objects:  30% (163/543)
-remote: Counting objects:  31% (169/543)
-remote: Counting objects:  32% (174/543)
-remote: Counting objects:  33% (180/543)
-remote: Counting objects:  34% (185/543)
-remote: Counting objects:  35% (191/543)
-remote: Counting objects:  36% (196/543)
-remote: Counting objects:  37% (201/543)
-remote: Counting objects:  38% (207/543)
-remote: Counting objects:  39% (212/543)
-remote: Counting objects:  40% (218/543)
-remote: Counting objects:  41% (223/543)
-remote: Counting objects:  42% (229/543)
-remote: Counting objects:  43% (234/543)
-remote: Counting objects:  44% (239/543)
-remote: Counting objects:  45% (245/543)
-remote: Counting objects:  46% (250/543)
-remote: Counting objects:  47% (256/543)
-remote: Counting objects:  48% (261/543)
-remote: Counting objects:  49% (267/543)
-remote: Counting objects:  50% (272/543)
-remote: Counting objects:  51% (277/543)
-remote: Counting objects:  52% (283/543)
-remote: Counting objects:  53% (288/543)
-remote: Counting objects:  54% (294/543)
-remote: Counting objects:  55% (299/543)
-remote: Counting objects:  56% (305/543)
-remote: Counting objects:  57% (310/543)
-remote: Counting objects:  58% (315/543)
-remote: Counting objects:  59% (321/543)
-remote: Counting objects:  60% (326/543)
-remote: Counting objects:  61% (332/543)
-remote: Counting objects:  62% (337/543)
-remote: Counting objects:  63% (343/543)
-remote: Counting objects:  64% (348/543)
-remote: Counting objects:  65% (353/543)
-remote: Counting objects:  66% (359/543)
-remote: Counting objects:  67% (364/543)
-remote: Counting objects:  68% (370/543)
-remote: Counting objects:  69% (375/543)
-remote: Counting objects:  70% (381/543)
-remote: Counting objects:  71% (386/543)
-remote: Counting objects:  72% (391/543)
-remote: Counting objects:  73% (397/543)
-remote: Counting objects:  74% (402/543)
-remote: Counting objects:  75% (408/543)
-remote: Counting objects:  76% (413/543)
-remote: Counting objects:  77% (419/543)
-remote: Counting objects:  78% (424/543)
-remote: Counting objects:  79% (429/543)
-remote: Counting objects:  80% (435/543)
-remote: Counting objects:  81% (440/543)
-remote: Counting objects:  82% (446/543)
-remote: Counting objects:  83% (451/543)
-remote: Counting objects:  84% (457/543)
-remote: Counting objects:  85% (462/543)
-remote: Counting objects:  86% (467/543)
-remote: Counting objects:  87% (473/543)
-remote: Counting objects:  88% (478/543)
-remote: Counting objects:  89% (484/543)
-remote: Counting objects:  90% (489/543)
-remote: Counting objects:  91% (495/543)
-remote: Counting objects:  92% (500/543)
-remote: Counting objects:  93% (505/543)
-remote: Counting objects:  94% (511/543)
-remote: Counting objects:  95% (516/543)
-remote: Counting objects:  96% (522/543)
-remote: Counting objects:  97% (527/543)
-remote: Counting objects:  98% (533/543)
-remote: Counting objects:  99% (538/543)
-remote: Counting objects: 100% (543/543)
-remote: Counting objects: 100% (543/543), done.
-remote: Compressing objects:   0% (1/201)
-remote: Compressing objects:   1% (3/201)
-remote: Compressing objects:   2% (5/201)
-remote: Compressing objects:   3% (7/201)
-remote: Compressing objects:   4% (9/201)
-remote: Compressing objects:   5% (11/201)
-remote: Compressing objects:   6% (13/201)
+remote: Counting objects:   0% (1/500)
+remote: Counting objects:   1% (5/500)
+remote: Counting objects:   2% (10/500)
+remote: Counting objects:   3% (15/500)
+remote: Counting objects:   4% (20/500)
+remote: Counting objects:   5% (25/500)
+remote: Counting objects:   6% (30/500)
+remote: Counting objects:   7% (35/500)
+remote: Counting objects:   8% (40/500)
+remote: Counting objects:   9% (45/500)
+remote: Counting objects:  10% (50/500)
+remote: Counting objects:  11% (55/500)
+remote: Counting objects:  12% (60/500)
+remote: Counting objects:  13% (65/500)
+remote: Counting objects:  14% (70/500)
+remote: Counting objects:  15% (75/500)
+remote: Counting objects:  16% (80/500)
+remote: Counting objects:  17% (85/500)
+remote: Counting objects:  18% (90/500)
+remote: Counting objects:  19% (95/500)
+remote: Counting objects:  20% (100/500)
+remote: Counting objects:  21% (105/500)
+remote: Counting objects:  22% (110/500)
+remote: Counting objects:  23% (115/500)
+remote: Counting objects:  24% (120/500)
+remote: Counting objects:  25% (125/500)
+remote: Counting objects:  26% (130/500)
+remote: Counting objects:  27% (135/500)
+remote: Counting objects:  28% (140/500)
+remote: Counting objects:  29% (145/500)
+remote: Counting objects:  30% (150/500)
+remote: Counting objects:  31% (155/500)
+remote: Counting objects:  32% (160/500)
+remote: Counting objects:  33% (165/500)
+remote: Counting objects:  34% (170/500)
+remote: Counting objects:  35% (175/500)
+remote: Counting objects:  36% (180/500)
+remote: Counting objects:  37% (185/500)
+remote: Counting objects:  38% (190/500)
+remote: Counting objects:  39% (195/500)
+remote: Counting objects:  40% (200/500)
+remote: Counting objects:  41% (205/500)
+remote: Counting objects:  42% (210/500)
+remote: Counting objects:  43% (215/500)
+remote: Counting objects:  44% (220/500)
+remote: Counting objects:  45% (225/500)
+remote: Counting objects:  46% (230/500)
+remote: Counting objects:  47% (235/500)
+remote: Counting objects:  48% (240/500)
+remote: Counting objects:  49% (245/500)
+remote: Counting objects:  50% (250/500)
+remote: Counting objects:  51% (255/500)
+remote: Counting objects:  52% (260/500)
+remote: Counting objects:  53% (265/500)
+remote: Counting objects:  54% (270/500)
+remote: Counting objects:  55% (275/500)
+remote: Counting objects:  56% (280/500)
+remote: Counting objects:  57% (285/500)
+remote: Counting objects:  58% (290/500)
+remote: Counting objects:  59% (295/500)
+remote: Counting objects:  60% (300/500)
+remote: Counting objects:  61% (305/500)
+remote: Counting objects:  62% (310/500)
+remote: Counting objects:  63% (315/500)
+remote: Counting objects:  64% (320/500)
+remote: Counting objects:  65% (325/500)
+remote: Counting objects:  66% (330/500)
+remote: Counting objects:  67% (335/500)
+remote: Counting objects:  68% (340/500)
+remote: Counting objects:  69% (345/500)
+remote: Counting objects:  70% (350/500)
+remote: Counting objects:  71% (355/500)
+remote: Counting objects:  72% (360/500)
+remote: Counting objects:  73% (365/500)
+remote: Counting objects:  74% (370/500)
+remote: Counting objects:  75% (375/500)
+remote: Counting objects:  76% (380/500)
+remote: Counting objects:  77% (385/500)
+remote: Counting objects:  78% (390/500)
+remote: Counting objects:  79% (395/500)
+remote: Counting objects:  80% (400/500)
+remote: Counting objects:  81% (405/500)
+remote: Counting objects:  82% (410/500)
+remote: Counting objects:  83% (415/500)
+remote: Counting objects:  84% (420/500)
+remote: Counting objects:  85% (425/500)
+remote: Counting objects:  86% (430/500)
+remote: Counting objects:  87% (435/500)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   7% (15/201)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Counting objects:  88% (440/500)
+remote: Counting objects:  89% (445/500)
+remote: Counting objects:  90% (450/500)
+remote: Counting objects:  91% (455/500)
+remote: Counting objects:  92% (460/500)
+remote: Counting objects:  93% (465/500)
+remote: Counting objects:  94% (470/500)
+remote: Counting objects:  95% (475/500)
+remote: Counting objects:  96% (480/500)
+remote: Counting objects:  97% (485/500)
+remote: Counting objects:  98% (490/500)
+remote: Counting objects:  99% (495/500)
+remote: Counting objects: 100% (500/500)
+remote: Counting objects: 100% (500/500), done.
+remote: Compressing objects:   0% (1/193)
+remote: Compressing objects:   1% (2/193)
+remote: Compressing objects:   2% (4/193)
+remote: Compressing objects:   3% (6/193)
+remote: Compressing objects:   4% (8/193)
+remote: Compressing objects:   5% (10/193)
+remote: Compressing objects:   6% (12/193)
+remote: Compressing objects:   7% (14/193)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   8% (17/201)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   8% (16/193)
+remote: Compressing objects:   9% (18/193)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   9% (19/201)
-remote: Compressing objects:  10% (21/201)
-remote: Compressing objects:  11% (23/201)
-remote: Compressing objects:  12% (25/201)
-remote: Compressing objects:  13% (27/201)
-remote: Compressing objects:  14% (29/201)
-remote: Compressing objects:  15% (31/201)
-remote: Compressing objects:  16% (33/201)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (20/193)
+remote: Compressing objects:  11% (22/193)
+remote: Compressing objects:  12% (24/193)
+remote: Compressing objects:  13% (26/193)
+remote: Compressing objects:  14% (28/193)
+remote: Compressing objects:  15% (29/193)
+remote: Compressing objects:  16% (31/193)
+remote: Compressing objects:  17% (33/193)
+remote: Compressing objects:  18% (35/193)
+remote: Compressing objects:  19% (37/193)
+remote: Compressing objects:  20% (39/193)
+remote: Compressing objects:  21% (41/193)
+remote: Compressing objects:  22% (43/193)
+remote: Compressing objects:  23% (45/193)
+remote: Compressing objects:  24% (47/193)
+remote: Compressing objects:  25% (49/193)
+remote: Compressing objects:  26% (51/193)
+remote: Compressing objects:  27% (53/193)
+remote: Compressing objects:  28% (55/193)
+remote: Compressing objects:  29% (56/193)
+remote: Compressing objects:  30% (58/193)
+remote: Compressing objects:  31% (60/193)
+remote: Compressing objects:  32% (62/193)
+remote: Compressing objects:  33% (64/193)
+remote: Compressing objects:  34% (66/193)
+remote: Compressing objects:  35% (68/193)
+remote: Compressing objects:  36% (70/193)
+remote: Compressing objects:  37% (72/193)
+remote: Compressing objects:  38% (74/193)
+remote: Compressing objects:  39% (76/193)
+remote: Compressing objects:  40% (78/193)
+remote: Compressing objects:  41% (80/193)
+remote: Compressing objects:  42% (82/193)
+remote: Compressing objects:  43% (83/193)
+remote: Compressing objects:  44% (85/193)
+remote: Compressing objects:  45% (87/193)
+remote: Compressing objects:  46% (89/193)
+remote: Compressing objects:  47% (91/193)
+remote: Compressing objects:  48% (93/193)
+remote: Compressing objects:  49% (95/193)
+remote: Compressing objects:  50% (97/193)
+remote: Compressing objects:  51% (99/193)
+remote: Compressing objects:  52% (101/193)
+remote: Compressing objects:  53% (103/193)
+remote: Compressing objects:  54% (105/193)
+remote: Compressing objects:  55% (107/193)
+remote: Compressing objects:  56% (109/193)
+remote: Compressing objects:  57% (111/193)
+remote: Compressing objects:  58% (112/193)
+remote: Compressing objects:  59% (114/193)
+remote: Compressing objects:  60% (116/193)
+remote: Compressing objects:  61% (118/193)
+remote: Compressing objects:  62% (120/193)
+remote: Compressing objects:  63% (122/193)
+remote: Compressing objects:  64% (124/193)
+remote: Compressing objects:  65% (126/193)
+remote: Compressing objects:  66% (128/193)
+remote: Compressing objects:  67% (130/193)
+remote: Compressing objects:  68% (132/193)
+remote: Compressing objects:  69% (134/193)
+remote: Compressing objects:  70% (136/193)
+remote: Compressing objects:  71% (138/193)
+remote: Compressing objects:  72% (139/193)
+remote: Compressing objects:  73% (141/193)
+remote: Compressing objects:  74% (143/193)
+remote: Compressing objects:  75% (145/193)
+remote: Compressing objects:  76% (147/193)
+remote: Compressing objects:  77% (149/193)
+remote: Compressing objects:  78% (151/193)
+remote: Compressing objects:  79% (153/193)
+remote: Compressing objects:  80% (155/193)
+remote: Compressing objects:  81% (157/193)
+remote: Compressing objects:  82% (159/193)
+remote: Compressing objects:  83% (161/193)
+remote: Compressing objects:  84% (163/193)
+remote: Compressing objects:  85% (165/193)
+remote: Compressing objects:  86% (166/193)
+remote: Compressing objects:  87% (168/193)
+remote: Compressing objects:  88% (170/193)
+remote: Compressing objects:  89% (172/193)
+remote: Compressing objects:  90% (174/193)
+remote: Compressing objects:  91% (176/193)
+remote: Compressing objects:  92% (178/193)
+remote: Compressing objects:  93% (180/193)
+remote: Compressing objects:  94% (182/193)
+remote: Compressing objects:  95% (184/193)
+remote: Compressing objects:  96% (186/193)
+remote: Compressing objects:  97% (188/193)
+remote: Compressing objects:  98% (190/193)
+remote: Compressing objects:  99% (192/193)
+remote: Compressing objects: 100% (193/193)
+remote: Compressing objects: 100% (193/193), done.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  17% (35/201)
-remote: Compressing objects:  18% (37/201)
-remote: Compressing objects:  19% (39/201)
-remote: Compressing objects:  20% (41/201)
-remote: Compressing objects:  21% (43/201)
-remote: Compressing objects:  22% (45/201)
-remote: Compressing objects:  23% (47/201)
-remote: Compressing objects:  24% (49/201)
-remote: Compressing objects:  25% (51/201)
-remote: Compressing objects:  26% (53/201)
-remote: Compressing objects:  27% (55/201)
-remote: Compressing objects:  28% (57/201)
-remote: Compressing objects:  29% (59/201)
-remote: Compressing objects:  30% (61/201)
-remote: Compressing objects:  31% (63/201)
-remote: Compressing objects:  32% (65/201)
-remote: Compressing objects:  33% (67/201)
-remote: Compressing objects:  34% (69/201)
-remote: Compressing objects:  35% (71/201)
-remote: Compressing objects:  36% (73/201)
-remote: Compressing objects:  37% (75/201)
-remote: Compressing objects:  38% (77/201)
-remote: Compressing objects:  39% (79/201)
-remote: Compressing objects:  40% (81/201)
-remote: Compressing objects:  41% (83/201)
-remote: Compressing objects:  42% (85/201)
-remote: Compressing objects:  43% (87/201)
-remote: Compressing objects:  44% (89/201)
-remote: Compressing objects:  45% (91/201)
-remote: Compressing objects:  46% (93/201)
-remote: Compressing objects:  47% (95/201)
-remote: Compressing objects:  48% (97/201)
-remote: Compressing objects:  49% (99/201)
-remote: Compressing objects:  50% (101/201)
-remote: Compressing objects:  51% (103/201)
-remote: Compressing objects:  52% (105/201)
-remote: Compressing objects:  53% (107/201)
-remote: Compressing objects:  54% (109/201)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  55% (111/201)
-remote: Compressing objects:  56% (113/201)
-remote: Compressing objects:  57% (115/201)
-remote: Compressing objects:  58% (117/201)
-remote: Compressing objects:  59% (119/201)
-remote: Compressing objects:  60% (121/201)
-remote: Compressing objects:  61% (123/201)
-remote: Compressing objects:  62% (125/201)
-remote: Compressing objects:  63% (127/201)
-remote: Compressing objects:  64% (129/201)
-remote: Compressing objects:  65% (131/201)
-remote: Compressing objects:  66% (133/201)
-remote: Compressing objects:  67% (135/201)
-remote: Compressing objects:  68% (137/201)
-remote: Compressing objects:  69% (139/201)
-remote: Compressing objects:  70% (141/201)
-remote: Compressing objects:  71% (143/201)
-remote: Compressing objects:  72% (145/201)
-remote: Compressing objects:  73% (147/201)
-remote: Compressing objects:  74% (149/201)
-remote: Compressing objects:  75% (151/201)
-remote: Compressing objects:  76% (153/201)
-remote: Compressing objects:  77% (155/201)
-remote: Compressing objects:  78% (157/201)
-remote: Compressing objects:  79% (159/201)
-remote: Compressing objects:  80% (161/201)
-remote: Compressing objects:  81% (163/201)
-remote: Compressing objects:  82% (165/201)
-remote: Compressing objects:  83% (167/201)
-remote: Compressing objects:  84% (169/201)
-remote: Compressing objects:  85% (171/201)
-remote: Compressing objects:  86% (173/201)
-remote: Compressing objects:  87% (175/201)
-remote: Compressing objects:  88% (177/201)
-remote: Compressing objects:  89% (179/201)
-remote: Compressing objects:  90% (181/201)
-remote: Compressing objects:  91% (183/201)
-remote: Compressing objects:  92% (185/201)
-remote: Compressing objects:  93% (187/201)
-remote: Compressing objects:  94% (189/201)
-remote: Compressing objects:  95% (191/201)
-remote: Compressing objects:  96% (193/201)
-remote: Compressing objects:  97% (195/201)
-remote: Compressing objects:  98% (197/201)
-remote: Compressing objects:  99% (199/201)
-remote: Compressing objects: 100% (201/201)
-remote: Compressing objects: 100% (201/201), done.
-Receiving objects:   0% (1/43013)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   0% (1/43013)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (431/43013)
@@ -1166,299 +1128,317 @@ Receiving objects:   0% (1/43013)
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   2% (861/43013)
 Receiving objects:   3% (1291/43013)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   4% (1721/43013)
+Receiving objects:   4% (1721/43013)
 Receiving objects:   5% (2151/43013)
+Receiving objects:   6% (2581/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   6% (2581/43013)
-Receiving objects:   7% (3011/43013)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   7% (3011/43013)
 Receiving objects:   8% (3442/43013)
 Receiving objects:   9% (3872/43013)
 Receiving objects:  10% (4302/43013)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  11% (4732/43013)
+Receiving objects:  11% (4732/43013)
 Receiving objects:  12% (5162/43013)
 Receiving objects:  13% (5592/43013)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6022/43013), 4.88 MiB | 9.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6022/43013), 16.67 MiB | 33.33 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6452/43013), 4.88 MiB | 9.68 MiB/s
-Receiving objects:  16% (6883/43013), 4.88 MiB | 9.68 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6452/43013), 16.67 MiB | 33.33 MiB/s
+Receiving objects:  16% (6883/43013), 16.67 MiB | 33.33 MiB/s
+Receiving objects:  17% (7313/43013), 16.67 MiB | 33.33 MiB/s
+Receiving objects:  17% (7492/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  17% (7313/43013), 4.88 MiB | 9.68 MiB/s
-Receiving objects:  17% (7492/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7743/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7743/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  19% (8173/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  20% (8603/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8173/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  20% (8603/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  21% (9033/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  22% (9463/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  21% (9033/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  22% (9463/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  23% (9893/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  24% (10324/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  25% (10754/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  26% (11184/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  27% (11614/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  23% (9893/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  24% (10324/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  25% (10754/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  26% (11184/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  27% (11614/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  28% (12044/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  28% (12044/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  29% (12474/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  30% (12904/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  31% (13335/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  32% (13765/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  29% (12474/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  30% (12904/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  31% (13335/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  32% (13765/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14195/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  34% (14625/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  35% (15055/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  36% (15485/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  37% (15915/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  38% (16345/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  39% (16776/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  40% (17206/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  41% (17636/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  42% (18066/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  43% (18496/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14195/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  34% (14625/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  35% (15055/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  36% (15485/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  37% (15915/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  38% (16345/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  39% (16776/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  40% (17206/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18926/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  45% (19356/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  46% (19786/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  47% (20217/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  48% (20647/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  41% (17636/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  42% (18066/43013), 37.87 MiB | 37.87 MiB/s
+Receiving objects:  43% (18496/43013), 37.87 MiB | 37.87 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  49% (21077/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  50% (21507/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  51% (21937/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18926/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  45% (19356/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  46% (19786/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  47% (20217/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  48% (20647/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  49% (21077/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22367/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  53% (22797/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  54% (23228/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  55% (23658/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  56% (24088/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  57% (24518/43013), 38.44 MiB | 38.32 MiB/s
-Receiving objects:  58% (24948/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21507/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  51% (21937/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25378/43013), 38.44 MiB | 38.32 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22367/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  53% (22797/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  54% (23228/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  55% (23658/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  56% (24088/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  60% (25808/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  61% (26238/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  62% (26669/43013), 69.18 MiB | 45.97 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24518/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  58% (24948/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (27099/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  64% (27529/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  65% (27959/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  66% (28389/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  67% (28819/43013), 69.18 MiB | 45.97 MiB/s
-Receiving objects:  68% (29249/43013), 69.18 MiB | 45.97 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25378/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  60% (25808/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  61% (26238/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29679/43013), 69.18 MiB | 45.97 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  62% (26669/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  63% (27099/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29817/43013), 101.27 MiB | 50.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27529/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  65% (27959/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  66% (28389/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  67% (28819/43013), 58.89 MiB | 39.00 MiB/s
+Receiving objects:  68% (29249/43013), 58.89 MiB | 39.00 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30110/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  71% (30540/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  72% (30970/43013), 101.27 MiB | 50.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  68% (29672/43013), 80.30 MiB | 39.95 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  73% (31400/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  74% (31830/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  75% (32260/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  76% (32690/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  77% (33121/43013), 101.27 MiB | 50.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29679/43013), 80.30 MiB | 39.95 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  78% (33551/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  79% (33981/43013), 101.27 MiB | 50.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30110/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  71% (30540/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  72% (30970/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  73% (31400/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  74% (31830/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  75% (32260/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  76% (32690/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  77% (33121/43013), 102.30 MiB | 40.77 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34411/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  81% (34841/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  82% (35271/43013), 101.27 MiB | 50.51 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  77% (33406/43013), 102.30 MiB | 40.77 MiB/s
+Receiving objects:  78% (33551/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35701/43013), 101.27 MiB | 50.51 MiB/s
-Receiving objects:  84% (36131/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  85% (36562/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  86% (36992/43013), 134.74 MiB | 53.79 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33981/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37422/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  88% (37852/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  89% (38282/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  90% (38712/43013), 134.74 MiB | 53.79 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34411/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  81% (34841/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  82% (35271/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (39142/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  92% (39572/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  93% (40003/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  94% (40433/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  95% (40863/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  96% (41293/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects:  97% (41723/43013), 134.74 MiB | 53.79 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35701/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  84% (36131/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (42153/43013), 134.74 MiB | 53.79 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  85% (36562/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  86% (36992/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42583/43013), 134.74 MiB | 53.79 MiB/s
-remote: Total 43013 (delta 488), reused 345 (delta 342), pack-reused 42470 (from 4)
-Receiving objects: 100% (43013/43013), 134.74 MiB | 53.79 MiB/s
-Receiving objects: 100% (43013/43013), 147.81 MiB | 54.05 MiB/s, done.
-Resolving deltas:   0% (0/33494)
-Resolving deltas:   1% (335/33494)
-Resolving deltas:   2% (670/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37422/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  88% (37852/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  89% (38282/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  90% (38712/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   3% (1005/33494)
-Resolving deltas:   4% (1340/33494)
-Resolving deltas:   5% (1675/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (39142/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  92% (39572/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  93% (40003/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  94% (40433/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  95% (40863/43013), 124.22 MiB | 41.28 MiB/s
+Receiving objects:  96% (41293/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   6% (2010/33494)
-Resolving deltas:   7% (2345/33494)
-Resolving deltas:   8% (2680/33494)
-Resolving deltas:   9% (3015/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  97% (41723/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3350/33494)
-Resolving deltas:  11% (3685/33494)
-Resolving deltas:  12% (4020/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (42153/43013), 124.22 MiB | 41.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4355/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42583/43013), 124.22 MiB | 41.28 MiB/s
+remote: Total 43013 (delta 444), reused 310 (delta 307), pack-reused 42513 (from 4)
+Receiving objects: 100% (43013/43013), 147.47 MiB | 42.03 MiB/s
+Receiving objects: 100% (43013/43013), 147.85 MiB | 41.97 MiB/s, done.
+Resolving deltas:   0% (0/33483)
+Resolving deltas:   1% (335/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4690/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (670/33483)
+Resolving deltas:   3% (1005/33483)
+Resolving deltas:   4% (1340/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5025/33494)
-Resolving deltas:  16% (5360/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   5% (1675/33483)
+Resolving deltas:   6% (2009/33483)
+Resolving deltas:   7% (2344/33483)
+Resolving deltas:   8% (2679/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5694/33494)
-Resolving deltas:  18% (6029/33494)
-Resolving deltas:  19% (6364/33494)
-Resolving deltas:  20% (6699/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (3014/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  21% (7034/33494)
-Resolving deltas:  22% (7369/33494)
-Resolving deltas:  23% (7704/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3349/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (8039/33494)
-Resolving deltas:  25% (8374/33494)
-Resolving deltas:  26% (8709/33494)
-Resolving deltas:  27% (9044/33494)
-Resolving deltas:  28% (9379/33494)
-Resolving deltas:  29% (9714/33494)
-Resolving deltas:  30% (10049/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  11% (3684/33483)
+Resolving deltas:  12% (4018/33483)
+Resolving deltas:  13% (4353/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10384/33494)
-Resolving deltas:  32% (10719/33494)
-Resolving deltas:  33% (11054/33494)
-Resolving deltas:  34% (11388/33494)
-Resolving deltas:  35% (11723/33494)
-Resolving deltas:  36% (12059/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4688/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  37% (12393/33494)
-Resolving deltas:  38% (12729/33494)
-Resolving deltas:  39% (13063/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5023/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13398/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  16% (5358/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13733/33494)
-Resolving deltas:  42% (14068/33494)
-Resolving deltas:  43% (14403/33494)
-Resolving deltas:  44% (14738/33494)
-Resolving deltas:  45% (15073/33494)
-Resolving deltas:  46% (15408/33494)
-Resolving deltas:  47% (15743/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5693/33483)
+Resolving deltas:  18% (6027/33483)
+Resolving deltas:  19% (6362/33483)
+Resolving deltas:  20% (6697/33483)
+Resolving deltas:  21% (7032/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  48% (16078/33494)
-Resolving deltas:  49% (16413/33494)
-Resolving deltas:  50% (16747/33494)
-Resolving deltas:  51% (17082/33494)
-Resolving deltas:  52% (17417/33494)
-Resolving deltas:  53% (17752/33494)
-Resolving deltas:  54% (18087/33494)
-Resolving deltas:  55% (18422/33494)
-Resolving deltas:  56% (18757/33494)
-Resolving deltas:  57% (19092/33494)
-Resolving deltas:  58% (19427/33494)
-Resolving deltas:  59% (19762/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  22% (7367/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  60% (20097/33494)
-Resolving deltas:  61% (20432/33494)
-Resolving deltas:  62% (20767/33494)
-Resolving deltas:  63% (21103/33494)
-Resolving deltas:  64% (21437/33494)
-Resolving deltas:  65% (21772/33494)
-Resolving deltas:  66% (22107/33494)
-Resolving deltas:  67% (22441/33494)
-Resolving deltas:  68% (22777/33494)
-Resolving deltas:  69% (23111/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7702/33483)
+Resolving deltas:  24% (8036/33483)
+Resolving deltas:  25% (8371/33483)
+Resolving deltas:  26% (8706/33483)
+Resolving deltas:  27% (9041/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  70% (23446/33494)
-Resolving deltas:  71% (23781/33494)
-Resolving deltas:  72% (24116/33494)
-Resolving deltas:  73% (24451/33494)
-Resolving deltas:  74% (24786/33494)
-Resolving deltas:  75% (25121/33494)
-Resolving deltas:  76% (25456/33494)
-Resolving deltas:  77% (25791/33494)
-Resolving deltas:  78% (26126/33494)
-Resolving deltas:  79% (26461/33494)
-Resolving deltas:  80% (26796/33494)
-Resolving deltas:  81% (27131/33494)
-Resolving deltas:  82% (27466/33494)
-Resolving deltas:  83% (27801/33494)
-Resolving deltas:  84% (28135/33494)
-Resolving deltas:  85% (28470/33494)
-Resolving deltas:  86% (28805/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  28% (9376/33483)
+Resolving deltas:  29% (9711/33483)
+Resolving deltas:  30% (10045/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  87% (29140/33494)
-Resolving deltas:  88% (29475/33494)
-Resolving deltas:  89% (29810/33494)
-Resolving deltas:  90% (30145/33494)
-Resolving deltas:  91% (30480/33494)
-Resolving deltas:  92% (30815/33494)
-Resolving deltas:  93% (31150/33494)
-Resolving deltas:  94% (31485/33494)
-Resolving deltas:  95% (31820/33494)
-Resolving deltas:  96% (32155/33494)
-Resolving deltas:  97% (32490/33494)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10380/33483)
+Resolving deltas:  32% (10715/33483)
+Resolving deltas:  33% (11050/33483)
+Resolving deltas:  34% (11385/33483)
+Resolving deltas:  35% (11720/33483)
+Resolving deltas:  36% (12054/33483)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  98% (32825/33494)
-Resolving deltas:  99% (33160/33494)
-Resolving deltas: 100% (33494/33494)
-Resolving deltas: 100% (33494/33494), done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  37% (12389/33483)
+Resolving deltas:  38% (12724/33483)
+Resolving deltas:  39% (13059/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13394/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13729/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (14063/33483)
+Resolving deltas:  43% (14398/33483)
+Resolving deltas:  44% (14733/33483)
+Resolving deltas:  45% (15068/33483)
+Resolving deltas:  46% (15403/33483)
+Resolving deltas:  47% (15738/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  48% (16072/33483)
+Resolving deltas:  49% (16407/33483)
+Resolving deltas:  49% (16673/33483)
+Resolving deltas:  50% (16742/33483)
+Resolving deltas:  51% (17077/33483)
+Resolving deltas:  52% (17412/33483)
+Resolving deltas:  53% (17746/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  54% (18081/33483)
+Resolving deltas:  55% (18416/33483)
+Resolving deltas:  56% (18751/33483)
+Resolving deltas:  57% (19086/33483)
+Resolving deltas:  58% (19421/33483)
+Resolving deltas:  59% (19755/33483)
+Resolving deltas:  60% (20090/33483)
+Resolving deltas:  61% (20425/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  62% (20760/33483)
+Resolving deltas:  63% (21095/33483)
+Resolving deltas:  64% (21430/33483)
+Resolving deltas:  65% (21764/33483)
+Resolving deltas:  66% (22099/33483)
+Resolving deltas:  67% (22434/33483)
+Resolving deltas:  68% (22769/33483)
+Resolving deltas:  69% (23105/33483)
+Resolving deltas:  70% (23439/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  71% (23773/33483)
+Resolving deltas:  72% (24108/33483)
+Resolving deltas:  73% (24443/33483)
+Resolving deltas:  74% (24778/33483)
+Resolving deltas:  75% (25113/33483)
+Resolving deltas:  76% (25448/33483)
+Resolving deltas:  77% (25782/33483)
+Resolving deltas:  78% (26117/33483)
+Resolving deltas:  79% (26452/33483)
+Resolving deltas:  80% (26787/33483)
+Resolving deltas:  81% (27123/33483)
+Resolving deltas:  82% (27457/33483)
+Resolving deltas:  83% (27791/33483)
+Resolving deltas:  84% (28126/33483)
+Resolving deltas:  85% (28461/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  86% (28796/33483)
+Resolving deltas:  87% (29131/33483)
+Resolving deltas:  88% (29466/33483)
+Resolving deltas:  89% (29800/33483)
+Resolving deltas:  90% (30135/33483)
+Resolving deltas:  91% (30470/33483)
+Resolving deltas:  92% (30805/33483)
+Resolving deltas:  93% (31140/33483)
+Resolving deltas:  94% (31475/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  95% (31809/33483)
+Resolving deltas:  96% (32144/33483)
+Resolving deltas:  97% (32479/33483)
+Resolving deltas:  98% (32814/33483)
+Resolving deltas:  99% (33149/33483)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33483/33483)
+Resolving deltas: 100% (33483/33483), done.
 </pre></div>
 </div>
 </div>
@@ -1769,86 +1749,19 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 <h1>extras<a class="headerlink" href="#extras" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def unzip_with_timestamps(zip_path, extract_to, keep_zip=True):</span>
-<span class="c1">#     &quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
-<span class="c1">#     with zipfile.ZipFile(zip_path, &quot;r&quot;) as zip_ref:</span>
-<span class="c1">#         for member in zip_ref.infolist():</span>
-<span class="c1">#             # Extract the file</span>
-<span class="c1">#             zip_ref.extract(member, extract_to)</span>
-
-<span class="c1">#             # Get the extracted file path</span>
-<span class="c1">#             extracted_path = os.path.join(extract_to, member.filename)</span>
-
-<span class="c1">#             # Get the modification time from the zip file</span>
-<span class="c1">#             date_time = datetime(*member.date_time)</span>
-<span class="c1">#             timestamp = date_time.timestamp()</span>
-
-<span class="c1">#             # Set both access and modification times</span>
-<span class="c1">#             os.utime(extracted_path, (timestamp, timestamp))</span>
-<span class="c1">#     if not keep_zip:</span>
-<span class="c1">#         os.remove(zip_path)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.chdir(&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># urls = {</span>
-<span class="c1">#     &quot;data/results-0.7.1.zip&quot;: &quot;https://storage.googleapis.com/open-tyndp-data-store/outcomes/0.7.1/results-0.7.1.zip&quot;,</span>
-<span class="c1">#     &quot;scripts/_helpers.py&quot;: &quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;,</span>
-<span class="c1">#     &quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;: &quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-04/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;,</span>
-<span class="c1"># }</span>
-
-<span class="c1"># os.makedirs(&quot;data&quot;, exist_ok=True)</span>
-<span class="c1"># os.makedirs(&quot;scripts&quot;, exist_ok=True)</span>
-<span class="c1"># for name, url in urls.items():</span>
-<span class="c1">#     if os.path.exists(name):</span>
-<span class="c1">#         print(f&quot;File {name} already exists. Skipping download.&quot;)</span>
-<span class="c1">#     else:</span>
-<span class="c1">#         print(f&quot;Retrieving {name} from storage.&quot;)</span>
-<span class="c1">#         urlretrieve(url, name)</span>
-<span class="c1">#         print(f&quot;File available in {name}.&quot;)</span>
-
-<span class="c1"># to_dir = &quot;data/results-0.7.1&quot;</span>
-<span class="c1"># if not os.path.exists(to_dir):</span>
-<span class="c1">#     print(f&quot;Unzipping data/results-0.7.1.zip.&quot;)</span>
-<span class="c1">#     unzip_with_timestamps(&quot;data/results-0.7.1.zip&quot;, &quot;data/results-0.7.1&quot;)</span>
-<span class="c1"># print(f&quot;Latest NT results for Open-TYNDP v0.7.1 are available in &#39;{to_dir}&#39;.&quot;)</span>
-
-<span class="c1"># to_dir = &quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span>
-<span class="c1"># if not os.path.exists(to_dir):</span>
-<span class="c1">#     print(f&quot;Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.&quot;)</span>
-<span class="c1">#     unzip_with_timestamps(</span>
-<span class="c1">#         &quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;,</span>
-<span class="c1">#         &quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;,</span>
-<span class="c1">#     )</span>
-<span class="c1"># print(f&quot;Open-TYNDP available in &#39;{to_dir}&#39;.&quot;)</span>
-
-
-<span class="c1"># print(&quot;Done&quot;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<!-- ## Using Snakemake to launch the Open-TYNDP workflow --><!-- We now need to change our working directory to the Open-TYNDP directory we previously retrieved. --><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.chdir(&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<!-- Be aware that to run the previous section of this notebook, you will need to restore the default working directory using `os.chdir("../../")`.
-
-Let's check that we are indeed in the new directory now: --><div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># os.getcwd()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<!-- We can now use Snakemake to call some of the rules to produce outputs with the `open-tyndp` PyPSA model. 
-
-We will use the prepared TYNDP configuration file (`config/config.tyndp.yaml`) and schedule a dry-run with `-n` as we only want to investigate the DAG of the workflow: --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi shell -e open-tyndp</span>
 </pre></div>
@@ -1876,9 +1789,7 @@ We will use the prepared TYNDP configuration file (`config/config.tyndp.yaml`) a
 </div>
 </div>
 </div>
-<!-- As you can see, there is nothing to be done since all necessary outputs are already present in the files. However, we can still explore the set of rules defined in the `Snakefile` and the other `.smk` files. First, we can plot the rule graph, then the full DAG.
-
-The corresponding rule graph to this workflow will look like this: --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call cba --configfile config/config.tyndp.yaml --rulegraph | python ../../scripts/filter_dag.py | dot -Tpng -o rulegraph_open_tyndp.png</span>
 <span class="c1"># # For Windows run instead:</span>
@@ -1894,7 +1805,7 @@ The corresponding rule graph to this workflow will look like this: --><div class
 </div>
 </div>
 </div>
-<!-- The corresponding DAG to this workflow will look like this: --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --dag | python ../../scripts/filter_dag.py | dot -Tpng -o dag_open_tyndp.png</span>
 <span class="c1"># # For Windows run instead:</span>
@@ -1910,39 +1821,7 @@ The corresponding rule graph to this workflow will look like this: --><div class
 </div>
 </div>
 </div>
-<!-- ### Apply Manual Adjustments --><!-- Open `data/open-tyndp-20251129/config/scenarios.tyndp.yaml` and modify the existing `NT-52SEG-20251129` scenario by adding the following manual adjustments:
-
-- Increase the `marginal_cost` of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a `Generator` component with the carrier name `import H2`.
-- Change the `efficiency` of `H2 Electrolysis` to 78% for both 2030 and 2040. H2 Electrolysis is added as a `Link` component.
-- Remove the initial capacity (`p_nom` and `p_nom_min`) of all `solar-pv-utility` generators for 2030.
-
-Then rerun the model and explore the results in PyPSA-Explorer.
-
-**Hint**: If you need a reminder on running the Snakemake workflow, refer to the section above.
-
-**Hint II**: Always start with a dry run first (add `-n` to your Snakemake command).
-
-**Hint III**: As we only want to solve the model without post-processing, we can call the rule `solve_sector_networks` instead of the `all` rule.
-
-**Hint IV**: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: `solving:solver`. --><!-- To run the workflow, we first need to install and activate the `open-tyndp` environment.
-
-The recommended approach for PyPSA models is to use the `pixi` environment manager, which handles all dependencies automatically. --><!-- :::{note} 
-We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.
-
-If you prefer to use conda to install the `open-tyndp` environment locally, refer to our [legacy installation documentation](https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda).
-::: --><!-- To install `pixi` locally on your operating system, follow the steps in the official [pixi installation documentation](https://pixi.sh/dev/installation/).
-
-For execution on Google Colab, install the Linux version of `pixi` in the runtime:
-
-```bash
-!wget -qO- https://pixi.sh/install.sh | sh
-```
-
-In the Google Colab terminal, you might need to execute:
-```bash
-exec bash -l
-```
-for the changes to take effect if pixi is not recognized. --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
 <span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
@@ -1950,15 +1829,7 @@ for the changes to take effect if pixi is not recognized. --><div class="cell do
 </div>
 </div>
 </div>
-<!-- Next, open a terminal window. Navigate to the `open-tyndp-20251129` repository before launching the workflow:
-
-```bash
-cd data/open-tyndp-20251129
-``` --><!-- Once you're in the `open-tyndp-20251129` repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:
-
-```bash
-pixi shell -e open-tyndp
-``` --><!-- ## Task 1: Run coupled and decoupled SB-CBA workflow --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run snakemake -call cba --configfile config/config.tyndp.yaml --config &#39;run={&quot;name&quot;:&quot;NT&quot;}&#39; &#39;data_config=&quot;tyndp&quot;&#39; &#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39; --until clean_projects -n</span>
 </pre></div>
@@ -2038,13 +1909,6 @@ pixi shell -e open-tyndp
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! pixi run tyndp-cba --config &#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true}}&#39; -n</span>
-</pre></div>
-</div>
-</div>
-</div>
-<!-- ## Visualize DAG --><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
 </pre></div>
 </div>
 </div>
@@ -2139,7 +2003,7 @@ pixi shell -e open-tyndp
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snakemake-and-pixi">Snakemake and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba-workflow">Exploring Open-TYNDP CBA workflow</a><ul class="nav section-nav flex-column">
