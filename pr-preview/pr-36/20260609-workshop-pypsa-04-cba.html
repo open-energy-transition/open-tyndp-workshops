@@ -1,0 +1,2617 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Workshop 4 (CBA) &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20260609-workshop-pypsa-04-cba';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <img src="_static/logo_merged.png" class="logo__image only-dark pst-js-only" alt="Open-TYNDP Workshops - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20251203-workshop-pypsa-03.html">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background4-geopandas.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/open-energy-transition/open-tyndp-workshops/blob/main/open-tyndp-workshops/20260609-workshop-pypsa-04-cba.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2F20260609-workshop-pypsa-04-cba.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/20260609-workshop-pypsa-04-cba.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Workshop 4 (CBA)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 4 (CBA)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-the-snakemake-tool">Reminder: The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-a-new-climate-year-and-run-it">Task X: Create a new climate year and run it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-manual-adjustments">Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow">Task 1: Run coupled and decoupled SB-CBA workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-dag">Visualize DAG</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="workshop-4-cba">
+<h1>Workshop 4 (CBA)<a class="headerlink" href="#workshop-4-cba" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">Code</span><span class="p">,</span> <span class="n">IFrame</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDFPageCountError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_legend_lines</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.nice_names&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.drop_zero&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.round&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="n">clip</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># TWh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="reminder-the-snakemake-tool">
+<h2>Reminder: The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool<a class="headerlink" href="#reminder-the-snakemake-tool" title="Link to this heading">#</a></h2>
+<img src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/snakemake_logo.png" width="500px" />
+<p>The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> workflow management system is a tool to create reproducible and scalable data analyses.
+Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid, and cloud environments, without the need to modify the workflow definition.</p>
+<p>Snakemake follows the <a class="reference external" href="https://www.gnu.org/software/make">GNU Make</a> paradigm: workflows are defined in terms of so-called <code class="docutils literal notranslate"><span class="pre">rules</span></code> that specify how to create a set of output files from a set of input files. Dependencies between the rules are determined automatically, creating a DAG (directed acyclic graph) of jobs that can be automatically parallelized.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation for this package is available at <a class="reference external" href="https://snakemake.readthedocs.io/">https://snakemake.readthedocs.io/</a>. You can also check out a <a class="reference external" href="https://slides.com/johanneskoester/snakemake-tutorial">slide deck Snakemake Tutorial</a> by Johannes Köster (2024).</p>
+<p>Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J., 2021. Sustainable data analysis with Snakemake. F1000Res 10, 33.</p>
+</div>
+<section id="a-minimal-snakemake-example">
+<h3>A minimal Snakemake example<a class="headerlink" href="#a-minimal-snakemake-example" title="Link to this heading">#</a></h3>
+<p>To check out how this looks in practice, we’ve prepared a minimal Snakemake example workflow that processes some data. The minimal workflow consists of the following rules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">retrieve_data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build_data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prepare_network</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solve_network</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code></p></li>
+</ul>
+<p>These rules are illustrative and mimic the Open-TYNDP structure and nomenclature.</p>
+<center>
+<p><img alt="" src="_images/minimal_workflow.png" /></p>
+</center><p>We have already loaded the raw data file used in this minimal example into our working directory.</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be called twice with two different filename extensions. For this, we are taking advantage of the concept of wildcards (<code class="docutils literal notranslate"><span class="pre">ext</span></code>). Snakemake will automatically resolve the wildcards using the dependency graph. In this case, the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule takes as input both a <code class="docutils literal notranslate"><span class="pre">png</span></code> and a <code class="docutils literal notranslate"><span class="pre">pdf</span></code> figure which propagates back throughout the workflow.</p>
+<section id="the-snakefile-and-rules">
+<h4>The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code><a class="headerlink" href="#the-snakefile-and-rules" title="Link to this heading">#</a></h4>
+<p>The rules need to be defined in a so-called <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> that sits in your current working directory. For our minimal example the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Code</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Snakefile&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;Python&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: Open Energy Transition gGmbH</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/benchmark.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data/benchmark.pdf&quot;</span>
+
+<span class="n">rule</span> <span class="n">retrieve_data</span><span class="p">:</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_raw.csv&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;wget -O </span><span class="si">{output}</span><span class="s2"> https://storage.googleapis.com/open-tyndp-data-store/workshop-02/data_raw.csv&quot;</span>
+
+<span class="n">rule</span> <span class="n">build_data</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_raw.csv&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_filtered.csv&quot;</span>
+    <span class="n">script</span><span class="p">:</span>
+        <span class="s2">&quot;scripts/build_data.py&quot;</span>
+
+<span class="n">rule</span> <span class="n">prepare_network</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/data_filtered.csv&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030.nc&quot;</span>
+    <span class="n">script</span><span class="p">:</span>
+        <span class="s2">&quot;scripts/prepare_network.py&quot;</span>
+
+<span class="n">rule</span> <span class="n">solve_network</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030.nc&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030_solved.nc&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;cp </span><span class="si">{input}</span><span class="s2"> </span><span class="si">{output}</span><span class="s2">&quot;</span>
+
+<span class="n">rule</span> <span class="n">plot_benchmark</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;data/base_2030_solved.nc&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;data/benchmark.</span><span class="si">{ext}</span><span class="s2">&quot;</span>
+    <span class="n">run</span><span class="p">:</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+</pre></div>
+</div></div>
+</div>
+<p>You can check out the scripts under <code class="docutils literal notranslate"><span class="pre">scripts</span></code>. You will see that they are simplistic and only serve an illustrative purpose.</p>
+<p>You can also observe how the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is defined to take advantage of the wildcards. This reduces the redundancy in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>. Wildcards are defined between <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> in the rule definition.</p>
+</section>
+<section id="calling-a-workflow">
+<h4>Calling a workflow<a class="headerlink" href="#calling-a-workflow" title="Link to this heading">#</a></h4>
+<p>You can trigger the workflow by specifying a target file, like <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code>, or any intermediate file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>data/benchmark.pdf
+</pre></div>
+</div>
+<p>Alternatively, you can also execute the workflow by calling a rule that produces an intermediate file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>build_data
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> You cannot call a rule that includes a wildcard without specifying what the wildcard should be filled with. Otherwise, Snakemake will not know what to propagate back.</p>
+<p>Or you can call the common rule <code class="docutils literal notranslate"><span class="pre">all</span></code> which can be used to execute the entire workflow. It takes the final workflow output as its input and thus requires all previous dependent rules to be run as well:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>all
+</pre></div>
+</div>
+<p>Because we defined the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule as first in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>, this rule is assumed to be the default and the following also works:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call
+</pre></div>
+</div>
+<p>A very important feature is the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag which executes a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code>. It is recommended to always first execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> before the actual execution of a workflow. This simply prints out the DAG of the workflow to investigate without actually executing it.</p>
+<p>Let’s try this out and investigate the output:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Green">SNAKEMAKE</span>
+<span class=" -Color -Color-Green">=========</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-05 08:09:05</span>
+<span class=" -Color -Color-Green">  Workflow ID: 2e1a7642-fcc8-435b-a02f-4bc50ddbc9fe</span>
+<span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
+<span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
+<span class=" -Color -Color-Green">  User: runner</span>
+<span class=" -Color -Color-Green">  Snakemake version: 9.22.0</span>
+<span class=" -Color -Color-Green">  Python version: 3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 02:00:33) [GCC 14.3.0]</span>
+<span class=" -Color -Color-Green">  Command: /home/runner/miniconda3/envs/open-tyndp-workshops/bin/snakemake -call -n</span>
+<span class=" -Color -Color-Green">  Snakefile: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/Snakefile</span>
+<span class=" -Color -Color-Green">  Base directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
+<span class=" -Color -Color-Green">  Run directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
+<span class=" -Color -Color-Green">  Working directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
+<span class=" -Color -Color-Green">  Config file(s): []</span>
+<span class=" -Color -Color-Green">  Config MD5: 99914b932bd37a50b983c5e7c90ae93b</span>
+
+<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                count</span>
+<span class=" -Color -Color-Yellow">---------------  -------</span>
+<span class=" -Color -Color-Yellow">build_data             1</span>
+<span class=" -Color -Color-Yellow">prepare_network        1</span>
+<span class=" -Color -Color-Yellow">solve_network          1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
+<span class=" -Color -Color-Yellow">all                    1</span>
+<span class=" -Color -Color-Yellow">total                  6</span>
+
+
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule build_data:</span>
+<span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
+<span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    jobid: 4</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule prepare_network:</span>
+<span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    jobid: 3</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule solve_network:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    jobid: 2</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule plot_benchmark:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    output: data/benchmark.png</span>
+<span class=" -Color -Color-Green">    jobid: 1</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    wildcards: ext=png</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule plot_benchmark:</span>
+<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
+<span class=" -Color -Color-Green">    jobid: 6</span>
+<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
+<span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Green">[Fri Jun  5 08:09:06 2026]</span>
+<span class=" -Color -Color-Green">rule all:</span>
+<span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
+<span class=" -Color -Color-Green">    jobid: 0</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
+<span class=" -Color -Color-Yellow">Job stats:</span>
+<span class=" -Color -Color-Yellow">job                count</span>
+<span class=" -Color -Color-Yellow">---------------  -------</span>
+<span class=" -Color -Color-Yellow">build_data             1</span>
+<span class=" -Color -Color-Yellow">prepare_network        1</span>
+<span class=" -Color -Color-Yellow">solve_network          1</span>
+<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
+<span class=" -Color -Color-Yellow">all                    1</span>
+<span class=" -Color -Color-Yellow">total                  6</span>
+
+<span class=" -Color -Color-Yellow">Reasons:</span>
+<span class=" -Color -Color-Yellow">    (check individual jobs above for details)</span>
+<span class=" -Color -Color-Yellow">    input files updated by another job:</span>
+<span class=" -Color -Color-Yellow">        all, plot_benchmark, prepare_network, solve_network</span>
+<span class=" -Color -Color-Yellow">    output files have to be generated:</span>
+<span class=" -Color -Color-Yellow">        build_data, plot_benchmark, prepare_network, solve_network</span>
+<span class=" -Color -Color-Yellow">1 jobs have missing provenance/metadata so that it in part cannot be used to trigger re-runs.</span>
+<span class=" -Color -Color-Yellow">Rules with missing metadata: retrieve_data</span>
+<span class=" -Color -Color-Yellow">This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule will be executed twice due to wildcards.</p>
+</section>
+<section id="visualizing-the-dag-of-a-workflow">
+<h4>Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow<a class="headerlink" href="#visualizing-the-dag-of-a-workflow" title="Link to this heading">#</a></h4>
+<p>You can also visualize the DAG of jobs using the <code class="docutils literal notranslate"><span class="pre">--dag</span></code> flag and the Graphviz <code class="docutils literal notranslate"><span class="pre">dot</span></code> command. This will not run the workflow but only create the visualization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_minimal.png
+<span class="c1"># For Windows run instead:</span>
+<span class="c1"># ! snakemake -call --dag | python scripts\\filter_dag.py | dot -Tpng -o dag_minimal.png</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_minimal.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" src="_images/663243e41feb03d5bffa785e9dc4c7fe593f0f3cde21177879ffb25c5ab9c06e.png" />
+</div>
+</div>
+<p>Rules that need to be executed will be presented as plain lines, while those that have already been executed will be presented as dotted lines. An alternative to the DAG is the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code>. This graph is typically less crowded as you will only visualize the dependency graph of rules. This representation is leaner than the DAG because rules are not repeated for wildcards.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>rulegraph_minimal.png
+<span class="c1"># For Windows run instead:</span>
+<span class="c1"># ! snakemake -call all --rulegraph | python scripts\\filter_dag.py | dot -Tpng -o rulegraph_minimal.png</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_minimal.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" src="_images/33a29721cfea9b761d2a747de62c43426a2771745d63578d53f0cb8bc81759bc.png" />
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">plot_benchmark</span></code> rule is only represented once.</p>
+<p>Alternatively, you can also visualize a <code class="docutils literal notranslate"><span class="pre">filegraph</span></code>, which is similar to the <code class="docutils literal notranslate"><span class="pre">rulegraph</span></code> but includes some information about the inputs and outputs to each of the rules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>all<span class="w"> </span>--filegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tsvg<span class="w"> </span>-o<span class="w"> </span>filegraph_minimal.svg
+<span class="c1"># For Windows run instead:</span>
+<span class="c1"># ! snakemake -call all --filegraph | python scripts\\filter_dag.py | dot -Tsvg -o filegraph_minimal.svg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s2">&quot;filegraph_minimal.svg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" src="_images/3a4d7329a29c40edc59cadd523dd7614b9e537c0ecc5e279f54786b91a5a1845.svg" />
+</div>
+</div>
+</section>
+</section>
+<section id="task-1-executing-a-workflow-with-snakemake">
+<h3>Task 1: Executing a workflow with Snakemake<a class="headerlink" href="#task-1-executing-a-workflow-with-snakemake" title="Link to this heading">#</a></h3>
+<p><strong>a)</strong> For our minimal example, execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> to produce the intermediate file <code class="docutils literal notranslate"><span class="pre">data/base_2030.nc</span></code>.</p>
+<p><strong>b)</strong> Execute the entire workflow and investigate what happens if you try to execute the workflow again.</p>
+<p><strong>c)</strong> Delete the final output file <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code> and investigate what happens if you try to execute the workflow again.</p>
+<p><strong>d)</strong> Change a value in the raw input data file <code class="docutils literal notranslate"><span class="pre">data/data_raw.csv</span></code> and save it again, overwriting the original file. Investigate what happens if you try to execute the workflow again.</p>
+<p>Hint: You can also just <code class="docutils literal notranslate"><span class="pre">touch</span></code> the file by executing <code class="docutils literal notranslate"><span class="pre">Path(&quot;data/data_raw.csv&quot;).touch()</span></code>. This will mimic a file edit.</p>
+<p><strong>e)</strong> (Optional) Open the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and add a second rule that processes the file <code class="docutils literal notranslate"><span class="pre">data_raw_2.csv</span></code> using the same script as the <code class="docutils literal notranslate"><span class="pre">build_data</span></code> rule. Add the output of this new rule as a second input to the <code class="docutils literal notranslate"><span class="pre">prepare_network</span></code> rule.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution c)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution d)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution e)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="discover-open-tyndp-file-structure">
+<h2>Discover Open-TYNDP file structure<a class="headerlink" href="#discover-open-tyndp-file-structure" title="Link to this heading">#</a></h2>
+<section id="cloning-the-open-tyndp-project">
+<h3>Cloning the Open-TYNDP project<a class="headerlink" href="#cloning-the-open-tyndp-project" title="Link to this heading">#</a></h3>
+<p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data
+</pre></div>
+</div>
+</div>
+</div>
+<p>Clone the Open-TYNDP repository directly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/open-energy-transition/open-tyndp.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;open-tyndp&#39;...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 43002, done.
+remote: Counting objects:   0% (1/601)
+remote: Counting objects:   1% (7/601)
+remote: Counting objects:   2% (13/601)
+remote: Counting objects:   3% (19/601)
+remote: Counting objects:   4% (25/601)
+remote: Counting objects:   5% (31/601)
+remote: Counting objects:   6% (37/601)
+remote: Counting objects:   7% (43/601)
+remote: Counting objects:   8% (49/601)
+remote: Counting objects:   9% (55/601)
+remote: Counting objects:  10% (61/601)
+remote: Counting objects:  11% (67/601)
+remote: Counting objects:  12% (73/601)
+remote: Counting objects:  13% (79/601)
+remote: Counting objects:  14% (85/601)
+remote: Counting objects:  15% (91/601)
+remote: Counting objects:  16% (97/601)
+remote: Counting objects:  17% (103/601)
+remote: Counting objects:  18% (109/601)
+remote: Counting objects:  19% (115/601)
+remote: Counting objects:  20% (121/601)
+remote: Counting objects:  21% (127/601)
+remote: Counting objects:  22% (133/601)
+remote: Counting objects:  23% (139/601)
+remote: Counting objects:  24% (145/601)
+remote: Counting objects:  25% (151/601)
+remote: Counting objects:  26% (157/601)
+remote: Counting objects:  27% (163/601)
+remote: Counting objects:  28% (169/601)
+remote: Counting objects:  29% (175/601)
+remote: Counting objects:  30% (181/601)
+remote: Counting objects:  31% (187/601)
+remote: Counting objects:  32% (193/601)
+remote: Counting objects:  33% (199/601)
+remote: Counting objects:  34% (205/601)
+remote: Counting objects:  35% (211/601)
+remote: Counting objects:  36% (217/601)
+remote: Counting objects:  37% (223/601)
+remote: Counting objects:  38% (229/601)
+remote: Counting objects:  39% (235/601)
+remote: Counting objects:  40% (241/601)
+remote: Counting objects:  41% (247/601)
+remote: Counting objects:  42% (253/601)
+remote: Counting objects:  43% (259/601)
+remote: Counting objects:  44% (265/601)
+remote: Counting objects:  45% (271/601)
+remote: Counting objects:  46% (277/601)
+remote: Counting objects:  47% (283/601)
+remote: Counting objects:  48% (289/601)
+remote: Counting objects:  49% (295/601)
+remote: Counting objects:  50% (301/601)
+remote: Counting objects:  51% (307/601)
+remote: Counting objects:  52% (313/601)
+remote: Counting objects:  53% (319/601)
+remote: Counting objects:  54% (325/601)
+remote: Counting objects:  55% (331/601)
+remote: Counting objects:  56% (337/601)
+remote: Counting objects:  57% (343/601)
+remote: Counting objects:  58% (349/601)
+remote: Counting objects:  59% (355/601)
+remote: Counting objects:  60% (361/601)
+remote: Counting objects:  61% (367/601)
+remote: Counting objects:  62% (373/601)
+remote: Counting objects:  63% (379/601)
+remote: Counting objects:  64% (385/601)
+remote: Counting objects:  65% (391/601)
+remote: Counting objects:  66% (397/601)
+remote: Counting objects:  67% (403/601)
+remote: Counting objects:  68% (409/601)
+remote: Counting objects:  69% (415/601)
+remote: Counting objects:  70% (421/601)
+remote: Counting objects:  71% (427/601)
+remote: Counting objects:  72% (433/601)
+remote: Counting objects:  73% (439/601)
+remote: Counting objects:  74% (445/601)
+remote: Counting objects:  75% (451/601)
+remote: Counting objects:  76% (457/601)
+remote: Counting objects:  77% (463/601)
+remote: Counting objects:  78% (469/601)
+remote: Counting objects:  79% (475/601)
+remote: Counting objects:  80% (481/601)
+remote: Counting objects:  81% (487/601)
+remote: Counting objects:  82% (493/601)
+remote: Counting objects:  83% (499/601)
+remote: Counting objects:  84% (505/601)
+remote: Counting objects:  85% (511/601)
+remote: Counting objects:  86% (517/601)
+remote: Counting objects:  87% (523/601)
+remote: Counting objects:  88% (529/601)
+remote: Counting objects:  89% (535/601)
+remote: Counting objects:  90% (541/601)
+remote: Counting objects:  91% (547/601)
+remote: Counting objects:  92% (553/601)
+remote: Counting objects:  93% (559/601)
+remote: Counting objects:  94% (565/601)
+remote: Counting objects:  95% (571/601)
+remote: Counting objects:  96% (577/601)
+remote: Counting objects:  97% (583/601)
+remote: Counting objects:  98% (589/601)
+remote: Counting objects:  99% (595/601)
+remote: Counting objects: 100% (601/601)
+remote: Counting objects: 100% (601/601), done.
+remote: Compressing objects:   0% (1/247)
+remote: Compressing objects:   1% (3/247)
+remote: Compressing objects:   2% (5/247)
+remote: Compressing objects:   3% (8/247)
+remote: Compressing objects:   4% (10/247)
+remote: Compressing objects:   5% (13/247)
+remote: Compressing objects:   6% (15/247)
+remote: Compressing objects:   7% (18/247)
+remote: Compressing objects:   8% (20/247)
+remote: Compressing objects:   9% (23/247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (25/247)
+remote: Compressing objects:  11% (28/247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  12% (30/247)
+remote: Compressing objects:  13% (33/247)
+remote: Compressing objects:  14% (35/247)
+remote: Compressing objects:  15% (38/247)
+remote: Compressing objects:  16% (40/247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  17% (42/247)
+remote: Compressing objects:  18% (45/247)
+remote: Compressing objects:  19% (47/247)
+remote: Compressing objects:  20% (50/247)
+remote: Compressing objects:  21% (52/247)
+remote: Compressing objects:  22% (55/247)
+remote: Compressing objects:  23% (57/247)
+remote: Compressing objects:  24% (60/247)
+remote: Compressing objects:  25% (62/247)
+remote: Compressing objects:  26% (65/247)
+remote: Compressing objects:  27% (67/247)
+remote: Compressing objects:  28% (70/247)
+remote: Compressing objects:  29% (72/247)
+remote: Compressing objects:  30% (75/247)
+remote: Compressing objects:  31% (77/247)
+remote: Compressing objects:  32% (80/247)
+remote: Compressing objects:  33% (82/247)
+remote: Compressing objects:  34% (84/247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  35% (87/247)
+remote: Compressing objects:  36% (89/247)
+remote: Compressing objects:  37% (92/247)
+remote: Compressing objects:  38% (94/247)
+remote: Compressing objects:  39% (97/247)
+remote: Compressing objects:  40% (99/247)
+remote: Compressing objects:  41% (102/247)
+remote: Compressing objects:  42% (104/247)
+remote: Compressing objects:  43% (107/247)
+remote: Compressing objects:  44% (109/247)
+remote: Compressing objects:  45% (112/247)
+remote: Compressing objects:  46% (114/247)
+remote: Compressing objects:  47% (117/247)
+remote: Compressing objects:  48% (119/247)
+remote: Compressing objects:  49% (122/247)
+remote: Compressing objects:  50% (124/247)
+remote: Compressing objects:  51% (126/247)
+remote: Compressing objects:  52% (129/247)
+remote: Compressing objects:  53% (131/247)
+remote: Compressing objects:  54% (134/247)
+remote: Compressing objects:  55% (136/247)
+remote: Compressing objects:  56% (139/247)
+remote: Compressing objects:  57% (141/247)
+remote: Compressing objects:  58% (144/247)
+remote: Compressing objects:  59% (146/247)
+remote: Compressing objects:  60% (149/247)
+remote: Compressing objects:  61% (151/247)
+remote: Compressing objects:  62% (154/247)
+remote: Compressing objects:  63% (156/247)
+remote: Compressing objects:  64% (159/247)
+remote: Compressing objects:  65% (161/247)
+remote: Compressing objects:  66% (164/247)
+remote: Compressing objects:  67% (166/247)
+remote: Compressing objects:  68% (168/247)
+remote: Compressing objects:  69% (171/247)
+remote: Compressing objects:  70% (173/247)
+remote: Compressing objects:  71% (176/247)
+remote: Compressing objects:  72% (178/247)
+remote: Compressing objects:  73% (181/247)
+remote: Compressing objects:  74% (183/247)
+remote: Compressing objects:  75% (186/247)
+remote: Compressing objects:  76% (188/247)
+remote: Compressing objects:  77% (191/247)
+remote: Compressing objects:  78% (193/247)
+remote: Compressing objects:  79% (196/247)
+remote: Compressing objects:  80% (198/247)
+remote: Compressing objects:  81% (201/247)
+remote: Compressing objects:  82% (203/247)
+remote: Compressing objects:  83% (206/247)
+remote: Compressing objects:  84% (208/247)
+remote: Compressing objects:  85% (210/247)
+remote: Compressing objects:  86% (213/247)
+remote: Compressing objects:  87% (215/247)
+remote: Compressing objects:  88% (218/247)
+remote: Compressing objects:  89% (220/247)
+remote: Compressing objects:  90% (223/247)
+remote: Compressing objects:  91% (225/247)
+remote: Compressing objects:  92% (228/247)
+remote: Compressing objects:  93% (230/247)
+remote: Compressing objects:  94% (233/247)
+remote: Compressing objects:  95% (235/247)
+remote: Compressing objects:  96% (238/247)
+remote: Compressing objects:  97% (240/247)
+remote: Compressing objects:  98% (243/247)
+remote: Compressing objects:  99% (245/247)
+remote: Compressing objects: 100% (247/247)
+remote: Compressing objects: 100% (247/247), done.
+Receiving objects:   0% (1/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (431/43002)
+Receiving objects:   2% (861/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   3% (1291/43002)
+Receiving objects:   4% (1721/43002)
+Receiving objects:   5% (2151/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   6% (2581/43002)
+Receiving objects:   7% (3011/43002)
+Receiving objects:   8% (3441/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   9% (3871/43002)
+Receiving objects:  10% (4301/43002)
+Receiving objects:  11% (4731/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  12% (5161/43002)
+Receiving objects:  13% (5591/43002)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  13% (5925/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (6021/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6451/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6881/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  17% (7311/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7741/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  19% (8171/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  20% (8601/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  21% (9031/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  22% (9461/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  23% (9891/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  24% (10321/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  25% (10751/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  26% (11181/43002), 19.65 MiB | 19.63 MiB/s
+Receiving objects:  27% (11611/43002), 19.65 MiB | 19.63 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  28% (12041/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  29% (12471/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  30% (12901/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  31% (13331/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  32% (13761/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14191/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  34% (14621/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  35% (15051/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  36% (15481/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  37% (15911/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  38% (16341/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  39% (16771/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  40% (17201/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  41% (17631/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  42% (18061/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  43% (18491/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18921/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  45% (19351/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  46% (19781/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  47% (20211/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  48% (20641/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  49% (21071/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  50% (21501/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  51% (21932/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22362/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  53% (22792/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  54% (23222/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  55% (23652/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  56% (24082/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24512/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  58% (24942/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25372/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  60% (25802/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  61% (26232/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  62% (26662/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  62% (27031/43002), 47.30 MiB | 31.51 MiB/s
+Receiving objects:  63% (27092/43002), 47.30 MiB | 31.51 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27522/43002), 71.14 MiB | 35.55 MiB/s
+Receiving objects:  65% (27952/43002), 71.14 MiB | 35.55 MiB/s
+Receiving objects:  66% (28382/43002), 71.14 MiB | 35.55 MiB/s
+Receiving objects:  67% (28812/43002), 71.14 MiB | 35.55 MiB/s
+Receiving objects:  68% (29242/43002), 71.14 MiB | 35.55 MiB/s
+Receiving objects:  69% (29672/43002), 71.14 MiB | 35.55 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (30102/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  71% (30532/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  72% (30962/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  73% (31392/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  74% (31822/43002), 98.23 MiB | 39.29 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  75% (32252/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  76% (32682/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  77% (33112/43002), 98.23 MiB | 39.29 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  77% (33455/43002), 98.23 MiB | 39.29 MiB/s
+Receiving objects:  78% (33542/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33972/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  80% (34402/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  81% (34832/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  82% (35262/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35692/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  84% (36122/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  85% (36552/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  86% (36982/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  87% (37412/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  88% (37842/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  89% (38272/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  90% (38702/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  91% (39132/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  92% (39562/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  93% (39992/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  94% (40422/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  95% (40852/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  96% (41282/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  97% (41712/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (42142/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects:  99% (42572/43002), 125.02 MiB | 41.68 MiB/s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Total 43002 (delta 510), reused 387 (delta 354), pack-reused 42401 (from 3)
+Receiving objects: 100% (43002/43002), 125.02 MiB | 41.68 MiB/s
+Receiving objects: 100% (43002/43002), 147.31 MiB | 42.73 MiB/s, done.
+Resolving deltas:   0% (0/33486)
+Resolving deltas:   1% (335/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (670/33486)
+Resolving deltas:   3% (1005/33486)
+Resolving deltas:   4% (1340/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   5% (1675/33486)
+Resolving deltas:   6% (2010/33486)
+Resolving deltas:   7% (2345/33486)
+Resolving deltas:   8% (2679/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (3014/33486)
+Resolving deltas:  10% (3349/33486)
+Resolving deltas:  11% (3684/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  12% (4019/33486)
+Resolving deltas:  13% (4354/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4689/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (5023/33486)
+Resolving deltas:  16% (5358/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5693/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  18% (6028/33486)
+Resolving deltas:  19% (6363/33486)
+Resolving deltas:  20% (6698/33486)
+Resolving deltas:  21% (7033/33486)
+Resolving deltas:  22% (7367/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7702/33486)
+Resolving deltas:  24% (8037/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  25% (8372/33486)
+Resolving deltas:  26% (8707/33486)
+Resolving deltas:  27% (9042/33486)
+Resolving deltas:  28% (9377/33486)
+Resolving deltas:  29% (9711/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  30% (10046/33486)
+Resolving deltas:  31% (10381/33486)
+Resolving deltas:  32% (10716/33486)
+Resolving deltas:  33% (11051/33486)
+Resolving deltas:  34% (11386/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  35% (11721/33486)
+Resolving deltas:  36% (12055/33486)
+Resolving deltas:  37% (12390/33486)
+Resolving deltas:  38% (12725/33486)
+Resolving deltas:  39% (13060/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13395/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13730/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (14065/33486)
+Resolving deltas:  43% (14399/33486)
+Resolving deltas:  44% (14734/33486)
+Resolving deltas:  45% (15069/33486)
+Resolving deltas:  46% (15404/33486)
+Resolving deltas:  47% (15739/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  48% (16074/33486)
+Resolving deltas:  49% (16409/33486)
+Resolving deltas:  50% (16743/33486)
+Resolving deltas:  51% (17078/33486)
+Resolving deltas:  52% (17413/33486)
+Resolving deltas:  53% (17748/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  54% (18083/33486)
+Resolving deltas:  55% (18418/33486)
+Resolving deltas:  56% (18753/33486)
+Resolving deltas:  57% (19088/33486)
+Resolving deltas:  58% (19422/33486)
+Resolving deltas:  59% (19757/33486)
+Resolving deltas:  59% (19869/33486)
+Resolving deltas:  60% (20092/33486)
+Resolving deltas:  61% (20427/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  62% (20762/33486)
+Resolving deltas:  63% (21097/33486)
+Resolving deltas:  64% (21432/33486)
+Resolving deltas:  65% (21766/33486)
+Resolving deltas:  66% (22101/33486)
+Resolving deltas:  67% (22436/33486)
+Resolving deltas:  68% (22771/33486)
+Resolving deltas:  69% (23106/33486)
+Resolving deltas:  70% (23441/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  71% (23776/33486)
+Resolving deltas:  72% (24110/33486)
+Resolving deltas:  73% (24445/33486)
+Resolving deltas:  74% (24780/33486)
+Resolving deltas:  75% (25115/33486)
+Resolving deltas:  76% (25450/33486)
+Resolving deltas:  77% (25785/33486)
+Resolving deltas:  78% (26120/33486)
+Resolving deltas:  79% (26454/33486)
+Resolving deltas:  80% (26789/33486)
+Resolving deltas:  81% (27124/33486)
+Resolving deltas:  82% (27459/33486)
+Resolving deltas:  83% (27794/33486)
+Resolving deltas:  84% (28129/33486)
+Resolving deltas:  85% (28464/33486)
+Resolving deltas:  86% (28798/33486)
+Resolving deltas:  87% (29133/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  88% (29468/33486)
+Resolving deltas:  89% (29803/33486)
+Resolving deltas:  90% (30138/33486)
+Resolving deltas:  91% (30473/33486)
+Resolving deltas:  92% (30808/33486)
+Resolving deltas:  93% (31142/33486)
+Resolving deltas:  94% (31477/33486)
+Resolving deltas:  95% (31812/33486)
+Resolving deltas:  96% (32147/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  97% (32482/33486)
+Resolving deltas:  98% (32817/33486)
+Resolving deltas:  99% (33152/33486)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33486/33486)
+Resolving deltas: 100% (33486/33486), done.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, navigate into the the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;open-tyndp/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>cba-low-res
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>branch &#39;cba-low-res&#39; set up to track &#39;origin/cba-low-res&#39;.
+Switched to a new branch &#39;cba-low-res&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch cba-low-res
+Your branch is up to date with &#39;origin/cba-low-res&#39;.
+
+nothing to commit, working tree clean
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="running-a-coupled-sb-cba-workflow">
+<h3>Running a coupled SB-&gt;CBA workflow<a class="headerlink" href="#running-a-coupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
+<p>To run the CBA workflow, the <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> runs the full process: taking a solved SB network -&gt; performing the TOOT/PINT analysis on a project -&gt; calculating the CBA indicators.</p>
+<p>The default Open-TYNDP settings can be found in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> file.</p>
+<p>First, let’s check what running the full could look like by doing a dry-run of <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can specify the specific scenario (e.g, <code class="docutils literal notranslate"><span class="pre">NT</span></code>), the project (e.g., <code class="docutils literal notranslate"><span class="pre">t4</span></code>), and planning horizon (e.g., 2030) we want to run also directly in the command line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">count</span></code> of steps changed when we specified a single run, project, and horizon.
+Comparatively, the default settings run the full list of scenarios we have, 5 projects (t4, t16, t28, t33, t35), and two planning horizons (2030 and 2040). So, the full default workflow will run many more steps.</p>
+<section id="checkpoints">
+<h4>Checkpoints<a class="headerlink" href="#checkpoints" title="Link to this heading">#</a></h4>
+<p>You may notice above that the number of rules is actually quite low.</p>
+<p>There is a <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> in the workflow, called <code class="docutils literal notranslate"><span class="pre">clean_projects</span></code>, that first checks how many projects are being asked to run before building out the full DAG.
+It tells the workflow which CBA projects exist, which project IDs to run, and which method applies (TOOT/PINT).</p>
+<p>Before the <code class="docutils literal notranslate"><span class="pre">clean_projects</span></code> step runs, Snakemake does not know the full list of project jobs it needs to create.
+The step downloads and cleans the external CBA project database, tells the workflow the full list of projects available, which projects the user wants to evaluate, and how each should be evaluated.
+After <code class="docutils literal notranslate"><span class="pre">clean_projects</span></code> finishes, Snakemake can read the cleaned CSV and expand the DAG into concrete jobs.</p>
+<p>Thus, what we should do first here is run the workflow just up until the checkpoint, then only after that can we run the full workflow again – in which case, the DAG would show the actual number of jobs that would be run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that the checkpoint is complete, we can re-check the DAG of how many steps are needed to run the CBA workflow.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="running-different-and-multiple-climate-years">
+<h3>Running different and multiple climate years<a class="headerlink" href="#running-different-and-multiple-climate-years" title="Link to this heading">#</a></h3>
+<p>(Add some info here about how different climate scenarios are defined? Navigate into <code class="docutils literal notranslate"><span class="pre">config/scenarios.yaml</span></code>?)</p>
+<p>First, we again need to run up to the checkpoint for the different climate years:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;, &quot;NT-cyears&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, we can run for just another climate year, such as the 1995 climate year for the NT scenario (<code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, we can run all climate years (1995, 2008, and 2009) for the <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cyears&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the total count of steps is much higher (especially for CBA-specific steps such as <code class="docutils literal notranslate"><span class="pre">make_indicators</span></code> and weather-dependent steps such as <code class="docutils literal notranslate"><span class="pre">build_renewable_profiles_pecd</span></code>) when multiple climate years are run.</p>
+</section>
+<section id="task-x-create-a-new-climate-year-and-run-it">
+<h3>Task X: Create a new climate year and run it<a class="headerlink" href="#task-x-create-a-new-climate-year-and-run-it" title="Link to this heading">#</a></h3>
+<p>Go into <code class="docutils literal notranslate"><span class="pre">config.scenarios.yaml</span></code> to create your own climate year run.</p>
+<p>Hints:</p>
+<ol class="arabic simple">
+<li><p>Copy an existing climate year run (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>) and modify the details to your liking.</p></li>
+<li><p>You would need to first run the new climate year up until the checkpoint.</p></li>
+<li><p>After the checkpoint, you can use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> to run the full workflow for your new climate year.</p></li>
+</ol>
+</section>
+<section id="running-a-decoupled-sb-cba-workflow">
+<h3>Running a decoupled SB-&gt;CBA Workflow<a class="headerlink" href="#running-a-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
+<p>Based on the DAGs shown in our dry runs, you can see that there are quite a lot of steps and rules that need to be run. A lot of these rules are specific to the SB stage of Open-TYNDP.</p>
+<p>We have the flexibility to bypass running and solving the SB workflow each time, by instead downloading a pre-solved SB network that we have released. By doing this, when running the CBA workflow, we start the process from an already solved SB network, reducing the number of steps significantly.</p>
+<p>This can be easily done by setting the <code class="docutils literal notranslate"><span class="pre">cba.use_presolved</span></code> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>. By default, this downloads and uses the latest release we have (at the time of this workshop, that is v0.7.1).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;latest&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the number of steps has decreased down from over 100 to just ~37, and we see some new steps not previously seen before, such as <code class="docutils literal notranslate"><span class="pre">retrieve_presolved_sb_networks</span></code>.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extras">
+<h1>extras<a class="headerlink" href="#extras" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unzip a file while preserving original file timestamps.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">zip_ref</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
+            <span class="c1"># Extract the file</span>
+            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">)</span>
+
+            <span class="c1"># Get the extracted file path</span>
+            <span class="n">extracted_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extract_to</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="c1"># Get the modification time from the zip file</span>
+            <span class="n">date_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="n">member</span><span class="o">.</span><span class="n">date_time</span><span class="p">)</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">date_time</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+            <span class="c1"># Set both access and modification times</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">utime</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">,</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_zip</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data/results-0.7.1.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/outcomes/0.7.1/results-0.7.1.zip&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts/_helpers.py&quot;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/scripts/_helpers.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;https://storage.googleapis.com/open-tyndp-data-store/workshop-04/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists. Skipping download.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from storage.&quot;</span><span class="p">)</span>
+        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File available in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/results-0.7.1&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/results-0.7.1.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span><span class="s2">&quot;data/results-0.7.1.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data/results-0.7.1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latest NT results for Open-TYNDP v0.7.1 are available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="n">to_dir</span> <span class="o">=</span> <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">to_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.&quot;</span><span class="p">)</span>
+    <span class="n">unzip_with_timestamps</span><span class="p">(</span>
+        <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks.zip&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Open-TYNDP available in &#39;</span><span class="si">{</span><span class="n">to_dir</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrieving data/results-0.7.1.zip from storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/results-0.7.1.zip.
+File scripts/_helpers.py already exists. Skipping download.
+Retrieving data/open-tyndp-20260604-feat-cba-presolved-networks.zip from storage.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File available in data/open-tyndp-20260604-feat-cba-presolved-networks.zip.
+Unzipping data/results-0.7.1.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Latest NT results for Open-TYNDP v0.7.1 are available in &#39;data/results-0.7.1&#39;.
+Unzipping data/open-tyndp-20260604-feat-cba-presolved-networks.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-TYNDP available in &#39;data/open-tyndp-20260604-feat-cba-presolved-networks&#39;.
+Done
+</pre></div>
+</div>
+</div>
+</div>
+<section id="using-snakemake-to-launch-the-open-tyndp-workflow">
+<h2>Using Snakemake to launch the Open-TYNDP workflow<a class="headerlink" href="#using-snakemake-to-launch-the-open-tyndp-workflow" title="Link to this heading">#</a></h2>
+<p>We now need to change our working directory to the Open-TYNDP directory we previously retrieved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/open-tyndp-20260604-feat-cba-presolved-networks&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Be aware that to run the previous section of this notebook, you will need to restore the default working directory using <code class="docutils literal notranslate"><span class="pre">os.chdir(&quot;../../&quot;)</span></code>.</p>
+<p>Let’s check that we are indeed in the new directory now:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use Snakemake to call some of the rules to produce outputs with the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> PyPSA model.</p>
+<p>We will use the prepared TYNDP configuration file (<code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>) and schedule a dry-run with <code class="docutils literal notranslate"><span class="pre">-n</span></code> as we only want to investigate the DAG of the workflow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
+usage: snakemake [-h] [--dry-run] [--profile PROFILE]
+                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
+                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
+                 [--resources NAME=INT [NAME=INT ...]]
+                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
+                 [--max-threads MAX_THREADS]
+                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
+                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
+                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
+                 [--default-resources [NAME=INT ...]]
+                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
+                 [--preemptible-retries PREEMPTIBLE_RETRIES]
+                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
+                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
+                 [--directory DIR] [--touch] [--keep-going]
+                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
+                 [--force] [--executor {local,dryrun,touch}] [--forceall]
+                 [--forcerun [TARGET ...]]
+                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
+                 [--prioritize TARGET [TARGET ...]]
+                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
+                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
+                 [--shadow-prefix DIR]
+                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
+                 [--scheduler [{greedy,ilp}]]
+                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
+                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
+                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
+                 [--report [FILE]] [--report-after-run]
+                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
+                 [--reporter PLUGIN] [--draft-notebook TARGET]
+                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
+                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
+                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
+                 [--list-rules] [--list-target-rules]
+                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
+                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
+                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
+                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
+                 [--list-changes {input,code,params}] [--list-input-changes]
+                 [--list-params-changes] [--list-untracked]
+                 [--delete-all-output | --delete-temp-output]
+                 [--keep-incomplete] [--drop-metadata] [--version]
+                 [--printshellcmds] [--debug-dag] [--nocolor]
+                 [--quiet [{all,host,progress,reason,rules} ...]]
+                 [--print-compilation] [--verbose] [--force-use-threads]
+                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
+                 [--max-inventory-time SECONDS] [--trust-io-cache]
+                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
+                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
+                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
+                 [--runtime-source-cache-path PATH]
+                 [--queue-input-wait-time SECONDS]
+                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
+                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
+                 [--keep-storage-local-copies] [--not-retrieve-storage]
+                 [--target-files-omit-workdir-adjustment]
+                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
+                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
+                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
+                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
+                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
+                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
+                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
+                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
+                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
+                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
+                 [--scheduler-greediness SCHEDULER_GREEDINESS]
+                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
+                 [--debug] [--runtime-profile FILE]
+                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
+                 [--show-failed-logs] [--logger {} [{} ...]]
+                 [--job-deploy-sources] [--benchmark-extended]
+                 [--persistence-backend {db,file}]
+                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
+                 [--container-image IMAGE] [--immediate-submit]
+                 [--jobscript SCRIPT] [--jobname NAME]
+                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
+                 [--container-cleanup-images] [--use-conda]
+                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
+                 [--conda-prefix DIR] [--conda-cleanup-envs]
+                 [--conda-cleanup-pkgs [{tarballs,cache}]]
+                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
+                 [--use-apptainer] [--apptainer-prefix DIR]
+                 [--apptainer-args ARGS] [--use-envmodules]
+                 [--deploy-sources QUERY CHECKSUM]
+                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
+                 [--mode {remote,default,subprocess}]
+                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
+                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
+                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
+                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--report-html-path VALUE]
+                 [--report-html-stylesheet-path VALUE]
+                 [--scheduler-greedy-greediness VALUE]
+                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
+                 [--scheduler-ilp-solver VALUE]
+                 [--scheduler-ilp-solver-path VALUE]
+                 [targets ...]
+snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, there is nothing to be done since all necessary outputs are already present in the files. However, we can still explore the set of rules defined in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and the other <code class="docutils literal notranslate"><span class="pre">.smk</span></code> files. First, we can plot the rule graph, then the full DAG.</p>
+<p>The corresponding rule graph to this workflow will look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>../../scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>rulegraph_open_tyndp.png
+<span class="c1"># For Windows run instead:</span>
+<span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --rulegraph | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o rulegraph_open_tyndp.png</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks/../../scripts/filter_dag.py&#39;: [Errno 2] No such file or directory
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
+usage: snakemake [-h] [--dry-run] [--profile PROFILE]
+                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
+                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
+                 [--resources NAME=INT [NAME=INT ...]]
+                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
+                 [--max-threads MAX_THREADS]
+                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
+                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
+                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
+                 [--default-resources [NAME=INT ...]]
+                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
+                 [--preemptible-retries PREEMPTIBLE_RETRIES]
+                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
+                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
+                 [--directory DIR] [--touch] [--keep-going]
+                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
+                 [--force] [--executor {local,dryrun,touch}] [--forceall]
+                 [--forcerun [TARGET ...]]
+                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
+                 [--prioritize TARGET [TARGET ...]]
+                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
+                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
+                 [--shadow-prefix DIR]
+                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
+                 [--scheduler [{greedy,ilp}]]
+                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
+                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
+                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
+                 [--report [FILE]] [--report-after-run]
+                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
+                 [--reporter PLUGIN] [--draft-notebook TARGET]
+                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
+                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
+                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
+                 [--list-rules] [--list-target-rules]
+                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
+                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
+                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
+                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
+                 [--list-changes {params,code,input}] [--list-input-changes]
+                 [--list-params-changes] [--list-untracked]
+                 [--delete-all-output | --delete-temp-output]
+                 [--keep-incomplete] [--drop-metadata] [--version]
+                 [--printshellcmds] [--debug-dag] [--nocolor]
+                 [--quiet [{all,host,progress,reason,rules} ...]]
+                 [--print-compilation] [--verbose] [--force-use-threads]
+                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
+                 [--max-inventory-time SECONDS] [--trust-io-cache]
+                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
+                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
+                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
+                 [--runtime-source-cache-path PATH]
+                 [--queue-input-wait-time SECONDS]
+                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
+                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
+                 [--keep-storage-local-copies] [--not-retrieve-storage]
+                 [--target-files-omit-workdir-adjustment]
+                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
+                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
+                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
+                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
+                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
+                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
+                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
+                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
+                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
+                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
+                 [--scheduler-greediness SCHEDULER_GREEDINESS]
+                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
+                 [--debug] [--runtime-profile FILE]
+                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
+                 [--show-failed-logs] [--logger {} [{} ...]]
+                 [--job-deploy-sources] [--benchmark-extended]
+                 [--persistence-backend {db,file}]
+                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
+                 [--container-image IMAGE] [--immediate-submit]
+                 [--jobscript SCRIPT] [--jobname NAME]
+                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
+                 [--container-cleanup-images] [--use-conda]
+                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
+                 [--conda-prefix DIR] [--conda-cleanup-envs]
+                 [--conda-cleanup-pkgs [{tarballs,cache}]]
+                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
+                 [--use-apptainer] [--apptainer-prefix DIR]
+                 [--apptainer-args ARGS] [--use-envmodules]
+                 [--deploy-sources QUERY CHECKSUM]
+                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
+                 [--mode {remote,default,subprocess}]
+                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
+                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
+                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
+                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--report-html-path VALUE]
+                 [--report-html-stylesheet-path VALUE]
+                 [--scheduler-greedy-greediness VALUE]
+                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
+                 [--scheduler-ilp-solver VALUE]
+                 [--scheduler-ilp-solver-path VALUE]
+                 [targets ...]
+snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;rulegraph_open_tyndp.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;rulegraph_open_tyndp.png&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;rulegraph_open_tyndp.png&#39;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding DAG to this workflow will look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>../../scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_open_tyndp.png
+<span class="c1"># For Windows run instead:</span>
+<span class="c1"># ! snakemake -call --configfile config/config.tyndp.yaml --dag | python ..\\..\\scripts\\filter_dag.py | dot -Tpng -o dag_open_tyndp.png</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks/../../scripts/filter_dag.py&#39;: [Errno 2] No such file or directory
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
+usage: snakemake [-h] [--dry-run] [--profile PROFILE]
+                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
+                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
+                 [--resources NAME=INT [NAME=INT ...]]
+                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
+                 [--max-threads MAX_THREADS]
+                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
+                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
+                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
+                 [--default-resources [NAME=INT ...]]
+                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
+                 [--preemptible-retries PREEMPTIBLE_RETRIES]
+                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
+                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
+                 [--directory DIR] [--touch] [--keep-going]
+                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
+                 [--force] [--executor {local,dryrun,touch}] [--forceall]
+                 [--forcerun [TARGET ...]]
+                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
+                 [--prioritize TARGET [TARGET ...]]
+                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
+                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
+                 [--shadow-prefix DIR]
+                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
+                 [--scheduler [{greedy,ilp}]]
+                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
+                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
+                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
+                 [--report [FILE]] [--report-after-run]
+                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
+                 [--reporter PLUGIN] [--draft-notebook TARGET]
+                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
+                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
+                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
+                 [--list-rules] [--list-target-rules]
+                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
+                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
+                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
+                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
+                 [--list-changes {code,input,params}] [--list-input-changes]
+                 [--list-params-changes] [--list-untracked]
+                 [--delete-all-output | --delete-temp-output]
+                 [--keep-incomplete] [--drop-metadata] [--version]
+                 [--printshellcmds] [--debug-dag] [--nocolor]
+                 [--quiet [{all,host,progress,reason,rules} ...]]
+                 [--print-compilation] [--verbose] [--force-use-threads]
+                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
+                 [--max-inventory-time SECONDS] [--trust-io-cache]
+                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
+                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
+                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
+                 [--runtime-source-cache-path PATH]
+                 [--queue-input-wait-time SECONDS]
+                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
+                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
+                 [--keep-storage-local-copies] [--not-retrieve-storage]
+                 [--target-files-omit-workdir-adjustment]
+                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
+                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
+                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
+                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
+                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
+                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
+                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
+                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
+                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
+                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
+                 [--scheduler-greediness SCHEDULER_GREEDINESS]
+                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
+                 [--debug] [--runtime-profile FILE]
+                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
+                 [--show-failed-logs] [--logger {} [{} ...]]
+                 [--job-deploy-sources] [--benchmark-extended]
+                 [--persistence-backend {db,file}]
+                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
+                 [--container-image IMAGE] [--immediate-submit]
+                 [--jobscript SCRIPT] [--jobname NAME]
+                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
+                 [--container-cleanup-images] [--use-conda]
+                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
+                 [--conda-prefix DIR] [--conda-cleanup-envs]
+                 [--conda-cleanup-pkgs [{tarballs,cache}]]
+                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
+                 [--use-apptainer] [--apptainer-prefix DIR]
+                 [--apptainer-args ARGS] [--use-envmodules]
+                 [--deploy-sources QUERY CHECKSUM]
+                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
+                 [--mode {remote,default,subprocess}]
+                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
+                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
+                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
+                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--report-html-path VALUE]
+                 [--report-html-stylesheet-path VALUE]
+                 [--scheduler-greedy-greediness VALUE]
+                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
+                 [--scheduler-ilp-solver VALUE]
+                 [--scheduler-ilp-solver-path VALUE]
+                 [targets ...]
+snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;dag_open_tyndp.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;dag_open_tyndp.png&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">TypeError</span>: a bytes-like object is required, not &#39;str&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="ne">FileNotFoundError</span>: No such file or directory: &#39;dag_open_tyndp.png&#39;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="apply-manual-adjustments">
+<h3>Apply Manual Adjustments<a class="headerlink" href="#apply-manual-adjustments" title="Link to this heading">#</a></h3>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/open-tyndp-20251129/config/scenarios.tyndp.yaml</span></code> and modify the existing <code class="docutils literal notranslate"><span class="pre">NT-52SEG-20251129</span></code> scenario by adding the following manual adjustments:</p>
+<ul class="simple">
+<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code> of all H2 imports by a factor of 1.5 (2030) and 1.3 (2040). The supply of imported H2 is included as a <code class="docutils literal notranslate"><span class="pre">Generator</span></code> component with the carrier name <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">H2</span></code>.</p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> of <code class="docutils literal notranslate"><span class="pre">H2</span> <span class="pre">Electrolysis</span></code> to 78% for both 2030 and 2040. H2 Electrolysis is added as a <code class="docutils literal notranslate"><span class="pre">Link</span></code> component.</p></li>
+<li><p>Remove the initial capacity (<code class="docutils literal notranslate"><span class="pre">p_nom</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_min</span></code>) of all <code class="docutils literal notranslate"><span class="pre">solar-pv-utility</span></code> generators for 2030.</p></li>
+</ul>
+<p>Then rerun the model and explore the results in PyPSA-Explorer.</p>
+<p><strong>Hint</strong>: If you need a reminder on running the Snakemake workflow, refer to the section above.</p>
+<p><strong>Hint II</strong>: Always start with a dry run first (add <code class="docutils literal notranslate"><span class="pre">-n</span></code> to your Snakemake command).</p>
+<p><strong>Hint III</strong>: As we only want to solve the model without post-processing, we can call the rule <code class="docutils literal notranslate"><span class="pre">solve_sector_networks</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule.</p>
+<p><strong>Hint IV</strong>: Make sure that the scenario that you want to run is specifying a solver that you can use. You can change the solver to Highs (an open-source solver) by changing the following configuration: <code class="docutils literal notranslate"><span class="pre">solving:solver</span></code>.</p>
+<p>To run the workflow, we first need to install and activate the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment.</p>
+<p>The recommended approach for PyPSA models is to use the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment manager, which handles all dependencies automatically.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are currently working on a robust setup for all operating systems and will focus on this topic specifically in our next workshop.</p>
+<p>If you prefer to use conda to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment locally, refer to our <a class="reference external" href="https://open-tyndp.readthedocs.io/en/latest/installation.html#legacy-method-conda">legacy installation documentation</a>.</p>
+</div>
+<p>To install <code class="docutils literal notranslate"><span class="pre">pixi</span></code> locally on your operating system, follow the steps in the official <a class="reference external" href="https://pixi.sh/dev/installation/">pixi installation documentation</a>.</p>
+<p>For execution on Google Colab, install the Linux version of <code class="docutils literal notranslate"><span class="pre">pixi</span></code> in the runtime:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>-qO-<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+<p>In the Google Colab terminal, you might need to execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span><span class="w"> </span>bash<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>for the changes to take effect if pixi is not recognized.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
+<span class="c1"># !wget -qO- https://pixi.sh/install.sh | sh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, open a terminal window. Navigate to the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository before launching the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>data/open-tyndp-20251129
+</pre></div>
+</div>
+<p>Once you’re in the <code class="docutils literal notranslate"><span class="pre">open-tyndp-20251129</span></code> repository, activate the environment with pixi. This drops you into a shell where you can run the workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</section>
+</section>
+<section id="task-1-run-coupled-and-decoupled-sb-cba-workflow">
+<h2>Task 1: Run coupled and decoupled SB-CBA workflow<a class="headerlink" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/data/open-tyndp-20260604-feat-cba-presolved-networks&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-cy2008&quot;, &quot;NT-cy2009&quot;, &quot;NT-cy1995&quot;, &quot;NT-cyears&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>--until<span class="w"> </span>clean_projects
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;: &quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT-cyears&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;48H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;projects&quot;:[&quot;t4&quot;],&quot;msv_extraction&quot;:{&quot;resolution&quot;:&quot;4380H&quot;},&quot;solving&quot;:{&quot;horizon&quot;:4381,&quot;overlap&quot;:1}}&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;data_config=&quot;tyndp&quot;&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true}}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-dag">
+<h2>Visualize DAG<a class="headerlink" href="#visualize-dag" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">56</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&quot;</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/meas/oet/open-tyndp-workshops/open-tyndp-workshops/&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>snakemake<span class="w"> </span>-call<span class="w"> </span>--dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>scripts/filter_dag.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-Tpng<span class="w"> </span>-o<span class="w"> </span>dag_minimal_2.png
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Workshop 4 (CBA)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-the-snakemake-tool">Reminder: The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> tool</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-snakemake-example">A minimal Snakemake example</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-snakefile-and-rules">The <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> and <code class="docutils literal notranslate"><span class="pre">rules</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-workflow">Calling a workflow</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dag-of-a-workflow">Visualizing the <code class="docutils literal notranslate"><span class="pre">DAG</span></code> of a workflow</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-executing-a-workflow-with-snakemake">Task 1: Executing a workflow with Snakemake</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discover-open-tyndp-file-structure">Discover Open-TYNDP file structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-a-new-climate-year-and-run-it">Task X: Create a new climate year and run it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">extras</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake-to-launch-the-open-tyndp-workflow">Using Snakemake to launch the Open-TYNDP workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-manual-adjustments">Apply Manual Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-run-coupled-and-decoupled-sb-cba-workflow">Task 1: Run coupled and decoupled SB-CBA workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-dag">Visualize DAG</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
