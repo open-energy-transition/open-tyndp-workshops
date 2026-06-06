@@ -445,7 +445,10 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-benefit-analysis">Cost-Benefit Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dry-run-flag-n">The dry-run flag (<code class="docutils literal notranslate"><span class="pre">-n</span></code>)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-pixi">Introducing: <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
@@ -1090,11 +1093,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_7d723">
+<table id="T_1c66b">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_7d723_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
+      <th id="T_1c66b_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1103,112 +1106,112 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </thead>
   <tbody>
     <tr>
-      <th id="T_7d723_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_7d723_row0_col0" class="data row0 col0" >-4.50</td>
+      <th id="T_1c66b_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_1c66b_row0_col0" class="data row0 col0" >-4.50</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_7d723_row1_col0" class="data row1 col0" >21.12</td>
+      <th id="T_1c66b_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_1c66b_row1_col0" class="data row1 col0" >21.12</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
-      <td id="T_7d723_row2_col0" class="data row2 col0" >53.94</td>
+      <th id="T_1c66b_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
+      <td id="T_1c66b_row2_col0" class="data row2 col0" >53.94</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
-      <td id="T_7d723_row3_col0" class="data row3 col0" >-3,936.13</td>
+      <th id="T_1c66b_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
+      <td id="T_1c66b_row3_col0" class="data row3 col0" >-3,936.13</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
-      <td id="T_7d723_row4_col0" class="data row4 col0" >322.81</td>
+      <th id="T_1c66b_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
+      <td id="T_1c66b_row4_col0" class="data row4 col0" >322.81</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
-      <td id="T_7d723_row5_col0" class="data row5 col0" >5.19</td>
+      <th id="T_1c66b_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
+      <td id="T_1c66b_row5_col0" class="data row5 col0" >5.19</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
-      <td id="T_7d723_row6_col0" class="data row6 col0" >9.19</td>
+      <th id="T_1c66b_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
+      <td id="T_1c66b_row6_col0" class="data row6 col0" >9.19</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
-      <td id="T_7d723_row7_col0" class="data row7 col0" >7.94</td>
+      <th id="T_1c66b_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
+      <td id="T_1c66b_row7_col0" class="data row7 col0" >7.94</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
-      <td id="T_7d723_row8_col0" class="data row8 col0" >3.04</td>
+      <th id="T_1c66b_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
+      <td id="T_1c66b_row8_col0" class="data row8 col0" >3.04</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
-      <td id="T_7d723_row9_col0" class="data row9 col0" >-238.52</td>
+      <th id="T_1c66b_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
+      <td id="T_1c66b_row9_col0" class="data row9 col0" >-238.52</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
-      <td id="T_7d723_row10_col0" class="data row10 col0" >14.29</td>
+      <th id="T_1c66b_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
+      <td id="T_1c66b_row10_col0" class="data row10 col0" >14.29</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row11" class="row_heading level0 row11" >Lignite</th>
-      <td id="T_7d723_row11_col0" class="data row11 col0" >15.27</td>
+      <th id="T_1c66b_level0_row11" class="row_heading level0 row11" >Lignite</th>
+      <td id="T_1c66b_row11_col0" class="data row11 col0" >15.27</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row12" class="row_heading level0 row12" >Nuclear</th>
-      <td id="T_7d723_row12_col0" class="data row12 col0" >634.13</td>
+      <th id="T_1c66b_level0_row12" class="row_heading level0 row12" >Nuclear</th>
+      <td id="T_1c66b_row12_col0" class="data row12 col0" >634.13</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_7d723_row13_col0" class="data row13 col0" >141.82</td>
+      <th id="T_1c66b_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_1c66b_row13_col0" class="data row13 col0" >141.82</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
-      <td id="T_7d723_row14_col0" class="data row14 col0" >9.74</td>
+      <th id="T_1c66b_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
+      <td id="T_1c66b_row14_col0" class="data row14 col0" >9.74</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
-      <td id="T_7d723_row15_col0" class="data row15 col0" >302.74</td>
+      <th id="T_1c66b_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
+      <td id="T_1c66b_row15_col0" class="data row15 col0" >302.74</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
-      <td id="T_7d723_row16_col0" class="data row16 col0" >2.86</td>
+      <th id="T_1c66b_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
+      <td id="T_1c66b_row16_col0" class="data row16 col0" >2.86</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
-      <td id="T_7d723_row17_col0" class="data row17 col0" >111.56</td>
+      <th id="T_1c66b_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
+      <td id="T_1c66b_row17_col0" class="data row17 col0" >111.56</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
-      <td id="T_7d723_row18_col0" class="data row18 col0" >1.62</td>
+      <th id="T_1c66b_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
+      <td id="T_1c66b_row18_col0" class="data row18 col0" >1.62</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
-      <td id="T_7d723_row19_col0" class="data row19 col0" >932.01</td>
+      <th id="T_1c66b_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
+      <td id="T_1c66b_row19_col0" class="data row19 col0" >932.01</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
-      <td id="T_7d723_row20_col0" class="data row20 col0" >90.37</td>
+      <th id="T_1c66b_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
+      <td id="T_1c66b_row20_col0" class="data row20 col0" >90.37</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
-      <td id="T_7d723_row21_col0" class="data row21 col0" >211.10</td>
+      <th id="T_1c66b_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
+      <td id="T_1c66b_row21_col0" class="data row21 col0" >211.10</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
-      <td id="T_7d723_row22_col0" class="data row22 col0" >-8.50</td>
+      <th id="T_1c66b_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
+      <td id="T_1c66b_row22_col0" class="data row22 col0" >-8.50</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
-      <td id="T_7d723_row23_col0" class="data row23 col0" >320.71</td>
+      <th id="T_1c66b_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
+      <td id="T_1c66b_row23_col0" class="data row23 col0" >320.71</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row24" class="row_heading level0 row24" >Run of River</th>
-      <td id="T_7d723_row24_col0" class="data row24 col0" >200.71</td>
+      <th id="T_1c66b_level0_row24" class="row_heading level0 row24" >Run of River</th>
+      <td id="T_1c66b_row24_col0" class="data row24 col0" >200.71</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
-      <td id="T_7d723_row25_col0" class="data row25 col0" >268.51</td>
+      <th id="T_1c66b_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
+      <td id="T_1c66b_row25_col0" class="data row25 col0" >268.51</td>
     </tr>
     <tr>
-      <th id="T_7d723_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
-      <td id="T_7d723_row26_col0" class="data row26 col0" >506.26</td>
+      <th id="T_1c66b_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
+      <td id="T_1c66b_row26_col0" class="data row26 col0" >506.26</td>
     </tr>
   </tbody>
 </table>
@@ -1347,12 +1350,12 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_95ce1">
+<table id="T_0ed6b">
   <thead>
     <tr>
       <th class="index_name level0" >network</th>
-      <th id="T_95ce1_level0_col0" class="col_heading level0 col0" >NT 2030</th>
-      <th id="T_95ce1_level0_col1" class="col_heading level0 col1" >NT 2040</th>
+      <th id="T_0ed6b_level0_col0" class="col_heading level0 col0" >NT 2030</th>
+      <th id="T_0ed6b_level0_col1" class="col_heading level0 col1" >NT 2040</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1362,149 +1365,149 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
   </thead>
   <tbody>
     <tr>
-      <th id="T_95ce1_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_95ce1_row0_col0" class="data row0 col0" >-4.50</td>
-      <td id="T_95ce1_row0_col1" class="data row0 col1" >-16.81</td>
+      <th id="T_0ed6b_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_0ed6b_row0_col0" class="data row0 col0" >-4.50</td>
+      <td id="T_0ed6b_row0_col1" class="data row0 col1" >-16.81</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_95ce1_row1_col0" class="data row1 col0" >21.12</td>
-      <td id="T_95ce1_row1_col1" class="data row1 col1" >21.45</td>
+      <th id="T_0ed6b_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_0ed6b_row1_col0" class="data row1 col0" >21.12</td>
+      <td id="T_0ed6b_row1_col1" class="data row1 col1" >21.45</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
-      <td id="T_95ce1_row2_col0" class="data row2 col0" >-3,613.67</td>
-      <td id="T_95ce1_row2_col1" class="data row2 col1" >-4,289.51</td>
+      <th id="T_0ed6b_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
+      <td id="T_0ed6b_row2_col0" class="data row2 col0" >-3,613.67</td>
+      <td id="T_0ed6b_row2_col1" class="data row2 col1" >-4,289.51</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
-      <td id="T_95ce1_row3_col0" class="data row3 col0" >322.81</td>
-      <td id="T_95ce1_row3_col1" class="data row3 col1" >208.61</td>
+      <th id="T_0ed6b_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
+      <td id="T_0ed6b_row3_col0" class="data row3 col0" >322.81</td>
+      <td id="T_0ed6b_row3_col1" class="data row3 col1" >208.61</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
-      <td id="T_95ce1_row4_col0" class="data row4 col0" >5.19</td>
-      <td id="T_95ce1_row4_col1" class="data row4 col1" >5.98</td>
+      <th id="T_0ed6b_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
+      <td id="T_0ed6b_row4_col0" class="data row4 col0" >5.19</td>
+      <td id="T_0ed6b_row4_col1" class="data row4 col1" >5.98</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
-      <td id="T_95ce1_row5_col0" class="data row5 col0" >9.19</td>
-      <td id="T_95ce1_row5_col1" class="data row5 col1" >3.12</td>
+      <th id="T_0ed6b_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
+      <td id="T_0ed6b_row5_col0" class="data row5 col0" >9.19</td>
+      <td id="T_0ed6b_row5_col1" class="data row5 col1" >3.12</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
-      <td id="T_95ce1_row6_col0" class="data row6 col0" >7.94</td>
-      <td id="T_95ce1_row6_col1" class="data row6 col1" >7.25</td>
+      <th id="T_0ed6b_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
+      <td id="T_0ed6b_row6_col0" class="data row6 col0" >7.94</td>
+      <td id="T_0ed6b_row6_col1" class="data row6 col1" >7.25</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
-      <td id="T_95ce1_row7_col0" class="data row7 col0" >3.04</td>
-      <td id="T_95ce1_row7_col1" class="data row7 col1" >8.15</td>
+      <th id="T_0ed6b_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
+      <td id="T_0ed6b_row7_col0" class="data row7 col0" >3.04</td>
+      <td id="T_0ed6b_row7_col1" class="data row7 col1" >8.15</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
-      <td id="T_95ce1_row8_col0" class="data row8 col0" >-238.52</td>
-      <td id="T_95ce1_row8_col1" class="data row8 col1" >-932.35</td>
+      <th id="T_0ed6b_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
+      <td id="T_0ed6b_row8_col0" class="data row8 col0" >-238.52</td>
+      <td id="T_0ed6b_row8_col1" class="data row8 col1" >-932.35</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
-      <td id="T_95ce1_row9_col0" class="data row9 col0" >14.29</td>
-      <td id="T_95ce1_row9_col1" class="data row9 col1" >14.40</td>
+      <th id="T_0ed6b_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
+      <td id="T_0ed6b_row9_col0" class="data row9 col0" >14.29</td>
+      <td id="T_0ed6b_row9_col1" class="data row9 col1" >14.40</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row10" class="row_heading level0 row10" >Lignite</th>
-      <td id="T_95ce1_row10_col0" class="data row10 col0" >15.27</td>
-      <td id="T_95ce1_row10_col1" class="data row10 col1" >14.17</td>
+      <th id="T_0ed6b_level0_row10" class="row_heading level0 row10" >Lignite</th>
+      <td id="T_0ed6b_row10_col0" class="data row10 col0" >15.27</td>
+      <td id="T_0ed6b_row10_col1" class="data row10 col1" >14.17</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row11" class="row_heading level0 row11" >Nuclear</th>
-      <td id="T_95ce1_row11_col0" class="data row11 col0" >634.13</td>
-      <td id="T_95ce1_row11_col1" class="data row11 col1" >627.40</td>
+      <th id="T_0ed6b_level0_row11" class="row_heading level0 row11" >Nuclear</th>
+      <td id="T_0ed6b_row11_col0" class="data row11 col0" >634.13</td>
+      <td id="T_0ed6b_row11_col1" class="data row11 col1" >627.40</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
-      <td id="T_95ce1_row12_col0" class="data row12 col0" >141.82</td>
-      <td id="T_95ce1_row12_col1" class="data row12 col1" >518.59</td>
+      <th id="T_0ed6b_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
+      <td id="T_0ed6b_row12_col0" class="data row12 col0" >141.82</td>
+      <td id="T_0ed6b_row12_col1" class="data row12 col1" >518.59</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
-      <td id="T_95ce1_row13_col0" class="data row13 col0" >9.74</td>
-      <td id="T_95ce1_row13_col1" class="data row13 col1" >51.82</td>
+      <th id="T_0ed6b_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
+      <td id="T_0ed6b_row13_col0" class="data row13 col0" >9.74</td>
+      <td id="T_0ed6b_row13_col1" class="data row13 col1" >51.82</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
-      <td id="T_95ce1_row14_col0" class="data row14 col0" >302.74</td>
-      <td id="T_95ce1_row14_col1" class="data row14 col1" >463.42</td>
+      <th id="T_0ed6b_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
+      <td id="T_0ed6b_row14_col0" class="data row14 col0" >302.74</td>
+      <td id="T_0ed6b_row14_col1" class="data row14 col1" >463.42</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
-      <td id="T_95ce1_row15_col0" class="data row15 col0" >2.86</td>
-      <td id="T_95ce1_row15_col1" class="data row15 col1" >18.67</td>
+      <th id="T_0ed6b_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
+      <td id="T_0ed6b_row15_col0" class="data row15 col0" >2.86</td>
+      <td id="T_0ed6b_row15_col1" class="data row15 col1" >18.67</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
-      <td id="T_95ce1_row16_col0" class="data row16 col0" >111.56</td>
-      <td id="T_95ce1_row16_col1" class="data row16 col1" >259.56</td>
+      <th id="T_0ed6b_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
+      <td id="T_0ed6b_row16_col0" class="data row16 col0" >111.56</td>
+      <td id="T_0ed6b_row16_col1" class="data row16 col1" >259.56</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
-      <td id="T_95ce1_row17_col0" class="data row17 col0" >1.62</td>
-      <td id="T_95ce1_row17_col1" class="data row17 col1" >2.12</td>
+      <th id="T_0ed6b_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
+      <td id="T_0ed6b_row17_col0" class="data row17 col0" >1.62</td>
+      <td id="T_0ed6b_row17_col1" class="data row17 col1" >2.12</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
-      <td id="T_95ce1_row18_col0" class="data row18 col0" >932.01</td>
-      <td id="T_95ce1_row18_col1" class="data row18 col1" >1,339.81</td>
+      <th id="T_0ed6b_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
+      <td id="T_0ed6b_row18_col0" class="data row18 col0" >932.01</td>
+      <td id="T_0ed6b_row18_col1" class="data row18 col1" >1,339.81</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
-      <td id="T_95ce1_row19_col0" class="data row19 col0" >90.37</td>
-      <td id="T_95ce1_row19_col1" class="data row19 col1" >115.26</td>
+      <th id="T_0ed6b_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
+      <td id="T_0ed6b_row19_col0" class="data row19 col0" >90.37</td>
+      <td id="T_0ed6b_row19_col1" class="data row19 col1" >115.26</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
-      <td id="T_95ce1_row20_col0" class="data row20 col0" >211.10</td>
-      <td id="T_95ce1_row20_col1" class="data row20 col1" >219.50</td>
+      <th id="T_0ed6b_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
+      <td id="T_0ed6b_row20_col0" class="data row20 col0" >211.10</td>
+      <td id="T_0ed6b_row20_col1" class="data row20 col1" >219.50</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
-      <td id="T_95ce1_row21_col0" class="data row21 col0" >-8.50</td>
-      <td id="T_95ce1_row21_col1" class="data row21 col1" >-17.13</td>
+      <th id="T_0ed6b_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
+      <td id="T_0ed6b_row21_col0" class="data row21 col0" >-8.50</td>
+      <td id="T_0ed6b_row21_col1" class="data row21 col1" >-17.13</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
-      <td id="T_95ce1_row22_col0" class="data row22 col0" >320.71</td>
-      <td id="T_95ce1_row22_col1" class="data row22 col1" >331.90</td>
+      <th id="T_0ed6b_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
+      <td id="T_0ed6b_row22_col0" class="data row22 col0" >320.71</td>
+      <td id="T_0ed6b_row22_col1" class="data row22 col1" >331.90</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row23" class="row_heading level0 row23" >Run of River</th>
-      <td id="T_95ce1_row23_col0" class="data row23 col0" >200.71</td>
-      <td id="T_95ce1_row23_col1" class="data row23 col1" >207.65</td>
+      <th id="T_0ed6b_level0_row23" class="row_heading level0 row23" >Run of River</th>
+      <td id="T_0ed6b_row23_col0" class="data row23 col0" >200.71</td>
+      <td id="T_0ed6b_row23_col1" class="data row23 col1" >207.65</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
-      <td id="T_95ce1_row24_col0" class="data row24 col0" >506.26</td>
-      <td id="T_95ce1_row24_col1" class="data row24 col1" >806.74</td>
+      <th id="T_0ed6b_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
+      <td id="T_0ed6b_row24_col0" class="data row24 col0" >506.26</td>
+      <td id="T_0ed6b_row24_col1" class="data row24 col1" >806.74</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
-      <td id="T_95ce1_row25_col0" class="data row25 col0" >53.94</td>
-      <td id="T_95ce1_row25_col1" class="data row25 col1" >92.24</td>
+      <th id="T_0ed6b_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
+      <td id="T_0ed6b_row25_col0" class="data row25 col0" >53.94</td>
+      <td id="T_0ed6b_row25_col1" class="data row25 col1" >92.24</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
-      <td id="T_95ce1_row26_col0" class="data row26 col0" >3,613.67</td>
-      <td id="T_95ce1_row26_col1" class="data row26 col1" >4,289.51</td>
+      <th id="T_0ed6b_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
+      <td id="T_0ed6b_row26_col0" class="data row26 col0" >3,613.67</td>
+      <td id="T_0ed6b_row26_col1" class="data row26 col1" >4,289.51</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
-      <td id="T_95ce1_row27_col0" class="data row27 col0" >-3,936.13</td>
-      <td id="T_95ce1_row27_col1" class="data row27 col1" >-4,855.13</td>
+      <th id="T_0ed6b_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
+      <td id="T_0ed6b_row27_col0" class="data row27 col0" >-3,936.13</td>
+      <td id="T_0ed6b_row27_col1" class="data row27 col1" >-4,855.13</td>
     </tr>
     <tr>
-      <th id="T_95ce1_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
-      <td id="T_95ce1_row28_col0" class="data row28 col0" >268.51</td>
-      <td id="T_95ce1_row28_col1" class="data row28 col1" >473.37</td>
+      <th id="T_0ed6b_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
+      <td id="T_0ed6b_row28_col0" class="data row28 col0" >268.51</td>
+      <td id="T_0ed6b_row28_col1" class="data row28 col1" >473.37</td>
     </tr>
   </tbody>
 </table>
@@ -1845,23 +1848,27 @@ Workflows are described via a human readable, Python based language. They can be
 </div>
 <section id="using-snakemake">
 <h4>Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code><a class="headerlink" href="#using-snakemake" title="Link to this heading">#</a></h4>
-<p>You can trigger the workflow by specifying a target file, like <code class="docutils literal notranslate"><span class="pre">data/benchmark.pdf</span></code>, or any intermediate file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>data/benchmark.pdf
+<p>Snakemake workflows can be triggered in different ways:</p>
+<ol class="arabic">
+<li><p><strong>By target file</strong>: specify the final output you want (using <code class="docutils literal notranslate"><span class="pre">results/my_output.nc</span></code> as an example output file name)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>results/my_output.nc
 </pre></div>
 </div>
-<p>Alternatively, you can also execute the workflow by calling a rule that produces an intermediate file:</p>
+</li>
+<li><p><strong>By rule name</strong>: call a specific step in the workflow (using <code class="docutils literal notranslate"><span class="pre">build_data</span></code> as an example rule/step name)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>build_data
 </pre></div>
 </div>
 <p><strong>NOTE:</strong> You cannot call a rule that includes a wildcard without specifying what the wildcard should be filled with. Otherwise, Snakemake will not know what to propagate back.</p>
-<p>Or you can call the common rule <code class="docutils literal notranslate"><span class="pre">all</span></code> which can be used to execute the entire workflow. It takes the final workflow output as its input and thus requires all previous dependent rules to be run as well:</p>
+</li>
+<li><p><strong>By entire workflow</strong>: Use the common rule <code class="docutils literal notranslate"><span class="pre">all</span></code> to execute the entire workflow. It takes the final workflow output as its input and thus requires all previous dependent rules to be run as well</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>all
 </pre></div>
 </div>
-<p>Because we defined the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule as first in the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>, this rule is assumed to be the default and the following also works:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call
-</pre></div>
-</div>
+</li>
+</ol>
+<section id="the-dry-run-flag-n">
+<h5>The dry-run flag (<code class="docutils literal notranslate"><span class="pre">-n</span></code>)<a class="headerlink" href="#the-dry-run-flag-n" title="Link to this heading">#</a></h5>
 <p>A very important feature is the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag which executes a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code>. It is recommended to always first execute a <code class="docutils literal notranslate"><span class="pre">dry-run</span></code> before the actual execution of a workflow. This simply prints out the DAG of the workflow to investigate without actually executing it.</p>
 <p>Let’s try this out and investigate the output:</p>
 <div class="cell docutils container">
@@ -1874,8 +1881,8 @@ Workflows are described via a human readable, Python based language. They can be
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-06 21:01:10</span>
-<span class=" -Color -Color-Green">  Workflow ID: 9000e393-5070-4d6b-98c0-2f75b9a15515</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-06 21:09:52</span>
+<span class=" -Color -Color-Green">  Workflow ID: 3aea81f5-fc6e-44f2-b5ba-2d60e571fb42</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -1902,30 +1909,29 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Yellow">all                    1</span>
 <span class=" -Color -Color-Yellow">total                  6</span>
 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -1933,7 +1939,7 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -1941,11 +1947,11 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Sat Jun  6 21:01:11 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 21:09:53 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -1970,6 +1976,7 @@ Workflows are described via a human readable, Python based language. They can be
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="introducing-pixi">
@@ -2170,9 +2177,7 @@ remote: Counting objects: 100% (567/567)
 remote: Counting objects: 100% (567/567), done.
 remote: Compressing objects:   0% (1/235)
 remote: Compressing objects:   1% (3/235)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   2% (5/235)
+remote: Compressing objects:   2% (5/235)
 remote: Compressing objects:   3% (8/235)
 remote: Compressing objects:   4% (10/235)
 remote: Compressing objects:   5% (12/235)
@@ -2194,10 +2199,10 @@ remote: Compressing objects:  14% (33/235)
 remote: Compressing objects:  15% (36/235)
 remote: Compressing objects:  16% (38/235)
 remote: Compressing objects:  17% (40/235)
-remote: Compressing objects:  18% (43/235)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  19% (45/235)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  18% (43/235)
+remote: Compressing objects:  19% (45/235)
 remote: Compressing objects:  20% (47/235)
 remote: Compressing objects:  21% (50/235)
 remote: Compressing objects:  22% (52/235)
@@ -2255,7 +2260,9 @@ remote: Compressing objects:  73% (172/235)
 remote: Compressing objects:  74% (174/235)
 remote: Compressing objects:  75% (177/235)
 remote: Compressing objects:  76% (179/235)
-remote: Compressing objects:  77% (181/235)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  77% (181/235)
 remote: Compressing objects:  78% (184/235)
 remote: Compressing objects:  79% (186/235)
 remote: Compressing objects:  80% (188/235)
@@ -2278,9 +2285,7 @@ remote: Compressing objects:  96% (226/235)
 remote: Compressing objects:  97% (228/235)
 remote: Compressing objects:  98% (231/235)
 remote: Compressing objects:  99% (233/235)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects: 100% (235/235)
+remote: Compressing objects: 100% (235/235)
 remote: Compressing objects: 100% (235/235), done.
 Receiving objects:   0% (1/42711)
 </pre></div>
@@ -2294,183 +2299,181 @@ Receiving objects:   3% (1282/42711)
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   4% (1709/42711)
 Receiving objects:   5% (2136/42711)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   6% (2563/42711)
+Receiving objects:   6% (2563/42711)
 Receiving objects:   7% (2990/42711)
-Receiving objects:   8% (3417/42711)
-Receiving objects:   9% (3844/42711)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  10% (4272/42711)
-Receiving objects:  11% (4699/42711)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   8% (3417/42711)
+Receiving objects:   9% (3844/42711)
+Receiving objects:  10% (4272/42711)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  11% (4699/42711)
 Receiving objects:  12% (5126/42711)
 Receiving objects:  13% (5553/42711)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  13% (5968/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  13% (5960/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (5980/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (5980/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6407/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6407/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6834/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  17% (7261/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6834/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  17% (7261/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7688/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7688/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  19% (8116/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8116/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  20% (8543/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  21% (8970/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  22% (9397/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  23% (9824/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  20% (8543/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  21% (8970/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  22% (9397/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  23% (9824/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  24% (10251/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  25% (10678/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  26% (11105/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  27% (11532/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  24% (10251/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  25% (10678/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  26% (11105/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  27% (11532/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  28% (11960/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  29% (12387/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  30% (12814/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  31% (13241/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  32% (13668/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  28% (11960/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  29% (12387/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  30% (12814/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  31% (13241/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  32% (13668/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14095/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  34% (14522/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14095/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  34% (14522/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  35% (14949/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  36% (15376/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  37% (15804/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  38% (16231/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  39% (16658/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  40% (17085/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  41% (17512/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  35% (14949/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  36% (15376/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  37% (15804/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  38% (16231/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  39% (16658/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  40% (17085/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  41% (17512/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  42% (17939/42711), 30.94 MiB | 30.93 MiB/s
-Receiving objects:  43% (18366/42711), 30.94 MiB | 30.93 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  42% (17939/42711), 28.46 MiB | 28.48 MiB/s
+Receiving objects:  43% (18366/42711), 28.46 MiB | 28.48 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18793/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  45% (19220/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  46% (19648/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  47% (20075/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  48% (20502/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  49% (20929/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  50% (21356/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18793/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  45% (19220/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  46% (19648/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  47% (20075/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  48% (20502/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  49% (20929/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  51% (21783/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21356/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  51% (21783/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22210/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  53% (22637/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  54% (23064/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  55% (23492/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  56% (23919/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  57% (24346/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  58% (24773/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22210/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  53% (22637/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  54% (23064/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  55% (23492/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  56% (23919/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25200/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  60% (25627/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  61% (26054/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  62% (26481/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  63% (26908/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24346/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  58% (24773/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27336/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  65% (27763/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  66% (28190/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25200/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  60% (25627/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  61% (26054/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  62% (26481/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  67% (28617/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  68% (29044/42711), 56.25 MiB | 37.52 MiB/s
-Receiving objects:  69% (29471/42711), 56.25 MiB | 37.52 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (26908/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29668/42711), 79.23 MiB | 39.63 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27336/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  65% (27763/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  66% (28190/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  67% (28617/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  68% (29044/42711), 54.39 MiB | 36.28 MiB/s
+Receiving objects:  69% (29471/42711), 54.39 MiB | 36.28 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (29898/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  71% (30325/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  72% (30752/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  73% (31180/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  74% (31607/42711), 105.16 MiB | 42.08 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29668/42711), 78.80 MiB | 39.42 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  75% (32034/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  76% (32461/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  77% (32888/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  78% (33315/42711), 105.16 MiB | 42.08 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (29898/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  71% (30325/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  72% (30752/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  73% (31180/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  74% (31607/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  75% (32034/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  76% (32461/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  77% (32888/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  78% (33315/42711), 106.98 MiB | 42.81 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33742/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  80% (34169/42711), 105.16 MiB | 42.08 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33742/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  80% (34169/42711), 106.98 MiB | 42.81 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  81% (34596/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  82% (35024/42711), 105.16 MiB | 42.08 MiB/s
-Receiving objects:  83% (35451/42711), 105.16 MiB | 42.08 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  81% (34596/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  82% (35024/42711), 106.98 MiB | 42.81 MiB/s
+Receiving objects:  83% (35451/42711), 106.98 MiB | 42.81 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35492/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  83% (35496/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  84% (35878/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  85% (36305/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  84% (35878/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  85% (36305/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  86% (36732/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  87% (37159/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  88% (37586/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  89% (38013/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  86% (36732/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  87% (37159/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  90% (38440/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  91% (38868/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  92% (39295/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  88% (37586/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  89% (38013/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  90% (38440/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  93% (39722/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  94% (40149/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  95% (40576/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  96% (41003/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects:  97% (41430/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  91% (38868/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  92% (39295/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  93% (39722/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  94% (40149/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  95% (40576/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  96% (41003/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects:  97% (41430/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (41857/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (41857/42711), 131.03 MiB | 43.69 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42284/42711), 131.03 MiB | 43.69 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42284/42711), 134.22 MiB | 44.75 MiB/s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Total 42711 (delta 489), reused 346 (delta 332), pack-reused 42144 (from 4)
-Receiving objects: 100% (42711/42711), 131.03 MiB | 43.69 MiB/s
-Receiving objects: 100% (42711/42711), 147.86 MiB | 44.14 MiB/s, done.
+Receiving objects: 100% (42711/42711), 134.22 MiB | 44.75 MiB/s
+Receiving objects: 100% (42711/42711), 147.86 MiB | 45.08 MiB/s, done.
 Resolving deltas:   0% (0/33256)
 Resolving deltas:   1% (333/33256)
+Resolving deltas:   2% (666/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (666/33256)
-Resolving deltas:   3% (998/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   3% (998/33256)
 Resolving deltas:   4% (1331/33256)
 Resolving deltas:   5% (1663/33256)
+Resolving deltas:   6% (1996/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   6% (1996/33256)
-Resolving deltas:   7% (2328/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   7% (2328/33256)
 Resolving deltas:   8% (2661/33256)
+Resolving deltas:   9% (2994/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (2994/33256)
-Resolving deltas:  10% (3326/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  10% (3326/33256)
 Resolving deltas:  11% (3659/33256)
 Resolving deltas:  12% (3991/33256)
 </pre></div>
@@ -2492,86 +2495,86 @@ Resolving deltas:  18% (5987/33256)
 Resolving deltas:  19% (6319/33256)
 Resolving deltas:  20% (6652/33256)
 Resolving deltas:  21% (6984/33256)
-Resolving deltas:  22% (7317/33256)
+Resolving deltas:  22% (7318/33256)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7649/33256)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (7982/33256)
-Resolving deltas:  25% (8315/33256)
+Resolving deltas:  25% (8314/33256)
 Resolving deltas:  26% (8647/33256)
 Resolving deltas:  27% (8980/33256)
 Resolving deltas:  28% (9312/33256)
 Resolving deltas:  29% (9645/33256)
-Resolving deltas:  30% (9977/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10311/33256)
-Resolving deltas:  32% (10642/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  30% (9977/33256)
+Resolving deltas:  31% (10310/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  33% (10975/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  32% (10642/33256)
+Resolving deltas:  33% (10975/33256)
 Resolving deltas:  34% (11308/33256)
 Resolving deltas:  35% (11640/33256)
 Resolving deltas:  36% (11973/33256)
 Resolving deltas:  37% (12305/33256)
 Resolving deltas:  38% (12638/33256)
-Resolving deltas:  39% (12970/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13303/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  39% (12970/33256)
+Resolving deltas:  40% (13303/33256)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13635/33256)
+Resolving deltas:  42% (13968/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (13968/33256)
-Resolving deltas:  43% (14301/33256)
-Resolving deltas:  44% (14633/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  43% (14302/33256)
+Resolving deltas:  44% (14634/33256)
 Resolving deltas:  45% (14966/33256)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  46% (15298/33256)
+Resolving deltas:  46% (15298/33256)
 Resolving deltas:  47% (15631/33256)
 Resolving deltas:  48% (15963/33256)
+Resolving deltas:  48% (16222/33256)
 Resolving deltas:  49% (16296/33256)
-Resolving deltas:  50% (16628/33256)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  50% (16628/33256)
 Resolving deltas:  51% (16961/33256)
 Resolving deltas:  52% (17294/33256)
 Resolving deltas:  53% (17626/33256)
 Resolving deltas:  54% (17959/33256)
 Resolving deltas:  55% (18291/33256)
 Resolving deltas:  56% (18624/33256)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  57% (18956/33256)
+Resolving deltas:  57% (18956/33256)
 Resolving deltas:  58% (19289/33256)
 Resolving deltas:  59% (19622/33256)
 Resolving deltas:  60% (19954/33256)
-Resolving deltas:  60% (20271/33256)
 Resolving deltas:  61% (20287/33256)
 Resolving deltas:  62% (20619/33256)
-Resolving deltas:  63% (20952/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  64% (21284/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  63% (20952/33256)
+Resolving deltas:  64% (21284/33256)
 Resolving deltas:  65% (21617/33256)
 Resolving deltas:  66% (21949/33256)
-Resolving deltas:  67% (22283/33256)
-Resolving deltas:  68% (22616/33256)
-Resolving deltas:  69% (22948/33256)
+Resolving deltas:  67% (22282/33256)
+Resolving deltas:  68% (22615/33256)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  69% (22947/33256)
 Resolving deltas:  70% (23280/33256)
 Resolving deltas:  71% (23612/33256)
 Resolving deltas:  72% (23945/33256)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  73% (24277/33256)
+Resolving deltas:  73% (24277/33256)
 Resolving deltas:  74% (24610/33256)
 Resolving deltas:  75% (24942/33256)
 Resolving deltas:  76% (25275/33256)
 Resolving deltas:  77% (25608/33256)
-Resolving deltas:  78% (25940/33256)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  78% (25940/33256)
 Resolving deltas:  79% (26273/33256)
 Resolving deltas:  80% (26605/33256)
 Resolving deltas:  81% (26938/33256)
@@ -2579,27 +2582,25 @@ Resolving deltas:  82% (27270/33256)
 Resolving deltas:  83% (27603/33256)
 Resolving deltas:  84% (27936/33256)
 Resolving deltas:  85% (28268/33256)
-Resolving deltas:  86% (28601/33256)
-Resolving deltas:  87% (28934/33256)
+Resolving deltas:  86% (28602/33256)
+Resolving deltas:  87% (28933/33256)
 Resolving deltas:  88% (29266/33256)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  89% (29598/33256)
+Resolving deltas:  89% (29598/33256)
 Resolving deltas:  90% (29931/33256)
 Resolving deltas:  91% (30263/33256)
-Resolving deltas:  92% (30596/33256)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  92% (30596/33256)
 Resolving deltas:  93% (30929/33256)
 Resolving deltas:  94% (31261/33256)
 Resolving deltas:  95% (31594/33256)
 Resolving deltas:  96% (31926/33256)
 Resolving deltas:  97% (32259/33256)
+Resolving deltas:  98% (32591/33256)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  98% (32591/33256)
-Resolving deltas:  99% (32924/33256)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33256/33256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  99% (32924/33256)
+Resolving deltas: 100% (33256/33256)
 Resolving deltas: 100% (33256/33256), done.
 </pre></div>
 </div>
@@ -3347,7 +3348,10 @@ Switched to a new branch &#39;workshop-4-cba&#39;
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-benefit-analysis">Cost-Benefit Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dry-run-flag-n">The dry-run flag (<code class="docutils literal notranslate"><span class="pre">-n</span></code>)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-pixi">Introducing: <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
