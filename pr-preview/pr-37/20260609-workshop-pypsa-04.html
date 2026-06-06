@@ -452,24 +452,21 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pixi">Using <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba">Exploring Open-TYNDP CBA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-and-installing-open-tyndp">Cloning and installing Open-TYNDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task 5: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-your-own-climate-year-and-run-it">Task X: Create your own climate year and run it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-climate-years">Modifying climate years</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-and-run-it">Task 6: Create your own climate year and run it</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-optional-running-and-solving-a-cba-project-with-a-pre-solved-network">Task (optional): Running and solving a CBA project with a pre-solved network</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)</a></li>
 </ul>
 </li>
 </ul>
@@ -477,6 +474,8 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 2: Reproduce benchmarks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-investigate-outputs">Task 3: Investigate outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-modify-configuration-files-directly">Task 5: Modify Configuration Files Directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-a-custom-climate-year-scenario">Task 6: Create a Custom Climate Year Scenario</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
@@ -526,22 +525,21 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">Code</span><span class="p">,</span> <span class="n">IFrame</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_from_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pdf2image.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDFPageCountError</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">Code</span><span class="p">,</span> <span class="n">IFrame</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_legend_lines</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">add_legend_lines</span><span class="p">,</span>
-<span class="p">)</span>
 
 <span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.nice_names&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.drop_zero&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -623,9 +621,9 @@ Done
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scripts._helpers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">show_benchmarks</span><span class="p">,</span>
     <span class="n">display_code_lines</span><span class="p">,</span>
     <span class="n">run_pypsa_explorer_in_colab</span><span class="p">,</span>
+    <span class="n">show_benchmarks</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1092,11 +1090,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_80a0c">
+<table id="T_3e564">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_80a0c_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
+      <th id="T_3e564_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1105,112 +1103,112 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </thead>
   <tbody>
     <tr>
-      <th id="T_80a0c_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_80a0c_row0_col0" class="data row0 col0" >-4.50</td>
+      <th id="T_3e564_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_3e564_row0_col0" class="data row0 col0" >-4.50</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_80a0c_row1_col0" class="data row1 col0" >21.12</td>
+      <th id="T_3e564_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_3e564_row1_col0" class="data row1 col0" >21.12</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
-      <td id="T_80a0c_row2_col0" class="data row2 col0" >53.94</td>
+      <th id="T_3e564_level0_row2" class="row_heading level0 row2" >Demand Side Response</th>
+      <td id="T_3e564_row2_col0" class="data row2 col0" >53.94</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
-      <td id="T_80a0c_row3_col0" class="data row3 col0" >-3,936.13</td>
+      <th id="T_3e564_level0_row3" class="row_heading level0 row3" >Electricity Exogenous Demand</th>
+      <td id="T_3e564_row3_col0" class="data row3 col0" >-3,936.13</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
-      <td id="T_80a0c_row4_col0" class="data row4 col0" >322.81</td>
+      <th id="T_3e564_level0_row4" class="row_heading level0 row4" >Gas CCGT</th>
+      <td id="T_3e564_row4_col0" class="data row4 col0" >322.81</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
-      <td id="T_80a0c_row5_col0" class="data row5 col0" >5.19</td>
+      <th id="T_3e564_level0_row5" class="row_heading level0 row5" >Gas CCGT (CCS)</th>
+      <td id="T_3e564_row5_col0" class="data row5 col0" >5.19</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
-      <td id="T_80a0c_row6_col0" class="data row6 col0" >9.19</td>
+      <th id="T_3e564_level0_row6" class="row_heading level0 row6" >Gas Conventional</th>
+      <td id="T_3e564_row6_col0" class="data row6 col0" >9.19</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
-      <td id="T_80a0c_row7_col0" class="data row7 col0" >7.94</td>
+      <th id="T_3e564_level0_row7" class="row_heading level0 row7" >Gas OCGT</th>
+      <td id="T_3e564_row7_col0" class="data row7 col0" >7.94</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
-      <td id="T_80a0c_row8_col0" class="data row8 col0" >3.04</td>
+      <th id="T_3e564_level0_row8" class="row_heading level0 row8" >H2 CCGT</th>
+      <td id="T_3e564_row8_col0" class="data row8 col0" >3.04</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
-      <td id="T_80a0c_row9_col0" class="data row9 col0" >-238.52</td>
+      <th id="T_3e564_level0_row9" class="row_heading level0 row9" >H2 Electrolysis</th>
+      <td id="T_3e564_row9_col0" class="data row9 col0" >-238.52</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
-      <td id="T_80a0c_row10_col0" class="data row10 col0" >14.29</td>
+      <th id="T_3e564_level0_row10" class="row_heading level0 row10" >Hydro Pondage</th>
+      <td id="T_3e564_row10_col0" class="data row10 col0" >14.29</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row11" class="row_heading level0 row11" >Lignite</th>
-      <td id="T_80a0c_row11_col0" class="data row11 col0" >15.27</td>
+      <th id="T_3e564_level0_row11" class="row_heading level0 row11" >Lignite</th>
+      <td id="T_3e564_row11_col0" class="data row11 col0" >15.27</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row12" class="row_heading level0 row12" >Nuclear</th>
-      <td id="T_80a0c_row12_col0" class="data row12 col0" >634.13</td>
+      <th id="T_3e564_level0_row12" class="row_heading level0 row12" >Nuclear</th>
+      <td id="T_3e564_row12_col0" class="data row12 col0" >634.13</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_80a0c_row13_col0" class="data row13 col0" >141.82</td>
+      <th id="T_3e564_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_3e564_row13_col0" class="data row13 col0" >141.82</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
-      <td id="T_80a0c_row14_col0" class="data row14 col0" >9.74</td>
+      <th id="T_3e564_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC Float.)</th>
+      <td id="T_3e564_row14_col0" class="data row14 col0" >9.74</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
-      <td id="T_80a0c_row15_col0" class="data row15 col0" >302.74</td>
+      <th id="T_3e564_level0_row15" class="row_heading level0 row15" >Offshore Wind (AC)</th>
+      <td id="T_3e564_row15_col0" class="data row15 col0" >302.74</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
-      <td id="T_80a0c_row16_col0" class="data row16 col0" >2.86</td>
+      <th id="T_3e564_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC Float.)</th>
+      <td id="T_3e564_row16_col0" class="data row16 col0" >2.86</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
-      <td id="T_80a0c_row17_col0" class="data row17 col0" >111.56</td>
+      <th id="T_3e564_level0_row17" class="row_heading level0 row17" >Offshore Wind (DC)</th>
+      <td id="T_3e564_row17_col0" class="data row17 col0" >111.56</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
-      <td id="T_80a0c_row18_col0" class="data row18 col0" >1.62</td>
+      <th id="T_3e564_level0_row18" class="row_heading level0 row18" >Oil (Light)</th>
+      <td id="T_3e564_row18_col0" class="data row18 col0" >1.62</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
-      <td id="T_80a0c_row19_col0" class="data row19 col0" >932.01</td>
+      <th id="T_3e564_level0_row19" class="row_heading level0 row19" >Onshore Wind</th>
+      <td id="T_3e564_row19_col0" class="data row19 col0" >932.01</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
-      <td id="T_80a0c_row20_col0" class="data row20 col0" >90.37</td>
+      <th id="T_3e564_level0_row20" class="row_heading level0 row20" >Other Non-Renewables</th>
+      <td id="T_3e564_row20_col0" class="data row20 col0" >90.37</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
-      <td id="T_80a0c_row21_col0" class="data row21 col0" >211.10</td>
+      <th id="T_3e564_level0_row21" class="row_heading level0 row21" >Other Renewables</th>
+      <td id="T_3e564_row21_col0" class="data row21 col0" >211.10</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
-      <td id="T_80a0c_row22_col0" class="data row22 col0" >-8.50</td>
+      <th id="T_3e564_level0_row22" class="row_heading level0 row22" >Pumped Hydro</th>
+      <td id="T_3e564_row22_col0" class="data row22 col0" >-8.50</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
-      <td id="T_80a0c_row23_col0" class="data row23 col0" >320.71</td>
+      <th id="T_3e564_level0_row23" class="row_heading level0 row23" >Reservoir & Dam</th>
+      <td id="T_3e564_row23_col0" class="data row23 col0" >320.71</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row24" class="row_heading level0 row24" >Run of River</th>
-      <td id="T_80a0c_row24_col0" class="data row24 col0" >200.71</td>
+      <th id="T_3e564_level0_row24" class="row_heading level0 row24" >Run of River</th>
+      <td id="T_3e564_row24_col0" class="data row24 col0" >200.71</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
-      <td id="T_80a0c_row25_col0" class="data row25 col0" >268.51</td>
+      <th id="T_3e564_level0_row25" class="row_heading level0 row25" >Solar PV (Rooftop)</th>
+      <td id="T_3e564_row25_col0" class="data row25 col0" >268.51</td>
     </tr>
     <tr>
-      <th id="T_80a0c_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
-      <td id="T_80a0c_row26_col0" class="data row26 col0" >506.26</td>
+      <th id="T_3e564_level0_row26" class="row_heading level0 row26" >Solar PV (Utility)</th>
+      <td id="T_3e564_row26_col0" class="data row26 col0" >506.26</td>
     </tr>
   </tbody>
 </table>
@@ -1240,7 +1238,7 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">s2030</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
     <span class="n">bus_carrier</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;low voltage&quot;</span><span class="p">],</span>
-    <span class="n">query</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;abs(value)&gt;</span><span class="si">{</span><span class="n">clip</span><span class="o">*</span><span class="mf">1e6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;abs(value)&gt;</span><span class="si">{</span><span class="n">clip</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Electricity Energy Balance </span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2"> (Clipped at </span><span class="si">{</span><span class="n">clip</span><span class="si">}</span><span class="s2"> TWh)&quot;</span><span class="p">);</span>
@@ -1349,12 +1347,12 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_cbcf6">
+<table id="T_1c2cd">
   <thead>
     <tr>
       <th class="index_name level0" >network</th>
-      <th id="T_cbcf6_level0_col0" class="col_heading level0 col0" >NT 2030</th>
-      <th id="T_cbcf6_level0_col1" class="col_heading level0 col1" >NT 2040</th>
+      <th id="T_1c2cd_level0_col0" class="col_heading level0 col0" >NT 2030</th>
+      <th id="T_1c2cd_level0_col1" class="col_heading level0 col1" >NT 2040</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1364,149 +1362,149 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
   </thead>
   <tbody>
     <tr>
-      <th id="T_cbcf6_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
-      <td id="T_cbcf6_row0_col0" class="data row0 col0" >-4.50</td>
-      <td id="T_cbcf6_row0_col1" class="data row0 col1" >-16.81</td>
+      <th id="T_1c2cd_level0_row0" class="row_heading level0 row0" >Battery Storage</th>
+      <td id="T_1c2cd_row0_col0" class="data row0 col0" >-4.50</td>
+      <td id="T_1c2cd_row0_col1" class="data row0 col1" >-16.81</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row1" class="row_heading level0 row1" >Coal</th>
-      <td id="T_cbcf6_row1_col0" class="data row1 col0" >21.12</td>
-      <td id="T_cbcf6_row1_col1" class="data row1 col1" >21.45</td>
+      <th id="T_1c2cd_level0_row1" class="row_heading level0 row1" >Coal</th>
+      <td id="T_1c2cd_row1_col0" class="data row1 col0" >21.12</td>
+      <td id="T_1c2cd_row1_col1" class="data row1 col1" >21.45</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
-      <td id="T_cbcf6_row2_col0" class="data row2 col0" >-3,613.67</td>
-      <td id="T_cbcf6_row2_col1" class="data row2 col1" >-4,289.51</td>
+      <th id="T_1c2cd_level0_row2" class="row_heading level0 row2" >Electricity Distribution Grid</th>
+      <td id="T_1c2cd_row2_col0" class="data row2 col0" >-3,613.67</td>
+      <td id="T_1c2cd_row2_col1" class="data row2 col1" >-4,289.51</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
-      <td id="T_cbcf6_row3_col0" class="data row3 col0" >322.81</td>
-      <td id="T_cbcf6_row3_col1" class="data row3 col1" >208.61</td>
+      <th id="T_1c2cd_level0_row3" class="row_heading level0 row3" >Gas CCGT</th>
+      <td id="T_1c2cd_row3_col0" class="data row3 col0" >322.81</td>
+      <td id="T_1c2cd_row3_col1" class="data row3 col1" >208.61</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
-      <td id="T_cbcf6_row4_col0" class="data row4 col0" >5.19</td>
-      <td id="T_cbcf6_row4_col1" class="data row4 col1" >5.98</td>
+      <th id="T_1c2cd_level0_row4" class="row_heading level0 row4" >Gas CCGT (CCS)</th>
+      <td id="T_1c2cd_row4_col0" class="data row4 col0" >5.19</td>
+      <td id="T_1c2cd_row4_col1" class="data row4 col1" >5.98</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
-      <td id="T_cbcf6_row5_col0" class="data row5 col0" >9.19</td>
-      <td id="T_cbcf6_row5_col1" class="data row5 col1" >3.12</td>
+      <th id="T_1c2cd_level0_row5" class="row_heading level0 row5" >Gas Conventional</th>
+      <td id="T_1c2cd_row5_col0" class="data row5 col0" >9.19</td>
+      <td id="T_1c2cd_row5_col1" class="data row5 col1" >3.12</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
-      <td id="T_cbcf6_row6_col0" class="data row6 col0" >7.94</td>
-      <td id="T_cbcf6_row6_col1" class="data row6 col1" >7.25</td>
+      <th id="T_1c2cd_level0_row6" class="row_heading level0 row6" >Gas OCGT</th>
+      <td id="T_1c2cd_row6_col0" class="data row6 col0" >7.94</td>
+      <td id="T_1c2cd_row6_col1" class="data row6 col1" >7.25</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
-      <td id="T_cbcf6_row7_col0" class="data row7 col0" >3.04</td>
-      <td id="T_cbcf6_row7_col1" class="data row7 col1" >8.15</td>
+      <th id="T_1c2cd_level0_row7" class="row_heading level0 row7" >H2 CCGT</th>
+      <td id="T_1c2cd_row7_col0" class="data row7 col0" >3.04</td>
+      <td id="T_1c2cd_row7_col1" class="data row7 col1" >8.15</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
-      <td id="T_cbcf6_row8_col0" class="data row8 col0" >-238.52</td>
-      <td id="T_cbcf6_row8_col1" class="data row8 col1" >-932.35</td>
+      <th id="T_1c2cd_level0_row8" class="row_heading level0 row8" >H2 Electrolysis</th>
+      <td id="T_1c2cd_row8_col0" class="data row8 col0" >-238.52</td>
+      <td id="T_1c2cd_row8_col1" class="data row8 col1" >-932.35</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
-      <td id="T_cbcf6_row9_col0" class="data row9 col0" >14.29</td>
-      <td id="T_cbcf6_row9_col1" class="data row9 col1" >14.40</td>
+      <th id="T_1c2cd_level0_row9" class="row_heading level0 row9" >Hydro Pondage</th>
+      <td id="T_1c2cd_row9_col0" class="data row9 col0" >14.29</td>
+      <td id="T_1c2cd_row9_col1" class="data row9 col1" >14.40</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row10" class="row_heading level0 row10" >Lignite</th>
-      <td id="T_cbcf6_row10_col0" class="data row10 col0" >15.27</td>
-      <td id="T_cbcf6_row10_col1" class="data row10 col1" >14.17</td>
+      <th id="T_1c2cd_level0_row10" class="row_heading level0 row10" >Lignite</th>
+      <td id="T_1c2cd_row10_col0" class="data row10 col0" >15.27</td>
+      <td id="T_1c2cd_row10_col1" class="data row10 col1" >14.17</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row11" class="row_heading level0 row11" >Nuclear</th>
-      <td id="T_cbcf6_row11_col0" class="data row11 col0" >634.13</td>
-      <td id="T_cbcf6_row11_col1" class="data row11 col1" >627.40</td>
+      <th id="T_1c2cd_level0_row11" class="row_heading level0 row11" >Nuclear</th>
+      <td id="T_1c2cd_row11_col0" class="data row11 col0" >634.13</td>
+      <td id="T_1c2cd_row11_col1" class="data row11 col1" >627.40</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
-      <td id="T_cbcf6_row12_col0" class="data row12 col0" >141.82</td>
-      <td id="T_cbcf6_row12_col1" class="data row12 col1" >518.59</td>
+      <th id="T_1c2cd_level0_row12" class="row_heading level0 row12" >Offshore Hub Transmission</th>
+      <td id="T_1c2cd_row12_col0" class="data row12 col0" >141.82</td>
+      <td id="T_1c2cd_row12_col1" class="data row12 col1" >518.59</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
-      <td id="T_cbcf6_row13_col0" class="data row13 col0" >9.74</td>
-      <td id="T_cbcf6_row13_col1" class="data row13 col1" >51.82</td>
+      <th id="T_1c2cd_level0_row13" class="row_heading level0 row13" >Offshore Wind (AC Float.)</th>
+      <td id="T_1c2cd_row13_col0" class="data row13 col0" >9.74</td>
+      <td id="T_1c2cd_row13_col1" class="data row13 col1" >51.82</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
-      <td id="T_cbcf6_row14_col0" class="data row14 col0" >302.74</td>
-      <td id="T_cbcf6_row14_col1" class="data row14 col1" >463.42</td>
+      <th id="T_1c2cd_level0_row14" class="row_heading level0 row14" >Offshore Wind (AC)</th>
+      <td id="T_1c2cd_row14_col0" class="data row14 col0" >302.74</td>
+      <td id="T_1c2cd_row14_col1" class="data row14 col1" >463.42</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
-      <td id="T_cbcf6_row15_col0" class="data row15 col0" >2.86</td>
-      <td id="T_cbcf6_row15_col1" class="data row15 col1" >18.67</td>
+      <th id="T_1c2cd_level0_row15" class="row_heading level0 row15" >Offshore Wind (DC Float.)</th>
+      <td id="T_1c2cd_row15_col0" class="data row15 col0" >2.86</td>
+      <td id="T_1c2cd_row15_col1" class="data row15 col1" >18.67</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
-      <td id="T_cbcf6_row16_col0" class="data row16 col0" >111.56</td>
-      <td id="T_cbcf6_row16_col1" class="data row16 col1" >259.56</td>
+      <th id="T_1c2cd_level0_row16" class="row_heading level0 row16" >Offshore Wind (DC)</th>
+      <td id="T_1c2cd_row16_col0" class="data row16 col0" >111.56</td>
+      <td id="T_1c2cd_row16_col1" class="data row16 col1" >259.56</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
-      <td id="T_cbcf6_row17_col0" class="data row17 col0" >1.62</td>
-      <td id="T_cbcf6_row17_col1" class="data row17 col1" >2.12</td>
+      <th id="T_1c2cd_level0_row17" class="row_heading level0 row17" >Oil (Light)</th>
+      <td id="T_1c2cd_row17_col0" class="data row17 col0" >1.62</td>
+      <td id="T_1c2cd_row17_col1" class="data row17 col1" >2.12</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
-      <td id="T_cbcf6_row18_col0" class="data row18 col0" >932.01</td>
-      <td id="T_cbcf6_row18_col1" class="data row18 col1" >1,339.81</td>
+      <th id="T_1c2cd_level0_row18" class="row_heading level0 row18" >Onshore Wind</th>
+      <td id="T_1c2cd_row18_col0" class="data row18 col0" >932.01</td>
+      <td id="T_1c2cd_row18_col1" class="data row18 col1" >1,339.81</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
-      <td id="T_cbcf6_row19_col0" class="data row19 col0" >90.37</td>
-      <td id="T_cbcf6_row19_col1" class="data row19 col1" >115.26</td>
+      <th id="T_1c2cd_level0_row19" class="row_heading level0 row19" >Other Non-Renewables</th>
+      <td id="T_1c2cd_row19_col0" class="data row19 col0" >90.37</td>
+      <td id="T_1c2cd_row19_col1" class="data row19 col1" >115.26</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
-      <td id="T_cbcf6_row20_col0" class="data row20 col0" >211.10</td>
-      <td id="T_cbcf6_row20_col1" class="data row20 col1" >219.50</td>
+      <th id="T_1c2cd_level0_row20" class="row_heading level0 row20" >Other Renewables</th>
+      <td id="T_1c2cd_row20_col0" class="data row20 col0" >211.10</td>
+      <td id="T_1c2cd_row20_col1" class="data row20 col1" >219.50</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
-      <td id="T_cbcf6_row21_col0" class="data row21 col0" >-8.50</td>
-      <td id="T_cbcf6_row21_col1" class="data row21 col1" >-17.13</td>
+      <th id="T_1c2cd_level0_row21" class="row_heading level0 row21" >Pumped Hydro</th>
+      <td id="T_1c2cd_row21_col0" class="data row21 col0" >-8.50</td>
+      <td id="T_1c2cd_row21_col1" class="data row21 col1" >-17.13</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
-      <td id="T_cbcf6_row22_col0" class="data row22 col0" >320.71</td>
-      <td id="T_cbcf6_row22_col1" class="data row22 col1" >331.90</td>
+      <th id="T_1c2cd_level0_row22" class="row_heading level0 row22" >Reservoir & Dam</th>
+      <td id="T_1c2cd_row22_col0" class="data row22 col0" >320.71</td>
+      <td id="T_1c2cd_row22_col1" class="data row22 col1" >331.90</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row23" class="row_heading level0 row23" >Run of River</th>
-      <td id="T_cbcf6_row23_col0" class="data row23 col0" >200.71</td>
-      <td id="T_cbcf6_row23_col1" class="data row23 col1" >207.65</td>
+      <th id="T_1c2cd_level0_row23" class="row_heading level0 row23" >Run of River</th>
+      <td id="T_1c2cd_row23_col0" class="data row23 col0" >200.71</td>
+      <td id="T_1c2cd_row23_col1" class="data row23 col1" >207.65</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
-      <td id="T_cbcf6_row24_col0" class="data row24 col0" >506.26</td>
-      <td id="T_cbcf6_row24_col1" class="data row24 col1" >806.74</td>
+      <th id="T_1c2cd_level0_row24" class="row_heading level0 row24" >Solar PV (Utility)</th>
+      <td id="T_1c2cd_row24_col0" class="data row24 col0" >506.26</td>
+      <td id="T_1c2cd_row24_col1" class="data row24 col1" >806.74</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
-      <td id="T_cbcf6_row25_col0" class="data row25 col0" >53.94</td>
-      <td id="T_cbcf6_row25_col1" class="data row25 col1" >92.24</td>
+      <th id="T_1c2cd_level0_row25" class="row_heading level0 row25" >Demand Side Response</th>
+      <td id="T_1c2cd_row25_col0" class="data row25 col0" >53.94</td>
+      <td id="T_1c2cd_row25_col1" class="data row25 col1" >92.24</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
-      <td id="T_cbcf6_row26_col0" class="data row26 col0" >3,613.67</td>
-      <td id="T_cbcf6_row26_col1" class="data row26 col1" >4,289.51</td>
+      <th id="T_1c2cd_level0_row26" class="row_heading level0 row26" >Electricity Distribution Grid</th>
+      <td id="T_1c2cd_row26_col0" class="data row26 col0" >3,613.67</td>
+      <td id="T_1c2cd_row26_col1" class="data row26 col1" >4,289.51</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
-      <td id="T_cbcf6_row27_col0" class="data row27 col0" >-3,936.13</td>
-      <td id="T_cbcf6_row27_col1" class="data row27 col1" >-4,855.13</td>
+      <th id="T_1c2cd_level0_row27" class="row_heading level0 row27" >Electricity Exogenous Demand</th>
+      <td id="T_1c2cd_row27_col0" class="data row27 col0" >-3,936.13</td>
+      <td id="T_1c2cd_row27_col1" class="data row27 col1" >-4,855.13</td>
     </tr>
     <tr>
-      <th id="T_cbcf6_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
-      <td id="T_cbcf6_row28_col0" class="data row28 col0" >268.51</td>
-      <td id="T_cbcf6_row28_col1" class="data row28 col1" >473.37</td>
+      <th id="T_1c2cd_level0_row28" class="row_heading level0 row28" >Solar PV (Rooftop)</th>
+      <td id="T_1c2cd_row28_col0" class="data row28 col0" >268.51</td>
+      <td id="T_1c2cd_row28_col1" class="data row28 col1" >473.37</td>
     </tr>
   </tbody>
 </table>
@@ -1818,21 +1816,31 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <h1>Cost-Benefit Analysis<a class="headerlink" href="#cost-benefit-analysis" title="Link to this heading">#</a></h1>
 <section id="workflow-management-using-snakemake-and-pixi">
 <h2>Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#workflow-management-using-snakemake-and-pixi" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Talk about how the Open-TYNDP project utilizes <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> as a workflow management system</p></li>
-<li><p>We also use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to manage environments and to enable ease-of-use of <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></p></li>
-</ul>
+<p>Now that we’ve explored the Scenario Building (SB) results, let’s learn how to run Cost-Benefit Analysis (CBA) on infrastructure projects. The Open-TYNDP CBA workflow involves many interconnected steps - from preparing network data to evaluating specific transmission projects to calculating economic indicators.</p>
+<p>To manage this complexity, Open-TYNDP uses two complementary tools:</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></strong> - A workflow management system that automatically figures out which analysis steps to run and in what order</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pixi</span></code></strong> - A package manager that simplifies environment setup and provides easy-to-use shortcuts for running workflows</p></li>
+</ol>
+<p>Let’s explore how these tools work together to make running complex energy system analyses more manageable.</p>
 <section id="reminder-snakemake">
 <h3>Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code><a class="headerlink" href="#reminder-snakemake" title="Link to this heading">#</a></h3>
 <img src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/792b8474ab5096e5ab8db2822af4fcd9fe659eb6/open-tyndp-workshops/snakemake_logo.png" width="500px" />
 <p>The <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> workflow management system is a tool to create reproducible and scalable data analyses.
 Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid, and cloud environments, without the need to modify the workflow definition.</p>
 <p>Snakemake follows the <a class="reference external" href="https://www.gnu.org/software/make">GNU Make</a> paradigm: workflows are defined in terms of so-called <code class="docutils literal notranslate"><span class="pre">rules</span></code> that specify how to create a set of output files from a set of input files. Dependencies between the rules are determined automatically, creating a DAG (directed acyclic graph) of jobs that can be automatically parallelized.</p>
+<p><strong>Why does Open-TYNDP use Snakemake?</strong></p>
+<p>Running the full TYNDP analysis involves many steps that depend on each other.</p>
+<p>Snakemake can automatically:</p>
+<ul class="simple">
+<li><p>Determine which steps need to run based on what files already exist</p></li>
+<li><p>Figure out the correct order to run them</p></li>
+<li><p>Skip steps that don’t need to be re-run</p></li>
+<li><p>Can run independent steps in parallel to save time</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Documentation for this package is available at <a class="reference external" href="https://snakemake.readthedocs.io/">https://snakemake.readthedocs.io/</a>. You can also check out a <a class="reference external" href="https://slides.com/johanneskoester/snakemake-tutorial">slide deck Snakemake Tutorial</a> by Johannes Köster (2024).</p>
-<p>Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J., 2021. Sustainable data analysis with Snakemake. F1000Res 10, 33.</p>
-<p>Add note to refer to previous workshop</p>
+<p>Snakemake documentation: <a class="reference external" href="https://snakemake.readthedocs.io/">https://snakemake.readthedocs.io/</a></p>
 </div>
 <section id="using-snakemake">
 <h4>Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code><a class="headerlink" href="#using-snakemake" title="Link to this heading">#</a></h4>
@@ -1865,8 +1873,8 @@ Workflows are described via a human readable, Python based language. They can be
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-05 14:55:24</span>
-<span class=" -Color -Color-Green">  Workflow ID: a9bd787c-bd9f-40e1-9a03-a6d323dca860</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-06 19:15:33</span>
+<span class=" -Color -Color-Green">  Workflow ID: e69363a0-4e71-4943-a913-52c779303fd9</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -1894,28 +1902,28 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Yellow">total                  6</span>
 
 
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -1923,7 +1931,7 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -1931,11 +1939,11 @@ Workflows are described via a human readable, Python based language. They can be
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Fri Jun  5 14:55:25 2026]</span>
+<span class=" -Color -Color-Green">[Sat Jun  6 19:15:34 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -1966,40 +1974,56 @@ Workflows are described via a human readable, Python based language. They can be
 <h3>Introducing: <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#introducing-pixi" title="Link to this heading">#</a></h3>
 <img src="https://raw.githubusercontent.com/prefix-dev/pixi/9f94b8a24353ca88d21846b72438c6066e8adc74/docs/assets/pixi-logo.svg" width="150px" />
 <p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> is a cross-platform, multi-language package management and workflow tool. It is built on the foundation of the <code class="docutils literal notranslate"><span class="pre">conda</span></code> ecosystem.</p>
+<p><strong>Why does Open-TYNDP use <code class="docutils literal notranslate"><span class="pre">pixi</span></code>?</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> serves two important roles in the Open-TYNDP project:</p>
+<p><strong>1. Environment Management</strong><br />
+<code class="docutils literal notranslate"><span class="pre">pixi</span></code> automatically installs all the required Python packages and their correct versions, similar to <code class="docutils literal notranslate"><span class="pre">conda</span></code> but faster and more reliable. Pixi helps us not have to worry about package conflicts or missing dependencies.</p>
+<p><strong>2. Simplified Commands</strong><br />
+<code class="docutils literal notranslate"><span class="pre">pixi</span></code> also allows us to create shortcuts for long snakemake commands.</p>
+<p>You can see the full Snakemake commands that pixi runs by looking in the <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file in the Open-TYNDP repository. For example, we have defined a shortcut for running the full CBA workflow, called <code class="docutils literal notranslate"><span class="pre">tyndp-cba</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Documentation for this package is available at <a class="reference external" href="https://pixi.prefix.dev/latest/">https://pixi.prefix.dev/latest/</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> documentation: <a class="reference external" href="https://pixi.prefix.dev/latest/">https://pixi.prefix.dev/latest/</a>.</p>
 </div>
 <section id="using-pixi">
 <h4>Using <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#using-pixi" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>we are using <code class="docutils literal notranslate"><span class="pre">pixi</span></code> for package/environment management</p></li>
-<li><p>we are able to wrap snakemake commands into pixi commands</p></li>
-<li><p>for remainder of notebook, we will use pixi</p></li>
-</ul>
-<p>Give examples of how we wrapped specific snakemake commands into pixi commands, to allow us to run shorter commands</p>
+<p><strong>Without pixi (raw Snakemake), you would run this command to run the full CBA workflow:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-call<span class="w"> </span>cba<span class="w"> </span>--configfile<span class="w"> </span>config/config.tyndp.yaml
+</pre></div>
+</div>
+<p><strong>Using <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, you just need to run:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba
+</pre></div>
+</div>
+<p>For the remainder of this notebook, we will use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> commands.</p>
+</section>
 </section>
 </section>
 <section id="coupled-vs-decoupled-sb-cba-workflow">
-<h3>Coupled vs decoupled SB-CBA workflow<a class="headerlink" href="#coupled-vs-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
+<h2>Coupled vs decoupled SB-CBA workflow<a class="headerlink" href="#coupled-vs-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
 <center>
 <p><img alt="" src="_images/cba_multi_proj.png" />
 <img alt="" src="_images/cba_from_presolved.png" /></p>
-</center><p>Note:</p>
+</center><p>The two diagrams above illustrate the two different ways to run the CBA workflow:</p>
+<p><strong>Coupled Workflow (left):</strong></p>
 <ul class="simple">
-<li><p>Connection between SB solve and CBA</p></li>
-<li><p>Mention that there are many many rules before solve_sector_network_myopic - we just chose to highlight the handoff between SB and CBA here</p></li>
-<li><p>Number of projects - only 2 shown here but for each project, the DAG expands and blows up</p></li>
+<li><p>Starts from scratch with the Scenario Building optimization</p></li>
+<li><p>First solves the Scenario Building network (the <code class="docutils literal notranslate"><span class="pre">solve_sector_network_myopic</span></code> step)</p></li>
+<li><p>Then continues on to perform the Cost-Benefit Analysis</p></li>
+<li><p>Each CBA project goes through: preparing project data -&gt; prepare the reference networks and project (TOOT/PINT) networks -&gt; solve the networks -&gt; calculating indicators</p></li>
 </ul>
-<p>Note:</p>
+<p><strong>Note:</strong> Many rules run before the solve step (not shown here for clarity) - the full workflow has 100+ steps!</p>
+<p><strong>Note:</strong> For each additional project you evaluate, the workflow adds more parallel branches. The diagram shows 2 projects just for illustrative purposes.</p>
+<p><strong>Decoupled Workflow (right):</strong></p>
 <ul class="simple">
-<li><p>With this there are no rules before the retrieve rule - we start from this point</p></li>
-<li><p>But all else is the same</p></li>
+<li><p>Starts from pre-solved SB networks that we download from our releases</p></li>
+<li><p>Skips all the Scenario Building steps – begins directly at the <code class="docutils literal notranslate"><span class="pre">retrieve</span></code> stage</p></li>
+<li><p>The rest of the workflow is identical to the coupled approach</p></li>
+<li><p>Much faster because we can skip the Scenario Building steps (including the optimization)</p></li>
 </ul>
 </section>
-</section>
-<section id="exploring-open-tyndp-cba">
-<h2>Exploring Open-TYNDP CBA<a class="headerlink" href="#exploring-open-tyndp-cba" title="Link to this heading">#</a></h2>
+<section id="cloning-and-installing-open-tyndp">
+<h2>Cloning and installing Open-TYNDP<a class="headerlink" href="#cloning-and-installing-open-tyndp" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
@@ -2008,8 +2032,6 @@ Workflows are described via a human readable, Python based language. They can be
 </div>
 </div>
 </div>
-<section id="cloning-the-open-tyndp-project">
-<h3>Cloning the Open-TYNDP project<a class="headerlink" href="#cloning-the-open-tyndp-project" title="Link to this heading">#</a></h3>
 <p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2042,529 +2064,536 @@ Workflows are described via a human readable, Python based language. They can be
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;open-tyndp&#39;...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 42722, done.
-remote: Counting objects:   0% (1/578)
-remote: Counting objects:   1% (6/578)
-remote: Counting objects:   2% (12/578)
-remote: Counting objects:   3% (18/578)
-remote: Counting objects:   4% (24/578)
-remote: Counting objects:   5% (29/578)
-remote: Counting objects:   6% (35/578)
-remote: Counting objects:   7% (41/578)
-remote: Counting objects:   8% (47/578)
-remote: Counting objects:   9% (53/578)
-remote: Counting objects:  10% (58/578)
-remote: Counting objects:  11% (64/578)
-remote: Counting objects:  12% (70/578)
-remote: Counting objects:  13% (76/578)
-remote: Counting objects:  14% (81/578)
-remote: Counting objects:  15% (87/578)
-remote: Counting objects:  16% (93/578)
-remote: Counting objects:  17% (99/578)
-remote: Counting objects:  18% (105/578)
-remote: Counting objects:  19% (110/578)
-remote: Counting objects:  20% (116/578)
-remote: Counting objects:  21% (122/578)
-remote: Counting objects:  22% (128/578)
-remote: Counting objects:  23% (133/578)
-remote: Counting objects:  24% (139/578)
-remote: Counting objects:  25% (145/578)
-remote: Counting objects:  26% (151/578)
-remote: Counting objects:  27% (157/578)
-remote: Counting objects:  28% (162/578)
-remote: Counting objects:  29% (168/578)
-remote: Counting objects:  30% (174/578)
-remote: Counting objects:  31% (180/578)
-remote: Counting objects:  32% (185/578)
-remote: Counting objects:  33% (191/578)
-remote: Counting objects:  34% (197/578)
-remote: Counting objects:  35% (203/578)
-remote: Counting objects:  36% (209/578)
-remote: Counting objects:  37% (214/578)
-remote: Counting objects:  38% (220/578)
-remote: Counting objects:  39% (226/578)
-remote: Counting objects:  40% (232/578)
-remote: Counting objects:  41% (237/578)
-remote: Counting objects:  42% (243/578)
-remote: Counting objects:  43% (249/578)
-remote: Counting objects:  44% (255/578)
-remote: Counting objects:  45% (261/578)
-remote: Counting objects:  46% (266/578)
-remote: Counting objects:  47% (272/578)
-remote: Counting objects:  48% (278/578)
-remote: Counting objects:  49% (284/578)
-remote: Counting objects:  50% (289/578)
-remote: Counting objects:  51% (295/578)
-remote: Counting objects:  52% (301/578)
-remote: Counting objects:  53% (307/578)
-remote: Counting objects:  54% (313/578)
-remote: Counting objects:  55% (318/578)
-remote: Counting objects:  56% (324/578)
-remote: Counting objects:  57% (330/578)
-remote: Counting objects:  58% (336/578)
-remote: Counting objects:  59% (342/578)
-remote: Counting objects:  60% (347/578)
-remote: Counting objects:  61% (353/578)
-remote: Counting objects:  62% (359/578)
-remote: Counting objects:  63% (365/578)
-remote: Counting objects:  64% (370/578)
-remote: Counting objects:  65% (376/578)
-remote: Counting objects:  66% (382/578)
-remote: Counting objects:  67% (388/578)
-remote: Counting objects:  68% (394/578)
-remote: Counting objects:  69% (399/578)
-remote: Counting objects:  70% (405/578)
-remote: Counting objects:  71% (411/578)
-remote: Counting objects:  72% (417/578)
-remote: Counting objects:  73% (422/578)
-remote: Counting objects:  74% (428/578)
-remote: Counting objects:  75% (434/578)
-remote: Counting objects:  76% (440/578)
-remote: Counting objects:  77% (446/578)
-remote: Counting objects:  78% (451/578)
-remote: Counting objects:  79% (457/578)
-remote: Counting objects:  80% (463/578)
-remote: Counting objects:  81% (469/578)
-remote: Counting objects:  82% (474/578)
-remote: Counting objects:  83% (480/578)
-remote: Counting objects:  84% (486/578)
-remote: Counting objects:  85% (492/578)
-remote: Counting objects:  86% (498/578)
-remote: Counting objects:  87% (503/578)
-remote: Counting objects:  88% (509/578)
-remote: Counting objects:  89% (515/578)
-remote: Counting objects:  90% (521/578)
-remote: Counting objects:  91% (526/578)
-remote: Counting objects:  92% (532/578)
-remote: Counting objects:  93% (538/578)
-remote: Counting objects:  94% (544/578)
-remote: Counting objects:  95% (550/578)
-remote: Counting objects:  96% (555/578)
-remote: Counting objects:  97% (561/578)
-remote: Counting objects:  98% (567/578)
-remote: Counting objects:  99% (573/578)
-remote: Counting objects: 100% (578/578)
-remote: Counting objects: 100% (578/578), done.
-remote: Compressing objects:   0% (1/238)
-remote: Compressing objects:   1% (3/238)
-remote: Compressing objects:   2% (5/238)
-remote: Compressing objects:   3% (8/238)
-remote: Compressing objects:   4% (10/238)
-remote: Compressing objects:   5% (12/238)
-remote: Compressing objects:   6% (15/238)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 42703, done.
+remote: Counting objects:   0% (1/553)
+remote: Counting objects:   1% (6/553)
+remote: Counting objects:   2% (12/553)
+remote: Counting objects:   3% (17/553)
+remote: Counting objects:   4% (23/553)
+remote: Counting objects:   5% (28/553)
+remote: Counting objects:   6% (34/553)
+remote: Counting objects:   7% (39/553)
+remote: Counting objects:   8% (45/553)
+remote: Counting objects:   9% (50/553)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   7% (17/238)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Counting objects:  10% (56/553)
+remote: Counting objects:  11% (61/553)
+remote: Counting objects:  12% (67/553)
+remote: Counting objects:  13% (72/553)
+remote: Counting objects:  14% (78/553)
+remote: Counting objects:  15% (83/553)
+remote: Counting objects:  16% (89/553)
+remote: Counting objects:  17% (95/553)
+remote: Counting objects:  18% (100/553)
+remote: Counting objects:  19% (106/553)
+remote: Counting objects:  20% (111/553)
+remote: Counting objects:  21% (117/553)
+remote: Counting objects:  22% (122/553)
+remote: Counting objects:  23% (128/553)
+remote: Counting objects:  24% (133/553)
+remote: Counting objects:  25% (139/553)
+remote: Counting objects:  26% (144/553)
+remote: Counting objects:  27% (150/553)
+remote: Counting objects:  28% (155/553)
+remote: Counting objects:  29% (161/553)
+remote: Counting objects:  30% (166/553)
+remote: Counting objects:  31% (172/553)
+remote: Counting objects:  32% (177/553)
+remote: Counting objects:  33% (183/553)
+remote: Counting objects:  34% (189/553)
+remote: Counting objects:  35% (194/553)
+remote: Counting objects:  36% (200/553)
+remote: Counting objects:  37% (205/553)
+remote: Counting objects:  38% (211/553)
+remote: Counting objects:  39% (216/553)
+remote: Counting objects:  40% (222/553)
+remote: Counting objects:  41% (227/553)
+remote: Counting objects:  42% (233/553)
+remote: Counting objects:  43% (238/553)
+remote: Counting objects:  44% (244/553)
+remote: Counting objects:  45% (249/553)
+remote: Counting objects:  46% (255/553)
+remote: Counting objects:  47% (260/553)
+remote: Counting objects:  48% (266/553)
+remote: Counting objects:  49% (271/553)
+remote: Counting objects:  50% (277/553)
+remote: Counting objects:  51% (283/553)
+remote: Counting objects:  52% (288/553)
+remote: Counting objects:  53% (294/553)
+remote: Counting objects:  54% (299/553)
+remote: Counting objects:  55% (305/553)
+remote: Counting objects:  56% (310/553)
+remote: Counting objects:  57% (316/553)
+remote: Counting objects:  58% (321/553)
+remote: Counting objects:  59% (327/553)
+remote: Counting objects:  60% (332/553)
+remote: Counting objects:  61% (338/553)
+remote: Counting objects:  62% (343/553)
+remote: Counting objects:  63% (349/553)
+remote: Counting objects:  64% (354/553)
+remote: Counting objects:  65% (360/553)
+remote: Counting objects:  66% (365/553)
+remote: Counting objects:  67% (371/553)
+remote: Counting objects:  68% (377/553)
+remote: Counting objects:  69% (382/553)
+remote: Counting objects:  70% (388/553)
+remote: Counting objects:  71% (393/553)
+remote: Counting objects:  72% (399/553)
+remote: Counting objects:  73% (404/553)
+remote: Counting objects:  74% (410/553)
+remote: Counting objects:  75% (415/553)
+remote: Counting objects:  76% (421/553)
+remote: Counting objects:  77% (426/553)
+remote: Counting objects:  78% (432/553)
+remote: Counting objects:  79% (437/553)
+remote: Counting objects:  80% (443/553)
+remote: Counting objects:  81% (448/553)
+remote: Counting objects:  82% (454/553)
+remote: Counting objects:  83% (459/553)
+remote: Counting objects:  84% (465/553)
+remote: Counting objects:  85% (471/553)
+remote: Counting objects:  86% (476/553)
+remote: Counting objects:  87% (482/553)
+remote: Counting objects:  88% (487/553)
+remote: Counting objects:  89% (493/553)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   8% (20/238)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Counting objects:  90% (498/553)
+remote: Counting objects:  91% (504/553)
+remote: Counting objects:  92% (509/553)
+remote: Counting objects:  93% (515/553)
+remote: Counting objects:  94% (520/553)
+remote: Counting objects:  95% (526/553)
+remote: Counting objects:  96% (531/553)
+remote: Counting objects:  97% (537/553)
+remote: Counting objects:  98% (542/553)
+remote: Counting objects:  99% (548/553)
+remote: Counting objects: 100% (553/553)
+remote: Counting objects: 100% (553/553), done.
+remote: Compressing objects:   0% (1/228)
+remote: Compressing objects:   1% (3/228)
+remote: Compressing objects:   2% (5/228)
+remote: Compressing objects:   3% (7/228)
+remote: Compressing objects:   4% (10/228)
+remote: Compressing objects:   5% (12/228)
+remote: Compressing objects:   6% (14/228)
+remote: Compressing objects:   7% (16/228)
+remote: Compressing objects:   8% (19/228)
+remote: Compressing objects:   9% (21/228)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   9% (22/238)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (23/228)
+remote: Compressing objects:  11% (26/228)
+remote: Compressing objects:  12% (28/228)
+remote: Compressing objects:  13% (30/228)
+remote: Compressing objects:  14% (32/228)
+remote: Compressing objects:  15% (35/228)
+remote: Compressing objects:  16% (37/228)
+remote: Compressing objects:  17% (39/228)
+remote: Compressing objects:  18% (42/228)
+remote: Compressing objects:  19% (44/228)
+remote: Compressing objects:  20% (46/228)
+remote: Compressing objects:  21% (48/228)
+remote: Compressing objects:  22% (51/228)
+remote: Compressing objects:  23% (53/228)
+remote: Compressing objects:  24% (55/228)
+remote: Compressing objects:  25% (57/228)
+remote: Compressing objects:  26% (60/228)
+remote: Compressing objects:  27% (62/228)
+remote: Compressing objects:  28% (64/228)
+remote: Compressing objects:  29% (67/228)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  10% (24/238)
-remote: Compressing objects:  11% (27/238)
-remote: Compressing objects:  12% (29/238)
-remote: Compressing objects:  13% (31/238)
-remote: Compressing objects:  14% (34/238)
-remote: Compressing objects:  15% (36/238)
-remote: Compressing objects:  16% (39/238)
-remote: Compressing objects:  17% (41/238)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  30% (69/228)
+remote: Compressing objects:  31% (71/228)
+remote: Compressing objects:  32% (73/228)
+remote: Compressing objects:  33% (76/228)
+remote: Compressing objects:  34% (78/228)
+remote: Compressing objects:  35% (80/228)
+remote: Compressing objects:  36% (83/228)
+remote: Compressing objects:  37% (85/228)
+remote: Compressing objects:  38% (87/228)
+remote: Compressing objects:  39% (89/228)
+remote: Compressing objects:  40% (92/228)
+remote: Compressing objects:  41% (94/228)
+remote: Compressing objects:  42% (96/228)
+remote: Compressing objects:  43% (99/228)
+remote: Compressing objects:  44% (101/228)
+remote: Compressing objects:  45% (103/228)
+remote: Compressing objects:  46% (105/228)
+remote: Compressing objects:  47% (108/228)
+remote: Compressing objects:  48% (110/228)
+remote: Compressing objects:  49% (112/228)
+remote: Compressing objects:  50% (114/228)
+remote: Compressing objects:  51% (117/228)
+remote: Compressing objects:  52% (119/228)
+remote: Compressing objects:  53% (121/228)
+remote: Compressing objects:  54% (124/228)
+remote: Compressing objects:  55% (126/228)
+remote: Compressing objects:  56% (128/228)
+remote: Compressing objects:  57% (130/228)
+remote: Compressing objects:  58% (133/228)
+remote: Compressing objects:  59% (135/228)
+remote: Compressing objects:  60% (137/228)
+remote: Compressing objects:  61% (140/228)
+remote: Compressing objects:  62% (142/228)
+remote: Compressing objects:  63% (144/228)
+remote: Compressing objects:  64% (146/228)
+remote: Compressing objects:  65% (149/228)
+remote: Compressing objects:  66% (151/228)
+remote: Compressing objects:  67% (153/228)
+remote: Compressing objects:  68% (156/228)
+remote: Compressing objects:  69% (158/228)
+remote: Compressing objects:  70% (160/228)
+remote: Compressing objects:  71% (162/228)
+remote: Compressing objects:  72% (165/228)
+remote: Compressing objects:  73% (167/228)
+remote: Compressing objects:  74% (169/228)
+remote: Compressing objects:  75% (171/228)
+remote: Compressing objects:  76% (174/228)
+remote: Compressing objects:  77% (176/228)
+remote: Compressing objects:  78% (178/228)
+remote: Compressing objects:  79% (181/228)
+remote: Compressing objects:  80% (183/228)
+remote: Compressing objects:  81% (185/228)
+remote: Compressing objects:  82% (187/228)
+remote: Compressing objects:  83% (190/228)
+remote: Compressing objects:  84% (192/228)
+remote: Compressing objects:  85% (194/228)
+remote: Compressing objects:  86% (197/228)
+remote: Compressing objects:  87% (199/228)
+remote: Compressing objects:  88% (201/228)
+remote: Compressing objects:  89% (203/228)
+remote: Compressing objects:  90% (206/228)
+remote: Compressing objects:  91% (208/228)
+remote: Compressing objects:  92% (210/228)
+remote: Compressing objects:  93% (213/228)
+remote: Compressing objects:  94% (215/228)
+remote: Compressing objects:  95% (217/228)
+remote: Compressing objects:  96% (219/228)
+remote: Compressing objects:  97% (222/228)
+remote: Compressing objects:  98% (224/228)
+remote: Compressing objects:  99% (226/228)
+remote: Compressing objects: 100% (228/228)
+remote: Compressing objects: 100% (228/228), done.
+Receiving objects:   0% (1/42703)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  18% (43/238)
-remote: Compressing objects:  19% (46/238)
-remote: Compressing objects:  20% (48/238)
-remote: Compressing objects:  21% (50/238)
-remote: Compressing objects:  22% (53/238)
-remote: Compressing objects:  23% (55/238)
-remote: Compressing objects:  24% (58/238)
-remote: Compressing objects:  25% (60/238)
-remote: Compressing objects:  26% (62/238)
-remote: Compressing objects:  27% (65/238)
-remote: Compressing objects:  28% (67/238)
-remote: Compressing objects:  29% (70/238)
-remote: Compressing objects:  30% (72/238)
-remote: Compressing objects:  31% (74/238)
-remote: Compressing objects:  32% (77/238)
-remote: Compressing objects:  33% (79/238)
-remote: Compressing objects:  34% (81/238)
-remote: Compressing objects:  35% (84/238)
-remote: Compressing objects:  36% (86/238)
-remote: Compressing objects:  37% (89/238)
-remote: Compressing objects:  38% (91/238)
-remote: Compressing objects:  39% (93/238)
-remote: Compressing objects:  40% (96/238)
-remote: Compressing objects:  41% (98/238)
-remote: Compressing objects:  42% (100/238)
-remote: Compressing objects:  43% (103/238)
-remote: Compressing objects:  44% (105/238)
-remote: Compressing objects:  45% (108/238)
-remote: Compressing objects:  46% (110/238)
-remote: Compressing objects:  47% (112/238)
-remote: Compressing objects:  48% (115/238)
-remote: Compressing objects:  49% (117/238)
-remote: Compressing objects:  50% (119/238)
-remote: Compressing objects:  51% (122/238)
-remote: Compressing objects:  52% (124/238)
-remote: Compressing objects:  53% (127/238)
-remote: Compressing objects:  54% (129/238)
-remote: Compressing objects:  55% (131/238)
-remote: Compressing objects:  56% (134/238)
-remote: Compressing objects:  57% (136/238)
-remote: Compressing objects:  58% (139/238)
-remote: Compressing objects:  59% (141/238)
-remote: Compressing objects:  60% (143/238)
-remote: Compressing objects:  61% (146/238)
-remote: Compressing objects:  62% (148/238)
-remote: Compressing objects:  63% (150/238)
-remote: Compressing objects:  64% (153/238)
-remote: Compressing objects:  65% (155/238)
-remote: Compressing objects:  66% (158/238)
-remote: Compressing objects:  67% (160/238)
-remote: Compressing objects:  68% (162/238)
-remote: Compressing objects:  69% (165/238)
-remote: Compressing objects:  70% (167/238)
-remote: Compressing objects:  71% (169/238)
-remote: Compressing objects:  72% (172/238)
-remote: Compressing objects:  73% (174/238)
-remote: Compressing objects:  74% (177/238)
-remote: Compressing objects:  75% (179/238)
-remote: Compressing objects:  76% (181/238)
-remote: Compressing objects:  77% (184/238)
-remote: Compressing objects:  78% (186/238)
-remote: Compressing objects:  79% (189/238)
-remote: Compressing objects:  80% (191/238)
-remote: Compressing objects:  81% (193/238)
-remote: Compressing objects:  82% (196/238)
-remote: Compressing objects:  83% (198/238)
-remote: Compressing objects:  84% (200/238)
-remote: Compressing objects:  85% (203/238)
-remote: Compressing objects:  86% (205/238)
-remote: Compressing objects:  87% (208/238)
-remote: Compressing objects:  88% (210/238)
-remote: Compressing objects:  89% (212/238)
-remote: Compressing objects:  90% (215/238)
-remote: Compressing objects:  91% (217/238)
-remote: Compressing objects:  92% (219/238)
-remote: Compressing objects:  93% (222/238)
-remote: Compressing objects:  94% (224/238)
-remote: Compressing objects:  95% (227/238)
-remote: Compressing objects:  96% (229/238)
-remote: Compressing objects:  97% (231/238)
-remote: Compressing objects:  98% (234/238)
-remote: Compressing objects:  99% (236/238)
-remote: Compressing objects: 100% (238/238)
-remote: Compressing objects: 100% (238/238), done.
-Receiving objects:   0% (1/42722)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (428/42703)
+Receiving objects:   2% (855/42703)
+Receiving objects:   3% (1282/42703)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (428/42722)
-Receiving objects:   2% (855/42722)
-Receiving objects:   3% (1282/42722)
-Receiving objects:   4% (1709/42722)
-Receiving objects:   5% (2137/42722)
-Receiving objects:   6% (2564/42722)
-Receiving objects:   7% (2991/42722)
-Receiving objects:   8% (3418/42722)
-Receiving objects:   9% (3845/42722)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   4% (1709/42703)
+Receiving objects:   5% (2136/42703)
+Receiving objects:   6% (2563/42703)
+Receiving objects:   7% (2990/42703)
+Receiving objects:   8% (3417/42703)
+Receiving objects:   9% (3844/42703)
+Receiving objects:  10% (4271/42703)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  10% (4273/42722)
-Receiving objects:  11% (4700/42722)
-Receiving objects:  12% (5127/42722)
-Receiving objects:  13% (5554/42722)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  11% (4698/42703)
+Receiving objects:  12% (5125/42703)
+Receiving objects:  13% (5552/42703)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (5982/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (5979/42703), 16.53 MiB | 33.04 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6409/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6406/42703), 16.53 MiB | 33.04 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6836/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  17% (7263/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  16% (6833/42703), 16.53 MiB | 33.04 MiB/s
+Receiving objects:  17% (7260/42703), 16.53 MiB | 33.04 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7690/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  19% (8118/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  17% (7576/42703), 16.53 MiB | 33.04 MiB/s
+Receiving objects:  18% (7687/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  19% (8114/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  20% (8545/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  21% (8972/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  22% (9399/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  23% (9827/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  24% (10254/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  25% (10681/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  26% (11108/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  27% (11535/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  20% (8541/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  21% (8968/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  22% (9395/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  23% (9822/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  24% (10249/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  25% (10676/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  28% (11963/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  29% (12390/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  30% (12817/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  31% (13244/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  32% (13672/42722), 24.34 MiB | 48.66 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  26% (11103/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  27% (11530/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  28% (11957/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  29% (12384/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  30% (12811/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  31% (13238/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  32% (13665/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14099/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  34% (14526/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  35% (14953/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  36% (15380/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  37% (15808/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  38% (16235/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  38% (16593/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  39% (16662/42722), 24.34 MiB | 48.66 MiB/s
-Receiving objects:  40% (17089/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  41% (17517/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14092/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  34% (14520/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  35% (14947/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  42% (17944/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  43% (18371/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  36% (15374/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  37% (15801/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  38% (16228/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  39% (16655/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  40% (17082/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  41% (17509/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  42% (17936/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  43% (18363/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18798/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  45% (19225/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  46% (19653/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  47% (20080/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  48% (20507/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  49% (20934/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18790/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  45% (19217/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  46% (19644/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  47% (20071/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  48% (20498/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  49% (20925/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21361/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  51% (21789/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21352/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  51% (21779/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22216/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  53% (22643/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  54% (23070/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  55% (23498/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  56% (23925/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22206/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  53% (22633/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  54% (23060/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  55% (23487/42703), 42.26 MiB | 42.25 MiB/s
+Receiving objects:  56% (23914/42703), 42.26 MiB | 42.25 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24352/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  58% (24779/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24341/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  58% (24768/42703), 65.50 MiB | 43.66 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25206/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  60% (25634/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  61% (26061/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25195/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  60% (25622/42703), 65.50 MiB | 43.66 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  62% (26488/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  63% (26915/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  61% (26049/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  62% (26476/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  63% (26903/42703), 65.50 MiB | 43.66 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27343/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  65% (27770/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  66% (28197/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  67% (28624/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  68% (29051/42722), 51.56 MiB | 51.55 MiB/s
-Receiving objects:  69% (29479/42722), 51.56 MiB | 51.55 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  64% (27330/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  65% (27757/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  66% (28184/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  67% (28612/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  68% (29039/42703), 65.50 MiB | 43.66 MiB/s
+Receiving objects:  69% (29466/42703), 65.50 MiB | 43.66 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29818/42722), 102.95 MiB | 51.47 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29743/42703), 89.13 MiB | 44.56 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (29906/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  71% (30333/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  72% (30760/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  73% (31188/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  74% (31615/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  75% (32042/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  76% (32469/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  77% (32896/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  78% (33324/42722), 102.95 MiB | 51.47 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (29893/42703), 89.13 MiB | 44.56 MiB/s
+Receiving objects:  71% (30320/42703), 89.13 MiB | 44.56 MiB/s
+Receiving objects:  72% (30747/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  73% (31174/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  74% (31601/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33751/42722), 102.95 MiB | 51.47 MiB/s
-Receiving objects:  80% (34178/42722), 102.95 MiB | 51.47 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  75% (32028/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  76% (32455/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  77% (32882/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  78% (33309/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  81% (34605/42722), 102.95 MiB | 51.47 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33736/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  82% (35033/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  83% (35460/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  80% (34163/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  81% (34590/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  84% (35887/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  85% (36314/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  86% (36741/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  82% (35017/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  83% (35444/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37169/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  88% (37596/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  89% (38023/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  84% (35871/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  85% (36298/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  90% (38450/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  91% (38878/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  92% (39305/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  93% (39732/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  94% (40159/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  95% (40586/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects:  96% (41014/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  86% (36725/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  87% (37152/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  88% (37579/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  89% (38006/42703), 114.05 MiB | 45.62 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  97% (41441/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  90% (38433/42703), 114.05 MiB | 45.62 MiB/s
+Receiving objects:  90% (38773/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  91% (38860/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  92% (39287/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  93% (39714/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  94% (40141/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  95% (40568/42703), 140.58 MiB | 46.86 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (41868/42722), 129.61 MiB | 51.84 MiB/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  96% (40995/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  97% (41422/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects:  98% (41849/42703), 140.58 MiB | 46.86 MiB/s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42295/42722), 129.61 MiB | 51.84 MiB/s
-remote: Total 42722 (delta 496), reused 356 (delta 340), pack-reused 42144 (from 4)
-Receiving objects: 100% (42722/42722), 129.61 MiB | 51.84 MiB/s
-Receiving objects: 100% (42722/42722), 147.86 MiB | 51.31 MiB/s, done.
-Resolving deltas:   0% (0/33263)
-Resolving deltas:   1% (333/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42276/42703), 140.58 MiB | 46.86 MiB/s
+remote: Total 42703 (delta 481), reused 336 (delta 325), pack-reused 42150 (from 4)
+Receiving objects: 100% (42703/42703), 140.58 MiB | 46.86 MiB/s
+Receiving objects: 100% (42703/42703), 147.79 MiB | 46.64 MiB/s, done.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (666/33263)
-Resolving deltas:   3% (998/33263)
-Resolving deltas:   4% (1331/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   0% (0/33247)
+Resolving deltas:   1% (333/33247)
+Resolving deltas:   2% (665/33247)
+Resolving deltas:   3% (998/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   5% (1664/33263)
-Resolving deltas:   6% (1996/33263)
-Resolving deltas:   7% (2329/33263)
-Resolving deltas:   8% (2662/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   4% (1330/33247)
+Resolving deltas:   5% (1663/33247)
+Resolving deltas:   6% (1995/33247)
+Resolving deltas:   7% (2329/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (2994/33263)
-Resolving deltas:  10% (3327/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   8% (2660/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  11% (3659/33263)
-Resolving deltas:  12% (3992/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (2993/33247)
+Resolving deltas:  10% (3325/33247)
+Resolving deltas:  11% (3658/33247)
+Resolving deltas:  12% (3990/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4325/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4323/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4657/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4655/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (4990/33263)
-Resolving deltas:  16% (5323/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (4988/33247)
+Resolving deltas:  16% (5320/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5655/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5652/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  18% (5988/33263)
-Resolving deltas:  19% (6320/33263)
-Resolving deltas:  20% (6653/33263)
-Resolving deltas:  21% (6986/33263)
-Resolving deltas:  22% (7318/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  18% (5985/33247)
+Resolving deltas:  19% (6317/33247)
+Resolving deltas:  20% (6650/33247)
+Resolving deltas:  21% (6982/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7651/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  22% (7315/33247)
+Resolving deltas:  23% (7647/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (7984/33263)
-Resolving deltas:  25% (8316/33263)
-Resolving deltas:  26% (8649/33263)
-Resolving deltas:  27% (8982/33263)
-Resolving deltas:  28% (9314/33263)
-Resolving deltas:  29% (9647/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (7980/33247)
+Resolving deltas:  25% (8312/33247)
+Resolving deltas:  26% (8645/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  30% (9979/33263)
-Resolving deltas:  31% (10312/33263)
-Resolving deltas:  32% (10645/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  27% (8977/33247)
+Resolving deltas:  28% (9310/33247)
+Resolving deltas:  29% (9642/33247)
+Resolving deltas:  30% (9975/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  33% (10977/33263)
-Resolving deltas:  34% (11310/33263)
-Resolving deltas:  35% (11643/33263)
-Resolving deltas:  36% (11975/33263)
-Resolving deltas:  37% (12308/33263)
-Resolving deltas:  38% (12640/33263)
-Resolving deltas:  39% (12973/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10307/33247)
+Resolving deltas:  32% (10641/33247)
+Resolving deltas:  33% (10972/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13306/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  34% (11304/33247)
+Resolving deltas:  35% (11637/33247)
+Resolving deltas:  36% (11969/33247)
+Resolving deltas:  37% (12302/33247)
+Resolving deltas:  38% (12635/33247)
+Resolving deltas:  39% (12967/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13638/33263)
-Resolving deltas:  42% (13971/33263)
-Resolving deltas:  43% (14304/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13299/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  44% (14636/33263)
-Resolving deltas:  45% (14969/33263)
-Resolving deltas:  46% (15301/33263)
-Resolving deltas:  47% (15634/33263)
-Resolving deltas:  48% (15967/33263)
-Resolving deltas:  48% (16254/33263)
-Resolving deltas:  49% (16299/33263)
-Resolving deltas:  50% (16632/33263)
-Resolving deltas:  51% (16965/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13632/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  52% (17297/33263)
-Resolving deltas:  53% (17630/33263)
-Resolving deltas:  54% (17963/33263)
-Resolving deltas:  55% (18295/33263)
-Resolving deltas:  56% (18628/33263)
-Resolving deltas:  57% (18960/33263)
-Resolving deltas:  58% (19293/33263)
-Resolving deltas:  59% (19626/33263)
-Resolving deltas:  60% (19958/33263)
-Resolving deltas:  61% (20291/33263)
-Resolving deltas:  62% (20624/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (13964/33247)
+Resolving deltas:  42% (14262/33247)
+Resolving deltas:  43% (14297/33247)
+Resolving deltas:  44% (14629/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  63% (20956/33263)
-Resolving deltas:  64% (21289/33263)
-Resolving deltas:  65% (21621/33263)
-Resolving deltas:  66% (21954/33263)
-Resolving deltas:  67% (22287/33263)
-Resolving deltas:  68% (22619/33263)
-Resolving deltas:  69% (22952/33263)
-Resolving deltas:  70% (23285/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  45% (14962/33247)
+Resolving deltas:  46% (15294/33247)
+Resolving deltas:  47% (15627/33247)
+Resolving deltas:  48% (15959/33247)
+Resolving deltas:  49% (16292/33247)
+Resolving deltas:  50% (16624/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  71% (23617/33263)
-Resolving deltas:  72% (23950/33263)
-Resolving deltas:  73% (24282/33263)
-Resolving deltas:  74% (24615/33263)
-Resolving deltas:  75% (24948/33263)
-Resolving deltas:  76% (25280/33263)
-Resolving deltas:  77% (25613/33263)
-Resolving deltas:  78% (25946/33263)
-Resolving deltas:  79% (26278/33263)
-Resolving deltas:  80% (26611/33263)
-Resolving deltas:  81% (26944/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  51% (16956/33247)
+Resolving deltas:  52% (17289/33247)
+Resolving deltas:  53% (17621/33247)
+Resolving deltas:  54% (17954/33247)
+Resolving deltas:  55% (18286/33247)
+Resolving deltas:  56% (18619/33247)
+Resolving deltas:  57% (18951/33247)
+Resolving deltas:  58% (19284/33247)
+Resolving deltas:  59% (19616/33247)
+Resolving deltas:  60% (19949/33247)
+Resolving deltas:  61% (20281/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  82% (27276/33263)
-Resolving deltas:  83% (27609/33263)
-Resolving deltas:  84% (27942/33263)
-Resolving deltas:  85% (28274/33263)
-Resolving deltas:  86% (28607/33263)
-Resolving deltas:  87% (28939/33263)
-Resolving deltas:  88% (29272/33263)
-Resolving deltas:  89% (29605/33263)
-Resolving deltas:  90% (29938/33263)
-Resolving deltas:  91% (30270/33263)
-Resolving deltas:  92% (30602/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  62% (20614/33247)
+Resolving deltas:  63% (20946/33247)
+Resolving deltas:  64% (21279/33247)
+Resolving deltas:  65% (21612/33247)
+Resolving deltas:  66% (21944/33247)
+Resolving deltas:  67% (22276/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  93% (30935/33263)
-Resolving deltas:  94% (31268/33263)
-Resolving deltas:  95% (31600/33263)
-Resolving deltas:  96% (31933/33263)
-Resolving deltas:  97% (32266/33263)
-Resolving deltas:  98% (32598/33263)
-Resolving deltas:  99% (32931/33263)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  68% (22608/33247)
+Resolving deltas:  69% (22941/33247)
+Resolving deltas:  70% (23273/33247)
+Resolving deltas:  71% (23606/33247)
+Resolving deltas:  72% (23938/33247)
+Resolving deltas:  73% (24271/33247)
+Resolving deltas:  74% (24603/33247)
+Resolving deltas:  75% (24936/33247)
+Resolving deltas:  76% (25268/33247)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33263/33263)
-Resolving deltas: 100% (33263/33263), done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  77% (25601/33247)
+Resolving deltas:  78% (25933/33247)
+Resolving deltas:  79% (26266/33247)
+Resolving deltas:  80% (26598/33247)
+Resolving deltas:  81% (26931/33247)
+Resolving deltas:  82% (27263/33247)
+Resolving deltas:  83% (27596/33247)
+Resolving deltas:  84% (27928/33247)
+Resolving deltas:  85% (28260/33247)
+Resolving deltas:  86% (28593/33247)
+Resolving deltas:  87% (28926/33247)
+Resolving deltas:  88% (29258/33247)
+Resolving deltas:  89% (29590/33247)
+Resolving deltas:  90% (29923/33247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  91% (30255/33247)
+Resolving deltas:  92% (30588/33247)
+Resolving deltas:  93% (30920/33247)
+Resolving deltas:  94% (31253/33247)
+Resolving deltas:  95% (31585/33247)
+Resolving deltas:  96% (31918/33247)
+Resolving deltas:  97% (32250/33247)
+Resolving deltas:  98% (32583/33247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  99% (32915/33247)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33247/33247)
+Resolving deltas: 100% (33247/33247), done.
 </pre></div>
 </div>
 </div>
@@ -2596,7 +2625,21 @@ Switched to a new branch &#39;cba-low-res&#39;
 </div>
 </div>
 </div>
-<p>(add instruction to install pixi - copy from workshop 3)</p>
+<p><strong>Installing pixi</strong></p>
+<p>If you don’t have <code class="docutils literal notranslate"><span class="pre">pixi</span></code> installed yet, you can install it using the following command:</p>
+<p><strong>On macOS/Linux:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</pre></div>
+</div>
+<p><strong>On Windows:</strong></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">iwr </span><span class="n">-useb</span> <span class="n">https</span><span class="p">://</span><span class="n">pixi</span><span class="p">.</span><span class="n">sh</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</pre></div>
+</div>
+<p>After installation, restart your terminal or run <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> (Linux) or <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.zshrc</span></code> (macOS) to make the <code class="docutils literal notranslate"><span class="pre">pixi</span></code> command available.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re running this notebook on Google Colab, pixi installation is handled automatically in a cell below.</p>
+</div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2619,17 +2662,39 @@ Switched to a new branch &#39;cba-low-res&#39;
 </div>
 </section>
 <section id="running-a-coupled-sb-cba-workflow">
-<h3>Running a coupled SB-&gt;CBA workflow<a class="headerlink" href="#running-a-coupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
-<p>To run the CBA workflow, the <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> runs the full process: taking a solved SB network -&gt; performing the TOOT/PINT analysis on a project -&gt; calculating the CBA indicators.</p>
-<p>The default Open-TYNDP settings can be found in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> file.</p>
-<p>TODO: add chunks of config file (refer to previous workshop about manual adjustments)</p>
+<h2>Running a coupled SB-&gt;CBA workflow<a class="headerlink" href="#running-a-coupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
+<p>As mentioned earlier, the command <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> executes the complete CBA workflow:</p>
+<ol class="arabic simple">
+<li><p>Takes a solved Scenario Building network (either from scratch or using pre-solved network)</p></li>
+<li><p>Prepares the CBA reference and project networks, for the specified project(s)</p></li>
+<li><p>Evaluates each specified project using TOOT or PINT methodology</p></li>
+<li><p>Calculates indicators (B1-B4)</p></li>
+</ol>
+<p><strong>Configuration Options</strong></p>
+<p>The Open-TYNDP workflow’s settings are housed in <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>.</p>
+<p>Key parameters that affect the entire run (SB and CBA):</p>
 <ul class="simple">
-<li><p>add snippets of default values (runs, horizons, snapshots, projects, etc)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">run.name</span></code></strong>: Which scenario to analyze (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;NT&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;NT-cy2009&quot;</span></code>)</p></li>
 </ul>
-<p>mention:</p>
+<p>Some CBA-specific key parameters are:</p>
 <ul class="simple">
-<li><p>because of notebook environment, we are focusing on command line changes, but in reality it’s easier to modify in config files directly using dedicated IDE</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cba.planning_horizons</span></code></strong>: Planning horizons to assess for the CBA (e.g., <code class="docutils literal notranslate"><span class="pre">[2030,</span> <span class="pre">2040]</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cba.projects</span></code></strong>: Which CBA projects to assess (e.g., <code class="docutils literal notranslate"><span class="pre">[&quot;t4&quot;,</span> <span class="pre">&quot;t16&quot;,</span> <span class="pre">&quot;t28&quot;]</span></code>) (note that at the moment Open-TYNDP can only assess transmission projects and not storage projects)</p></li>
 </ul>
+<p>You can modify these settings in two ways:</p>
+<ol class="arabic simple">
+<li><p><strong>Edit the config file directly</strong></p></li>
+<li><p><strong>Override via command line</strong></p></li>
+</ol>
+<p>For example: <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">'run={&quot;name&quot;:&quot;NT&quot;}'</span> <span class="pre">'cba={&quot;planning_horizons&quot;:[2030]}'</span></code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In practice, editing the YAML configuration files directly in a text editor or IDE is much easier than using command-line overrides. We’re using command-line options in this notebook for demonstration purposes, but for real life, we recommend modifying the config files directly!</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In a previous workshop, we covered how to navigate and modify the Open-TYNDP configuration files. The same principles apply here for the CBA settings.</p>
+</div>
 <p>First, let’s check what running the full could look like by doing a dry-run of <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2659,7 +2724,7 @@ Switched to a new branch &#39;cba-low-res&#39;
 <p>Notice how the <code class="docutils literal notranslate"><span class="pre">count</span></code> of steps changed when we specified a single run, project, and horizon.
 Comparatively, the default settings run the full list of scenarios we have, 5 projects (t4, t16, t28, t33, t35), and two planning horizons (2030 and 2040). So, the full default workflow will run many more steps.</p>
 <section id="checkpoints">
-<h4>Checkpoints<a class="headerlink" href="#checkpoints" title="Link to this heading">#</a></h4>
+<h3>Checkpoints<a class="headerlink" href="#checkpoints" title="Link to this heading">#</a></h3>
 <p>You may notice above that the number of rules is actually quite low.</p>
 <p>There is a <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> in the workflow, called <code class="docutils literal notranslate"><span class="pre">clean_projects</span></code>, that first checks how many projects are being asked to run before building out the full DAG.
 It tells the workflow which CBA projects exist, which project IDs to run, and which method applies (TOOT/PINT).</p>
@@ -2693,41 +2758,25 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 </div>
 </section>
-<section id="task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">
-<h4>Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code><a class="headerlink" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>Change the config settings to match above</p>
-<ul>
-<li><p>Change scenario name in config.tyndp.yaml</p></li>
-<li><p>Change parameters within NT in scenarios.tyndp.yaml</p></li>
-</ul>
-</li>
-<li><p>Come back here</p></li>
-<li><p>Run simplified command line</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Should give the same output as above, without the arguments</span>
-<span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>-n
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
-</div>
+<section id="task-5-change-the-configuration-directly-in-the-config-config-tyndp-yaml">
+<h3>Task 5: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code><a class="headerlink" href="#task-5-change-the-configuration-directly-in-the-config-config-tyndp-yaml" title="Link to this heading">#</a></h3>
 </section>
 </section>
-<section id="running-different-and-multiple-climate-years">
-<h3>Running different and multiple climate years<a class="headerlink" href="#running-different-and-multiple-climate-years" title="Link to this heading">#</a></h3>
-<p>(Add some info here about how different climate scenarios are defined? Navigate into <code class="docutils literal notranslate"><span class="pre">config/scenarios.yaml</span></code>?)</p>
-<p>TODO:</p>
+<section id="modifying-climate-years">
+<h2>Modifying climate years<a class="headerlink" href="#modifying-climate-years" title="Link to this heading">#</a></h2>
+<p><strong>Understanding Climate Years</strong></p>
+<p>Energy system performance varies significantly with weather conditions - wind and solar availability change year to year, as do heating and cooling demands. To account for this variability, Open-TYNDP can evaluate scenarios using different historical climate years.</p>
+<p>Climate year scenarios are defined in <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code>. For example:</p>
 <ul class="simple">
-<li><p>add snippets of yaml here to show as examples</p></li>
-<li><p>can also show live</p></li>
-<li><p>stress that in practice it’s easier to modify in yaml</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT-cy1995</span></code>: NT scenario using 1995 weather data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>: NT scenario using 2008 weather data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT-cy2009</span></code>: NT scenario using 2009 weather data (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT-cyears</span></code>: Runs all 3 NT scenarios: <code class="docutils literal notranslate"><span class="pre">NT-cy1995</span></code>, <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>, and <code class="docutils literal notranslate"><span class="pre">NT-cy2009</span></code></p></li>
+</ul>
+<p>Each climate year changes weather-dependent data, such as:</p>
+<ul class="simple">
+<li><p>Renewable energy generation profiles (wind, solar)</p></li>
+<li><p>Demand</p></li>
 </ul>
 <p>First, we again need to run up to the checkpoint for the different climate years:</p>
 <div class="cell docutils container">
@@ -2769,33 +2818,26 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 </div>
 <p>Note how the total count of steps is much higher (especially for CBA-specific steps such as <code class="docutils literal notranslate"><span class="pre">make_indicators</span></code> and weather-dependent steps such as <code class="docutils literal notranslate"><span class="pre">build_renewable_profiles_pecd</span></code>) when multiple climate years are run.</p>
-<section id="task-x-create-your-own-climate-year-and-run-it">
-<h4>Task X: Create your own climate year and run it<a class="headerlink" href="#task-x-create-your-own-climate-year-and-run-it" title="Link to this heading">#</a></h4>
-<p>Go into <code class="docutils literal notranslate"><span class="pre">scenarios.tyndp.yaml</span></code> to create your own climate year run.</p>
-<p>Hints:</p>
+<section id="task-6-create-your-own-climate-year-and-run-it">
+<h3>Task 6: Create your own climate year and run it<a class="headerlink" href="#task-6-create-your-own-climate-year-and-run-it" title="Link to this heading">#</a></h3>
+<p>Create your own custom climate year scenario by modifying <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code>:</p>
+<p><strong>Instructions:</strong></p>
 <ol class="arabic simple">
-<li><p>Copy an existing climate year run (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>) and modify the details to your liking. Change the name.</p></li>
-<li><p>You would need to first run the new climate year up until the checkpoint.</p></li>
-<li><p>After the checkpoint, you can use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> to run the full workflow for your new climate year.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code> in a text editor</p></li>
+<li><p>Find an existing climate year definition (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>)</p></li>
+<li><p>Copy the entire section and give it a new name (e.g., <code class="docutils literal notranslate"><span class="pre">NT-workshop</span></code> or anything you like)</p></li>
+<li><p>Modify the parameters as desired – you could change other settings, though climate year data itself is a bit limited (see warning below)</p></li>
+<li><p>Save the file</p></li>
+<li><p>First run: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-checkpoint</span> <span class="pre">--config</span> <span class="pre">'run={&quot;name&quot;:[&quot;NT-workshop&quot;]}'</span> <span class="pre">'cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}'</span></code> (replace <code class="docutils literal notranslate"><span class="pre">NT-workshop</span></code> with your own scenario name, if different)</p></li>
+<li><p>Then run: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span> <span class="pre">--config</span> <span class="pre">'run={&quot;name&quot;:[&quot;NT-workshop&quot;]}'</span> <span class="pre">'cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}'</span> <span class="pre">-n</span></code> (replace <code class="docutils literal notranslate"><span class="pre">NT-workshop</span></code> with your own scenario name, if different)</p></li>
 </ol>
-<p>Warning:
-We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at the moment.</p>
-<p>Mention the benefit: if we have more climate years in the year, this is how we would add it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
-</pre></div>
-</div>
-</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The weather data availability is limited. Currently, only climate years 1995, 2008, and 2009 are available in the PECD (Pan-European Climate Database) that Open-TYNDP uses.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-workshop&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -2808,13 +2850,11 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </section>
 </section>
 <section id="running-a-decoupled-sb-cba-workflow">
-<h3>Running a decoupled SB-&gt;CBA Workflow<a class="headerlink" href="#running-a-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h3>
-<p>Based on the DAGs shown in our dry runs, you can see that there are quite a lot of steps and rules that need to be run. A lot of these rules are specific to the SB stage of Open-TYNDP.</p>
-<p>We have the flexibility to bypass running and solving the SB workflow each time, by instead downloading a pre-solved SB network that we have released. By doing this, when running the CBA workflow, we start the process from an already solved SB network, reducing the number of steps significantly.</p>
+<h2>Running a decoupled SB-&gt;CBA workflow<a class="headerlink" href="#running-a-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
 <p>This can be easily done by setting the <code class="docutils literal notranslate"><span class="pre">cba.use_presolved</span></code> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>. By default, this downloads and uses the latest release we have (at the time of this workshop, that is v0.7.1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;frog&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;latest&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;latest&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
 </pre></div>
 </div>
 </div>
@@ -2825,14 +2865,39 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </div>
 </div>
 <p>Note how the number of steps has decreased down from over 100 to just ~37, and we see some new steps not previously seen before, such as <code class="docutils literal notranslate"><span class="pre">retrieve_presolved_sb_networks</span></code>.</p>
-<section id="task-optional-running-and-solving-a-cba-project-with-a-pre-solved-network">
-<h4>Task (optional): Running and solving a CBA project with a pre-solved network<a class="headerlink" href="#task-optional-running-and-solving-a-cba-project-with-a-pre-solved-network" title="Link to this heading">#</a></h4>
+<p>You can also specify a different version to retrieve from - for example, the previous release (0.6.1):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true,&quot;sb_version&quot;:&quot;0.6.1&quot;},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: line 1: pixi: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<div class="{warning}::: docutils">
+<p>At the moment, Open-TYNDP has only run the SB process on the NT scenario, so we can only use pre-solved networks for the NT scenario (meaning, you cannot set <code class="docutils literal notranslate"><span class="pre">use_presolved</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and change the run name to “DE” for example).</p>
+</div>
+<section id="task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">
+<h3>Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)<a class="headerlink" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled" title="Link to this heading">#</a></h3>
+<p><strong>Optional Exercise: Run a Complete CBA</strong></p>
+<p>If you have time and want to see the full workflow in action, you can run a complete CBA evaluation using a pre-solved network:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:&quot;NT&quot;}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;cba_scenario_input&quot;:{&quot;use_presolved&quot;:true},&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+<p><strong>What this does:</strong></p>
 <ul class="simple">
-<li><p>Checkout to workshop branch</p></li>
-<li><p>Mention warning that it takes 15 minutes to solve</p></li>
-<li><p>Let people run it during the break</p></li>
+<li><p>Downloads the pre-solved NT 2030 network</p></li>
+<li><p>Evaluates project t4 (a transmission line between Poland and Lithuania)</p></li>
+<li><p>Calculates all CBA indicators</p></li>
+<li><p>Produces final results in <code class="docutils literal notranslate"><span class="pre">results/tyndp/NT/cba/</span></code></p></li>
 </ul>
-</section>
+<div class="{warning}::: docutils">
+<p><strong>Time requirement:</strong> This could take approximately 15-20 minutes to complete, depending on your computer’s performance. So this would be a good task to start right before going on a coffee break!</p>
+</div>
 </section>
 </section>
 </section>
@@ -2896,19 +2961,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s2040</span> <span class="o">=</span> <span class="n">networks</span><span class="p">[</span><span class="s2">&quot;NT 2040&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell tag_hide-cell docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell content</p>
-<p class="expanded admonition-title">Hide code cell content</p>
-</summary>
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (b) Optional: Try to exclude load shedding from the hydrogen price in 2040.</span>
 <span class="n">voll</span> <span class="o">=</span> <span class="mi">3000</span>  <span class="c1"># EUR/ MWh_H2</span>
 <span class="n">prices</span> <span class="o">=</span> <span class="p">(</span>
@@ -2940,7 +2992,20 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b346be080e3b95de72325ce3f6e939dc3760dfa0bbb5b6fdbb0ce1466a2dffe.png" src="_images/6b346be080e3b95de72325ce3f6e939dc3760dfa0bbb5b6fdbb0ce1466a2dffe.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># (b) Optional: Try to exclude load shedding from the hydrogen price in 2040.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">voll</span> <span class="o">=</span> <span class="mi">3000</span>  <span class="c1"># EUR/ MWh_H2</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">prices</span> <span class="o">=</span> <span class="p">(</span>
+<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="n">s2040</span><span class="o">.</span><span class="n">prices</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="n">bus_carrier</span><span class="o">=</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="n">weighting</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<span class="ne">NameError</span>: name &#39;s2040&#39; is not defined
+</pre></div>
+</div>
 </div>
 </details>
 </div>
@@ -2969,40 +3034,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Wind Generation [TWh]</th>
-    </tr>
-    <tr>
-      <th>carrier</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Offshore Wind (DC OH)</th>
-      <td>10.831581</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </details>
 </div>
 <div class="cell tag_hide-cell docutils container">
@@ -3030,47 +3061,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-</style>
-<table id="T_01c6e">
-  <thead>
-    <tr>
-      <th class="blank" >&nbsp;</th>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_01c6e_level0_col0" class="col_heading level0 col0" >H2 Import (+), H2 Export (-) [TWh]</th>
-    </tr>
-    <tr>
-      <th class="index_name level0" >carrier</th>
-      <th class="index_name level1" >bus</th>
-      <th class="blank col0" >&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_01c6e_level0_row0" class="row_heading level0 row0" rowspan="5">H2 pipeline</th>
-      <th id="T_01c6e_level1_row0" class="row_heading level1 row0" >DE H2</th>
-      <td id="T_01c6e_row0_col0" class="data row0 col0" >142.38</td>
-    </tr>
-    <tr>
-      <th id="T_01c6e_level1_row1" class="row_heading level1 row1" >PL H2</th>
-      <td id="T_01c6e_row1_col0" class="data row1 col0" >89.05</td>
-    </tr>
-    <tr>
-      <th id="T_01c6e_level1_row2" class="row_heading level1 row2" >FR H2</th>
-      <td id="T_01c6e_row2_col0" class="data row2 col0" >54.23</td>
-    </tr>
-    <tr>
-      <th id="T_01c6e_level1_row3" class="row_heading level1 row3" >AT H2</th>
-      <td id="T_01c6e_row3_col0" class="data row3 col0" >36.37</td>
-    </tr>
-    <tr>
-      <th id="T_01c6e_level1_row4" class="row_heading level1 row4" >CZ H2</th>
-      <td id="T_01c6e_row4_col0" class="data row4 col0" >36.30</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
 </details>
 </div>
 <div class="cell tag_hide-cell docutils container">
@@ -3098,14 +3088,46 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.descriptors:Multiple units found for carrier [&#39;AC&#39;, &#39;H2&#39;]: [&#39;MWh_el&#39; &#39;MWh_LHV&#39;]
-</pre></div>
-</div>
-</div>
 </details>
 </div>
 <p>We can observe for night of the 6th of June, that wind production drops along with solar electricity production resulting in no hydrogen production via electrolysis for that time. Instead, German hydrogen demand is met via H2 pipeline imports as well as from Cavern Storages and blue Hydrogen production. Pumped hydro, battery storage and electricity imports are utilized to support electricity production in the same period to meet the remaining exogenous electricity demand.</p>
+</section>
+<section id="task-5-modify-configuration-files-directly">
+<h2>Task 5: Modify Configuration Files Directly<a class="headerlink" href="#task-5-modify-configuration-files-directly" title="Link to this heading">#</a></h2>
+<p>After modifying <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run:</span> <span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">[&quot;NT&quot;]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cba:</span> <span class="pre">planning_horizons</span></code>: <code class="docutils literal notranslate"><span class="pre">[2030]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cba:</span> <span class="pre">projects</span></code>: <code class="docutils literal notranslate"><span class="pre">[t4]</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the dry-run without --config arguments</span>
+<span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-6-create-a-custom-climate-year-scenario">
+<h2>Task 6: Create a Custom Climate Year Scenario<a class="headerlink" href="#task-6-create-a-custom-climate-year-scenario" title="Link to this heading">#</a></h2>
+<p>After creating your custom scenario in <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code> (e.g., named “NT-workshop”):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, run the checkpoint</span>
+<span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-checkpoint<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-workshop&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Then run the dry-run to see the workflow</span>
+<span class="o">!</span><span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-cba<span class="w"> </span>--config<span class="w"> </span><span class="s1">&#39;run={&quot;name&quot;:[&quot;NT-workshop&quot;]}&#39;</span><span class="w"> </span><span class="s1">&#39;cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}&#39;</span><span class="w"> </span>-n
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="notebook-clean-up">
@@ -3122,11 +3144,6 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
     <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rm_dir</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping cleanup (not in CI environment).&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CI environment detected. Cleaning up notebook data by removing &#39;data/results-0.7.1&#39; and &#39;data/results-0.7.1.zip&#39;.
 </pre></div>
 </div>
 </div>
@@ -3231,24 +3248,21 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pixi">Using <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-cba">Exploring Open-TYNDP CBA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-the-open-tyndp-project">Cloning the Open-TYNDP project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task X: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-and-installing-open-tyndp">Cloning and installing Open-TYNDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-coupled-sb-cba-workflow">Running a coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-change-the-configuration-directly-in-the-config-config-tyndp-yaml">Task 5: Change the configuration directly in the <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-different-and-multiple-climate-years">Running different and multiple climate years</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-x-create-your-own-climate-year-and-run-it">Task X: Create your own climate year and run it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-climate-years">Modifying climate years</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-and-run-it">Task 6: Create your own climate year and run it</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA Workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-optional-running-and-solving-a-cba-project-with-a-pre-solved-network">Task (optional): Running and solving a CBA project with a pre-solved network</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-decoupled-sb-cba-workflow">Running a decoupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)</a></li>
 </ul>
 </li>
 </ul>
@@ -3256,6 +3270,8 @@ We used previous set of PECD data. So we can only run 1995, 2008, and 2009 at th
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Task 2: Reproduce benchmarks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-investigate-outputs">Task 3: Investigate outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-modify-configuration-files-directly">Task 5: Modify Configuration Files Directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-a-custom-climate-year-scenario">Task 6: Create a Custom Climate Year Scenario</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-clean-up">Notebook clean up</a></li>
