@@ -819,8 +819,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-08 12:12:12</span>
-<span class=" -Color -Color-Green">  Workflow ID: 24a38759-d55a-4a2a-a576-f8ed0d9b0b32</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-08 15:24:12</span>
+<span class=" -Color -Color-Green">  Workflow ID: f828e72c-b3fe-48b7-a4d9-6ba5385c7b81</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -847,29 +847,30 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Yellow">all                    1</span>
 <span class=" -Color -Color-Yellow">total                  6</span>
 
-
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule build_data:</span>
 <span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
 <span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    jobid: 4</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule prepare_network:</span>
 <span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    jobid: 3</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule solve_network:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    jobid: 2</span>
 <span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.png</span>
@@ -877,7 +878,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=png</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
@@ -885,11 +886,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
 <span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:13 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:13 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.png, data/benchmark.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                count</span>
@@ -1123,21 +1124,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
+<span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
-<span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
 <span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Datafile downloads disabled in config[retrieve] or no internet access.
+Datafile downloads disabled in config[retrieve] or no internet access.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-08 12:12:21</span>
-<span class=" -Color -Color-Green">  Workflow ID: 41a04a7e-2ac6-46c5-9762-5b3553092cc5</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-08 15:24:21</span>
+<span class=" -Color -Color-Green">  Workflow ID: e6dbb3ad-7770-4f2d-a619-ced78ff0a59a</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -1151,9 +1150,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">  Config file(s): [PosixPath(&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp-20251016/config/config.tyndp.yaml&#39;), &#39;config/config.default.yaml&#39;, &#39;config/plotting.default.yaml&#39;, &#39;config/benchmarking.default.yaml&#39;, &#39;config/config.private.yaml&#39;]</span>
 <span class=" -Color -Color-Green">  Config MD5: e1b8c0df6d43bd15b94893013ba0fb54</span>
 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
+<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Nothing to be done (all requested files are present and up to date).</span>
@@ -1251,7 +1248,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/config.default.yaml is extended by additional config specified via the command line.</span>
-<span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Config file config/plotting.default.yaml is extended by additional config specified via the command line.</span>
 <span class=" -Color -Color-Yellow">Config file config/benchmarking.default.yaml is extended by additional config specified via the command line.</span>
 <span class=" -Color -Color-Yellow">Config file config/config.private.yaml is extended by additional config specified via the command line.</span>
 </pre></div>
@@ -1262,8 +1261,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 <span class=" -Color -Color-Green">SNAKEMAKE</span>
 <span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-08 12:12:41</span>
-<span class=" -Color -Color-Green">  Workflow ID: 3b6f7c73-e526-4327-b112-f439afbbf407</span>
+<span class=" -Color -Color-Green">  Date: 2026-06-08 15:24:41</span>
+<span class=" -Color -Color-Green">  Workflow ID: 5de97ae7-dc47-4e7d-992a-3096b3c8c32e</span>
 <span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
 <span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
 <span class=" -Color -Color-Green">  User: runner</span>
@@ -1300,7 +1299,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Yellow">total                         20</span>
 
 
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_offshore_network:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf</span>
@@ -1310,7 +1309,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=H2 pipeline OH</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=4000, mem=4 GB, mem_mib=3815</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf</span>
@@ -1320,7 +1319,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=H2</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf</span>
@@ -1330,7 +1329,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=oil</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf</span>
@@ -1340,7 +1339,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=co2 stored</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule make_summary:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv</span>
@@ -1350,7 +1349,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_offshore_network:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf</span>
@@ -1360,7 +1359,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=DC_OH</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=4000, mem=4 GB, mem_mib=3815</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_power_network:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf</span>
@@ -1371,7 +1370,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    threads: 2</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=10000, mem=10 GB, mem_mib=9537</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule build_statistics:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, data/tyndp_electricity_loss_factors.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv</span>
@@ -1382,7 +1381,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    threads: 4</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=4000, mem=4 GB, mem_mib=3815</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_timeseries:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, matplotlibrc</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/graphics/balance_timeseries/s_all___2040</span>
@@ -1393,7 +1392,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    threads: 4</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=10000, mem=10 GB, mem_mib=9537</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_hydrogen_network:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/country_shapes.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf</span>
@@ -1404,7 +1403,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    threads: 2</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=10000, mem=10 GB, mem_mib=9537</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf</span>
@@ -1414,7 +1413,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=AC</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_heatmap_timeseries:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, matplotlibrc</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040</span>
@@ -1425,7 +1424,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040</span>
 <span class=" -Color -Color-Green">    threads: 4</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=10000, mem=10 GB, mem_mib=9537</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf</span>
@@ -1435,7 +1434,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=gas</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_balance_map:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/networks/base_s_all___2040.nc, resources/tyndp/NT/regions_onshore_base_s_all.geojson</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf</span>
@@ -1445,17 +1444,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Updated input files: results/tyndp/NT/networks/base_s_all___2040.nc</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=, planning_horizons=2040, carrier=methanol</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule make_global_summary:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/individual/nodal_costs_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2030.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2030.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2030.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2030.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2030.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2030.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2030.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2030.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2030.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2030.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2030.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/capacities.csv, results/tyndp/NT/csvs/energy.csv, results/tyndp/NT/csvs/energy_balance.csv, results/tyndp/NT/csvs/capacity_factors.csv, results/tyndp/NT/csvs/metrics.csv, results/tyndp/NT/csvs/curtailment.csv, results/tyndp/NT/csvs/prices.csv, results/tyndp/NT/csvs/weighted_prices.csv, results/tyndp/NT/csvs/market_values.csv, results/tyndp/NT/csvs/nodal_costs.csv, results/tyndp/NT/csvs/nodal_capacities.csv, results/tyndp/NT/csvs/nodal_energy_balance.csv, results/tyndp/NT/csvs/nodal_capacity_factors.csv</span>
 <span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/make_global_summary.log</span>
 <span class=" -Color -Color-Green">    jobid: 238</span>
 <span class=" -Color -Color-Green">    benchmark: results/tyndp/NT/benchmarks/make_global_summary</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/individual/costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/market_values_s_all___2040.csv, results/tyndp/NT/csvs/individual/prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/weighted_prices_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_capacities_s_all___2040.csv, results/tyndp/NT/csvs/individual/energy_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_energy_balance_s_all___2040.csv, results/tyndp/NT/csvs/individual/nodal_costs_s_all___2040.csv, results/tyndp/NT/csvs/individual/curtailment_s_all___2040.csv, results/tyndp/NT/csvs/individual/capacity_factors_s_all___2040.csv, results/tyndp/NT/csvs/individual/metrics_s_all___2040.csv</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule make_benchmark:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/validation/resources/benchmarks_s_all___2030.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv, results/tyndp/NT/validation/resources/benchmarks_tyndp.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/csvs_s_all___all_years, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv</span>
@@ -1466,7 +1465,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=</span>
 <span class=" -Color -Color-Green">    threads: 4</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule make_cumulative_costs:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/costs.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/csvs/cumulative_costs.csv</span>
@@ -1476,32 +1475,32 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/costs.csv</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=4000, mem=4 GB, mem_mib=3815</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_benchmark:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/validation/resources/benchmarks_s_all___2030.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv, results/tyndp/NT/validation/resources/benchmarks_tyndp.csv, results/tyndp/NT/validation/resources/vp_data_tyndp.csv, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/validation/graphics_s_all___all_years, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf</span>
 <span class=" -Color -Color-Green">    log: logs/tyndp/NT/plot_benchmark_s_all___all_years.log</span>
 <span class=" -Color -Color-Green">    jobid: 225</span>
 <span class=" -Color -Color-Green">    benchmark: benchmarks/tyndp/NT/plot_benchmark_s_all___all_years</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv, results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/validation/resources/benchmarks_s_all___2040.csv, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.csv</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT, clusters=all, opts=, sector_opts=</span>
 <span class=" -Color -Color-Green">    threads: 4</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=8000, mem=8 GB, mem_mib=7630</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule plot_summary:</span>
 <span class=" -Color -Color-Green">    input: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/energy.csv, results/tyndp/NT/csvs/energy_balance.csv, data/eurostat/Balances-April2023, data/bundle/eea/UNFCCC_v23.csv</span>
 <span class=" -Color -Color-Green">    output: results/tyndp/NT/graphs/costs.svg, results/tyndp/NT/graphs/energy.svg, results/tyndp/NT/graphs/balances-energy.svg</span>
 <span class=" -Color -Color-Green">    log: results/tyndp/NT/logs/plot_summary.log</span>
 <span class=" -Color -Color-Green">    jobid: 237</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/energy_balance.csv, results/tyndp/NT/csvs/energy.csv, results/tyndp/NT/csvs/costs.csv</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/csvs/costs.csv, results/tyndp/NT/csvs/energy_balance.csv, results/tyndp/NT/csvs/energy.csv</span>
 <span class=" -Color -Color-Green">    wildcards: run=NT</span>
 <span class=" -Color -Color-Green">    threads: 2</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp, mem_mb=10000, mem=10 GB, mem_mib=9537</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 12:12:44 2026]</span>
+<span class=" -Color -Color-Green">[Mon Jun  8 15:24:44 2026]</span>
 <span class=" -Color -Color-Green">rule all:</span>
 <span class=" -Color -Color-Green">    input: resources/tyndp/NT/maps/base_h2_network_all___2030.pdf, resources/tyndp/NT/maps/base_h2_network_all___2040.pdf, resources/tyndp/DE/maps/base_h2_network_all___2030.pdf, resources/tyndp/DE/maps/base_h2_network_all___2040.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2030_DC_OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2030_H2 pipeline OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2040_DC_OH.pdf, resources/tyndp/NT/maps/base_offshore_network_all___2040_H2 pipeline OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2030_DC_OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2030_H2 pipeline OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2040_DC_OH.pdf, resources/tyndp/DE/maps/base_offshore_network_all___2040_H2 pipeline OH.pdf, results/tyndp/NT/maps/base_s_all___2030-offshore_network_DC_OH.pdf, results/tyndp/NT/maps/base_s_all___2030-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/DE/maps/base_s_all___2030-offshore_network_DC_OH.pdf, results/tyndp/DE/maps/base_s_all___2030-offshore_network_H2 pipeline OH.pdf, results/tyndp/DE/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/DE/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/DE/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/NT/graphs/costs.svg, results/tyndp/DE/graphs/costs.svg, resources/tyndp/NT/maps/power-network.pdf, resources/tyndp/DE/maps/power-network.pdf, resources/tyndp/NT/maps/power-network-s-all.pdf, resources/tyndp/DE/maps/power-network-s-all.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2030.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/DE/maps/base_s_all__-costs-all_2030.pdf, results/tyndp/DE/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2030.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/DE/maps/base_s_all__-h2_network_2030.pdf, results/tyndp/DE/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/NT/csvs/cumulative_costs.csv, results/tyndp/DE/csvs/cumulative_costs.csv, results/tyndp/NT/maps/base_s_all___2030-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_H2.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_oil.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2030-balance_map_co2 stored.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_AC.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_H2.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_gas.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_oil.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_methanol.pdf, results/tyndp/DE/maps/base_s_all___2030-balance_map_co2 stored.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/DE/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/NT/graphics/balance_timeseries/s_all___2030, results/tyndp/NT/graphics/balance_timeseries/s_all___2040, results/tyndp/DE/graphics/balance_timeseries/s_all___2030, results/tyndp/DE/graphics/balance_timeseries/s_all___2040, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2030, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040, results/tyndp/DE/graphics/heatmap_timeseries/s_all___2030, results/tyndp/DE/graphics/heatmap_timeseries/s_all___2040</span>
 <span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/NT/graphs/costs.svg, results/tyndp/NT/graphics/balance_timeseries/s_all___2040, results/tyndp/NT/csvs/cumulative_costs.csv, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040</span>
+<span class=" -Color -Color-Green">    reason: Input files updated by another job: results/tyndp/NT/maps/base_s_all___2040-balance_map_AC.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_DC_OH.pdf, results/tyndp/NT/graphics/balance_timeseries/s_all___2040, results/tyndp/NT/maps/base_s_all___2040-balance_map_oil.pdf, results/tyndp/NT/validation/kpis_eu27_s_all___all_years.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_gas.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_H2.pdf, results/tyndp/NT/csvs/cumulative_costs.csv, results/tyndp/NT/graphs/costs.svg, results/tyndp/NT/graphics/heatmap_timeseries/s_all___2040, results/tyndp/NT/maps/base_s_all___2040-balance_map_methanol.pdf, results/tyndp/NT/maps/base_s_all__-h2_network_2040.pdf, results/tyndp/NT/maps/base_s_all__-costs-all_2040.pdf, results/tyndp/NT/maps/base_s_all___2040-balance_map_co2 stored.pdf, results/tyndp/NT/maps/base_s_all___2040-offshore_network_H2 pipeline OH.pdf</span>
 <span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
 <span class=" -Color -Color-Yellow">Job stats:</span>
 <span class=" -Color -Color-Yellow">job                        count</span>
@@ -4353,7 +4352,7 @@ Name: DE00 0 solar-pv-rooftop-2040, dtype: float64
       &quot;getColor&quot;: &quot;@@=rgba&quot;,
       &quot;getPath&quot;: &quot;@@=path&quot;,
       &quot;getWidth&quot;: &quot;@@=width_pdk&quot;,
-      &quot;id&quot;: &quot;a7a47c1b-b570-40aa-bf3e-22b2000adf30&quot;,
+      &quot;id&quot;: &quot;0911a1da-3bf7-4926-be2e-9a4a14b5003c&quot;,
       &quot;parameters&quot;: {
         &quot;depthTest&quot;: false
       },
@@ -6666,7 +6665,7 @@ Name: DE00 0 solar-pv-rooftop-2040, dtype: float64
       ],
       &quot;getFillColor&quot;: &quot;@@=rgba_arrow&quot;,
       &quot;getPolygon&quot;: &quot;@@=arrow&quot;,
-      &quot;id&quot;: &quot;a69f4fb8-da57-4792-b567-57ff97a79f11&quot;,
+      &quot;id&quot;: &quot;9bba8a90-03d9-4746-a649-84a378e477ff&quot;,
       &quot;parameters&quot;: {
         &quot;depthTest&quot;: false
       },
@@ -7096,7 +7095,7 @@ Name: DE00 0 solar-pv-rooftop-2040, dtype: float64
       &quot;getColor&quot;: &quot;@@=rgba&quot;,
       &quot;getPosition&quot;: &quot;@@=[x, y]&quot;,
       &quot;getRadius&quot;: &quot;@@=size_pdk&quot;,
-      &quot;id&quot;: &quot;e7e74b7d-918d-42b6-a31d-bd76a00000ea&quot;,
+      &quot;id&quot;: &quot;a6bef130-a8cc-4452-a153-fd77b144acbc&quot;,
       &quot;parameters&quot;: {
         &quot;depthTest&quot;: false
       },
