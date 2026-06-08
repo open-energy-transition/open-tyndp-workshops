@@ -510,6 +510,10 @@
 <li><p>Learn how to execute CBA analysis coupled to or detached from the Scenario Building workflow</p></li>
 </ul>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This notebook uses pre-downloaded results and runs simplified workflows designed for learning purposes. It is not a substitute for running the full Open-TYNDP workflow. All examples and results are based on Open-TYNDP v0.7.1 — outputs may differ in other versions.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click the rocket button in the top right corner and launch “Colab”. If that doesn’t work, download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
@@ -518,15 +522,17 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
+<span class="c1"># !pip install packaging==25.0 --q</span>
 <span class="c1"># !pip install pypsa==1.2.1 pypsa-explorer pandas matplotlib numpy pdf2image cartopy snakemake</span>
-<span class="c1"># !apt-get install poppler-utils</span>
+<span class="c1"># !apt-get install poppler-utils -qq</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard library imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
@@ -543,6 +549,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa.plot.maps.static</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_legend_lines</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pypsa_explorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
 
+<span class="c1"># Plot settings</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.nice_names&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.drop_zero&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">pypsa</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;params.statistics.round&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -552,6 +559,7 @@
 </div>
 </div>
 </div>
+<p>We use a custom unzip function here to preserve the original file timestamps. This matters for <code class="docutils literal notranslate"><span class="pre">snakemake</span></code>, which uses timestamps to decide which files need to be re-run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -576,7 +584,7 @@
 </div>
 </div>
 </div>
-<p>As in previous workshops, we first need to retrieve some files that we’ll need today.</p>
+<p>We’ll download the latest Open-TYNDP results (v0.7.1) and some helper scripts. The results are pre-computed so you don’t need to run the full optimisation yourself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
@@ -647,6 +655,8 @@ Done
 <h1>Scenario Building<a class="headerlink" href="#scenario-building" title="Link to this heading">#</a></h1>
 <section id="explore-nt-outcomes-using-the-pypsa-statistics-module">
 <h2>Explore NT outcomes using the <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code> module<a class="headerlink" href="#explore-nt-outcomes-using-the-pypsa-statistics-module" title="Link to this heading">#</a></h2>
+<p>When Open-TYNDP runs an optimisation, all input data, installed capacities, demand profiles, network topology, technology assumptions, is loaded into a PyPSA network object <code class="docutils literal notranslate"><span class="pre">n</span></code>. After the optimisation completes, the results are stored in the same network object. This means <code class="docutils literal notranslate"><span class="pre">n</span></code> contains everything: what went in and what came out.
+Since a PyPSA network holds a large amount of detailed information across many components, exploring it directly can be overwhelming. This is where <code class="docutils literal notranslate"><span class="pre">n.statistics</span></code> comes in: a built-in module that gives you fast, easy access to the most important system-level metrics without having to dig into the raw network data yourself.</p>
 <p><code class="docutils literal notranslate"><span class="pre">n.statistics</span></code> provides a consistent, high-level API that handles component iteration, port mapping, and carrier grouping automatically.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -777,7 +787,7 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </div>
 </div>
 </div>
-<p>For convenience, let’s save the statistics accessor in a variable <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<p>To avoid typing <code class="docutils literal notranslate"><span class="pre">networks[&quot;NT</span> <span class="pre">2030&quot;].stats</span></code> every time, let’s save a shortcut:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s2030</span> <span class="o">=</span> <span class="n">networks</span><span class="p">[</span><span class="s2">&quot;NT 2030&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span>
@@ -1117,11 +1127,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_ecc29">
+<table id="T_862d0">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_ecc29_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
+      <th id="T_862d0_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1130,112 +1140,112 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </thead>
   <tbody>
     <tr>
-      <th id="T_ecc29_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
-      <td id="T_ecc29_row0_col0" class="data row0 col0" >506.26</td>
+      <th id="T_862d0_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
+      <td id="T_862d0_row0_col0" class="data row0 col0" >506.26</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
-      <td id="T_ecc29_row1_col0" class="data row1 col0" >268.51</td>
+      <th id="T_862d0_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
+      <td id="T_862d0_row1_col0" class="data row1 col0" >268.51</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row2" class="row_heading level0 row2" >Run of River</th>
-      <td id="T_ecc29_row2_col0" class="data row2 col0" >200.71</td>
+      <th id="T_862d0_level0_row2" class="row_heading level0 row2" >Run of River</th>
+      <td id="T_862d0_row2_col0" class="data row2 col0" >200.71</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
-      <td id="T_ecc29_row3_col0" class="data row3 col0" >320.71</td>
+      <th id="T_862d0_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
+      <td id="T_862d0_row3_col0" class="data row3 col0" >320.71</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
-      <td id="T_ecc29_row4_col0" class="data row4 col0" >-8.50</td>
+      <th id="T_862d0_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
+      <td id="T_862d0_row4_col0" class="data row4 col0" >-8.50</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
-      <td id="T_ecc29_row5_col0" class="data row5 col0" >211.10</td>
+      <th id="T_862d0_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
+      <td id="T_862d0_row5_col0" class="data row5 col0" >211.10</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
-      <td id="T_ecc29_row6_col0" class="data row6 col0" >90.37</td>
+      <th id="T_862d0_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
+      <td id="T_862d0_row6_col0" class="data row6 col0" >90.37</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
-      <td id="T_ecc29_row7_col0" class="data row7 col0" >932.01</td>
+      <th id="T_862d0_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
+      <td id="T_862d0_row7_col0" class="data row7 col0" >932.01</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
-      <td id="T_ecc29_row8_col0" class="data row8 col0" >1.62</td>
+      <th id="T_862d0_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
+      <td id="T_862d0_row8_col0" class="data row8 col0" >1.62</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
-      <td id="T_ecc29_row9_col0" class="data row9 col0" >111.56</td>
+      <th id="T_862d0_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
+      <td id="T_862d0_row9_col0" class="data row9 col0" >111.56</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
-      <td id="T_ecc29_row10_col0" class="data row10 col0" >2.86</td>
+      <th id="T_862d0_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
+      <td id="T_862d0_row10_col0" class="data row10 col0" >2.86</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
-      <td id="T_ecc29_row11_col0" class="data row11 col0" >302.74</td>
+      <th id="T_862d0_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
+      <td id="T_862d0_row11_col0" class="data row11 col0" >302.74</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
-      <td id="T_ecc29_row12_col0" class="data row12 col0" >9.74</td>
+      <th id="T_862d0_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
+      <td id="T_862d0_row12_col0" class="data row12 col0" >9.74</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_ecc29_row13_col0" class="data row13 col0" >141.82</td>
+      <th id="T_862d0_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_862d0_row13_col0" class="data row13 col0" >141.82</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row14" class="row_heading level0 row14" >Nuclear</th>
-      <td id="T_ecc29_row14_col0" class="data row14 col0" >634.13</td>
+      <th id="T_862d0_level0_row14" class="row_heading level0 row14" >Nuclear</th>
+      <td id="T_862d0_row14_col0" class="data row14 col0" >634.13</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row15" class="row_heading level0 row15" >Lignite</th>
-      <td id="T_ecc29_row15_col0" class="data row15 col0" >15.27</td>
+      <th id="T_862d0_level0_row15" class="row_heading level0 row15" >Lignite</th>
+      <td id="T_862d0_row15_col0" class="data row15 col0" >15.27</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
-      <td id="T_ecc29_row16_col0" class="data row16 col0" >14.29</td>
+      <th id="T_862d0_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
+      <td id="T_862d0_row16_col0" class="data row16 col0" >14.29</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
-      <td id="T_ecc29_row17_col0" class="data row17 col0" >-238.52</td>
+      <th id="T_862d0_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
+      <td id="T_862d0_row17_col0" class="data row17 col0" >-238.52</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
-      <td id="T_ecc29_row18_col0" class="data row18 col0" >3.04</td>
+      <th id="T_862d0_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
+      <td id="T_862d0_row18_col0" class="data row18 col0" >3.04</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
-      <td id="T_ecc29_row19_col0" class="data row19 col0" >7.94</td>
+      <th id="T_862d0_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
+      <td id="T_862d0_row19_col0" class="data row19 col0" >7.94</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
-      <td id="T_ecc29_row20_col0" class="data row20 col0" >9.19</td>
+      <th id="T_862d0_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
+      <td id="T_862d0_row20_col0" class="data row20 col0" >9.19</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
-      <td id="T_ecc29_row21_col0" class="data row21 col0" >5.19</td>
+      <th id="T_862d0_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
+      <td id="T_862d0_row21_col0" class="data row21 col0" >5.19</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
-      <td id="T_ecc29_row22_col0" class="data row22 col0" >322.81</td>
+      <th id="T_862d0_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
+      <td id="T_862d0_row22_col0" class="data row22 col0" >322.81</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
-      <td id="T_ecc29_row23_col0" class="data row23 col0" >-3,936.13</td>
+      <th id="T_862d0_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
+      <td id="T_862d0_row23_col0" class="data row23 col0" >-3,936.13</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
-      <td id="T_ecc29_row24_col0" class="data row24 col0" >53.94</td>
+      <th id="T_862d0_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
+      <td id="T_862d0_row24_col0" class="data row24 col0" >53.94</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row25" class="row_heading level0 row25" >Coal</th>
-      <td id="T_ecc29_row25_col0" class="data row25 col0" >21.12</td>
+      <th id="T_862d0_level0_row25" class="row_heading level0 row25" >Coal</th>
+      <td id="T_862d0_row25_col0" class="data row25 col0" >21.12</td>
     </tr>
     <tr>
-      <th id="T_ecc29_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
-      <td id="T_ecc29_row26_col0" class="data row26 col0" >-4.50</td>
+      <th id="T_862d0_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
+      <td id="T_862d0_row26_col0" class="data row26 col0" >-4.50</td>
     </tr>
   </tbody>
 </table>
@@ -1322,7 +1332,7 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </section>
 <section id="compare-results-with-pypsa-networkcollections">
 <h3>Compare results with <code class="docutils literal notranslate"><span class="pre">PyPSA.NetworkCollections</span></code><a class="headerlink" href="#compare-results-with-pypsa-networkcollections" title="Link to this heading">#</a></h3>
-<p>Lastly, one might also want to compare results between runs or planning years. To make this a bit easier, PyPSA v1.0 introduced a new object called <code class="docutils literal notranslate"><span class="pre">NetworkCollections</span></code>.</p>
+<p>So far we have been looking at 2030 and 2040 separately. PyPSA’s <code class="docutils literal notranslate"><span class="pre">NetworkCollection</span></code> lets you query both at once, so you can compare planning years side by side without repeating your code.</p>
 <p>Let’s have a look at how this is used in practice. First we define a network collection (<code class="docutils literal notranslate"><span class="pre">nc</span></code>) with our previously imported result networks for NT 2030 and NT 2040.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1377,12 +1387,12 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_c99ab">
+<table id="T_4f06a">
   <thead>
     <tr>
       <th class="index_name level0" >network</th>
-      <th id="T_c99ab_level0_col0" class="col_heading level0 col0" >NT 2030</th>
-      <th id="T_c99ab_level0_col1" class="col_heading level0 col1" >NT 2040</th>
+      <th id="T_4f06a_level0_col0" class="col_heading level0 col0" >NT 2030</th>
+      <th id="T_4f06a_level0_col1" class="col_heading level0 col1" >NT 2040</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1392,139 +1402,139 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
   </thead>
   <tbody>
     <tr>
-      <th id="T_c99ab_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
-      <td id="T_c99ab_row0_col0" class="data row0 col0" >506.26</td>
-      <td id="T_c99ab_row0_col1" class="data row0 col1" >806.74</td>
+      <th id="T_4f06a_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
+      <td id="T_4f06a_row0_col0" class="data row0 col0" >506.26</td>
+      <td id="T_4f06a_row0_col1" class="data row0 col1" >806.74</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
-      <td id="T_c99ab_row1_col0" class="data row1 col0" >268.51</td>
-      <td id="T_c99ab_row1_col1" class="data row1 col1" >473.37</td>
+      <th id="T_4f06a_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
+      <td id="T_4f06a_row1_col0" class="data row1 col0" >268.51</td>
+      <td id="T_4f06a_row1_col1" class="data row1 col1" >473.37</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row2" class="row_heading level0 row2" >Run of River</th>
-      <td id="T_c99ab_row2_col0" class="data row2 col0" >200.71</td>
-      <td id="T_c99ab_row2_col1" class="data row2 col1" >207.65</td>
+      <th id="T_4f06a_level0_row2" class="row_heading level0 row2" >Run of River</th>
+      <td id="T_4f06a_row2_col0" class="data row2 col0" >200.71</td>
+      <td id="T_4f06a_row2_col1" class="data row2 col1" >207.65</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
-      <td id="T_c99ab_row3_col0" class="data row3 col0" >320.71</td>
-      <td id="T_c99ab_row3_col1" class="data row3 col1" >331.90</td>
+      <th id="T_4f06a_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
+      <td id="T_4f06a_row3_col0" class="data row3 col0" >320.71</td>
+      <td id="T_4f06a_row3_col1" class="data row3 col1" >331.90</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
-      <td id="T_c99ab_row4_col0" class="data row4 col0" >-8.50</td>
-      <td id="T_c99ab_row4_col1" class="data row4 col1" >-17.13</td>
+      <th id="T_4f06a_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
+      <td id="T_4f06a_row4_col0" class="data row4 col0" >-8.50</td>
+      <td id="T_4f06a_row4_col1" class="data row4 col1" >-17.13</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
-      <td id="T_c99ab_row5_col0" class="data row5 col0" >211.10</td>
-      <td id="T_c99ab_row5_col1" class="data row5 col1" >219.50</td>
+      <th id="T_4f06a_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
+      <td id="T_4f06a_row5_col0" class="data row5 col0" >211.10</td>
+      <td id="T_4f06a_row5_col1" class="data row5 col1" >219.50</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
-      <td id="T_c99ab_row6_col0" class="data row6 col0" >90.37</td>
-      <td id="T_c99ab_row6_col1" class="data row6 col1" >115.26</td>
+      <th id="T_4f06a_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
+      <td id="T_4f06a_row6_col0" class="data row6 col0" >90.37</td>
+      <td id="T_4f06a_row6_col1" class="data row6 col1" >115.26</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
-      <td id="T_c99ab_row7_col0" class="data row7 col0" >932.01</td>
-      <td id="T_c99ab_row7_col1" class="data row7 col1" >1,339.81</td>
+      <th id="T_4f06a_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
+      <td id="T_4f06a_row7_col0" class="data row7 col0" >932.01</td>
+      <td id="T_4f06a_row7_col1" class="data row7 col1" >1,339.81</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
-      <td id="T_c99ab_row8_col0" class="data row8 col0" >1.62</td>
-      <td id="T_c99ab_row8_col1" class="data row8 col1" >2.12</td>
+      <th id="T_4f06a_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
+      <td id="T_4f06a_row8_col0" class="data row8 col0" >1.62</td>
+      <td id="T_4f06a_row8_col1" class="data row8 col1" >2.12</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
-      <td id="T_c99ab_row9_col0" class="data row9 col0" >111.56</td>
-      <td id="T_c99ab_row9_col1" class="data row9 col1" >259.56</td>
+      <th id="T_4f06a_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
+      <td id="T_4f06a_row9_col0" class="data row9 col0" >111.56</td>
+      <td id="T_4f06a_row9_col1" class="data row9 col1" >259.56</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
-      <td id="T_c99ab_row10_col0" class="data row10 col0" >2.86</td>
-      <td id="T_c99ab_row10_col1" class="data row10 col1" >18.67</td>
+      <th id="T_4f06a_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
+      <td id="T_4f06a_row10_col0" class="data row10 col0" >2.86</td>
+      <td id="T_4f06a_row10_col1" class="data row10 col1" >18.67</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
-      <td id="T_c99ab_row11_col0" class="data row11 col0" >302.74</td>
-      <td id="T_c99ab_row11_col1" class="data row11 col1" >463.42</td>
+      <th id="T_4f06a_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
+      <td id="T_4f06a_row11_col0" class="data row11 col0" >302.74</td>
+      <td id="T_4f06a_row11_col1" class="data row11 col1" >463.42</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
-      <td id="T_c99ab_row12_col0" class="data row12 col0" >9.74</td>
-      <td id="T_c99ab_row12_col1" class="data row12 col1" >51.82</td>
+      <th id="T_4f06a_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
+      <td id="T_4f06a_row12_col0" class="data row12 col0" >9.74</td>
+      <td id="T_4f06a_row12_col1" class="data row12 col1" >51.82</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_c99ab_row13_col0" class="data row13 col0" >141.82</td>
-      <td id="T_c99ab_row13_col1" class="data row13 col1" >518.59</td>
+      <th id="T_4f06a_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_4f06a_row13_col0" class="data row13 col0" >141.82</td>
+      <td id="T_4f06a_row13_col1" class="data row13 col1" >518.59</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row14" class="row_heading level0 row14" >Nuclear</th>
-      <td id="T_c99ab_row14_col0" class="data row14 col0" >634.13</td>
-      <td id="T_c99ab_row14_col1" class="data row14 col1" >627.40</td>
+      <th id="T_4f06a_level0_row14" class="row_heading level0 row14" >Nuclear</th>
+      <td id="T_4f06a_row14_col0" class="data row14 col0" >634.13</td>
+      <td id="T_4f06a_row14_col1" class="data row14 col1" >627.40</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row15" class="row_heading level0 row15" >Lignite</th>
-      <td id="T_c99ab_row15_col0" class="data row15 col0" >15.27</td>
-      <td id="T_c99ab_row15_col1" class="data row15 col1" >14.17</td>
+      <th id="T_4f06a_level0_row15" class="row_heading level0 row15" >Lignite</th>
+      <td id="T_4f06a_row15_col0" class="data row15 col0" >15.27</td>
+      <td id="T_4f06a_row15_col1" class="data row15 col1" >14.17</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
-      <td id="T_c99ab_row16_col0" class="data row16 col0" >14.29</td>
-      <td id="T_c99ab_row16_col1" class="data row16 col1" >14.40</td>
+      <th id="T_4f06a_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
+      <td id="T_4f06a_row16_col0" class="data row16 col0" >14.29</td>
+      <td id="T_4f06a_row16_col1" class="data row16 col1" >14.40</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
-      <td id="T_c99ab_row17_col0" class="data row17 col0" >-238.52</td>
-      <td id="T_c99ab_row17_col1" class="data row17 col1" >-932.35</td>
+      <th id="T_4f06a_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
+      <td id="T_4f06a_row17_col0" class="data row17 col0" >-238.52</td>
+      <td id="T_4f06a_row17_col1" class="data row17 col1" >-932.35</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
-      <td id="T_c99ab_row18_col0" class="data row18 col0" >3.04</td>
-      <td id="T_c99ab_row18_col1" class="data row18 col1" >8.15</td>
+      <th id="T_4f06a_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
+      <td id="T_4f06a_row18_col0" class="data row18 col0" >3.04</td>
+      <td id="T_4f06a_row18_col1" class="data row18 col1" >8.15</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
-      <td id="T_c99ab_row19_col0" class="data row19 col0" >7.94</td>
-      <td id="T_c99ab_row19_col1" class="data row19 col1" >7.25</td>
+      <th id="T_4f06a_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
+      <td id="T_4f06a_row19_col0" class="data row19 col0" >7.94</td>
+      <td id="T_4f06a_row19_col1" class="data row19 col1" >7.25</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
-      <td id="T_c99ab_row20_col0" class="data row20 col0" >9.19</td>
-      <td id="T_c99ab_row20_col1" class="data row20 col1" >3.12</td>
+      <th id="T_4f06a_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
+      <td id="T_4f06a_row20_col0" class="data row20 col0" >9.19</td>
+      <td id="T_4f06a_row20_col1" class="data row20 col1" >3.12</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
-      <td id="T_c99ab_row21_col0" class="data row21 col0" >5.19</td>
-      <td id="T_c99ab_row21_col1" class="data row21 col1" >5.98</td>
+      <th id="T_4f06a_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
+      <td id="T_4f06a_row21_col0" class="data row21 col0" >5.19</td>
+      <td id="T_4f06a_row21_col1" class="data row21 col1" >5.98</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
-      <td id="T_c99ab_row22_col0" class="data row22 col0" >322.81</td>
-      <td id="T_c99ab_row22_col1" class="data row22 col1" >208.61</td>
+      <th id="T_4f06a_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
+      <td id="T_4f06a_row22_col0" class="data row22 col0" >322.81</td>
+      <td id="T_4f06a_row22_col1" class="data row22 col1" >208.61</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
-      <td id="T_c99ab_row23_col0" class="data row23 col0" >-3,936.13</td>
-      <td id="T_c99ab_row23_col1" class="data row23 col1" >-4,855.13</td>
+      <th id="T_4f06a_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
+      <td id="T_4f06a_row23_col0" class="data row23 col0" >-3,936.13</td>
+      <td id="T_4f06a_row23_col1" class="data row23 col1" >-4,855.13</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
-      <td id="T_c99ab_row24_col0" class="data row24 col0" >53.94</td>
-      <td id="T_c99ab_row24_col1" class="data row24 col1" >92.24</td>
+      <th id="T_4f06a_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
+      <td id="T_4f06a_row24_col0" class="data row24 col0" >53.94</td>
+      <td id="T_4f06a_row24_col1" class="data row24 col1" >92.24</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row25" class="row_heading level0 row25" >Coal</th>
-      <td id="T_c99ab_row25_col0" class="data row25 col0" >21.12</td>
-      <td id="T_c99ab_row25_col1" class="data row25 col1" >21.45</td>
+      <th id="T_4f06a_level0_row25" class="row_heading level0 row25" >Coal</th>
+      <td id="T_4f06a_row25_col0" class="data row25 col0" >21.12</td>
+      <td id="T_4f06a_row25_col1" class="data row25 col1" >21.45</td>
     </tr>
     <tr>
-      <th id="T_c99ab_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
-      <td id="T_c99ab_row26_col0" class="data row26 col0" >-4.50</td>
-      <td id="T_c99ab_row26_col1" class="data row26 col1" >-16.81</td>
+      <th id="T_4f06a_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
+      <td id="T_4f06a_row26_col0" class="data row26 col0" >-4.50</td>
+      <td id="T_4f06a_row26_col1" class="data row26 col1" >-16.81</td>
     </tr>
   </tbody>
 </table>
@@ -1981,7 +1991,7 @@ usage: snakemake [-h] [--dry-run] [--profile PROFILE]
                  [--filegraph] [--d3dag] [--summary] [--detailed-summary]
                  [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
                  [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
-                 [--list-changes {input,code,params}] [--list-input-changes]
+                 [--list-changes {params,input,code}] [--list-input-changes]
                  [--list-params-changes] [--list-untracked]
                  [--delete-all-output | --delete-temp-output]
                  [--keep-incomplete] [--drop-metadata] [--version]
@@ -2029,7 +2039,7 @@ usage: snakemake [-h] [--dry-run] [--profile PROFILE]
                  [--apptainer-args ARGS] [--use-envmodules]
                  [--deploy-sources QUERY CHECKSUM]
                  [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
-                 [--mode {remote,default,subprocess}]
+                 [--mode {default,subprocess,remote}]
                  [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
                  [--max-jobs-per-second MAX_JOBS_PER_SECOND]
                  [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
@@ -2169,6 +2179,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </section>
 <section id="coupled-vs-decoupled-sb-cba-workflow">
 <h2>Coupled vs decoupled SB-CBA workflow<a class="headerlink" href="#coupled-vs-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
+<p>Before diving into the workflow, it helps to understand that there are two ways to run the CBA: (i) starting from scratch running first the SB, or (ii)using pre-solved networks we’ve already uploaded. The second option is much faster.</p>
 <center>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -2215,8 +2226,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If pixi was installed successfully but your shell still can’t find it, you may need to add it to your PATH manually. Use the following command to do so.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>os.environ<span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.expanduser<span class="o">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;:&quot;</span><span class="w"> </span>+<span class="w"> </span>os.environ<span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment:</p>
@@ -2809,7 +2824,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">cba</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
 <span class="w">      </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
@@ -2827,7 +2842,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="w">      </span><span class="nt">cba</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
 <span class="w">        </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="7">
@@ -2906,7 +2921,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="{warning}::: docutils">
 <p><strong>Time requirement:</strong> This could take approximately 15-20 minutes to complete, depending on your computer’s performance. So this would be a good task to start right before going on a coffee break!</p>
 </div>
-<p>You may have to first undo the changes you’ve made to your <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>:</p>
+<p>If you completed Task 5 or 6, your config file will have been modified. Run the cell below to reset it before switching branches:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>config/config.tyndp.yaml
@@ -3101,11 +3116,11 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_bdc76">
+<table id="T_b1279">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_bdc76_level0_col0" class="col_heading level0 col0" >H2 Import (+), H2 Export (-) [TWh]</th>
+      <th id="T_b1279_level0_col0" class="col_heading level0 col0" >H2 Import (+), H2 Export (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >country</th>
@@ -3114,24 +3129,24 @@ dtype: float64
   </thead>
   <tbody>
     <tr>
-      <th id="T_bdc76_level0_row0" class="row_heading level0 row0" >DE</th>
-      <td id="T_bdc76_row0_col0" class="data row0 col0" >314.89</td>
+      <th id="T_b1279_level0_row0" class="row_heading level0 row0" >DE</th>
+      <td id="T_b1279_row0_col0" class="data row0 col0" >314.89</td>
     </tr>
     <tr>
-      <th id="T_bdc76_level0_row1" class="row_heading level0 row1" >IT</th>
-      <td id="T_bdc76_row1_col0" class="data row1 col0" >95.79</td>
+      <th id="T_b1279_level0_row1" class="row_heading level0 row1" >IT</th>
+      <td id="T_b1279_row1_col0" class="data row1 col0" >95.79</td>
     </tr>
     <tr>
-      <th id="T_bdc76_level0_row2" class="row_heading level0 row2" >FR</th>
-      <td id="T_bdc76_row2_col0" class="data row2 col0" >91.15</td>
+      <th id="T_b1279_level0_row2" class="row_heading level0 row2" >FR</th>
+      <td id="T_b1279_row2_col0" class="data row2 col0" >91.15</td>
     </tr>
     <tr>
-      <th id="T_bdc76_level0_row3" class="row_heading level0 row3" >PL</th>
-      <td id="T_bdc76_row3_col0" class="data row3 col0" >89.05</td>
+      <th id="T_b1279_level0_row3" class="row_heading level0 row3" >PL</th>
+      <td id="T_b1279_row3_col0" class="data row3 col0" >89.05</td>
     </tr>
     <tr>
-      <th id="T_bdc76_level0_row4" class="row_heading level0 row4" >BE</th>
-      <td id="T_bdc76_row4_col0" class="data row4 col0" >65.32</td>
+      <th id="T_b1279_level0_row4" class="row_heading level0 row4" >BE</th>
+      <td id="T_b1279_row4_col0" class="data row4 col0" >65.32</td>
     </tr>
   </tbody>
 </table>
