@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '20260609-workshop-pypsa-04';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -443,6 +445,7 @@
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-benefit-analysis">Cost-Benefit Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-open-tyndp-repository">Clone the Open-TYNDP repository</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
@@ -458,16 +461,16 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-and-installing-open-tyndp">Cloning and installing Open-TYNDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-open-tyndp">Install Open-TYNDP</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-sb-cba-workflow">Coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-configure-the-settings-to-run-the-nt-scenario-for-a-single-cba-project-and-planning-horizon">Task 5: Configure the settings to run the NT scenario for a single CBA project and planning horizon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-climate-years">Modifying climate years</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-and-run-it">Task 6: Create your own climate year and run it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-configure-the-settings-in-config-files">Task 5: Configure the settings in config files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-different-and-multiple-climate-years">Run different and multiple climate years</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-scenario">Task 6: Create your own climate year scenario</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoupled-sb-cba-workflow">Decoupled SB-&gt;CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-decoupled-cost-benefit-analysis">Task 7 (optional): Perform a complete (decoupled) Cost-Benefit Analysis</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
@@ -1114,11 +1117,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_cee88">
+<table id="T_ecc29">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_cee88_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
+      <th id="T_ecc29_level0_col0" class="col_heading level0 col0" >Supply (+), Demand (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1127,112 +1130,112 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </thead>
   <tbody>
     <tr>
-      <th id="T_cee88_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
-      <td id="T_cee88_row0_col0" class="data row0 col0" >506.26</td>
+      <th id="T_ecc29_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
+      <td id="T_ecc29_row0_col0" class="data row0 col0" >506.26</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
-      <td id="T_cee88_row1_col0" class="data row1 col0" >268.51</td>
+      <th id="T_ecc29_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
+      <td id="T_ecc29_row1_col0" class="data row1 col0" >268.51</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row2" class="row_heading level0 row2" >Run of River</th>
-      <td id="T_cee88_row2_col0" class="data row2 col0" >200.71</td>
+      <th id="T_ecc29_level0_row2" class="row_heading level0 row2" >Run of River</th>
+      <td id="T_ecc29_row2_col0" class="data row2 col0" >200.71</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
-      <td id="T_cee88_row3_col0" class="data row3 col0" >320.71</td>
+      <th id="T_ecc29_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
+      <td id="T_ecc29_row3_col0" class="data row3 col0" >320.71</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
-      <td id="T_cee88_row4_col0" class="data row4 col0" >-8.50</td>
+      <th id="T_ecc29_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
+      <td id="T_ecc29_row4_col0" class="data row4 col0" >-8.50</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
-      <td id="T_cee88_row5_col0" class="data row5 col0" >211.10</td>
+      <th id="T_ecc29_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
+      <td id="T_ecc29_row5_col0" class="data row5 col0" >211.10</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
-      <td id="T_cee88_row6_col0" class="data row6 col0" >90.37</td>
+      <th id="T_ecc29_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
+      <td id="T_ecc29_row6_col0" class="data row6 col0" >90.37</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
-      <td id="T_cee88_row7_col0" class="data row7 col0" >932.01</td>
+      <th id="T_ecc29_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
+      <td id="T_ecc29_row7_col0" class="data row7 col0" >932.01</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
-      <td id="T_cee88_row8_col0" class="data row8 col0" >1.62</td>
+      <th id="T_ecc29_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
+      <td id="T_ecc29_row8_col0" class="data row8 col0" >1.62</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
-      <td id="T_cee88_row9_col0" class="data row9 col0" >111.56</td>
+      <th id="T_ecc29_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
+      <td id="T_ecc29_row9_col0" class="data row9 col0" >111.56</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
-      <td id="T_cee88_row10_col0" class="data row10 col0" >2.86</td>
+      <th id="T_ecc29_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
+      <td id="T_ecc29_row10_col0" class="data row10 col0" >2.86</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
-      <td id="T_cee88_row11_col0" class="data row11 col0" >302.74</td>
+      <th id="T_ecc29_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
+      <td id="T_ecc29_row11_col0" class="data row11 col0" >302.74</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
-      <td id="T_cee88_row12_col0" class="data row12 col0" >9.74</td>
+      <th id="T_ecc29_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
+      <td id="T_ecc29_row12_col0" class="data row12 col0" >9.74</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_cee88_row13_col0" class="data row13 col0" >141.82</td>
+      <th id="T_ecc29_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_ecc29_row13_col0" class="data row13 col0" >141.82</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row14" class="row_heading level0 row14" >Nuclear</th>
-      <td id="T_cee88_row14_col0" class="data row14 col0" >634.13</td>
+      <th id="T_ecc29_level0_row14" class="row_heading level0 row14" >Nuclear</th>
+      <td id="T_ecc29_row14_col0" class="data row14 col0" >634.13</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row15" class="row_heading level0 row15" >Lignite</th>
-      <td id="T_cee88_row15_col0" class="data row15 col0" >15.27</td>
+      <th id="T_ecc29_level0_row15" class="row_heading level0 row15" >Lignite</th>
+      <td id="T_ecc29_row15_col0" class="data row15 col0" >15.27</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
-      <td id="T_cee88_row16_col0" class="data row16 col0" >14.29</td>
+      <th id="T_ecc29_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
+      <td id="T_ecc29_row16_col0" class="data row16 col0" >14.29</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
-      <td id="T_cee88_row17_col0" class="data row17 col0" >-238.52</td>
+      <th id="T_ecc29_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
+      <td id="T_ecc29_row17_col0" class="data row17 col0" >-238.52</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
-      <td id="T_cee88_row18_col0" class="data row18 col0" >3.04</td>
+      <th id="T_ecc29_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
+      <td id="T_ecc29_row18_col0" class="data row18 col0" >3.04</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
-      <td id="T_cee88_row19_col0" class="data row19 col0" >7.94</td>
+      <th id="T_ecc29_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
+      <td id="T_ecc29_row19_col0" class="data row19 col0" >7.94</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
-      <td id="T_cee88_row20_col0" class="data row20 col0" >9.19</td>
+      <th id="T_ecc29_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
+      <td id="T_ecc29_row20_col0" class="data row20 col0" >9.19</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
-      <td id="T_cee88_row21_col0" class="data row21 col0" >5.19</td>
+      <th id="T_ecc29_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
+      <td id="T_ecc29_row21_col0" class="data row21 col0" >5.19</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
-      <td id="T_cee88_row22_col0" class="data row22 col0" >322.81</td>
+      <th id="T_ecc29_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
+      <td id="T_ecc29_row22_col0" class="data row22 col0" >322.81</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
-      <td id="T_cee88_row23_col0" class="data row23 col0" >-3,936.13</td>
+      <th id="T_ecc29_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
+      <td id="T_ecc29_row23_col0" class="data row23 col0" >-3,936.13</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
-      <td id="T_cee88_row24_col0" class="data row24 col0" >53.94</td>
+      <th id="T_ecc29_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
+      <td id="T_ecc29_row24_col0" class="data row24 col0" >53.94</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row25" class="row_heading level0 row25" >Coal</th>
-      <td id="T_cee88_row25_col0" class="data row25 col0" >21.12</td>
+      <th id="T_ecc29_level0_row25" class="row_heading level0 row25" >Coal</th>
+      <td id="T_ecc29_row25_col0" class="data row25 col0" >21.12</td>
     </tr>
     <tr>
-      <th id="T_cee88_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
-      <td id="T_cee88_row26_col0" class="data row26 col0" >-4.50</td>
+      <th id="T_ecc29_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
+      <td id="T_ecc29_row26_col0" class="data row26 col0" >-4.50</td>
     </tr>
   </tbody>
 </table>
@@ -1374,12 +1377,12 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_4a0b2">
+<table id="T_c99ab">
   <thead>
     <tr>
       <th class="index_name level0" >network</th>
-      <th id="T_4a0b2_level0_col0" class="col_heading level0 col0" >NT 2030</th>
-      <th id="T_4a0b2_level0_col1" class="col_heading level0 col1" >NT 2040</th>
+      <th id="T_c99ab_level0_col0" class="col_heading level0 col0" >NT 2030</th>
+      <th id="T_c99ab_level0_col1" class="col_heading level0 col1" >NT 2040</th>
     </tr>
     <tr>
       <th class="index_name level0" >carrier</th>
@@ -1389,139 +1392,139 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
   </thead>
   <tbody>
     <tr>
-      <th id="T_4a0b2_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
-      <td id="T_4a0b2_row0_col0" class="data row0 col0" >506.26</td>
-      <td id="T_4a0b2_row0_col1" class="data row0 col1" >806.74</td>
+      <th id="T_c99ab_level0_row0" class="row_heading level0 row0" >Solar PV (Utility)</th>
+      <td id="T_c99ab_row0_col0" class="data row0 col0" >506.26</td>
+      <td id="T_c99ab_row0_col1" class="data row0 col1" >806.74</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
-      <td id="T_4a0b2_row1_col0" class="data row1 col0" >268.51</td>
-      <td id="T_4a0b2_row1_col1" class="data row1 col1" >473.37</td>
+      <th id="T_c99ab_level0_row1" class="row_heading level0 row1" >Solar PV (Rooftop)</th>
+      <td id="T_c99ab_row1_col0" class="data row1 col0" >268.51</td>
+      <td id="T_c99ab_row1_col1" class="data row1 col1" >473.37</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row2" class="row_heading level0 row2" >Run of River</th>
-      <td id="T_4a0b2_row2_col0" class="data row2 col0" >200.71</td>
-      <td id="T_4a0b2_row2_col1" class="data row2 col1" >207.65</td>
+      <th id="T_c99ab_level0_row2" class="row_heading level0 row2" >Run of River</th>
+      <td id="T_c99ab_row2_col0" class="data row2 col0" >200.71</td>
+      <td id="T_c99ab_row2_col1" class="data row2 col1" >207.65</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
-      <td id="T_4a0b2_row3_col0" class="data row3 col0" >320.71</td>
-      <td id="T_4a0b2_row3_col1" class="data row3 col1" >331.90</td>
+      <th id="T_c99ab_level0_row3" class="row_heading level0 row3" >Reservoir & Dam</th>
+      <td id="T_c99ab_row3_col0" class="data row3 col0" >320.71</td>
+      <td id="T_c99ab_row3_col1" class="data row3 col1" >331.90</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
-      <td id="T_4a0b2_row4_col0" class="data row4 col0" >-8.50</td>
-      <td id="T_4a0b2_row4_col1" class="data row4 col1" >-17.13</td>
+      <th id="T_c99ab_level0_row4" class="row_heading level0 row4" >Pumped Hydro</th>
+      <td id="T_c99ab_row4_col0" class="data row4 col0" >-8.50</td>
+      <td id="T_c99ab_row4_col1" class="data row4 col1" >-17.13</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
-      <td id="T_4a0b2_row5_col0" class="data row5 col0" >211.10</td>
-      <td id="T_4a0b2_row5_col1" class="data row5 col1" >219.50</td>
+      <th id="T_c99ab_level0_row5" class="row_heading level0 row5" >Other Renewables</th>
+      <td id="T_c99ab_row5_col0" class="data row5 col0" >211.10</td>
+      <td id="T_c99ab_row5_col1" class="data row5 col1" >219.50</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
-      <td id="T_4a0b2_row6_col0" class="data row6 col0" >90.37</td>
-      <td id="T_4a0b2_row6_col1" class="data row6 col1" >115.26</td>
+      <th id="T_c99ab_level0_row6" class="row_heading level0 row6" >Other Non-Renewables</th>
+      <td id="T_c99ab_row6_col0" class="data row6 col0" >90.37</td>
+      <td id="T_c99ab_row6_col1" class="data row6 col1" >115.26</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
-      <td id="T_4a0b2_row7_col0" class="data row7 col0" >932.01</td>
-      <td id="T_4a0b2_row7_col1" class="data row7 col1" >1,339.81</td>
+      <th id="T_c99ab_level0_row7" class="row_heading level0 row7" >Onshore Wind</th>
+      <td id="T_c99ab_row7_col0" class="data row7 col0" >932.01</td>
+      <td id="T_c99ab_row7_col1" class="data row7 col1" >1,339.81</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
-      <td id="T_4a0b2_row8_col0" class="data row8 col0" >1.62</td>
-      <td id="T_4a0b2_row8_col1" class="data row8 col1" >2.12</td>
+      <th id="T_c99ab_level0_row8" class="row_heading level0 row8" >Oil (Light)</th>
+      <td id="T_c99ab_row8_col0" class="data row8 col0" >1.62</td>
+      <td id="T_c99ab_row8_col1" class="data row8 col1" >2.12</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
-      <td id="T_4a0b2_row9_col0" class="data row9 col0" >111.56</td>
-      <td id="T_4a0b2_row9_col1" class="data row9 col1" >259.56</td>
+      <th id="T_c99ab_level0_row9" class="row_heading level0 row9" >Offshore Wind (DC)</th>
+      <td id="T_c99ab_row9_col0" class="data row9 col0" >111.56</td>
+      <td id="T_c99ab_row9_col1" class="data row9 col1" >259.56</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
-      <td id="T_4a0b2_row10_col0" class="data row10 col0" >2.86</td>
-      <td id="T_4a0b2_row10_col1" class="data row10 col1" >18.67</td>
+      <th id="T_c99ab_level0_row10" class="row_heading level0 row10" >Offshore Wind (DC Float.)</th>
+      <td id="T_c99ab_row10_col0" class="data row10 col0" >2.86</td>
+      <td id="T_c99ab_row10_col1" class="data row10 col1" >18.67</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
-      <td id="T_4a0b2_row11_col0" class="data row11 col0" >302.74</td>
-      <td id="T_4a0b2_row11_col1" class="data row11 col1" >463.42</td>
+      <th id="T_c99ab_level0_row11" class="row_heading level0 row11" >Offshore Wind (AC)</th>
+      <td id="T_c99ab_row11_col0" class="data row11 col0" >302.74</td>
+      <td id="T_c99ab_row11_col1" class="data row11 col1" >463.42</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
-      <td id="T_4a0b2_row12_col0" class="data row12 col0" >9.74</td>
-      <td id="T_4a0b2_row12_col1" class="data row12 col1" >51.82</td>
+      <th id="T_c99ab_level0_row12" class="row_heading level0 row12" >Offshore Wind (AC Float.)</th>
+      <td id="T_c99ab_row12_col0" class="data row12 col0" >9.74</td>
+      <td id="T_c99ab_row12_col1" class="data row12 col1" >51.82</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
-      <td id="T_4a0b2_row13_col0" class="data row13 col0" >141.82</td>
-      <td id="T_4a0b2_row13_col1" class="data row13 col1" >518.59</td>
+      <th id="T_c99ab_level0_row13" class="row_heading level0 row13" >Offshore Hub Transmission</th>
+      <td id="T_c99ab_row13_col0" class="data row13 col0" >141.82</td>
+      <td id="T_c99ab_row13_col1" class="data row13 col1" >518.59</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row14" class="row_heading level0 row14" >Nuclear</th>
-      <td id="T_4a0b2_row14_col0" class="data row14 col0" >634.13</td>
-      <td id="T_4a0b2_row14_col1" class="data row14 col1" >627.40</td>
+      <th id="T_c99ab_level0_row14" class="row_heading level0 row14" >Nuclear</th>
+      <td id="T_c99ab_row14_col0" class="data row14 col0" >634.13</td>
+      <td id="T_c99ab_row14_col1" class="data row14 col1" >627.40</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row15" class="row_heading level0 row15" >Lignite</th>
-      <td id="T_4a0b2_row15_col0" class="data row15 col0" >15.27</td>
-      <td id="T_4a0b2_row15_col1" class="data row15 col1" >14.17</td>
+      <th id="T_c99ab_level0_row15" class="row_heading level0 row15" >Lignite</th>
+      <td id="T_c99ab_row15_col0" class="data row15 col0" >15.27</td>
+      <td id="T_c99ab_row15_col1" class="data row15 col1" >14.17</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
-      <td id="T_4a0b2_row16_col0" class="data row16 col0" >14.29</td>
-      <td id="T_4a0b2_row16_col1" class="data row16 col1" >14.40</td>
+      <th id="T_c99ab_level0_row16" class="row_heading level0 row16" >Hydro Pondage</th>
+      <td id="T_c99ab_row16_col0" class="data row16 col0" >14.29</td>
+      <td id="T_c99ab_row16_col1" class="data row16 col1" >14.40</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
-      <td id="T_4a0b2_row17_col0" class="data row17 col0" >-238.52</td>
-      <td id="T_4a0b2_row17_col1" class="data row17 col1" >-932.35</td>
+      <th id="T_c99ab_level0_row17" class="row_heading level0 row17" >H2 Electrolysis</th>
+      <td id="T_c99ab_row17_col0" class="data row17 col0" >-238.52</td>
+      <td id="T_c99ab_row17_col1" class="data row17 col1" >-932.35</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
-      <td id="T_4a0b2_row18_col0" class="data row18 col0" >3.04</td>
-      <td id="T_4a0b2_row18_col1" class="data row18 col1" >8.15</td>
+      <th id="T_c99ab_level0_row18" class="row_heading level0 row18" >H2 CCGT</th>
+      <td id="T_c99ab_row18_col0" class="data row18 col0" >3.04</td>
+      <td id="T_c99ab_row18_col1" class="data row18 col1" >8.15</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
-      <td id="T_4a0b2_row19_col0" class="data row19 col0" >7.94</td>
-      <td id="T_4a0b2_row19_col1" class="data row19 col1" >7.25</td>
+      <th id="T_c99ab_level0_row19" class="row_heading level0 row19" >Gas OCGT</th>
+      <td id="T_c99ab_row19_col0" class="data row19 col0" >7.94</td>
+      <td id="T_c99ab_row19_col1" class="data row19 col1" >7.25</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
-      <td id="T_4a0b2_row20_col0" class="data row20 col0" >9.19</td>
-      <td id="T_4a0b2_row20_col1" class="data row20 col1" >3.12</td>
+      <th id="T_c99ab_level0_row20" class="row_heading level0 row20" >Gas Conventional</th>
+      <td id="T_c99ab_row20_col0" class="data row20 col0" >9.19</td>
+      <td id="T_c99ab_row20_col1" class="data row20 col1" >3.12</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
-      <td id="T_4a0b2_row21_col0" class="data row21 col0" >5.19</td>
-      <td id="T_4a0b2_row21_col1" class="data row21 col1" >5.98</td>
+      <th id="T_c99ab_level0_row21" class="row_heading level0 row21" >Gas CCGT (CCS)</th>
+      <td id="T_c99ab_row21_col0" class="data row21 col0" >5.19</td>
+      <td id="T_c99ab_row21_col1" class="data row21 col1" >5.98</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
-      <td id="T_4a0b2_row22_col0" class="data row22 col0" >322.81</td>
-      <td id="T_4a0b2_row22_col1" class="data row22 col1" >208.61</td>
+      <th id="T_c99ab_level0_row22" class="row_heading level0 row22" >Gas CCGT</th>
+      <td id="T_c99ab_row22_col0" class="data row22 col0" >322.81</td>
+      <td id="T_c99ab_row22_col1" class="data row22 col1" >208.61</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
-      <td id="T_4a0b2_row23_col0" class="data row23 col0" >-3,936.13</td>
-      <td id="T_4a0b2_row23_col1" class="data row23 col1" >-4,855.13</td>
+      <th id="T_c99ab_level0_row23" class="row_heading level0 row23" >Electricity Exogenous Demand</th>
+      <td id="T_c99ab_row23_col0" class="data row23 col0" >-3,936.13</td>
+      <td id="T_c99ab_row23_col1" class="data row23 col1" >-4,855.13</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
-      <td id="T_4a0b2_row24_col0" class="data row24 col0" >53.94</td>
-      <td id="T_4a0b2_row24_col1" class="data row24 col1" >92.24</td>
+      <th id="T_c99ab_level0_row24" class="row_heading level0 row24" >Demand Side Response</th>
+      <td id="T_c99ab_row24_col0" class="data row24 col0" >53.94</td>
+      <td id="T_c99ab_row24_col1" class="data row24 col1" >92.24</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row25" class="row_heading level0 row25" >Coal</th>
-      <td id="T_4a0b2_row25_col0" class="data row25 col0" >21.12</td>
-      <td id="T_4a0b2_row25_col1" class="data row25 col1" >21.45</td>
+      <th id="T_c99ab_level0_row25" class="row_heading level0 row25" >Coal</th>
+      <td id="T_c99ab_row25_col0" class="data row25 col0" >21.12</td>
+      <td id="T_c99ab_row25_col1" class="data row25 col1" >21.45</td>
     </tr>
     <tr>
-      <th id="T_4a0b2_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
-      <td id="T_4a0b2_row26_col0" class="data row26 col0" >-4.50</td>
-      <td id="T_4a0b2_row26_col1" class="data row26 col1" >-16.81</td>
+      <th id="T_c99ab_level0_row26" class="row_heading level0 row26" >Battery Storage</th>
+      <td id="T_c99ab_row26_col0" class="data row26 col0" >-4.50</td>
+      <td id="T_c99ab_row26_col1" class="data row26 col1" >-16.81</td>
     </tr>
   </tbody>
 </table>
@@ -1832,6 +1835,52 @@ Entries: [&#39;NT 2030&#39;, &#39;NT 2040&#39;]
 <section class="tex2jax_ignore mathjax_ignore" id="cost-benefit-analysis">
 <h1>Cost-Benefit Analysis<a class="headerlink" href="#cost-benefit-analysis" title="Link to this heading">#</a></h1>
 <p>Now that we’ve explored the Scenario Building (SB) results, let’s learn how to run Cost-Benefit Analysis (CBA)!</p>
+<section id="clone-the-open-tyndp-repository">
+<h2>Clone the Open-TYNDP repository<a class="headerlink" href="#clone-the-open-tyndp-repository" title="Link to this heading">#</a></h2>
+<p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data
+</pre></div>
+</div>
+</div>
+</div>
+<p>Clone the Open-TYNDP repository directly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="o">==</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;open-tyndp&quot;</span><span class="p">):</span>
+        <span class="err">!</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">transition</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">tyndp</span><span class="o">.</span><span class="n">git</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;open-tyndp directory already exists, skipping clone&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Not in data/ directory. Current directory:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, navigate into the the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;open-tyndp/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="workflow-management-using-snakemake-and-pixi">
 <h2>Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#workflow-management-using-snakemake-and-pixi" title="Link to this heading">#</a></h2>
 <p>The Open-TYNDP CBA workflow involves many interconnected steps: from retrieving the SB network, to preparing the reference and project networks, to optimizing the networks, to calculating indicators.</p>
@@ -1892,100 +1941,109 @@ Workflows are described via a human readable, Python based language. They can be
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Green">SNAKEMAKE</span>
-<span class=" -Color -Color-Green">=========</span>
-<span class=" -Color -Color-Green">  Date: 2026-06-08 07:00:40</span>
-<span class=" -Color -Color-Green">  Workflow ID: dc1f5fff-6f05-456c-b1a0-ce02012d5459</span>
-<span class=" -Color -Color-Green">  Platform: Linux-6.17.0-1015-azure-x86_64-with-glibc2.39</span>
-<span class=" -Color -Color-Green">  Host: runnervm3jyl0</span>
-<span class=" -Color -Color-Green">  User: runner</span>
-<span class=" -Color -Color-Green">  Snakemake version: 9.22.0</span>
-<span class=" -Color -Color-Green">  Python version: 3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 02:00:33) [GCC 14.3.0]</span>
-<span class=" -Color -Color-Green">  Command: /home/runner/miniconda3/envs/open-tyndp-workshops/bin/snakemake -call -n</span>
-<span class=" -Color -Color-Green">  Snakefile: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/Snakefile</span>
-<span class=" -Color -Color-Green">  Base directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
-<span class=" -Color -Color-Green">  Run directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
-<span class=" -Color -Color-Green">  Working directory: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops</span>
-<span class=" -Color -Color-Green">  Config file(s): []</span>
-<span class=" -Color -Color-Green">  Config MD5: 99914b932bd37a50b983c5e7c90ae93b</span>
-
-<span class=" -Color -Color-Yellow">Building DAG of jobs...</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">Job stats:</span>
-<span class=" -Color -Color-Yellow">job                count</span>
-<span class=" -Color -Color-Yellow">---------------  -------</span>
-<span class=" -Color -Color-Yellow">build_data             1</span>
-<span class=" -Color -Color-Yellow">prepare_network        1</span>
-<span class=" -Color -Color-Yellow">solve_network          1</span>
-<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
-<span class=" -Color -Color-Yellow">all                    1</span>
-<span class=" -Color -Color-Yellow">total                  6</span>
-
-
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule build_data:</span>
-<span class=" -Color -Color-Green">    input: data/data_raw.csv</span>
-<span class=" -Color -Color-Green">    output: data/data_filtered.csv</span>
-<span class=" -Color -Color-Green">    jobid: 4</span>
-<span class=" -Color -Color-Green">    reason: Missing output files: data/data_filtered.csv</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule prepare_network:</span>
-<span class=" -Color -Color-Green">    input: data/data_filtered.csv</span>
-<span class=" -Color -Color-Green">    output: data/base_2030.nc</span>
-<span class=" -Color -Color-Green">    jobid: 3</span>
-<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030.nc; Input files updated by another job: data/data_filtered.csv</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule solve_network:</span>
-<span class=" -Color -Color-Green">    input: data/base_2030.nc</span>
-<span class=" -Color -Color-Green">    output: data/base_2030_solved.nc</span>
-<span class=" -Color -Color-Green">    jobid: 2</span>
-<span class=" -Color -Color-Green">    reason: Missing output files: data/base_2030_solved.nc; Input files updated by another job: data/base_2030.nc</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule plot_benchmark:</span>
-<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
-<span class=" -Color -Color-Green">    output: data/benchmark.png</span>
-<span class=" -Color -Color-Green">    jobid: 1</span>
-<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.png; Input files updated by another job: data/base_2030_solved.nc</span>
-<span class=" -Color -Color-Green">    wildcards: ext=png</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule plot_benchmark:</span>
-<span class=" -Color -Color-Green">    input: data/base_2030_solved.nc</span>
-<span class=" -Color -Color-Green">    output: data/benchmark.pdf</span>
-<span class=" -Color -Color-Green">    jobid: 6</span>
-<span class=" -Color -Color-Green">    reason: Missing output files: data/benchmark.pdf; Input files updated by another job: data/base_2030_solved.nc</span>
-<span class=" -Color -Color-Green">    wildcards: ext=pdf</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Green">[Mon Jun  8 07:00:41 2026]</span>
-<span class=" -Color -Color-Green">rule all:</span>
-<span class=" -Color -Color-Green">    input: data/benchmark.png, data/benchmark.pdf</span>
-<span class=" -Color -Color-Green">    jobid: 0</span>
-<span class=" -Color -Color-Green">    reason: Input files updated by another job: data/benchmark.pdf, data/benchmark.png</span>
-<span class=" -Color -Color-Green">    resources: tmpdir=/tmp</span>
-<span class=" -Color -Color-Yellow">Job stats:</span>
-<span class=" -Color -Color-Yellow">job                count</span>
-<span class=" -Color -Color-Yellow">---------------  -------</span>
-<span class=" -Color -Color-Yellow">build_data             1</span>
-<span class=" -Color -Color-Yellow">prepare_network        1</span>
-<span class=" -Color -Color-Yellow">solve_network          1</span>
-<span class=" -Color -Color-Yellow">plot_benchmark         2</span>
-<span class=" -Color -Color-Yellow">all                    1</span>
-<span class=" -Color -Color-Yellow">total                  6</span>
-
-<span class=" -Color -Color-Yellow">Reasons:</span>
-<span class=" -Color -Color-Yellow">    (check individual jobs above for details)</span>
-<span class=" -Color -Color-Yellow">    input files updated by another job:</span>
-<span class=" -Color -Color-Yellow">        all, plot_benchmark, prepare_network, solve_network</span>
-<span class=" -Color -Color-Yellow">    output files have to be generated:</span>
-<span class=" -Color -Color-Yellow">        build_data, plot_benchmark, prepare_network, solve_network</span>
-<span class=" -Color -Color-Yellow">1 jobs have missing provenance/metadata so that it in part cannot be used to trigger re-runs.</span>
-<span class=" -Color -Color-Yellow">Rules with missing metadata: retrieve_data</span>
-<span class=" -Color -Color-Yellow">This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using workflow specific profile profiles/default for setting default command line arguments.
+usage: snakemake [-h] [--dry-run] [--profile PROFILE]
+                 [--workflow-profile WORKFLOW_PROFILE] [--cache [RULE ...]]
+                 [--snakefile FILE] [--cores N] [--jobs N] [--local-cores N]
+                 [--resources NAME=INT [NAME=INT ...]]
+                 [--set-threads RULE=THREADS [RULE=THREADS ...]]
+                 [--max-threads MAX_THREADS]
+                 [--set-resources RULE:RESOURCE=VALUE [RULE:RESOURCE=VALUE ...]]
+                 [--set-scatter NAME=SCATTERITEMS [NAME=SCATTERITEMS ...]]
+                 [--set-resource-scopes RESOURCE=[global|local] [RESOURCE=[global|local] ...]]
+                 [--default-resources [NAME=INT ...]]
+                 [--preemptible-rules [PREEMPTIBLE_RULES ...]]
+                 [--preemptible-retries PREEMPTIBLE_RETRIES]
+                 [--configfile FILE [FILE ...]] [--config [KEY=VALUE ...]]
+                 [--replace-workflow-config] [--envvars VARNAME [VARNAME ...]]
+                 [--directory DIR] [--touch] [--keep-going]
+                 [--rerun-triggers {code,input,mtime,params,software-env} [{code,input,mtime,params,software-env} ...]]
+                 [--force] [--executor {local,dryrun,touch}] [--forceall]
+                 [--forcerun [TARGET ...]]
+                 [--consider-ancient RULE=INPUTITEMS [RULE=INPUTITEMS ...]]
+                 [--prioritize TARGET [TARGET ...]]
+                 [--batch RULE=BATCH/BATCHES] [--until TARGET [TARGET ...]]
+                 [--omit-from TARGET [TARGET ...]] [--rerun-incomplete]
+                 [--shadow-prefix DIR]
+                 [--strict-dag-evaluation {cyclic-graph,functions,periodic-wildcards} [{cyclic-graph,functions,periodic-wildcards} ...]]
+                 [--scheduler [{greedy,ilp}]]
+                 [--conda-base-path CONDA_BASE_PATH] [--no-subworkflows]
+                 [--precommand PRECOMMAND] [--groups GROUPS [GROUPS ...]]
+                 [--group-components GROUP_COMPONENTS [GROUP_COMPONENTS ...]]
+                 [--report [FILE]] [--report-after-run]
+                 [--report-stylesheet CSSFILE] [--report-metadata FILE]
+                 [--reporter PLUGIN] [--draft-notebook TARGET]
+                 [--edit-notebook TARGET] [--notebook-listen IP:PORT]
+                 [--lint [{text,json}]] [--generate-unit-tests [TESTPATH]]
+                 [--containerize [{dockerfile,apptainer}]] [--export-cwl FILE]
+                 [--list-rules] [--list-target-rules]
+                 [--dag [{dot,mermaid-js}]] [--rulegraph [{dot,mermaid-js}]]
+                 [--filegraph] [--d3dag] [--summary] [--detailed-summary]
+                 [--archive FILE] [--cleanup-metadata FILE [FILE ...]]
+                 [--cleanup-shadow] [--skip-script-cleanup] [--unlock]
+                 [--list-changes {input,code,params}] [--list-input-changes]
+                 [--list-params-changes] [--list-untracked]
+                 [--delete-all-output | --delete-temp-output]
+                 [--keep-incomplete] [--drop-metadata] [--version]
+                 [--printshellcmds] [--debug-dag] [--nocolor]
+                 [--quiet [{all,host,progress,reason,rules} ...]]
+                 [--print-compilation] [--verbose] [--force-use-threads]
+                 [--allow-ambiguity] [--nolock] [--ignore-incomplete]
+                 [--max-inventory-time SECONDS] [--trust-io-cache]
+                 [--max-checksum-file-size SIZE] [--latency-wait SECONDS]
+                 [--wait-for-free-local-storage WAIT_FOR_FREE_LOCAL_STORAGE]
+                 [--wait-for-files [FILE ...]] [--wait-for-files-file FILE]
+                 [--runtime-source-cache-path PATH]
+                 [--queue-input-wait-time SECONDS]
+                 [--omit-flags OMIT_FLAGS [OMIT_FLAGS ...]] [--notemp]
+                 [--all-temp] [--unneeded-temp-files FILE [FILE ...]]
+                 [--keep-storage-local-copies] [--not-retrieve-storage]
+                 [--target-files-omit-workdir-adjustment]
+                 [--allowed-rules ALLOWED_RULES [ALLOWED_RULES ...]]
+                 [--max-jobs-per-timespan MAX_JOBS_PER_TIMESPAN]
+                 [--max-status-checks-per-second MAX_STATUS_CHECKS_PER_SECOND]
+                 [--seconds-between-status-checks SECONDS_BETWEEN_STATUS_CHECKS]
+                 [--retries RETRIES] [--wrapper-prefix WRAPPER_PREFIX]
+                 [--default-storage-provider DEFAULT_STORAGE_PROVIDER]
+                 [--default-storage-prefix DEFAULT_STORAGE_PREFIX]
+                 [--local-storage-prefix LOCAL_STORAGE_PREFIX]
+                 [--remote-job-local-storage-prefix REMOTE_JOB_LOCAL_STORAGE_PREFIX]
+                 [--shared-fs-usage {input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} [{input-output,persistence,software-deployment,software-deployment-cache,source-cache,sources,storage-local-copies,none} ...]]
+                 [--scheduler-greediness SCHEDULER_GREEDINESS]
+                 [--scheduler-subsample SCHEDULER_SUBSAMPLE] [--no-hooks]
+                 [--debug] [--runtime-profile FILE]
+                 [--local-groupid LOCAL_GROUPID] [--attempt ATTEMPT]
+                 [--show-failed-logs] [--logger {} [{} ...]]
+                 [--job-deploy-sources] [--benchmark-extended]
+                 [--persistence-backend {db,file}]
+                 [--persistence-backend-db-url PERSISTENCE_BACKEND_DB_URL]
+                 [--container-image IMAGE] [--immediate-submit]
+                 [--jobscript SCRIPT] [--jobname NAME]
+                 [--software-deployment-method {apptainer,conda,env-modules} [{apptainer,conda,env-modules} ...]]
+                 [--container-cleanup-images] [--use-conda]
+                 [--conda-not-block-search-path-envvars] [--list-conda-envs]
+                 [--conda-prefix DIR] [--conda-cleanup-envs]
+                 [--conda-cleanup-pkgs [{tarballs,cache}]]
+                 [--conda-create-envs-only] [--conda-frontend {conda,mamba}]
+                 [--use-apptainer] [--apptainer-prefix DIR]
+                 [--apptainer-args ARGS] [--use-envmodules]
+                 [--deploy-sources QUERY CHECKSUM]
+                 [--target-jobs TARGET_JOBS [TARGET_JOBS ...]]
+                 [--mode {remote,default,subprocess}]
+                 [--scheduler-solver-path SCHEDULER_SOLVER_PATH]
+                 [--max-jobs-per-second MAX_JOBS_PER_SECOND]
+                 [--storage-http-max-requests-per-second [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-auth [TAG::]AUTH_TYPE=ARG1,ARG2,... [[TAG::]AUTH_TYPE=ARG1,ARG2,... ...]]
+                 [--storage-http-allow-redirects [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--storage-http-supports-head [TAG::]VALUE [[TAG::]VALUE ...]]
+                 [--report-html-path VALUE]
+                 [--report-html-stylesheet-path VALUE]
+                 [--scheduler-greedy-greediness VALUE]
+                 [--scheduler-greedy-omit-prioritize-by-temp-and-input]
+                 [--scheduler-ilp-solver VALUE]
+                 [--scheduler-ilp-solver-path VALUE]
+                 [targets ...]
+snakemake: error: argument --logger: invalid choice: &#39;pypsa&#39; (choose from )
 </pre></div>
 </div>
 </div>
@@ -2003,7 +2061,94 @@ Workflows are described via a human readable, Python based language. They can be
 <code class="docutils literal notranslate"><span class="pre">pixi</span></code> automatically installs all the required Python packages and their correct versions, similar to <code class="docutils literal notranslate"><span class="pre">conda</span></code> but faster and more reliable. Pixi helps us not have to worry about package conflicts or missing dependencies.</p>
 <p><strong>2. Simplified Commands</strong><br />
 <code class="docutils literal notranslate"><span class="pre">pixi</span></code> also allows us to create shortcuts for long snakemake commands.</p>
-<p>You can see the full Snakemake commands that pixi runs by looking in the <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file in the Open-TYNDP repository. For example, we have defined a shortcut for running the full CBA workflow, called <code class="docutils literal notranslate"><span class="pre">tyndp-cba</span></code>.</p>
+<p>You can see the full Snakemake commands that pixi runs by looking in the <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file in the Open-TYNDP repository. For example, we have defined a shortcut for running the full CBA workflow, called <code class="docutils literal notranslate"><span class="pre">tyndp-cba</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;pixi.toml&quot;</span><span class="p">,</span> <span class="s2">&quot;toml&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">202</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="n">tyndp-cba</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    snakemake -call cba --configfile config/config.tyndp.yaml</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> documentation: <a class="reference external" href="https://pixi.prefix.dev/latest/">https://pixi.prefix.dev/latest/</a>.</p>
@@ -2025,9 +2170,21 @@ Workflows are described via a human readable, Python based language. They can be
 <section id="coupled-vs-decoupled-sb-cba-workflow">
 <h2>Coupled vs decoupled SB-CBA workflow<a class="headerlink" href="#coupled-vs-decoupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
 <center>
-<p><img alt="" src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feat/workshop-4/open-tyndp-workshops/cba_multi_proj.png" />
-<img alt="" src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feat/workshop-4/open-tyndp-workshops/cba_from_presolved.png" /></p>
-</center><p>The two diagrams above illustrate the two different ways to run the CBA workflow:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Coupled</p></th>
+<th class="head text-center"><p>Decoupled</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><img alt="alt" src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feat/workshop-4/open-tyndp-workshops/cba_multi_proj.png" /></p></td>
+<td class="text-center"><p><img alt="alt" src="https://raw.githubusercontent.com/open-energy-transition/open-tyndp-workshops/refs/heads/feat/workshop-4/open-tyndp-workshops/cba_from_presolved.png" /></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p>The two diagrams above illustrate the two different ways to run the CBA workflow:</p>
 <p><strong>Coupled Workflow (left):</strong></p>
 <ul class="simple">
 <li><p>Starts from scratch with the Scenario Building optimization</p></li>
@@ -2037,7 +2194,7 @@ Workflows are described via a human readable, Python based language. They can be
 </ul>
 <p><strong>Note:</strong> There are many rules (100+) that exist before <code class="docutils literal notranslate"><span class="pre">solve_sector_network_myopic</span></code>, but they are not included here for the diagram to be legible. With these diagrams, we mainly want to highlight the handoff between the SB process and the CBA process within the Open-TYNDP workflow.</p>
 <p><strong>Note:</strong> For each additional project you evaluate, the workflow adds more parallel branches. The diagram shows 2 projects just for illustrative purposes.</p>
-<p><strong>Decoupled Workflow (right):</strong></p>
+<p><strong>Decoupled Workflow (right)</strong>:</p>
 <ul class="simple">
 <li><p>Starts from pre-solved SB networks that we download from our releases</p></li>
 <li><p>Skips all the Scenario Building steps – begins directly at the <code class="docutils literal notranslate"><span class="pre">retrieve</span></code> stage</p></li>
@@ -2045,8 +2202,8 @@ Workflows are described via a human readable, Python based language. They can be
 <li><p>Much faster because we can skip the Scenario Building steps (including the optimization)</p></li>
 </ul>
 </section>
-<section id="cloning-and-installing-open-tyndp">
-<h2>Cloning and installing Open-TYNDP<a class="headerlink" href="#cloning-and-installing-open-tyndp" title="Link to this heading">#</a></h2>
+<section id="install-open-tyndp">
+<h2>Install Open-TYNDP<a class="headerlink" href="#install-open-tyndp" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the next line for running this notebook on Colab</span>
@@ -2060,578 +2217,6 @@ Workflows are described via a human readable, Python based language. They can be
 <p>If pixi was installed successfully but your shell still can’t find it, you may need to add it to your PATH manually. Use the following command to do so.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>os.environ<span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.expanduser<span class="o">(</span><span class="s2">&quot;~/.pixi/bin&quot;</span><span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;:&quot;</span><span class="w"> </span>+<span class="w"> </span>os.environ<span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span>
 </pre></div>
-</div>
-</div>
-<p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data
-</pre></div>
-</div>
-</div>
-</div>
-<p>Clone the Open-TYNDP repository directly:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="o">==</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;open-tyndp&quot;</span><span class="p">):</span>
-        <span class="o">!</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/open-energy-transition/open-tyndp.git
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;open-tyndp directory already exists, skipping clone&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Not in data/ directory. Current directory:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;open-tyndp&#39;...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Enumerating objects: 42699, done.
-remote: Counting objects:   0% (1/569)
-remote: Counting objects:   1% (6/569)
-remote: Counting objects:   2% (12/569)
-remote: Counting objects:   3% (18/569)
-remote: Counting objects:   4% (23/569)
-remote: Counting objects:   5% (29/569)
-remote: Counting objects:   6% (35/569)
-remote: Counting objects:   7% (40/569)
-remote: Counting objects:   8% (46/569)
-remote: Counting objects:   9% (52/569)
-remote: Counting objects:  10% (57/569)
-remote: Counting objects:  11% (63/569)
-remote: Counting objects:  12% (69/569)
-remote: Counting objects:  13% (74/569)
-remote: Counting objects:  14% (80/569)
-remote: Counting objects:  15% (86/569)
-remote: Counting objects:  16% (92/569)
-remote: Counting objects:  17% (97/569)
-remote: Counting objects:  18% (103/569)
-remote: Counting objects:  19% (109/569)
-remote: Counting objects:  20% (114/569)
-remote: Counting objects:  21% (120/569)
-remote: Counting objects:  22% (126/569)
-remote: Counting objects:  23% (131/569)
-remote: Counting objects:  24% (137/569)
-remote: Counting objects:  25% (143/569)
-remote: Counting objects:  26% (148/569)
-remote: Counting objects:  27% (154/569)
-remote: Counting objects:  28% (160/569)
-remote: Counting objects:  29% (166/569)
-remote: Counting objects:  30% (171/569)
-remote: Counting objects:  31% (177/569)
-remote: Counting objects:  32% (183/569)
-remote: Counting objects:  33% (188/569)
-remote: Counting objects:  34% (194/569)
-remote: Counting objects:  35% (200/569)
-remote: Counting objects:  36% (205/569)
-remote: Counting objects:  37% (211/569)
-remote: Counting objects:  38% (217/569)
-remote: Counting objects:  39% (222/569)
-remote: Counting objects:  40% (228/569)
-remote: Counting objects:  41% (234/569)
-remote: Counting objects:  42% (239/569)
-remote: Counting objects:  43% (245/569)
-remote: Counting objects:  44% (251/569)
-remote: Counting objects:  45% (257/569)
-remote: Counting objects:  46% (262/569)
-remote: Counting objects:  47% (268/569)
-remote: Counting objects:  48% (274/569)
-remote: Counting objects:  49% (279/569)
-remote: Counting objects:  50% (285/569)
-remote: Counting objects:  51% (291/569)
-remote: Counting objects:  52% (296/569)
-remote: Counting objects:  53% (302/569)
-remote: Counting objects:  54% (308/569)
-remote: Counting objects:  55% (313/569)
-remote: Counting objects:  56% (319/569)
-remote: Counting objects:  57% (325/569)
-remote: Counting objects:  58% (331/569)
-remote: Counting objects:  59% (336/569)
-remote: Counting objects:  60% (342/569)
-remote: Counting objects:  61% (348/569)
-remote: Counting objects:  62% (353/569)
-remote: Counting objects:  63% (359/569)
-remote: Counting objects:  64% (365/569)
-remote: Counting objects:  65% (370/569)
-remote: Counting objects:  66% (376/569)
-remote: Counting objects:  67% (382/569)
-remote: Counting objects:  68% (387/569)
-remote: Counting objects:  69% (393/569)
-remote: Counting objects:  70% (399/569)
-remote: Counting objects:  71% (404/569)
-remote: Counting objects:  72% (410/569)
-remote: Counting objects:  73% (416/569)
-remote: Counting objects:  74% (422/569)
-remote: Counting objects:  75% (427/569)
-remote: Counting objects:  76% (433/569)
-remote: Counting objects:  77% (439/569)
-remote: Counting objects:  78% (444/569)
-remote: Counting objects:  79% (450/569)
-remote: Counting objects:  80% (456/569)
-remote: Counting objects:  81% (461/569)
-remote: Counting objects:  82% (467/569)
-remote: Counting objects:  83% (473/569)
-remote: Counting objects:  84% (478/569)
-remote: Counting objects:  85% (484/569)
-remote: Counting objects:  86% (490/569)
-remote: Counting objects:  87% (496/569)
-remote: Counting objects:  88% (501/569)
-remote: Counting objects:  89% (507/569)
-remote: Counting objects:  90% (513/569)
-remote: Counting objects:  91% (518/569)
-remote: Counting objects:  92% (524/569)
-remote: Counting objects:  93% (530/569)
-remote: Counting objects:  94% (535/569)
-remote: Counting objects:  95% (541/569)
-remote: Counting objects:  96% (547/569)
-remote: Counting objects:  97% (552/569)
-remote: Counting objects:  98% (558/569)
-remote: Counting objects:  99% (564/569)
-remote: Counting objects: 100% (569/569)
-remote: Counting objects: 100% (569/569), done.
-remote: Compressing objects:   0% (1/220)
-remote: Compressing objects:   1% (3/220)
-remote: Compressing objects:   2% (5/220)
-remote: Compressing objects:   3% (7/220)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   4% (9/220)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   5% (11/220)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:   6% (14/220)
-remote: Compressing objects:   7% (16/220)
-remote: Compressing objects:   8% (18/220)
-remote: Compressing objects:   9% (20/220)
-remote: Compressing objects:  10% (22/220)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  11% (25/220)
-remote: Compressing objects:  12% (27/220)
-remote: Compressing objects:  13% (29/220)
-remote: Compressing objects:  14% (31/220)
-remote: Compressing objects:  15% (33/220)
-remote: Compressing objects:  16% (36/220)
-remote: Compressing objects:  17% (38/220)
-remote: Compressing objects:  18% (40/220)
-remote: Compressing objects:  19% (42/220)
-remote: Compressing objects:  20% (44/220)
-remote: Compressing objects:  21% (47/220)
-remote: Compressing objects:  22% (49/220)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Compressing objects:  23% (51/220)
-remote: Compressing objects:  24% (53/220)
-remote: Compressing objects:  25% (55/220)
-remote: Compressing objects:  26% (58/220)
-remote: Compressing objects:  27% (60/220)
-remote: Compressing objects:  28% (62/220)
-remote: Compressing objects:  29% (64/220)
-remote: Compressing objects:  30% (66/220)
-remote: Compressing objects:  31% (69/220)
-remote: Compressing objects:  32% (71/220)
-remote: Compressing objects:  33% (73/220)
-remote: Compressing objects:  34% (75/220)
-remote: Compressing objects:  35% (77/220)
-remote: Compressing objects:  36% (80/220)
-remote: Compressing objects:  37% (82/220)
-remote: Compressing objects:  38% (84/220)
-remote: Compressing objects:  39% (86/220)
-remote: Compressing objects:  40% (88/220)
-remote: Compressing objects:  41% (91/220)
-remote: Compressing objects:  42% (93/220)
-remote: Compressing objects:  43% (95/220)
-remote: Compressing objects:  44% (97/220)
-remote: Compressing objects:  45% (99/220)
-remote: Compressing objects:  46% (102/220)
-remote: Compressing objects:  47% (104/220)
-remote: Compressing objects:  48% (106/220)
-remote: Compressing objects:  49% (108/220)
-remote: Compressing objects:  50% (110/220)
-remote: Compressing objects:  51% (113/220)
-remote: Compressing objects:  52% (115/220)
-remote: Compressing objects:  53% (117/220)
-remote: Compressing objects:  54% (119/220)
-remote: Compressing objects:  55% (121/220)
-remote: Compressing objects:  56% (124/220)
-remote: Compressing objects:  57% (126/220)
-remote: Compressing objects:  58% (128/220)
-remote: Compressing objects:  59% (130/220)
-remote: Compressing objects:  60% (132/220)
-remote: Compressing objects:  61% (135/220)
-remote: Compressing objects:  62% (137/220)
-remote: Compressing objects:  63% (139/220)
-remote: Compressing objects:  64% (141/220)
-remote: Compressing objects:  65% (143/220)
-remote: Compressing objects:  66% (146/220)
-remote: Compressing objects:  67% (148/220)
-remote: Compressing objects:  68% (150/220)
-remote: Compressing objects:  69% (152/220)
-remote: Compressing objects:  70% (154/220)
-remote: Compressing objects:  71% (157/220)
-remote: Compressing objects:  72% (159/220)
-remote: Compressing objects:  73% (161/220)
-remote: Compressing objects:  74% (163/220)
-remote: Compressing objects:  75% (165/220)
-remote: Compressing objects:  76% (168/220)
-remote: Compressing objects:  77% (170/220)
-remote: Compressing objects:  78% (172/220)
-remote: Compressing objects:  79% (174/220)
-remote: Compressing objects:  80% (176/220)
-remote: Compressing objects:  81% (179/220)
-remote: Compressing objects:  82% (181/220)
-remote: Compressing objects:  83% (183/220)
-remote: Compressing objects:  84% (185/220)
-remote: Compressing objects:  85% (187/220)
-remote: Compressing objects:  86% (190/220)
-remote: Compressing objects:  87% (192/220)
-remote: Compressing objects:  88% (194/220)
-remote: Compressing objects:  89% (196/220)
-remote: Compressing objects:  90% (198/220)
-remote: Compressing objects:  91% (201/220)
-remote: Compressing objects:  92% (203/220)
-remote: Compressing objects:  93% (205/220)
-remote: Compressing objects:  94% (207/220)
-remote: Compressing objects:  95% (209/220)
-remote: Compressing objects:  96% (212/220)
-remote: Compressing objects:  97% (214/220)
-remote: Compressing objects:  98% (216/220)
-remote: Compressing objects:  99% (218/220)
-remote: Compressing objects: 100% (220/220)
-remote: Compressing objects: 100% (220/220), done.
-Receiving objects:   0% (1/42699)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   1% (427/42699)
-Receiving objects:   2% (854/42699)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   3% (1281/42699)
-Receiving objects:   4% (1708/42699)
-Receiving objects:   5% (2135/42699)
-Receiving objects:   6% (2562/42699)
-Receiving objects:   7% (2989/42699)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:   8% (3416/42699)
-Receiving objects:   9% (3843/42699)
-Receiving objects:  10% (4270/42699)
-Receiving objects:  11% (4697/42699)
-Receiving objects:  12% (5124/42699)
-Receiving objects:  13% (5551/42699)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  14% (5978/42699), 18.92 MiB | 37.82 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  15% (6405/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  16% (6832/42699), 18.92 MiB | 37.82 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  17% (7259/42699), 18.92 MiB | 37.82 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  18% (7686/42699), 18.92 MiB | 37.82 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  19% (8113/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  20% (8540/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  21% (8967/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  22% (9394/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  23% (9821/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  24% (10248/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  25% (10675/42699), 18.92 MiB | 37.82 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  26% (11102/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  27% (11529/42699), 18.92 MiB | 37.82 MiB/s
-Receiving objects:  27% (11678/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  28% (11956/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  29% (12383/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  30% (12810/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  31% (13237/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  32% (13664/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  33% (14091/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  34% (14518/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  35% (14945/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  36% (15372/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  37% (15799/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  38% (16226/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  39% (16653/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  40% (17080/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  41% (17507/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  42% (17934/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  43% (18361/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  44% (18788/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  45% (19215/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  46% (19642/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  47% (20069/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  48% (20496/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  49% (20923/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  50% (21350/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  51% (21777/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  52% (22204/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  53% (22631/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  54% (23058/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  55% (23485/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  56% (23912/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  57% (24339/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  58% (24766/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  59% (25193/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  60% (25620/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  61% (26047/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  62% (26474/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  63% (26901/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  64% (27328/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  65% (27755/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  66% (28182/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  67% (28609/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  68% (29036/42699), 47.22 MiB | 47.21 MiB/s
-Receiving objects:  69% (29463/42699), 47.22 MiB | 47.21 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  69% (29818/42699), 99.86 MiB | 49.93 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  70% (29890/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  71% (30317/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  72% (30744/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  73% (31171/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  74% (31598/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  75% (32025/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  76% (32452/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  77% (32879/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  78% (33306/42699), 99.86 MiB | 49.93 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  79% (33733/42699), 99.86 MiB | 49.93 MiB/s
-Receiving objects:  80% (34160/42699), 99.86 MiB | 49.93 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  81% (34587/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  82% (35014/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  83% (35441/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  84% (35868/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  85% (36295/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  86% (36722/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  87% (37149/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  88% (37576/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  89% (38003/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  90% (38430/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  91% (38857/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  92% (39284/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  93% (39711/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  94% (40138/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  95% (40565/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  96% (40992/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects:  97% (41419/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  98% (41846/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Receiving objects:  99% (42273/42699), 127.87 MiB | 51.15 MiB/s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>remote: Total 42699 (delta 512), reused 349 (delta 349), pack-reused 42130 (from 4)
-Receiving objects: 100% (42699/42699), 127.87 MiB | 51.15 MiB/s
-Receiving objects: 100% (42699/42699), 147.28 MiB | 51.19 MiB/s, done.
-Resolving deltas:   0% (0/33267)
-Resolving deltas:   1% (333/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   2% (666/33267)
-Resolving deltas:   3% (1000/33267)
-Resolving deltas:   4% (1331/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   5% (1664/33267)
-Resolving deltas:   6% (1997/33267)
-Resolving deltas:   7% (2329/33267)
-Resolving deltas:   8% (2662/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:   9% (2995/33267)
-Resolving deltas:  10% (3327/33267)
-Resolving deltas:  11% (3660/33267)
-Resolving deltas:  12% (3993/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  13% (4325/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  14% (4658/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  15% (4991/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  16% (5323/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  17% (5656/33267)
-Resolving deltas:  18% (5989/33267)
-Resolving deltas:  19% (6321/33267)
-Resolving deltas:  20% (6654/33267)
-Resolving deltas:  21% (6987/33267)
-Resolving deltas:  22% (7319/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  23% (7652/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  24% (7985/33267)
-Resolving deltas:  25% (8317/33267)
-Resolving deltas:  26% (8650/33267)
-Resolving deltas:  27% (8983/33267)
-Resolving deltas:  28% (9315/33267)
-Resolving deltas:  29% (9648/33267)
-Resolving deltas:  30% (9981/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  31% (10313/33267)
-Resolving deltas:  32% (10646/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  33% (10979/33267)
-Resolving deltas:  34% (11311/33267)
-Resolving deltas:  35% (11644/33267)
-Resolving deltas:  36% (11977/33267)
-Resolving deltas:  37% (12309/33267)
-Resolving deltas:  38% (12642/33267)
-Resolving deltas:  39% (12975/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  40% (13307/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  41% (13640/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  42% (13973/33267)
-Resolving deltas:  43% (14305/33267)
-Resolving deltas:  44% (14638/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  45% (14971/33267)
-Resolving deltas:  46% (15303/33267)
-Resolving deltas:  47% (15636/33267)
-Resolving deltas:  48% (15969/33267)
-Resolving deltas:  49% (16301/33267)
-Resolving deltas:  50% (16634/33267)
-Resolving deltas:  51% (16967/33267)
-Resolving deltas:  52% (17300/33267)
-Resolving deltas:  53% (17633/33267)
-Resolving deltas:  54% (17965/33267)
-Resolving deltas:  55% (18297/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  56% (18630/33267)
-Resolving deltas:  56% (18904/33267)
-Resolving deltas:  57% (18963/33267)
-Resolving deltas:  58% (19295/33267)
-Resolving deltas:  59% (19628/33267)
-Resolving deltas:  60% (19961/33267)
-Resolving deltas:  61% (20293/33267)
-Resolving deltas:  62% (20626/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  63% (20959/33267)
-Resolving deltas:  64% (21291/33267)
-Resolving deltas:  65% (21624/33267)
-Resolving deltas:  66% (21957/33267)
-Resolving deltas:  67% (22289/33267)
-Resolving deltas:  68% (22622/33267)
-Resolving deltas:  69% (22955/33267)
-Resolving deltas:  70% (23287/33267)
-Resolving deltas:  71% (23620/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  72% (23953/33267)
-Resolving deltas:  73% (24285/33267)
-Resolving deltas:  74% (24618/33267)
-Resolving deltas:  75% (24951/33267)
-Resolving deltas:  76% (25283/33267)
-Resolving deltas:  77% (25617/33267)
-Resolving deltas:  78% (25949/33267)
-Resolving deltas:  79% (26281/33267)
-Resolving deltas:  80% (26614/33267)
-Resolving deltas:  81% (26948/33267)
-Resolving deltas:  82% (27279/33267)
-Resolving deltas:  83% (27612/33267)
-Resolving deltas:  84% (27945/33267)
-Resolving deltas:  85% (28277/33267)
-Resolving deltas:  86% (28610/33267)
-Resolving deltas:  87% (28943/33267)
-Resolving deltas:  88% (29275/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  89% (29608/33267)
-Resolving deltas:  90% (29941/33267)
-Resolving deltas:  91% (30273/33267)
-Resolving deltas:  92% (30606/33267)
-Resolving deltas:  93% (30939/33267)
-Resolving deltas:  94% (31271/33267)
-Resolving deltas:  95% (31604/33267)
-Resolving deltas:  96% (31937/33267)
-Resolving deltas:  97% (32269/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas:  98% (32602/33267)
-Resolving deltas:  99% (32935/33267)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving deltas: 100% (33267/33267)
-Resolving deltas: 100% (33267/33267), done.
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, navigate into the the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> directory:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;open-tyndp/&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory changed to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Directory changed to: /home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp
-</pre></div>
-</div>
 </div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to install the <code class="docutils literal notranslate"><span class="pre">open-tyndp</span></code> environment:</p>
@@ -2650,31 +2235,204 @@ Resolving deltas: 100% (33267/33267), done.
 </section>
 <section id="coupled-sb-cba-workflow">
 <h2>Coupled SB-&gt;CBA workflow<a class="headerlink" href="#coupled-sb-cba-workflow" title="Link to this heading">#</a></h2>
-<p>As mentioned earlier, the command <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> executes the complete CBA workflow:</p>
-<ol class="arabic simple">
-<li><p>Takes a solved Scenario Building network (either from scratch or using pre-solved network)</p></li>
-<li><p>Prepares the CBA reference and project networks, for the specified project(s)</p></li>
-<li><p>Evaluates each specified project using TOOT or PINT methodology</p></li>
-<li><p>Calculates indicators (B1-B4)</p></li>
-</ol>
 <p><strong>Configuration Options</strong></p>
 <p>The Open-TYNDP workflow’s settings are housed in <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>. Feel free to open the file to explore the full extent of configuration settings we have available.</p>
-<p>One key parameter that affects both the SB and CBA processes is the run name:</p>
-<p>Run name:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">run</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="w"> </span><span class="c1"># which scenario to run - for example, can be changed to &quot;NT&quot; to run just the NT scenario</span>
+<p>One key parameter that affects both the SB and CBA processes is the run name, which sets what scenario(s) to run - for example, the parameter can be changed to “NT” to run just the NT scenario:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;config/config.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="nt">run</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tyndp&quot;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;all&quot;</span>
+</pre></div>
+</div></div>
 </div>
 <p>Some CBA-specific key parameters are:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cba</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="c1"># which planning horizon(s) to assess project on</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2030</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2040</span>
-<span class="w">  </span><span class="nt">projects</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t1-t35</span><span class="w"> </span><span class="c1"># which projects to assess</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;config/config.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">411</span><span class="p">,</span> <span class="mi">432</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can modify these settings in two ways:</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="nt">cba</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hurdle_costs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w"> </span><span class="c1"># Transmission line marginal cost</span>
+<span class="w">  </span><span class="nt">co2_societal_cost</span><span class="p">:</span><span class="w"> </span><span class="c1"># euros/t; 2024 CBA Implementation Guidelines, p. 68</span>
+<span class="w">    </span><span class="nt">2030</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">low</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">126</span>
+<span class="w">      </span><span class="nt">central</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">238</span>
+<span class="w">      </span><span class="nt">high</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">315</span>
+<span class="w">    </span><span class="nt">2040</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">low</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">339</span>
+<span class="w">      </span><span class="nt">central</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">628</span>
+<span class="w">      </span><span class="nt">high</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">662</span>
+<span class="w">  </span><span class="nt">planning_horizons</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2030</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2040</span>
+<span class="w">  </span><span class="nt">cba_scenario_input</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">use_presolved</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">sb_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span><span class="w"> </span><span class="c1"># use &#39;latest&#39; or a supported version from data/versions.csv for pre-solved SB network input in CBA; only applies if use_presolved is true</span>
+<span class="w">  </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toot</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pint</span>
+<span class="w">  </span><span class="nt">projects</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t1-t35</span>
+</pre></div>
+</div></div>
+</div>
+<p>You can modify the config settings within Open-TYNDP in two ways:</p>
 <ol class="arabic simple">
 <li><p><strong>Edit the config file directly</strong></p></li>
 <li><p><strong>Override via command line</strong> – For example, by adding the following to your command: <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">'run={&quot;name&quot;:&quot;NT&quot;}'</span> <span class="pre">'cba={&quot;planning_horizons&quot;:[2030]}'</span></code></p></li>
@@ -2683,6 +2441,14 @@ Resolving deltas: 100% (33267/33267), done.
 <p class="admonition-title">Tip</p>
 <p>In practice, editing the YAML configuration files directly in a text editor or IDE is much easier than using command-line overrides. We’re using command-line options in this notebook for demonstration purposes, but for real life, we recommend modifying the config files directly!</p>
 </div>
+<p><strong>Triggering a complete CBA run</strong></p>
+<p>As hinted earlier, the command <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code> executes the complete CBA workflow:</p>
+<ol class="arabic simple">
+<li><p>Takes a solved Scenario Building network (either from scratch or using pre-solved network)</p></li>
+<li><p>Prepares the CBA reference and project networks, for the specified project(s)</p></li>
+<li><p>Evaluates each specified project using TOOT or PINT methodology</p></li>
+<li><p>Calculates indicators (B1-B4)</p></li>
+</ol>
 <p>First, let’s check what running the full workflow could look like by doing a dry-run of <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2753,8 +2519,8 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 </section>
 </section>
-<section id="task-5-configure-the-settings-to-run-the-nt-scenario-for-a-single-cba-project-and-planning-horizon">
-<h2>Task 5: Configure the settings to run the NT scenario for a single CBA project and planning horizon<a class="headerlink" href="#task-5-configure-the-settings-to-run-the-nt-scenario-for-a-single-cba-project-and-planning-horizon" title="Link to this heading">#</a></h2>
+<section id="task-5-configure-the-settings-in-config-files">
+<h2>Task 5: Configure the settings in config files<a class="headerlink" href="#task-5-configure-the-settings-in-config-files" title="Link to this heading">#</a></h2>
 <p>So far, we’ve been setting the run settings via the command line. However, as we’ve mentioned, in real life it’s much easier to go into the config files and edit them directly. So let’s do that for the settings we’ve been running the CBA with so far:</p>
 <ul class="simple">
 <li><p>NT run</p></li>
@@ -2793,12 +2559,93 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 <p>You should see the same number of steps as when we ran <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span> <span class="pre">--config</span> <span class="pre">'run={&quot;name&quot;:&quot;NT&quot;}'</span> <span class="pre">'cba={&quot;planning_horizons&quot;:[2030],&quot;projects&quot;:[&quot;t4&quot;]}'</span> <span class="pre">-n</span></code> above.</p>
 <p>Now you can run the CBA workflow without needing to specify configuration overrides on the command line!</p>
 </section>
-<section id="modifying-climate-years">
-<h2>Modifying climate years<a class="headerlink" href="#modifying-climate-years" title="Link to this heading">#</a></h2>
+<section id="run-different-and-multiple-climate-years">
+<h2>Run different and multiple climate years<a class="headerlink" href="#run-different-and-multiple-climate-years" title="Link to this heading">#</a></h2>
 <p><strong>Understanding Climate Years</strong></p>
 <p>Energy system performance varies significantly with weather conditions - wind and solar availability change year to year, as do heating and cooling demands. To account for this variability, Open-TYNDP can evaluate scenarios using different historical climate years.</p>
 <p>Climate year scenarios are defined in <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code>. For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">NT-cy2008</span><span class="p">:</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="nt">NT-cy2008</span><span class="p">:</span>
 <span class="c1">#  &lt;&lt;: *cba-common</span>
 <span class="w">  </span><span class="nt">snapshots</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2008-01-01&quot;</span>
@@ -2810,6 +2657,7 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 <span class="w">  </span><span class="nt">cba</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
 </pre></div>
+</div></div>
 </div>
 <p>The following climate year scenarios related to the <code class="docutils literal notranslate"><span class="pre">NT</span></code> scenario are already existing in the Open-TYNDP workflow:</p>
 <ul class="simple">
@@ -2819,10 +2667,92 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 <li><p><code class="docutils literal notranslate"><span class="pre">NT-cyears</span></code>: Runs all 3 NT scenarios: <code class="docutils literal notranslate"><span class="pre">NT-cy1995</span></code>, <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>, and <code class="docutils literal notranslate"><span class="pre">NT-cy2009</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">NY-cyears</span></code> scenario acts somewhat as a collection scenario for the 3 climate years and is defined in <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code> as well:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">NT-cyears</span><span class="p">:</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;config/scenarios.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">314</span><span class="p">,</span> <span class="mi">316</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.output_html .hll { background-color: #ffffcc }
+.output_html { background: #f8f8f8; }
+.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
+.output_html .err { border: 1px solid #F00 } /* Error */
+.output_html .k { color: #008000; font-weight: bold } /* Keyword */
+.output_html .o { color: #666 } /* Operator */
+.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.output_html .cp { color: #9C6500 } /* Comment.Preproc */
+.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.output_html .gd { color: #A00000 } /* Generic.Deleted */
+.output_html .ge { font-style: italic } /* Generic.Emph */
+.output_html .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.output_html .gr { color: #E40000 } /* Generic.Error */
+.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.output_html .gi { color: #008400 } /* Generic.Inserted */
+.output_html .go { color: #717171 } /* Generic.Output */
+.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.output_html .gs { font-weight: bold } /* Generic.Strong */
+.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.output_html .gt { color: #04D } /* Generic.Traceback */
+.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.output_html .kp { color: #008000 } /* Keyword.Pseudo */
+.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.output_html .kt { color: #B00040 } /* Keyword.Type */
+.output_html .m { color: #666 } /* Literal.Number */
+.output_html .s { color: #BA2121 } /* Literal.String */
+.output_html .na { color: #687822 } /* Name.Attribute */
+.output_html .nb { color: #008000 } /* Name.Builtin */
+.output_html .nc { color: #00F; font-weight: bold } /* Name.Class */
+.output_html .no { color: #800 } /* Name.Constant */
+.output_html .nd { color: #A2F } /* Name.Decorator */
+.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.output_html .nf { color: #00F } /* Name.Function */
+.output_html .nl { color: #767600 } /* Name.Label */
+.output_html .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.output_html .nv { color: #19177C } /* Name.Variable */
+.output_html .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.output_html .w { color: #BBB } /* Text.Whitespace */
+.output_html .mb { color: #666 } /* Literal.Number.Bin */
+.output_html .mf { color: #666 } /* Literal.Number.Float */
+.output_html .mh { color: #666 } /* Literal.Number.Hex */
+.output_html .mi { color: #666 } /* Literal.Number.Integer */
+.output_html .mo { color: #666 } /* Literal.Number.Oct */
+.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
+.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
+.output_html .sc { color: #BA2121 } /* Literal.String.Char */
+.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
+.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.output_html .sx { color: #008000 } /* Literal.String.Other */
+.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
+.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
+.output_html .ss { color: #19177C } /* Literal.String.Symbol */
+.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.output_html .fm { color: #00F } /* Name.Function.Magic */
+.output_html .vc { color: #19177C } /* Name.Variable.Class */
+.output_html .vg { color: #19177C } /* Name.Variable.Global */
+.output_html .vi { color: #19177C } /* Name.Variable.Instance */
+.output_html .vm { color: #19177C } /* Name.Variable.Magic */
+.output_html .il { color: #666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="nt">NT-cyears</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">cba</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">scenarios</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">NT-cy2009</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NT-cy2008</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NT-cy1995</span><span class="p p-Indicator">]</span>
 </pre></div>
+</div></div>
 </div>
 <p>How can we run the CBA workflow for a different climate year? First, we again need to run up to the checkpoint for the different climate years:</p>
 <div class="cell docutils container">
@@ -2865,44 +2795,46 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 </div>
 <p>Notice how the total count of steps is much higher (especially for CBA-specific steps such as <code class="docutils literal notranslate"><span class="pre">make_indicators</span></code> and weather-dependent steps such as <code class="docutils literal notranslate"><span class="pre">build_renewable_profiles_pecd</span></code>) when multiple climate years are run.</p>
 </section>
-<section id="task-6-create-your-own-climate-year-and-run-it">
-<h2>Task 6: Create your own climate year and run it<a class="headerlink" href="#task-6-create-your-own-climate-year-and-run-it" title="Link to this heading">#</a></h2>
+<section id="task-6-create-your-own-climate-year-scenario">
+<h2>Task 6: Create your own climate year scenario<a class="headerlink" href="#task-6-create-your-own-climate-year-scenario" title="Link to this heading">#</a></h2>
 <p>Create your own custom climate year scenario by modifying <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code>:</p>
 <p><strong>Instructions:</strong></p>
 <ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code></p></li>
-<li><p>Find an existing climate year definition (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>)</p></li>
-<li><p>Copy the entire section and give it a new name (e.g., <code class="docutils literal notranslate"><span class="pre">NT-workshop</span></code> or anything you like)</p></li>
-<li><p>Modify the parameters as desired (e.g., set the snapshots to the climate year you’re interested in - note that we’re limited to 1995, 2008, and 2009)</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code> .</p></li>
+<li><p>Find an existing climate year definition (e.g., <code class="docutils literal notranslate"><span class="pre">NT-cy2008</span></code>).</p></li>
+<li><p>Copy the entire section and give it a new name (e.g., <code class="docutils literal notranslate"><span class="pre">NT-workshop</span></code> or anything you like).</p></li>
+<li><p>Modify the parameters as desired (e.g., set the snapshots to the climate year you’re interested in - note that we’re limited to 1995, 2008, and 2009).</p></li>
 <li><p>Add CBA configuration to your custom scenario (similar to what you did in Task 5):</p></li>
 </ol>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="nt">cba</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
-<span class="w">    </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
-</pre></div>
-</div>
-<p>In the end, the full custom scenario should look something like this:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">NT-workshop</span><span class="p">:</span>
-<span class="c1">#  &lt;&lt;: *cba-common</span>
-<span class="w">  </span><span class="nt">snapshots</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2008-01-01&quot;</span>
-<span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2009-01-01&quot;</span>
-
-<span class="w">  </span><span class="nt">atlite</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default_cutout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">europe-2008-sarah3-era5</span>
-
-<span class="w">  </span><span class="nt">cba</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
-<span class="w">    </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">cba</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">      </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>Save the file</p></li>
-<li><p>Update <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> to set run: name: to <code class="docutils literal notranslate"><span class="pre">[&quot;NT-workshop&quot;]</span></code> (or your custom scenario name)</p></li>
+<li><p>In the end, the full custom scenario should look something like this:</p></li>
 </ol>
-<p>By configuring the CBA settings in your scenario file, you can now run it with just: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span> <span class="pre">-n</span></code> (first, remember to run the checkpoint).</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">NT-workshop</span><span class="p">:</span>
+<span class="w">    </span><span class="c1">#  &lt;&lt;: *cba-common</span>
+<span class="w">      </span><span class="nt">snapshots</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2008-01-01&quot;</span>
+<span class="w">        </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2009-01-01&quot;</span>
+
+<span class="w">      </span><span class="nt">atlite</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">default_cutout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">europe-2008-sarah3-era5</span>
+
+<span class="w">      </span><span class="nt">cba</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">sb_scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NT</span>
+<span class="w">        </span><span class="nt">planning_horizons</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2030</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;t4&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Save the <code class="docutils literal notranslate"><span class="pre">config/scenarios.tyndp.yaml</span></code> file,</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code> to set run: name: to <code class="docutils literal notranslate"><span class="pre">&quot;NT-workshop&quot;</span></code> (or your custom scenario name). Save file.</p></li>
+</ol>
+<p>By configuring the CBA settings in your scenario file, you can now run it with just: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">tyndp-cba</span> <span class="pre">-n</span></code> (but first, remember to run the checkpoint).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The weather data availability is limited. Currently, only climate years 1995, 2008, and 2009 are available in the pre-built PECD (Pan-European Climate Database) that Open-TYNDP uses. The data is reduced to minimise retrieval requirements.</p>
@@ -2943,8 +2875,8 @@ After <code class="docutils literal notranslate"><span class="pre">clean_project
 <p>At the moment, Open-TYNDP has only run the SB process on the NT scenario, so we can only use pre-solved networks for the NT scenario (meaning, you cannot set <code class="docutils literal notranslate"><span class="pre">use_presolved</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and change the run name to “DE” for example).</p>
 </div>
 </section>
-<section id="task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">
-<h2>Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)<a class="headerlink" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled" title="Link to this heading">#</a></h2>
+<section id="task-7-optional-perform-a-complete-decoupled-cost-benefit-analysis">
+<h2>Task 7 (optional): Perform a complete (decoupled) Cost-Benefit Analysis<a class="headerlink" href="#task-7-optional-perform-a-complete-decoupled-cost-benefit-analysis" title="Link to this heading">#</a></h2>
 <p><strong>Optional Exercise: Run a Complete CBA</strong></p>
 <p>If you have time and want to see the full workflow in action, you can run a complete CBA evaluation using a pre-solved network:</p>
 <p>First, navigate into a specific branch called <code class="docutils literal notranslate"><span class="pre">workshop-4-cba</span></code> in git:</p>
@@ -3169,11 +3101,11 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_315f2">
+<table id="T_bdc76">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_315f2_level0_col0" class="col_heading level0 col0" >H2 Import (+), H2 Export (-) [TWh]</th>
+      <th id="T_bdc76_level0_col0" class="col_heading level0 col0" >H2 Import (+), H2 Export (-) [TWh]</th>
     </tr>
     <tr>
       <th class="index_name level0" >country</th>
@@ -3182,24 +3114,24 @@ dtype: float64
   </thead>
   <tbody>
     <tr>
-      <th id="T_315f2_level0_row0" class="row_heading level0 row0" >DE</th>
-      <td id="T_315f2_row0_col0" class="data row0 col0" >314.89</td>
+      <th id="T_bdc76_level0_row0" class="row_heading level0 row0" >DE</th>
+      <td id="T_bdc76_row0_col0" class="data row0 col0" >314.89</td>
     </tr>
     <tr>
-      <th id="T_315f2_level0_row1" class="row_heading level0 row1" >IT</th>
-      <td id="T_315f2_row1_col0" class="data row1 col0" >95.79</td>
+      <th id="T_bdc76_level0_row1" class="row_heading level0 row1" >IT</th>
+      <td id="T_bdc76_row1_col0" class="data row1 col0" >95.79</td>
     </tr>
     <tr>
-      <th id="T_315f2_level0_row2" class="row_heading level0 row2" >FR</th>
-      <td id="T_315f2_row2_col0" class="data row2 col0" >91.15</td>
+      <th id="T_bdc76_level0_row2" class="row_heading level0 row2" >FR</th>
+      <td id="T_bdc76_row2_col0" class="data row2 col0" >91.15</td>
     </tr>
     <tr>
-      <th id="T_315f2_level0_row3" class="row_heading level0 row3" >PL</th>
-      <td id="T_315f2_row3_col0" class="data row3 col0" >89.05</td>
+      <th id="T_bdc76_level0_row3" class="row_heading level0 row3" >PL</th>
+      <td id="T_bdc76_row3_col0" class="data row3 col0" >89.05</td>
     </tr>
     <tr>
-      <th id="T_315f2_level0_row4" class="row_heading level0 row4" >BE</th>
-      <td id="T_315f2_row4_col0" class="data row4 col0" >65.32</td>
+      <th id="T_bdc76_level0_row4" class="row_heading level0 row4" >BE</th>
+      <td id="T_bdc76_row4_col0" class="data row4 col0" >65.32</td>
     </tr>
   </tbody>
 </table>
@@ -3447,6 +3379,7 @@ dtype: float64
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-benefit-analysis">Cost-Benefit Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-open-tyndp-repository">Clone the Open-TYNDP repository</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
@@ -3462,16 +3395,16 @@ dtype: float64
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-vs-decoupled-sb-cba-workflow">Coupled vs decoupled SB-CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloning-and-installing-open-tyndp">Cloning and installing Open-TYNDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-open-tyndp">Install Open-TYNDP</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-sb-cba-workflow">Coupled SB-&gt;CBA workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoints">Checkpoints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-configure-the-settings-to-run-the-nt-scenario-for-a-single-cba-project-and-planning-horizon">Task 5: Configure the settings to run the NT scenario for a single CBA project and planning horizon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-climate-years">Modifying climate years</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-and-run-it">Task 6: Create your own climate year and run it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-configure-the-settings-in-config-files">Task 5: Configure the settings in config files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-different-and-multiple-climate-years">Run different and multiple climate years</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-create-your-own-climate-year-scenario">Task 6: Create your own climate year scenario</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoupled-sb-cba-workflow">Decoupled SB-&gt;CBA workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-cost-benefit-analysis-on-a-project-decoupled">Task 7 (optional): Perform a complete Cost-Benefit Analysis on a project (decoupled)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-optional-perform-a-complete-decoupled-cost-benefit-analysis">Task 7 (optional): Perform a complete (decoupled) Cost-Benefit Analysis</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
