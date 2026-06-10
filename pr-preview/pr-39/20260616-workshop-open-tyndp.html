@@ -445,14 +445,14 @@
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">1. Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-1-clone-the-open-tyndp-repository">Alternative 1: Clone the Open-TYNDP repository</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-2-the-windows-installer">Alternative 2: The Windows-Installer</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-tyndp-workflow">The Open-TYNDP workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-open-tyndp-workflow">2. Run the Open-TYNDP workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-workflow">High-level workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-configure-the-settings-in-config-files">Task: Configure the settings in config files</a></li>
@@ -471,7 +471,7 @@
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">3. Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-explore-outcomes-with-pypsa-explorer">Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-explore-nt-outcomes-using-the-pypsa-statistics-module">(Optional) Explore NT outcomes using the <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code> module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-from-a-network">Extracting insights from a network</a></li>
@@ -764,7 +764,7 @@ Workflows are described via a human readable, Python based language. They can be
 </section>
 </section>
 <section id="installing-open-tyndp">
-<h2>Installing Open-TYNDP<a class="headerlink" href="#installing-open-tyndp" title="Link to this heading">#</a></h2>
+<h2>1. Installing Open-TYNDP<a class="headerlink" href="#installing-open-tyndp" title="Link to this heading">#</a></h2>
 <p>There are multiple different alternatives for your to install the Open-TYNDP.</p>
 <p>Locally:</p>
 <ol class="arabic simple">
@@ -881,8 +881,8 @@ Workflows are described via a human readable, Python based language. They can be
 </iframe></section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="the-open-tyndp-workflow">
-<h1>The Open-TYNDP workflow<a class="headerlink" href="#the-open-tyndp-workflow" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="run-the-open-tyndp-workflow">
+<h1>2. Run the Open-TYNDP workflow<a class="headerlink" href="#run-the-open-tyndp-workflow" title="Link to this heading">#</a></h1>
 <p>Now that we’ve successfully installed the Open-TYNDP repository and initialized the python environment, let’s learn how to run an actual modelling workflow!</p>
 <section id="high-level-workflow">
 <h2>High-level workflow<a class="headerlink" href="#high-level-workflow" title="Link to this heading">#</a></h2>
@@ -1303,7 +1303,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2030.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;9146f221-492b-4884-9297-b8d0ab8481b3&#39;]
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2030.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;6d0e8128-25fd-4832-a6f6-fd1b8c53a8df&#39;]
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
@@ -1604,7 +1604,7 @@ Open-TYNDP offers several ways to do this, ranging from simple data updates to c
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="exploring-open-tyndp-s-latest-outcomes">
-<h1>Exploring Open-TYNDP’s latest outcomes<a class="headerlink" href="#exploring-open-tyndp-s-latest-outcomes" title="Link to this heading">#</a></h1>
+<h1>3. Exploring Open-TYNDP’s latest outcomes<a class="headerlink" href="#exploring-open-tyndp-s-latest-outcomes" title="Link to this heading">#</a></h1>
 <p>Now that you are familiar with the model workflow and the PyPSA-Explorer Dashboard, let’s have a look at the latest Open-TYNDP NT scenario results (v0.7.1) and explore them interactively using the PyPSA-Explorer.</p>
 <section id="task-explore-outcomes-with-pypsa-explorer">
 <h2>Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code><a class="headerlink" href="#task-explore-outcomes-with-pypsa-explorer" title="Link to this heading">#</a></h2>
@@ -2319,14 +2319,14 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">1. Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-1-clone-the-open-tyndp-repository">Alternative 1: Clone the Open-TYNDP repository</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-2-the-windows-installer">Alternative 2: The Windows-Installer</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-tyndp-workflow">The Open-TYNDP workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-open-tyndp-workflow">2. Run the Open-TYNDP workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-workflow">High-level workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-configure-the-settings-in-config-files">Task: Configure the settings in config files</a></li>
@@ -2345,7 +2345,7 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">3. Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-explore-outcomes-with-pypsa-explorer">Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-explore-nt-outcomes-using-the-pypsa-statistics-module">(Optional) Explore NT outcomes using the <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code> module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-from-a-network">Extracting insights from a network</a></li>
