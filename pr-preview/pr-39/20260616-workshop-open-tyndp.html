@@ -200,7 +200,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
@@ -429,8 +428,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Open-TYNDP: Installation, Workflows and Exploring Outcomes</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-tyndp-model">The Open-TYNDP model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Open-TYNDP: Installation, Workflows and Exploring Outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation-and-intro">Preparation and Intro</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
@@ -446,8 +445,9 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">1. Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-1-clone-the-open-tyndp-repository">Alternative 1: Clone the Open-TYNDP repository</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-2-the-windows-installer">Alternative 2: The Windows-Installer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-clone-via-terminal">Option 1: Clone via terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-clone-via-this-notebook-locally-or-collab">Option 2: Clone via this notebook (locally or Collab)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-the-windows-installer">Option 3: The Windows-Installer</a></li>
 </ul>
 </li>
 </ul>
@@ -456,11 +456,6 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-workflow">High-level workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-configure-the-settings-in-config-files">Task: Configure the settings in config files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-assumptions-in-open-tyndp">Modifying assumptions in Open-TYNDP</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-modifying-input-data">Method 1: Modifying Input Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-custom-assumptions">Method 2: Custom Assumptions</a></li>
@@ -472,6 +467,11 @@
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">3. Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-explore-outcomes-with-pypsa-explorer">Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-explore-nt-outcomes-using-the-pypsa-statistics-module">(Optional) Explore NT outcomes using the <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code> module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-from-a-network">Extracting insights from a network</a></li>
@@ -533,6 +533,8 @@
 <p>If you have not set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click the rocket button in the top right corner and launch “Colab”. If that doesn’t work, download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
 <p>Then install the required packages by uncommenting the cell below.</p>
 </div>
+<section id="preparation-and-intro">
+<h2>Preparation and Intro<a class="headerlink" href="#preparation-and-intro" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment for running this notebook on Colab</span>
@@ -584,7 +586,7 @@
 </div>
 </div>
 </div>
-<p>We use a custom unzip function here to preserve the original file timestamps. This matters for <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, which uses timestamps to decide which files need to be re-run.</p>
+<p>We use a custom unzip function here to preserve the original file timestamps. This matters for the workflow manager <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, which uses timestamps to decide which files need to be re-run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unzip_with_timestamps</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">extract_to</span><span class="p">,</span> <span class="n">keep_zip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -667,8 +669,6 @@ Done
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="the-open-tyndp-model">
-<h1>The Open-TYNDP model<a class="headerlink" href="#the-open-tyndp-model" title="Link to this heading">#</a></h1>
 <section id="workflow-management-using-snakemake-and-pixi">
 <h2>Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#workflow-management-using-snakemake-and-pixi" title="Link to this heading">#</a></h2>
 <p><strong>~15 minutes</strong></p>
@@ -769,17 +769,23 @@ Workflows are described via a human readable, Python based language. They can be
 <p>Locally:</p>
 <ol class="arabic simple">
 <li><p>Clone the Open-TYNDP repository using a terminal</p></li>
-<li><p>Clone the Open-TYNDP repository by executing this notebook locally</p></li>
+<li><p>Clone the Open-TYNDP repository by executing this notebook locally or on Colab</p></li>
 <li><p>Use the Open-TYNDP Windows Installer (only compatible with Windows OS)</p></li>
 </ol>
-<p>On Colab:</p>
-<ol class="arabic simple" start="4">
-<li><p>Clone the Open-TYNDP repository from the notebook</p></li>
-</ol>
 <p>You can follow the links to navigate to the corresponding section below.</p>
-<section id="alternative-1-clone-the-open-tyndp-repository">
-<h3>Alternative 1: Clone the Open-TYNDP repository<a class="headerlink" href="#alternative-1-clone-the-open-tyndp-repository" title="Link to this heading">#</a></h3>
-<p>We can install the Open-TYNDP by directly cloning the latest code repository from GitHub. First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
+<section id="option-1-clone-via-terminal">
+<h3>Option 1: Clone via terminal<a class="headerlink" href="#option-1-clone-via-terminal" title="Link to this heading">#</a></h3>
+<p>Open a terminal, navigate to your preferred folder, and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/open-energy-transition/open-tyndp.git
+<span class="nb">cd</span><span class="w"> </span>open-tyndp
+pixi<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>open-tyndp
+</pre></div>
+</div>
+</section>
+<section id="option-2-clone-via-this-notebook-locally-or-collab">
+<h3>Option 2: Clone via this notebook (locally or Collab)<a class="headerlink" href="#option-2-clone-via-this-notebook-locally-or-collab" title="Link to this heading">#</a></h3>
+<p>If you are running this notebook locally and prefer not to use a terminal, the cells below will clone the repository and set up the environment for you automatically.</p>
+<p>First, navigate into the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
@@ -865,8 +871,8 @@ Workflows are described via a human readable, Python based language. They can be
 </div>
 <p>And that’s it: We are good to go!</p>
 </section>
-<section id="alternative-2-the-windows-installer">
-<h3>Alternative 2: The Windows-Installer<a class="headerlink" href="#alternative-2-the-windows-installer" title="Link to this heading">#</a></h3>
+<section id="option-3-the-windows-installer">
+<h3>Option 3: The Windows-Installer<a class="headerlink" href="#option-3-the-windows-installer" title="Link to this heading">#</a></h3>
 <p>If you’re on Windows, you can skip the manual setup entirely. We’ve put together a signed and verified installer that takes care of everything for you under the hood:</p>
 <ul class="simple">
 <li><p>cloning the repository</p></li>
@@ -886,7 +892,7 @@ Workflows are described via a human readable, Python based language. They can be
 <p>Now that we’ve successfully installed the Open-TYNDP repository and initialized the python environment, let’s learn how to run an actual modelling workflow!</p>
 <section id="high-level-workflow">
 <h2>High-level workflow<a class="headerlink" href="#high-level-workflow" title="Link to this heading">#</a></h2>
-<p>Before diving into the details of the workflow, it helps to understand the high-level logic behind the large set of rules that make the entire Open-TYNDP workflow.</p>
+<p>Before diving into the details of the Scenario Building (SB) workflow, it helps to understand the high-level logic behind the large set of rules that make the entire Open-TYNDP workflow.</p>
 <p>In the following figure, we’ve illustrated a much simplified workflow that represents the high-level steps of Open-TYNDP.</p>
 <center>
 <p><img alt="" src="_images/minimal_workflow.png" /></p>
@@ -915,7 +921,13 @@ Workflows are described via a human readable, Python based language. They can be
 <section id="configuration-options">
 <h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h2>
 <p>The Open-TYNDP workflow’s settings are housed in <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>. Feel free to open the file to explore the full extent of configuration settings we have available.</p>
-<p>One key parameter is the run name, which sets what scenario(s) to run - for example, the parameter can be changed to “NT” to run just the NT scenario:</p>
+<p>One key parameter is the run name, which sets which scenario(s) to run. The TYNDP 2024 includes three scenarios, each representing a different vision of how Europe’s energy system could develop by 2030 and 2040:</p>
+<ol class="arabic simple">
+<li><p><strong>National Trends (NT)</strong> — a baseline scenario based on current national energy and climate plans. It reflects what is likely to happen given existing policies and commitments, without assuming additional ambition beyond what is already legislated.</p></li>
+<li><p><strong>Distributed Energy (DE)</strong> — a scenario in which the energy transition is driven by decentralised solutions: prosumers, local renewables, community energy, and distributed storage play a central role.</p></li>
+<li><p><strong>Global Ambition (GA)</strong> — a scenario with higher climate ambition and a more centralised approach, driven by large-scale renewable deployment, interconnection, and cross-border energy trade.</p></li>
+</ol>
+<p>By default, Open-TYNDP runs all three scenarios. To run a single scenario, change the <code class="docutils literal notranslate"><span class="pre">run:</span> <span class="pre">name:</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">config/config.tyndp.yaml</span></code>, for example, set it to “NT” to run just the NT scenario:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_code_lines</span><span class="p">(</span><span class="s2">&quot;config/config.tyndp.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
@@ -1173,82 +1185,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div>
-</section>
-<section id="interactive-exploration-with-pypsa-explorer">
-<h2>Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h2>
-<p>PyPSA-Explorer is an interactive dashboard for visualizing and analyzing energy system networks. It provides:</p>
-<p><strong>1. Energy Balance Tab</strong></p>
-<ul class="simple">
-<li><p>View production, consumption, and storage patterns over time</p></li>
-<li><p>Switch between time series and aggregated views</p></li>
-<li><p>Filter by energy carrier (electricity, hydrogen, etc.)</p></li>
-<li><p>Filter by country or region</p></li>
-</ul>
-<p><strong>2. Capacity Tab</strong></p>
-<ul class="simple">
-<li><p>Analyze installed capacities across scenarios</p></li>
-<li><p>Compare capacity buildout between 2030 and 2040</p></li>
-<li><p>View breakdowns by technology type and region</p></li>
-</ul>
-<p><strong>3. Economics Tab</strong></p>
-<ul class="simple">
-<li><p>Examine costs and revenues</p></li>
-<li><p>Review CAPEX and OPEX breakdowns by technology</p></li>
-<li><p>Compare regional cost distributions</p></li>
-<li><p>Assess investment requirements</p></li>
-</ul>
-<p><strong>4. Network Map</strong></p>
-<ul class="simple">
-<li><p>Visualize the geographical network layout</p></li>
-<li><p>View an interactive map with network components</p></li>
-<li><p>Zoom and pan to explore specific regions</p></li>
-</ul>
-<p><strong>Tip:</strong> Use the scenario selector buttons in the top-right corner to switch between NT 2030 and NT 2040 scenarios.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>PyPSA-Explorer can be launched in different ways depending on your environment:</p>
-<ul class="simple">
-<li><p><strong>Local Jupyter</strong>: Use the terminal command (recommended) or inline display</p></li>
-<li><p><strong>Google Colab</strong>: The dashboard launches inline, embedded directly in the notebook</p></li>
-<li><p><strong>Local Open-TYNDP</strong>: Launch the PyPSA-Explorer directly from the Open-TYNDP either directly from the workflow or from archived, pre-solved networks</p></li>
-</ul>
-<p>Follow the instructions below for your specific environment.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>PyPSA-Explorer is under active development and can experience bugs and limitations.</p>
-</div>
-<section id="for-local-users">
-<h3>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h3>
-<p>If you’re running locally, we <strong>recommend</strong> launching PyPSA-Explorer directly from the Open-TYNDP workflow using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-sb
-</pre></div>
-</div>
-<p>Or from the terminal directly using the pypsa-explorer pip package:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>path/to/your/network.nc:network_name<span class="w"> </span>path/to/your/second/network.nc:network2_name
-</pre></div>
-</div>
-<p>This command opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
-<p><strong>Alternative</strong>: The cell below can launch the dashboard inline within the notebook, though the terminal method provides better performance and responsiveness.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
-<span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch from the notebook instead</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
-    <span class="c1"># Local Jupyter: Inline display</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>  <span class="c1"># Make sure to define `networks` as a dictionary of imported PyPSA Networks first</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="for-google-colab-users">
-<h3>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h3>
-<p>Running PyPSA-Explorer on Google Colab requires a small workaround to display the dashboard properly inside the notebook.</p>
-<p>We already imported a useful helper function to handle this: <code class="docutils literal notranslate"><span class="pre">run_pypsa_explorer_in_colab()</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Tip for Colab users:</strong> To view the dashboard in fullscreen mode, click the three dots (⋮) in the top-right corner of the output cell and select <strong>“View output fullscreen”</strong>.</p>
 <p>We can now actually run the workflow once on a simplified temporal resolution (168H) which is computationally feasible to solve within this workshop. This resolution is already pre-configured, so we can simply execute:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!<span class="w"> </span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-sb
 </pre></div>
@@ -1303,7 +1239,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2030.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;6d0e8128-25fd-4832-a6f6-fd1b8c53a8df&#39;]
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2030.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;5f33340c-d5e8-4b8a-b8a1-110f4663dbca&#39;]
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
@@ -1474,7 +1410,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </section>
-</section>
 <section id="modifying-assumptions-in-open-tyndp">
 <h2>Modifying assumptions in Open-TYNDP<a class="headerlink" href="#modifying-assumptions-in-open-tyndp" title="Link to this heading">#</a></h2>
 <p>A key advantage of open-source energy modelling is the ability to adjust input assumptions and observe how results respond. This is especially important for TYNDP models, where assumptions evolve over time and multiple configurations need testing.
@@ -1606,6 +1541,83 @@ Open-TYNDP offers several ways to do this, ranging from simple data updates to c
 <section class="tex2jax_ignore mathjax_ignore" id="exploring-open-tyndp-s-latest-outcomes">
 <h1>3. Exploring Open-TYNDP’s latest outcomes<a class="headerlink" href="#exploring-open-tyndp-s-latest-outcomes" title="Link to this heading">#</a></h1>
 <p>Now that you are familiar with the model workflow and the PyPSA-Explorer Dashboard, let’s have a look at the latest Open-TYNDP NT scenario results (v0.7.1) and explore them interactively using the PyPSA-Explorer.</p>
+<section id="interactive-exploration-with-pypsa-explorer">
+<h2>Interactive Exploration with PyPSA-Explorer<a class="headerlink" href="#interactive-exploration-with-pypsa-explorer" title="Link to this heading">#</a></h2>
+<p>PyPSA-Explorer is an interactive dashboard for visualizing and analyzing energy system networks. It provides:
+<strong>1. Energy Balance Tab</strong></p>
+<ul class="simple">
+<li><p>View production, consumption, and storage patterns over time</p></li>
+<li><p>Switch between time series and aggregated views</p></li>
+<li><p>Filter by energy carrier (electricity, hydrogen, etc.)</p></li>
+<li><p>Filter by country or region</p></li>
+</ul>
+<p><strong>2. Capacity Tab</strong></p>
+<ul class="simple">
+<li><p>Analyze installed capacities across scenarios</p></li>
+<li><p>Compare capacity buildout between 2030 and 2040</p></li>
+<li><p>View breakdowns by technology type and region</p></li>
+</ul>
+<p><strong>3. Economics Tab</strong></p>
+<ul class="simple">
+<li><p>Examine costs and revenues</p></li>
+<li><p>Review CAPEX and OPEX breakdowns by technology</p></li>
+<li><p>Compare regional cost distributions</p></li>
+<li><p>Assess investment requirements</p></li>
+</ul>
+<p><strong>4. Network Map</strong></p>
+<ul class="simple">
+<li><p>Visualize the geographical network layout</p></li>
+<li><p>View an interactive map with network components</p></li>
+<li><p>Zoom and pan to explore specific regions</p></li>
+</ul>
+<p><strong>Tip:</strong> Use the scenario selector buttons in the top-right corner to switch between NT 2030 and NT 2040 scenarios.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PyPSA-Explorer can be launched in different ways depending on your environment:</p>
+<ul class="simple">
+<li><p><strong>Local Jupyter</strong>: Use the terminal command (recommended) or inline display</p></li>
+<li><p><strong>Google Colab</strong>: The dashboard launches inline, embedded directly in the notebook</p></li>
+<li><p><strong>Local Open-TYNDP</strong>: Launch the PyPSA-Explorer directly from the Open-TYNDP either directly from the workflow or from archived, pre-solved networks</p></li>
+</ul>
+<p>Follow the instructions below for your specific environment.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>PyPSA-Explorer is under active development and can experience bugs and limitations.</p>
+</div>
+<section id="for-local-users">
+<h3>For Local Users<a class="headerlink" href="#for-local-users" title="Link to this heading">#</a></h3>
+<p>If you’re running locally, we <strong>recommend</strong> launching PyPSA-Explorer directly from the Open-TYNDP workflow using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>tyndp-sb
+</pre></div>
+</div>
+<p>Or from the terminal directly using the pypsa-explorer pip package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pypsa-explorer<span class="w"> </span>path/to/your/network.nc:network_name<span class="w"> </span>path/to/your/second/network.nc:network2_name
+</pre></div>
+</div>
+<p>This command opens the dashboard in your default browser at <a class="reference external" href="http://localhost:8050">http://localhost:8050</a>.</p>
+<p><strong>Alternative</strong>: The cell below can launch the dashboard inline within the notebook, though the terminal method provides better performance and responsiveness.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal method recommended</span>
+<span class="n">USE_TERMINAL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Change to False if you want to launch from the notebook instead</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">USE_TERMINAL</span><span class="p">:</span>
+    <span class="c1"># Local Jupyter: Inline display</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>  <span class="c1"># Make sure to define `networks` as a dictionary of imported PyPSA Networks first</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jupyter_mode</span><span class="o">=</span><span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="for-google-colab-users">
+<h3>For Google Colab Users<a class="headerlink" href="#for-google-colab-users" title="Link to this heading">#</a></h3>
+<p>Running PyPSA-Explorer on Google Colab requires a small workaround to display the dashboard properly inside the notebook.</p>
+<p>We already imported a useful helper function to handle this: <code class="docutils literal notranslate"><span class="pre">run_pypsa_explorer_in_colab()</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">run_pypsa_explorer_in_colab</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Tip for Colab users:</strong> To view the dashboard in fullscreen mode, click the three dots (⋮) in the top-right corner of the output cell and select <strong>“View output fullscreen”</strong>.</p>
+</section>
+</section>
 <section id="task-explore-outcomes-with-pypsa-explorer">
 <h2>Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code><a class="headerlink" href="#task-explore-outcomes-with-pypsa-explorer" title="Link to this heading">#</a></h2>
 <p>Try to find and verify some specific information about the solved networks.</p>
@@ -2303,8 +2315,8 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Open-TYNDP: Installation, Workflows and Exploring Outcomes</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-tyndp-model">The Open-TYNDP model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Open-TYNDP: Installation, Workflows and Exploring Outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation-and-intro">Preparation and Intro</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-management-using-snakemake-and-pixi">Workflow management using <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-snakemake">Reminder: <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-snakemake">Using <code class="docutils literal notranslate"><span class="pre">snakemake</span></code></a><ul class="nav section-nav flex-column">
@@ -2320,8 +2332,9 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-open-tyndp">1. Installing Open-TYNDP</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-1-clone-the-open-tyndp-repository">Alternative 1: Clone the Open-TYNDP repository</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-2-the-windows-installer">Alternative 2: The Windows-Installer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-clone-via-terminal">Option 1: Clone via terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-clone-via-this-notebook-locally-or-collab">Option 2: Clone via this notebook (locally or Collab)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-the-windows-installer">Option 3: The Windows-Installer</a></li>
 </ul>
 </li>
 </ul>
@@ -2330,11 +2343,6 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-workflow">High-level workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-configure-the-settings-in-config-files">Task: Configure the settings in config files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-assumptions-in-open-tyndp">Modifying assumptions in Open-TYNDP</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-modifying-input-data">Method 1: Modifying Input Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-custom-assumptions">Method 2: Custom Assumptions</a></li>
@@ -2346,6 +2354,11 @@ and it does not accept <code class="docutils literal notranslate"><span class="p
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-open-tyndp-s-latest-outcomes">3. Exploring Open-TYNDP’s latest outcomes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exploration-with-pypsa-explorer">Interactive Exploration with PyPSA-Explorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-local-users">For Local Users</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-google-colab-users">For Google Colab Users</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-explore-outcomes-with-pypsa-explorer">Task: Explore outcomes with <code class="docutils literal notranslate"><span class="pre">PyPSA-Explorer</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-explore-nt-outcomes-using-the-pypsa-statistics-module">(Optional) Explore NT outcomes using the <code class="docutils literal notranslate"><span class="pre">PyPSA.statistics</span></code> module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-insights-from-a-network">Extracting insights from a network</a></li>
