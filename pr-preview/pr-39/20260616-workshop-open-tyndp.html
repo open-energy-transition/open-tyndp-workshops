@@ -1261,7 +1261,7 @@ Unzipping and overwriting results/results-workshop.zip.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path and an importer function</span>
-<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;results/NT/networks/&quot;</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s2">&quot;results/tyndp/NT/networks/&quot;</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">import_network</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -1279,6 +1279,21 @@ Unzipping and overwriting results/results-workshop.zip.
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Importing network from PyPSA version v1.2.1 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;PyPSA-Eur (tyndp)&#39; has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.consistency:Sanitizing network...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.components._types.carriers:Assigned colors to 1 carriers using &#39;tab10&#39; palette.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.consistency:Network sanitization complete.
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
 <span class="nn">File ~/miniconda3/envs/open-tyndp-workshops/lib/python3.13/site-packages/xarray/backends/file_manager.py:219,</span> in <span class="ni">CachingFileManager._acquire_with_cache_info</span><span class="nt">(self, needs_lock)</span>
@@ -1291,18 +1306,17 @@ Unzipping and overwriting results/results-workshop.zip.
 <span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/NT/networks/base_s_all___2030.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;29787ddf-c597-4238-aa4d-91bd5988c92a&#39;]
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2040.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;9847d2e3-a4eb-473c-b901-d82c106f08c0&#39;]
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span> 
 <span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Load the latest NT scenario networks directly into dictionary for PyPSA-Explorer</span>
 <span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">networks</span> <span class="o">=</span> <span class="p">{</span>
-<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="s2">&quot;NT 2030&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;NT 2030&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2030.nc&quot;</span><span class="p">),</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="s2">&quot;NT 2040&quot;</span><span class="p">:</span> <span class="n">import_network</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="s2">&quot;base_s_all___2040.nc&quot;</span><span class="p">),</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">}</span>
 
 <span class="nn">Cell In[20], line 6,</span> in <span class="ni">import_network</span><span class="nt">(fn)</span>
@@ -1431,7 +1445,7 @@ Unzipping and overwriting results/results-workshop.zip.
 <span class="nn">File src/netCDF4/_netCDF4.pyx:2158,</span> in <span class="ni">netCDF4._netCDF4._ensure_nc_success</span><span class="nt">()</span>
 <span class="ne">-&gt; </span><span class="mi">2158</span> <span class="s1">&#39;Could not get source, probably due dynamically evaluated source code.&#39;</span>
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/NT/networks/base_s_all___2030.nc&#39;
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2040.nc&#39;
 </pre></div>
 </div>
 </div>

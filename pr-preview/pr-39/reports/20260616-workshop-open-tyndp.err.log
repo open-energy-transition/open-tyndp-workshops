@@ -29,7 +29,7 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 # Define the path and an importer function
-base_path = "results/NT/networks/"
+base_path = "results/tyndp/NT/networks/"
 
 
 def import_network(fn: str):
@@ -45,6 +45,17 @@ networks = {
 }
 ------------------
 
+----- stderr -----
+WARNING:pypsa.network.io:Importing network from PyPSA version v1.2.1 while current version is v1.2.2. Read the release notes at `https://go.pypsa.org/release-notes` to prepare your network for import.
+----- stderr -----
+INFO:pypsa.network.io:Imported network 'PyPSA-Eur (tyndp)' has buses, carriers, generators, global_constraints, links, loads, shapes, storage_units, stores, sub_networks
+----- stderr -----
+INFO:pypsa.consistency:Sanitizing network...
+----- stderr -----
+INFO:pypsa.components._types.carriers:Assigned colors to 1 carriers using 'tab10' palette.
+----- stderr -----
+INFO:pypsa.consistency:Network sanitization complete.
+------------------
 
 [31m---------------------------------------------------------------------------[39m
 [31mKeyError[39m                                  Traceback (most recent call last)
@@ -58,18 +69,17 @@ networks = {
 [32m---> [39m[32m56[39m     value = [30;43mself[39;49m[30;43m.[39;49m[30;43m_cache[39;49m[30;43m[[39;49m[30;43mkey[39;49m[30;43m][39;49m
 [32m     57[39m     [38;5;28mself[39m._cache.move_to_end(key)
 
-[31mKeyError[39m: [<class 'netCDF4._netCDF4.Dataset'>, ('/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/NT/networks/base_s_all___2030.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '29787ddf-c597-4238-aa4d-91bd5988c92a']
+[31mKeyError[39m: [<class 'netCDF4._netCDF4.Dataset'>, ('/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2040.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '9847d2e3-a4eb-473c-b901-d82c106f08c0']
 
 During handling of the above exception, another exception occurred:
 
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[20][39m[32m, line 13[39m
-[32m      9[39m 
+[36mCell[39m[36m [39m[32mIn[20][39m[32m, line 14[39m
 [32m     10[39m 
 [32m     11[39m [38;5;66;03m# Load the latest NT scenario networks directly into dictionary for PyPSA-Explorer[39;00m
 [32m     12[39m networks = {
-[32m---> [39m[32m13[39m     [33m"NT 2030"[39m: import_network(base_path + [33m"base_s_all___2030.nc"[39m),
-[32m     14[39m     [33m"NT 2040"[39m: import_network(base_path + [33m"base_s_all___2040.nc"[39m),
+[32m     13[39m     [33m"NT 2030"[39m: import_network(base_path + [33m"base_s_all___2030.nc"[39m),
+[32m---> [39m[32m14[39m     [33m"NT 2040"[39m: import_network(base_path + [33m"base_s_all___2040.nc"[39m),
 [32m     15[39m }
 
 [36mCell[39m[36m [39m[32mIn[20][39m[32m, line 6[39m, in [36mimport_network[39m[34m(fn)[39m
@@ -198,5 +208,5 @@ During handling of the above exception, another exception occurred:
 [36mFile [39m[32msrc/netCDF4/_netCDF4.pyx:2158[39m, in [36mnetCDF4._netCDF4._ensure_nc_success[39m[34m()[39m
 [32m-> [39m[32m2158[39m [33m'Could not get source, probably due dynamically evaluated source code.'[39m
 
-[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/NT/networks/base_s_all___2030.nc'
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/home/runner/work/open-tyndp-workshops/open-tyndp-workshops/open-tyndp-workshops/data/open-tyndp/results/tyndp/NT/networks/base_s_all___2040.nc'
 
