@@ -1,0 +1,1374 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Background: Introduction to geopandas and cartopy &#8212; Open-TYNDP Workshops</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'background4-geopandas';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_merged.png" class="logo__image only-light" alt="Open-TYNDP Workshops - Home"/>
+    <img src="_static/logo_merged.png" class="logo__image only-dark pst-js-only" alt="Open-TYNDP Workshops - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome: Open-TYNDP Workshops
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20250409-workshop-pypsa-01.html">Workshop 1: Introduction to <code class="docutils literal notranslate"><span class="pre">PyPSA</span></code> &amp; TYNDP reference grids</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20250624-workshop-pypsa-02.html">Workshop 2: Introduction to <code class="docutils literal notranslate"><span class="pre">Snakemake</span></code>, new features update &amp; benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20251203-workshop-pypsa-03.html">Workshop 3: Exploring NT Scenario Results, Modifying Assumptions, and Benchmarking</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="20260609-workshop-pypsa-04.html">Workshop 4: Open-TYNDP Outcomes and CBA Workflows</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="background1-python.html">Background: Introduction to the basics of <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background2-numpy.html">Background: Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="background3-pandas.html">Background: Tabular data analysis with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="oet-extension/00-reference.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/open-energy-transition/open-tyndp-workshops/blob/main/open-tyndp-workshops/background4-geopandas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/open-energy-transition/open-tyndp-workshops/issues/new?title=Issue%20on%20page%20%2Fbackground4-geopandas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/background4-geopandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Background: Introduction to geopandas and cartopy</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-something-other-than-pandas">Why do we need something other than <code class="docutils literal notranslate"><span class="pre">pandas</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geopandas-a-pandas-extension-for-geospatial-data">Geopandas - a Pandas extension for geospatial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-projections-with-cartopy">Map Projections with Cartopy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reprojecting-a-geodataframe">Reprojecting a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-writing-files-with-geopandas">Reading and Writing Files with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-areas-and-buffers">Calculating the areas and buffers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-spatial-datasets">Joining spatial datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="background-introduction-to-geopandas-and-cartopy">
+<h1>Background: Introduction to <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code><a class="headerlink" href="#background-introduction-to-geopandas-and-cartopy" title="Link to this heading">#</a></h1>
+<p><font size="2"><em>Copyright (c) 2022-2024, Fabian Neumann</em></font></p>
+<section id="basic-setup">
+<h2>Basic Setup<a class="headerlink" href="#basic-setup" title="Link to this heading">#</a></h2>
+<p>Again, we will be using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> in this tutorial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>geopandas<span class="w"> </span>matplotlib<span class="w"> </span>cartopy<span class="w"> </span>mapclassify
+</pre></div>
+</div>
+</div>
+</section>
+<section id="why-do-we-need-something-other-than-pandas">
+<h2>Why do we need something other than <code class="docutils literal notranslate"><span class="pre">pandas</span></code>?<a class="headerlink" href="#why-do-we-need-something-other-than-pandas" title="Link to this heading">#</a></h2>
+<p>Let’s reload again our example dataset of conventional power plants in Europe as a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/powerplantmatching/master/powerplants.csv&quot;</span>
+<span class="n">ppl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This dataset includes coordinates (latitude and longitude), which allows us to plot the location and capacity of all power plants in a scatter plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppl</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">ppl</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">/</span> <span class="mf">1e3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, this graphs misses some geographic reference point, we’d normally expect for a map like shorelines, country borders etc.</p>
+</section>
+<section id="geopandas-a-pandas-extension-for-geospatial-data">
+<h2>Geopandas - a Pandas extension for geospatial data<a class="headerlink" href="#geopandas-a-pandas-extension-for-geospatial-data" title="Link to this heading">#</a></h2>
+<img src="https://geopandas.org/en/stable/_images/geopandas_logo.png" width="400px" /><p>Geopandas extends <code class="docutils literal notranslate"><span class="pre">pandas</span></code> by adding support for geospatial data.</p>
+<p>The core data structure in GeoPandas is the <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code>, a subclass of <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>, that can store geometry columns and perform spatial operations.</p>
+<img src="https://geopandas.org/en/stable/_images/dataframe.svg" width="600px" /><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation for this package is available at <a class="reference external" href="https://geopandas.org/en/stable/">https://geopandas.org/en/stable/</a>.</p>
+</div>
+<p>Typical geometries are points, lines, and polygons. They come from another library called <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html"><code class="docutils literal notranslate"><span class="pre">shapely</span></code></a>, which helps you create, analyze, and manipulate two-dimensional shapes and their properties, such as points, lines, and polygons.</p>
+<img src="https://geobgu.xyz/py/_images/simple_feature_types.svg" width="600px" /><p>First, we need to import the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> package. The conventional alias is <code class="docutils literal notranslate"><span class="pre">gpd</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can convert the latitude and longitude values given in the dataset to formal geometries (to be exact: <code class="docutils literal notranslate"><span class="pre">shapely.Point</span></code> objects but we won’t go into detail regarding this) using the <code class="docutils literal notranslate"><span class="pre">gpd.points_from_xy()</span></code> function, and use this to <code class="docutils literal notranslate"><span class="pre">gpd.GeoDataFrame</span></code>. We should also specify a so-called coordinate reference system (CRS). The code ‘4326’ means latitude and longitude values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">ppl</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span> <span class="n">ppl</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">])</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ppl</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, the <code class="docutils literal notranslate"><span class="pre">gdf</span></code> looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the additional <code class="docutils literal notranslate"><span class="pre">geometry</span></code> columns, it is now even easier to plot the geographic data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">/</span> <span class="mf">1e2</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also start up an interactive map to explore the geodata in more detail:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="map-projections-with-cartopy">
+<h2>Map Projections with Cartopy<a class="headerlink" href="#map-projections-with-cartopy" title="Link to this heading">#</a></h2>
+<img src="https://scitools.org.uk/cartopy/docs/v0.16/_images/sphx_glr_logo_001.png" width="300px" /><p>Cartopy is a Python package designed for geospatial data processing and has exposed an interface to enable easy map creation using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<p>The Earth is a globe, but we present maps usually on two-dimensional surfaces. Hence, we typically need to <em>project</em> data points onto flat surfaces (e.g. screens, paper). However, we will always loose some information in doing so.</p>
+<img src="https://raw.githubusercontent.com/SciTools/cartopy-tutorial/master/static/orange_peel.jpg" width="500px" />
+<p>A map projection is:</p>
+<blockquote>
+<div><p>a systematic transformation of the latitudes and longitudes of locations from the surface of a sphere or an ellipsoid into locations on a plane. <a class="reference external" href="https://en.wikipedia.org/wiki/Map_projection">Wikipedia: Map projection</a>.</p>
+</div></blockquote>
+<p>Different projections <strong>preserve different metric properties</strong>. As a result,
+converting geodata from one projection to another is a common exercise in geographic data science.</p>
+<ul class="simple">
+<li><p><strong>conformal projections</strong> preserve angles/directions (e.g. Mercator projection)</p></li>
+<li><p><strong>equal-area projections</strong> preserve area measure (e.g. Mollweide)</p></li>
+<li><p><strong>equidistant projections</strong> preserve distances between points (e.g. Plate carrée)</p></li>
+<li><p><strong>compromise projections</strong> seek to strike a balance between distortions (e.g. Robinson)</p></li>
+</ul>
+<p>If you like the “Orange-as-Earth” analogy for projections, checkout <a class="reference external" href="https://www.youtube.com/watch?v=D3tdW9l1690">this numberphile video</a> by Hannah Fry.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation for this package is available at <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/">https://scitools.org.uk/cartopy/docs/latest/</a>.</p>
+</div>
+<p>First, we need to import the relevant parts of the <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s draw a first map with <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> outlining the global coastlines in the so-called <a class="reference external" href="https://en.wikipedia.org/wiki/Equirectangular_projection">plate carrée projection (equirectangular projection)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A list of the available projections can be found on the <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html#cartopy-projections">Cartopy projection list page</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Mollweide</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can combine the functionality of <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">/</span> <span class="mf">1e2</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can add further <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/matplotlib/feature_interface.html#the-cartopy-feature-interface">geographic features</a> to this map for better orientation.</p>
+<p>For instance, we can add the coastlines…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… country borders …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… colour in the ocean in blue …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;azure&quot;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>…and color in the land area in yellow …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cornsilk&quot;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Geopandas will automatically calculate sensible bounds for the plot given the geographic data.
+But we can also manually zoom in or out by setting the spatial extent with the <code class="docutils literal notranslate"><span class="pre">.set_extent()</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="reprojecting-a-geodataframe">
+<h3>Reprojecting a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code><a class="headerlink" href="#reprojecting-a-geodataframe" title="Link to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can use the function <code class="docutils literal notranslate"><span class="pre">.to_crs()</span></code> to convert a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> to a desired coordinate reference system. In this particular case, we use the <code class="docutils literal notranslate"><span class="pre">proj4_init</span></code> string of an initialised <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> projection to reproject our power plant <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">proj4_init</span></code> string is a text-based representation of a coordinate reference system (CRS) that defines the parameters for transforming geographical coordinates between different spatial reference systems, used by the PROJ library. It will look similar to this: “+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs”.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">()</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">proj4_init</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">/</span> <span class="mf">1e2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="reading-and-writing-files-with-geopandas">
+<h2>Reading and Writing Files with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code><a class="headerlink" href="#reading-and-writing-files-with-geopandas" title="Link to this heading">#</a></h2>
+<p>In the following example, we’ll load a dataset containing the <a class="reference external" href="https://en.wikipedia.org/wiki/Nomenclature_of_Territorial_Units_for_Statistics">NUTS regions</a>:</p>
+<blockquote>
+<div><p>Nomenclature of Territorial Units for Statistics or NUTS (French: Nomenclature des unités territoriales statistiques) is a geocode standard for referencing the subdivisions of countries for statistical purposes.</p>
+</div></blockquote>
+<p>Our ultimate <strong>goal</strong> for this part of the tutorial is to map the power plant capacities to the NUTS-1 region they belong to.</p>
+<img src="https://ec.europa.eu/eurostat/documents/345175/501899/framing" width="400px" /><p>Common filetypes for vector-based geospatial datasets are GeoPackage (<code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>), GeoJSON (<code class="docutils literal notranslate"><span class="pre">.geojson</span></code>), File Geodatabase (<code class="docutils literal notranslate"><span class="pre">.gdb</span></code>), or Shapefiles (<code class="docutils literal notranslate"><span class="pre">.shp</span></code>).</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> we can use the <code class="docutils literal notranslate"><span class="pre">gpd.read_file()</span></code> function to read such files. So let’s start:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://tubcloud.tu-berlin.de/s/RHZJrN8Dnfn26nr/download/NUTS_RG_10M_2021_4326.geojson&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is good practice to set an index. You can use <code class="docutils literal notranslate"><span class="pre">.set_index()</span></code> for that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span> <span class="o">=</span> <span class="n">nuts</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also check out the geometries in the dataset with <code class="docutils literal notranslate"><span class="pre">.geometry</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span><span class="o">.</span><span class="n">geometry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">.crs</span></code> we can check in which coordinate reference system the data is given:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts</span><span class="o">.</span><span class="n">total_bounds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s filter by NUTS-1 level…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span> <span class="o">=</span> <span class="n">nuts</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;LEVL_CODE == 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… and explore what kind of geometries we have in the dataset …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To write a GeoDataFrame back to file use <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.to_file()</span></code>. The file format is inferred from the file ending.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;tmp.geojson&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-the-areas-and-buffers">
+<h2>Calculating the areas and buffers<a class="headerlink" href="#calculating-the-areas-and-buffers" title="Link to this heading">#</a></h2>
+<p>The first thing we need to do to calculate area or buffers is to reproject the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> to an equal-area projection (here: <a class="reference external" href="https://epsg.io/3035">EPSG:3035</a> which is valid only within Europe; global alternative is the Mollweide projection <a class="reference external" href="https://epsg.io/54009">EPSG:54009</a>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span> <span class="o">=</span> <span class="n">nuts1</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The area can be accessed via <code class="docutils literal notranslate"><span class="pre">.area</span></code> and is given in m² (after projection). Let’s convert to km²:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area</span> <span class="o">=</span> <span class="n">nuts1</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="mf">1e6</span>
+<span class="n">area</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">area</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also build a buffer of 1km around each geometry using <code class="docutils literal notranslate"><span class="pre">.buffer()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="joining-spatial-datasets">
+<h2>Joining spatial datasets<a class="headerlink" href="#joining-spatial-datasets" title="Link to this heading">#</a></h2>
+<p>Multiple <code class="docutils literal notranslate"><span class="pre">GeoDataFrames</span></code> can be combined via <em>spatial joins</em>.</p>
+<p>Observations from two datasets are combined with the <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.sjoin.html"><code class="docutils literal notranslate"><span class="pre">.sjoin()</span></code></a> function based on their spatial relationship to one another (e.g. whether they are intersecting or overlapping). You can read more about the specific options <a class="reference external" href="https://geopandas.org/en/stable/docs/user_guide/mergingdata.html#binary-predicate-joins">here</a>.</p>
+<p>To perform a spatial join, you need to provide the following information:</p>
+<ul class="simple">
+<li><p>The two GeoDataFrames you want to join (e.g., <code class="docutils literal notranslate"><span class="pre">left_df</span></code> and <code class="docutils literal notranslate"><span class="pre">right_df</span></code>).</p></li>
+<li><p>The type of spatial relationship to test (e.g., <code class="docutils literal notranslate"><span class="pre">intersects</span></code>, <code class="docutils literal notranslate"><span class="pre">contains</span></code>, <code class="docutils literal notranslate"><span class="pre">within</span></code>). This is specified using the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter.</p></li>
+<li><p>The type of join to perform (e.g., <code class="docutils literal notranslate"><span class="pre">inner</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span></code>). This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">.sjoin()</span></code> function will then iterate through the geometries in both GeoDataFrames, evaluate the specified spatial relationship, and join the matching records.</p>
+<p>For example, if the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter is set to ‘intersects’, the function will check if the geometries of each record in <code class="docutils literal notranslate"><span class="pre">left_df</span></code> intersect with the geometries of any records in <code class="docutils literal notranslate"><span class="pre">right_df</span></code>. If a match is found, the attributes of the corresponding records from both GeoDataFrames will be combined into a new record in the output GeoDataFrame.</p>
+<p>By performing spatial joins, you can efficiently combine and analyze geospatial data based on their spatial relationships, without the need for explicit coordinate-based calculations.</p>
+<p>Let’s first reproject the <code class="docutils literal notranslate"><span class="pre">gdf</span></code> object to the same CRS as <code class="docutils literal notranslate"><span class="pre">nuts1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, let’s have a look at both datasets at once. We want to find out which points (representing power plants) lie within which shape (representing NUTS regions).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">epsg</span><span class="p">(</span><span class="mi">3035</span><span class="p">))</span>
+
+<span class="n">nuts1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">)</span>
+
+<span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s2">&quot;Fueltype&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now apply the <code class="docutils literal notranslate"><span class="pre">.sjoin</span></code> function to look for which power plants lie within which NUTS1 region. By default, <code class="docutils literal notranslate"><span class="pre">sjoin</span></code> looks for intersections and keeps the geometries of the <em>left</em> <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joined</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">nuts1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we look at this new <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>, we now have additional columns from the NUTS1 data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joined</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use these new columns to group the capacities (and convert to a suitable unit):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cap</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;NUTS_ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># GW</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s quickly check if all NUTS1 regions have power plants:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is not the case. Then it is good practice to reindex the series to include all NUTS1 regions, even if this leads to some NaN values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cap</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">nuts1</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cap</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can plot the total generation capacity per NUTS1 region on a map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">column</span><span class="o">=</span><span class="n">cap</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This concludes the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> tutorial.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p><strong>Task 1:</strong> Recreate the figure above (i.e. generation capacity per NUTS1 region)</p>
+<ul class="simple">
+<li><p>using 3 different <a class="reference external" href="https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html">cartopy projections</a> of your choice.</p></li>
+<li><p>such that the capacities are normalised by the area of the NUTS1 region (unit: MW/km²).</p></li>
+<li><p>such that it only shows the hard coal power plant capacities.</p></li>
+<li><p>such that it only shows NUTS1 shapes for Germany (and Denmark).</p></li>
+<li><p>but with NUTS2 regions instead of NUTS1 regions.</p></li>
+<li><p>(advanced) such that it shows the capacity-weighted average age of the power plants instead of the capacities. Where are the oldest generators? Can you think of a reason why?</p></li>
+</ul>
+<p>Which German NUTS2 region has the highest conventional generation capacity? Can you think of a reason why?</p>
+<p>Three projections of choice:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">crs</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ccrs</span><span class="o">.</span><span class="n">EqualEarth</span><span class="p">(),</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(),</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">()]:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+    <span class="n">nuts1</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">proj4_init</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">cap</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Normalised by area in MW/km²:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">column</span><span class="o">=</span><span class="n">cap</span> <span class="o">/</span> <span class="p">(</span><span class="n">nuts1</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Only hard coal generators:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hard_coal_cap</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">joined</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Fueltype == &#39;Hard Coal&#39;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;NUTS_ID&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">nuts1</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">nuts1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="n">column</span><span class="o">=</span><span class="n">hard_coal_cap</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">missing_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">6e6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">2e6</span><span class="p">,</span> <span class="mf">6e6</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Only Germany:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subregion</span> <span class="o">=</span> <span class="n">nuts1</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;CNTR_CODE == &#39;DE&#39;&quot;</span><span class="p">)</span>
+<span class="n">subregion</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">subregion</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Only Germany and Denmark:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;DK&quot;</span><span class="p">]</span>
+<span class="n">subregion</span> <span class="o">=</span> <span class="n">nuts1</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;CNTR_CODE in @countries&quot;</span><span class="p">)</span>  <span class="c1"># alternative A</span>
+<span class="n">subregion</span> <span class="o">=</span> <span class="n">nuts1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nuts1</span><span class="o">.</span><span class="n">CNTR_CODE</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">countries</span><span class="p">)]</span>  <span class="c1"># alternative B</span>
+<span class="n">subregion</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">subregion</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>In NUTS2 rather than NUTS1:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuts2</span> <span class="o">=</span> <span class="n">nuts</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;LEVL_CODE == 2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3035</span><span class="p">)</span>
+<span class="n">joined2</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">nuts2</span><span class="p">)</span>
+<span class="n">cap2</span> <span class="o">=</span> <span class="n">joined2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;NUTS_ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">nuts2</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># GW</span>
+<span class="n">nuts2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">column</span><span class="o">=</span><span class="n">cap2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>NUTS2 region with highest capacity:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cap2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># alternative A</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cap2</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>  <span class="c1"># alternative B</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Capacity-weighted average age:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_weighted_age</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formula:</span>
+<span class="sd">    \bar{x} = \frac{ \sum\limits_{i=1}^n w_i x_i}{\sum\limits_{i=1}^n w_i}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">numerator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">Capacity</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">DateIn</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># only build sum of capacities where a date is given</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">Capacity</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">x</span><span class="o">.</span><span class="n">DateIn</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+
+<span class="n">age</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;NUTS_ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calculate_weighted_age</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">nuts1</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">nuts1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">column</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Task 2:</strong> Load the following <code class="docutils literal notranslate"><span class="pre">.gpkg</span></code> file containing the Danish <a class="reference external" href="https://en.wikipedia.org/wiki/Natura_2000">Natura2000</a> natural protection areas as <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>:</p>
+<p><a class="reference external" href="https://tubcloud.tu-berlin.de/s/mEpdmgBtmMbyjAr/download/Natura2000_end2021-DK.gpkg">https://tubcloud.tu-berlin.de/s/mEpdmgBtmMbyjAr/download/Natura2000_end2021-DK.gpkg</a></p>
+<ul class="simple">
+<li><p>How many individual natural protection areas are there?</p></li>
+<li><p>What is the name of the largest natural protection area in Denmark?</p></li>
+<li><p>What is the total protection area in square kilometers (make sure you don’t double-count overlapping areas by running the <a class="reference external" href="https://geopandas.org/en/stable/docs/user_guide/aggregation_with_dissolve.html#dissolve-example"><code class="docutils literal notranslate"><span class="pre">.dissolve()</span></code></a> function).</p></li>
+<li><p>(advanced) Use <a class="reference external" href="https://geopandas.org/en/stable/docs/user_guide/set_operations.html#set-operations-with-overlay">set operations with the <code class="docutils literal notranslate"><span class="pre">.overlay()</span></code> function</a> and the NUTS1 regions <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> to identify what share of Danish natural protection areas is at sea.</p></li>
+</ul>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://tubcloud.tu-berlin.de/s/mEpdmgBtmMbyjAr/download/Natura2000_end2021-DK.gpkg&quot;</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natura</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natura</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natura</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>How many:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">natura</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Name of largest protection area:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">natura</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">i</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natura</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Total area in km²:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">natura</span><span class="o">.</span><span class="n">dissolve</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="mf">1e6</span>  <span class="c1"># sqkm</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Share of natural protection area offshore:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">onshore_natura</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">nuts1</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(),</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">onshore_natura</span><span class="o">.</span><span class="n">explore</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">onshore_natura</span><span class="o">.</span><span class="n">area</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">total</span><span class="o">.</span><span class="n">area</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ""
+        },
+        kernelOptions: {
+            name: "",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = ''</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-something-other-than-pandas">Why do we need something other than <code class="docutils literal notranslate"><span class="pre">pandas</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geopandas-a-pandas-extension-for-geospatial-data">Geopandas - a Pandas extension for geospatial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-projections-with-cartopy">Map Projections with Cartopy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reprojecting-a-geodataframe">Reprojecting a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-writing-files-with-geopandas">Reading and Writing Files with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-areas-and-buffers">Calculating the areas and buffers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-spatial-datasets">Joining spatial datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Open Energy Transition
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
