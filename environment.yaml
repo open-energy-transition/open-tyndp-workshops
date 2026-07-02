@@ -10,7 +10,7 @@ dependencies:
   # main packages
 - numpy
 - scipy
-- pandas>=2,<3
+- pandas>=2,<3  # pin pandas<3 until https://github.com/PyPSA/PyPSA/issues/1585 resolved
 - geopandas>=1
 - snakemake-minimal>=9
 - snakemake-storage-plugin-http>=0.3

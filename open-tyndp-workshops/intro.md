@@ -14,6 +14,7 @@ Notably, this will include:
 - Demand profiles
 - Existing supply infrastructure (PEMMDB) & climate data (PECD)
 - EVs, Synthetic fuels & Hybrid Heat Pumps
+- Running CBA workflows including different projects, climate years and planning horizons
 
 ## Setting up the environment
 
