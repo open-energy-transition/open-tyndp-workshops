@@ -14,3 +14,4 @@ open-tyndp-workshops/tmp.csv
 *cleared.ipynb
 .snakemake/
 CLAUDE.md
+.pixi/

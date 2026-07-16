@@ -29,22 +29,29 @@ For running the notebook using Google Colab you can simply launch it by clicking
 
 ### Alternative: Local installation
 
-#### Installing the package manager `conda`
-
 If you don't want to use Google Colab you will need to install the packages locally. For running this, Python and nearly all of the software packages in the scientific python
 ecosystem are [open-source](https://opensource.org/). Coordinating the
 compatibility between these different packages and their multiple versions can be difficult! Fortunately, the problem is solved by using a Python
 _distribution_ and/or _package manager_. You should use a package manager!
 
-#### Anaconda
+#### Using pixi (recommended)
 
-The easiest way to set up a full-stack scientific Python deployment is to use a
-Python distribution. This is an installation of Python with a set of curated
-packages which are known to work together.
+[pixi](https://pixi.sh) is a fast, cross-platform package manager that installs the exact locked environment and works on Linux, macOS, and Windows.
 
-For instance, you can install on your computer the popular
+1. Clone the repository
+2. [Install pixi](https://pixi.sh/latest/#installation) (single command, no admin rights required)
+3. In the repository root, run `pixi install`
+4. Start JupyterLab: `pixi run jupyter lab`
+
+#### Using conda (alternative)
+
+##### Installing conda
+
+**Anaconda**
+
+You can install on your computer the popular
 [Anaconda Python Distribution](https://www.anaconda.com/download/).
-Follow the link above to obtain a one-click installers for your operating system.
+Follow the link above to obtain a one-click installer for your operating system.
 
 For **Linux and MacOS users**, you can access the command line by opening the _terminal_ program.
 
@@ -52,13 +59,13 @@ For **Windows users**, you should first install Anaconda (described above) or `m
 
 From the Anaconda Prompt, you should be able to run `conda` and other shell commands.
 
-#### Lightweight `miniconda`
+**Lightweight miniconda**
 
 If you don't want to download a large file like the Anaconda Python Distribution (ca. 800 MB), there is a
 lightweight alternative installation called `miniconda`.
 Follow the link to the [Miniconda Installation](https://docs.conda.io/en/latest/miniconda.html) page and use, for example, the [quick command line install](https://docs.anaconda.com/miniconda/#quick-command-line-install).
 
-#### Windows user installation
+**Windows user installation**
 
 For running this workshop notebook locally, it is necessary to install the required environment using the conda package manager as described above.
 
@@ -67,18 +74,20 @@ Windows users have multiple options for this:
 - Recommended: Use [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) which will allow you to follow the Linux installation instructions for conda and the python environment.
 - Install Windows native conda via `Anaconda` (described above) or `miniconda` (described above), which gives you access to the "Anaconda Prompt" desktop application. From the Anaconda Prompt, you should be able to run `conda` and other shell commands. Visit the [Conda Website](https://docs.conda.io/projects/conda/en/stable/user-guide/install/windows.html) for more information.
 
-#### Environment for these workshops: `open-tyndp-workshops`
+##### Creating the environment
 
-The latest environment specification for this course can be downloaded under the following link as a [`YAML`-file](https://en.wikipedia.org/wiki/YAML):
+Fully-pinned environment files for each platform are available in the [`envs/` directory](https://github.com/open-energy-transition/open-tyndp-workshops/tree/main/envs) of the repository.
 
-https://github.com/open-energy-transition/open-tyndp-workshops/blob/main/environment.yaml
+After cloning the repository and navigating to its folder, you can create this environment using `conda`.
 
-There is a download button in the top-right corner.
-
-After navigating to the folder where the `environment.yaml` file is stored ([here](https://tutorials.codebar.io/command-line/introduction/tutorial.html)'s a tutorial how to navigate with the command line),
-you can create this environment using `conda`
-
-    conda env create -f environment.yaml
+    # Linux
+    conda env create -f envs/linux-64.yaml
+    # macOS (Apple Silicon)
+    conda env create -f envs/osx-arm64.yaml
+    # macOS (Intel)
+    conda env create -f envs/osx-64.yaml
+    # Windows
+    conda env create -f envs/win-64.yaml
 
 Activate this environment
 
